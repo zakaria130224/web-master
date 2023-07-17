@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+}
+
+.left-div {
+  background-color: #00a3ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel {
+  width: 380px;
+  height: 380px;
+}
+
+.carousel-text {
+  text-align: center;
+  color: white;
+  margin-top: 20px;
+}
+
+.carousel-copy {
+  text-align: center;
+  color: white;
+  max-width: 350px;
+  margin-top: 10px;
+}
+
+.right-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  width: 320px;
+  height: 91px;
+}
+
+.login-text {
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.copy {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ffffff00;
+  border-radius: 8px;
+  background: #f5f8fa;
+  box-shadow: 0 0 10px #00000000;
+  transition: box-shadow 1s ease-in-out 0s, border 0.3s ease-in-out 0s;
+}
+
+.input-field:focus {
+  outline: none !important;
+  border: 1px solid #0078cf;
+  box-shadow: 0 0 10px #0000000d;
+}
+
+.password-icon {
+  position: relative;
+}
+
+.password-icon input[type="password"] {
+  padding-right: 30px;
+}
+
+.password-icon .eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  scale: 1.5;
+}
+
+.cta {
+  background-color: #0078cf;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.font-telenor-bold {
+  font-family: "telonor-bold";
+}
+
+.font-telenor-regular {
+  font-family: "telonor-regular";
+}
+
+.full-height {
+  height: 100vh;
+}
+
+a {
+  color: #007bcf !important;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #007bff !important;
+  text-decoration: none;
+}
