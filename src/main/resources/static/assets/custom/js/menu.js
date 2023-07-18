@@ -9,6 +9,7 @@ $(document).ready(function () {
                 [5, 10, 25, 'All'],
             ],
             processing: true,
+            buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
             serverSide: true,
             ordering: true,
             initComplete: function () {
@@ -62,12 +63,12 @@ $(document).ready(function () {
                     data: "id",
                     render: function (data) {
                         //return '<span data-toggle="modal" data-target="#updateUser" class="btn badge badge-dark badge-pill cursor-pointer" onclick="viewEditModal(' + data + ')" ><span class="glyphicon glyphicon-pencil"></span> Edit</span>'
-                        return '<button data-toggle="modal" data-target="#updateModal" class="btn btn-icon btn-icon-only btn-secondary btn-icon-style-4" onclick="viewEditModal(' + data + ')"><span class="btn-icon-wrap"><i class="fa fa-pencil"></i></span></button>'
+                        return '<button data-toggle="modal" data-target="#updateModal" class="btn btn-icon btn-icon-only btn-secondary btn-icon-style-4" onclick="viewEditModal(' + data + ')"><i class="fa fa-edit"></i></button>'
                     },
                     className: ""
                 },
             ]
-        });
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     }
 
 

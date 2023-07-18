@@ -17,70 +17,67 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="padding: 75px 0px 75px 0px">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-1">
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">User Management</a></li>
-                            <li class="breadcrumb-item active">Menu</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-            <!-- /.container-fluid -->
-        </section>
+        <nav class="hk-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light bg-transparent">
+                <li class="breadcrumb-item"><a href="#">${title}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Menu</li>
+            </ol>
+        </nav>
+
 
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
+                    <div class="col-md-12">
+                        <!-- Message -->
+                        <jsp:include page="../../partial/msg.jsp"></jsp:include>
+                        <!-- Title -->
+                    </div>
+
                     <div class="col-12">
-                        <div class="card card-outline card-primary">
+                        <div class="card">
                             <div class="card-header">
-                                <%--                                <h3 class="card-title">Report For Engine Off</h3>--%>
-
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button class="btn btn-outline-primary btn-sm float-right m-1"
-                                            data-toggle="modal"
-                                            data-target="#addModal"> + Add
-                                    </button>
-                                    <button class="btn btn-primary btn-sm float-right m-1"><i
-                                            class="fa fa-file-excel"></i> Button
-                                    </button>
-                                </div>
+                                <h3 class="card-title p-2">Menu Items</h3>
+                                <button type="button" class="btn btn-primary float-right mr-2"><i class="fa fa-plus-square"></i> Add Menu</button>
+                                <button type="button" class="btn btn-primary float-right mr-2"><i class="fa fa-download"></i> Export</button>
                             </div>
-
-
-                            <span class="material-icons-outlined">map</span>
-                            <!-- /.card-header -->
                             <div class="card-body">
 
-                                <table class="table table-hover" id="dataTbl">
-                                    <thead class="thead-primary">
-                                    <tr>
-                                        <%--                                                        <th>#</th>--%>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>IsParent</th>
-                                        <th>Priority</th>
-                                        <th>IsSidebarMenu</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                </table>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <section class="hk-sec-wrapper">
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <div class="table-wrap">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover table-bordered table-striped w-100 display pb-30 " id="dataTbl">
+                                                                <thead class="thead-primary">
+                                                                <tr>
+                                                                    <%--                                                        <th>#</th>--%>
+                                                                    <th>Name</th>
+                                                                    <th>Description</th>
+                                                                    <th>IsParent</th>
+                                                                    <th>Priority</th>
+                                                                    <th>IsSidebarMenu</th>
+                                                                    <th>Status</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                    </div>
+                                </div>
+                                <!-- /Row -->
                             </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
         </section>
@@ -89,6 +86,7 @@
 
     <jsp:include page="../../partial/footer.jsp"></jsp:include>
 </div>
+
 <!-- Add Modal forms-->
 <div class="modal fade" id="addModal" role="dialog" aria-labelledby="addModal"
      aria-hidden="true">
@@ -191,17 +189,12 @@
 
 </div>
 
-<!-- Update Modal forms-->
-<div class="modal fade" id="updateModal" role="dialog" aria-labelledby="updateModal"
-     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document" id="updateModalBody">
-
-    </div>
-
-</div>
-
 <!-- /.content-wrapper -->
 <jsp:include page="../../partial/footerlink.jsp"></jsp:include>
 
 <script src="${pageContext.request.contextPath}/assets/custom/js/menu.js"></script>
+
+
+
+
 

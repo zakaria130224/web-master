@@ -43,7 +43,7 @@ function loadDatatable() {
                 data: "id",
                 render: function (data) {
                     //return '<span data-toggle="modal" data-target="#updateUser" class="btn badge badge-dark badge-pill cursor-pointer" onclick="viewEditModal(' + data + ')" ><span class="glyphicon glyphicon-pencil"></span> Edit</span>'
-                    return '<button data-toggle="modal" data-target="#updateUser" class="btn btn-icon btn-icon-only btn-secondary btn-icon-style-4" onclick="viewEditModal(' + data + ')"><span class="btn-icon-wrap"><i class="fa fa-pencil"></i></span></button>'
+                    return '<button data-toggle="modal" data-target="#updateUser" class="btn btn-icon btn-icon-only btn-secondary btn-icon-style-4" onclick="viewEditModal(' + data + ')"><i class="fa fa-edit"></i></button>'
                 },
                 className: ""
             },
