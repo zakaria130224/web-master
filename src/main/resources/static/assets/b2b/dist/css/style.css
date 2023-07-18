@@ -112,3 +112,7 @@
   /* transform-origin: 0 0; */
   transform: rotate(-90deg);
 }
+
+.font-21{
+  font-size: 21px;
+}

@@ -20,3 +20,4 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/adminlte.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/pages/dashboard.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/pages/dashboard.css" />

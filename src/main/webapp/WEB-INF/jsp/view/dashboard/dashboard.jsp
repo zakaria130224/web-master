@@ -87,7 +87,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="circle mr-3 bg-green circle p-2 d-flex justify-content-center
-                       align-items-center">
+                       align-items-center font-21">
                                         <i class="fa fa-exchange text-white"></i>
                                     </div>
                                     <div>
@@ -103,7 +103,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="circle mr-3 bg-danger circle p-2 d-flex justify-content-center
-                       align-items-center">
+                       align-items-center font-21">
                                         <i class="fa fa-stop-circle-o text-white"></i>
                                     </div>
                                     <div>
@@ -119,8 +119,8 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="circle mr-3 bg-primary circle p-2 d-flex justify-content-center
-                       align-items-center">
-                                        <i class="fa-pause-circle-o text-white"></i>
+                       align-items-center font-21">
+                                        <i class="fa fa-pause-circle-o text-white"></i>
                                     </div>
                                     <div>
                                         <h4 class="mb-1">5</h4>
@@ -134,8 +134,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="circle mr-3 bg-primary circle p-2 d-flex justify-content-center
-                       align-items-center">
+                                    <div class="circle mr-3 bg-gray circle p-2 d-flex justify-content-center
+                       align-items-center font-21">
                                         <i class="fas fa-plug text-white"></i>
                                     </div>
                                     <div>
@@ -150,13 +150,13 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="circle mr-3 bg-primary circle p-2 d-flex justify-content-center
-                       align-items-center">
-                                        <i class="fas fa-star text-white"></i>
+                                    <div class="circle mr-3 bg-gray circle p-2 d-flex justify-content-center
+                       align-items-center font-21">
+                                        <i class="fa fa-question-circle-o text-white"></i>
                                     </div>
                                     <div>
                                         <h4 class="mb-1">5</h4>
-                                        <p class="text-muted">Small Text</p>
+                                        <p class="text-muted">Unreachable</p>
                                     </div>
                                 </div>
                             </div>
