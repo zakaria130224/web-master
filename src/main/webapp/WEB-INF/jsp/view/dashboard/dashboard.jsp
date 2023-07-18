@@ -36,22 +36,22 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mx-1 py-2 mb-1 " style="background-color: white; border-radius: 8px;">
-                    <div class="col-6 col-md-3 col-lg-2">
+                    <div class="col-sm-3 col-md-2 col-lg-1">
                         <div class="tabs_bar">
                             <span class="mt-5">General</span>
                         </div>
                     </div>
-                    <div class="col-6 col-md-3 col-lg-2">
+                    <div class="col-sm-3 col-md-2 col-lg-1">
                         <div class="tabs_bar">
                             <span class="mt-5">VTS</span>
                         </div>
                     </div>
-                    <div class="col-6 col-md-3 col-lg-2">
+                    <div class="col-sm-3 col-md-2 col-lg-1">
                         <div class="tabs_bar">
                             <span class="mt-5">OBD</span>
                         </div>
                     </div>
-                    <div class="col-6 col-md-3 col-lg-2">
+                    <div class="col-sm-3 col-md-2 col-lg-1">
                         <div class="tabs_bar">
                             <span class="mt-5">Product2</span>
                         </div>
@@ -70,9 +70,25 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="circle mr-3 bg-primary circle p-2 d-flex justify-content-center
+                                    <div class="circle mr-3 bg-purple circle p-2 d-flex justify-content-center
                        align-items-center">
-                                        <i class="fas fa-star text-white"></i>
+                                        <i class="fas fa-gear text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="mb-1">5</h4>
+                                        <p class="text-muted">Total Vehicles</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="circle mr-3 bg-green circle p-2 d-flex justify-content-center
+                       align-items-center">
+                                        <i class="fa fa-exchange text-white"></i>
                                     </div>
                                     <div>
                                         <h4 class="mb-1">5</h4>
@@ -86,13 +102,13 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="circle mr-3 bg-primary circle p-2 d-flex justify-content-center
+                                    <div class="circle mr-3 bg-danger circle p-2 d-flex justify-content-center
                        align-items-center">
-                                        <i class="fas fa-star text-white"></i>
+                                        <i class="fa fa-stop-circle-o text-white"></i>
                                     </div>
                                     <div>
                                         <h4 class="mb-1">5</h4>
-                                        <p class="text-muted">Small Text</p>
+                                        <p class="text-muted">Engine Off</p>
                                     </div>
                                 </div>
                             </div>
@@ -104,11 +120,11 @@
                                 <div class="d-flex align-items-center">
                                     <div class="circle mr-3 bg-primary circle p-2 d-flex justify-content-center
                        align-items-center">
-                                        <i class="fas fa-star text-white"></i>
+                                        <i class="fa-pause-circle-o text-white"></i>
                                     </div>
                                     <div>
                                         <h4 class="mb-1">5</h4>
-                                        <p class="text-muted">Small Text</p>
+                                        <p class="text-muted">Idle</p>
                                     </div>
                                 </div>
                             </div>
@@ -120,27 +136,11 @@
                                 <div class="d-flex align-items-center">
                                     <div class="circle mr-3 bg-primary circle p-2 d-flex justify-content-center
                        align-items-center">
-                                        <i class="fas fa-star text-white"></i>
+                                        <i class="fas fa-plug text-white"></i>
                                     </div>
                                     <div>
                                         <h4 class="mb-1">5</h4>
-                                        <p class="text-muted">Small Text</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="circle mr-3 bg-primary circle p-2 d-flex justify-content-center
-                       align-items-center">
-                                        <i class="fas fa-star text-white"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="mb-1">5</h4>
-                                        <p class="text-muted">Small Text</p>
+                                        <p class="text-muted">Unplugged</p>
                                     </div>
                                 </div>
                             </div>

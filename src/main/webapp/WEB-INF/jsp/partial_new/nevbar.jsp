@@ -12,26 +12,16 @@
   <!-- Left navbar links -->
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" data-widget="pushmenu" data-enable-remember="true" data-auto-collapse-size="4048" href="#" role="button"><i class="fas fa-bars"></i></a>
+      <a class="nav-link" data-widget="pushmenu" data-enable-remember="true" data-auto-collapse-size="4048"
+         href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <strong><a href="dashboard.html" class="nav-link">Dashboard</a></strong>
+      <strong><a href="#" class="nav-link">Dashboard</a></strong>
     </li>
   </ul>
 
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
-    <!-- Messages Dropdown Menu -->
-    <li class="nav-item dropdown">
-      <div class="user-panel d-flex">
-        <div class="info">
-          <a href="#" class="d-block">Sean</a>
-        </div>
-        <div class="image">
-          <img src="${pageContext.request.contextPath}/assets/dist/img/admin.png" class="img-circle elevation-2" alt="User Image" />
-        </div>
-      </div>
-    </li>
     <!-- Notifications Dropdown Menu -->
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
@@ -58,6 +48,25 @@
         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
       </div>
     </li>
+    <!-- Messages Dropdown Menu -->
+    <li class="nav-item dropdown">
+      <div class="user-panel d-flex">
+        <div class="info">
+          <span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>
+        </div>
+        <div class="image">
+          <img src="${pageContext.request.contextPath}/assets/v2/dist/img/admin.png"
+               class="img-circle elevation-2" alt="User Image"/>
+        </div>
+      </div>
+
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="${pageContext.request.contextPath}/logout">
+        <i class="fas fa-sign-out-alt"></i>
+      </a>
+    </li>
+
   </ul>
 </nav>
 
