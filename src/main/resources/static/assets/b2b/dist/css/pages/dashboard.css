@@ -130,12 +130,8 @@ footer {
   padding-left: 30px;
   display: block;
   margin-top: -30px;
-
-  @media only screen and (max-width: 767px) {
-    padding-left: unset;
-    text-align: center;
-  }
 }
+
 .gap-50 {
   gap: 180px;
 }
@@ -171,4 +167,13 @@ p {
 
 .target-span {
   padding-left: 0px;
+}
+
+.bg-dropdown{
+  background: #F5F8FA;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+  border-color: #19aaf8 transparent transparent transparent;
+  border-width: 9px 7px 0 7px;
+  margin-left: -12px;
 }

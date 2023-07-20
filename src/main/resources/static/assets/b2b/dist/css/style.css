@@ -116,3 +116,48 @@
 .font-21{
   font-size: 21px;
 }
+
+.select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--single {
+  border-color: #F5F8FA;
+  background: #F5F8FA;
+  height: 48px;
+}
+.select2-container--default .select2-selection--single {
+  border: 1px solid #F5F8FA;
+  padding: 0.46875rem 0.75rem;
+  height: calc(2.25rem + 2px);
+}
+.select2-container--default .select2-selection--single {
+  background: #F5F8FA;
+}
+span.small-text {
+  font-size: 16px;
+}
+.h6, h6 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.text-color-gray{
+  color: #B5B5C3;
+}
+.color-blue{
+  background: #0c84ff;
+}
+.color-hue{
+  background: #DDF2FE;
+}
+.small-indicator {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  margin-right: 10px;
+}
+
+.select2-container--default .select2-selection--single {
+  padding: 0.55875rem 0.75rem !important;
+  height: 48px !important;
+  font-size: 16px !important;
+}
+
+

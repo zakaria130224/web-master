@@ -39,7 +39,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title p-2">Menu Items</h3>
-                                <button type="button" class="btn btn-primary float-right mr-2"><i class="fa fa-plus-square"></i> Add Menu</button>
+                                <button type="button" class="btn btn-primary float-right mr-2" data-toggle="modal"
+                                        data-target="#addUser"><i class="fa fa-plus-square"></i> Add Menu</button>
                                 <button type="button" class="btn btn-primary float-right mr-2"><i class="fa fa-download"></i> Export</button>
                             </div>
                             <div class="card-body">
@@ -88,7 +89,7 @@
 </div>
 
 <!-- Add Modal forms-->
-<div class="modal fade" id="addModal" role="dialog" aria-labelledby="addModal"
+<div class="modal fade" id="addUser" role="dialog" aria-labelledby="addModal"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <form name="f" action="menu/save" method="POST" modelAttribute="message">

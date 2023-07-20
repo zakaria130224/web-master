@@ -25,6 +25,7 @@
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/b2b/plugins/select2/js/select2.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/jszip/jszip.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/pdfmake/pdfmake.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/pdfmake/vfs_fonts.js"></script>

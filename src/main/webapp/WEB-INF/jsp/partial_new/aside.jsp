@@ -27,7 +27,7 @@
 
     <hr>
     <!-- Vertical Nav -->
-    <div class="sidebar">
+    <%--<div class="sidebar">
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu"
@@ -99,7 +99,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <% for (MenuTree child2 : child1.getChild()) {%>
-                                <%--                                                <%if (child2.getChild().size() == 0) {%>--%>
+                                &lt;%&ndash;                                                <%if (child2.getChild().size() == 0) {%>&ndash;%&gt;
                                 <%if (child2.isHasLink()) {%>
                                 <li class="nav-item">
                                     <a class="nav-link"
@@ -118,7 +118,7 @@
                                     </a>
                                 </li>
                                 <%} %>
-                                <%--                                                <%} %>--%>
+                                &lt;%&ndash;                                                <%} %>&ndash;%&gt;
 
 
                                 <%} %>
@@ -139,6 +139,125 @@
                 <%}%>
             </ul>
         </nav>
+    </div>--%>
+
+    <div class="sidebar">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                   with font-awesome or any other icon font library -->
+
+                <li class="nav-item active-element">
+                    <a href="${pageContext.request.contextPath}/dashboard" class="nav-link">
+                        <i class="nav-icon fa fa-tachometer"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/devices" class="nav-link">
+                        <i class="nav-icon fa fa-cube"></i>
+                        <p>IoT Devices</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/alarm" class="nav-link">
+                        <i class="nav-icon far fa-bell"></i>
+                        <p>Alarm</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/map" class="nav-link">
+                        <i class="nav-icon fa fa-map"></i>
+                        <p>Map</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/trips" class="nav-link">
+                        <i class="nav-icon fa fa-car"></i>
+                        <p>Trips</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/settings" class="nav-link">
+                        <i class="nav-icon fa fa-gear"></i>
+                        <p>Settings</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-clipboard"></i>
+                        <p>
+                            Reports
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/reports/report-engine-off" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Engine Off Report</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/reports/report-fuel-used" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Fuel Used Report</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/reports/report-idle-time" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Idle Time Report</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/reports/report-tips" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Trips Reports</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/billing" class="nav-link">
+                        <i class="nav-icon fa fa-file-text"></i>
+                        <p>Billing</p>
+                    </a>
+                </li>
+
+
+
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/logs" class="nav-link">
+                        <i class="nav-icon fa fa-list-alt"></i>
+                        <p>Logs</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/support" class="nav-link">
+                        <i class="nav-icon fa fa-phone-square"></i>
+                        <p>Support</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/logout" class="nav-link">
+                        <i class="nav-icon fa fa-sign-out"></i>
+                        <p>Logout</p>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
     </div>
 
 </aside>
