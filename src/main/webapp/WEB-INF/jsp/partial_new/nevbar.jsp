@@ -23,9 +23,29 @@
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
     <!-- Notifications Dropdown Menu -->
+    <!-- Messages Dropdown Menu -->
+    <li class="nav-item dropdown">
+      <div class="user-panel d-flex">
+        <div class="info">
+          <p class="black-30 font-size-16 m-0">${logedUser.loginName}</p>
+          <p class="black-50 font-size-14 m-0">User Role</p>
+          <%--<span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>--%>
+        </div>
+        <div class="image">
+          <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/admin.png"
+               class="img-circle" alt="User Image"/>
+        </div>
+      </div>
+
+    </li>
+    <%--<li class="nav-item">
+      <a class="nav-link" href="${pageContext.request.contextPath}/logout">
+        <i class="fas fa-sign-out-alt"></i>
+      </a>
+    </li>--%>
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
-        <i class="far fa-bell"></i>
+        <img class="" src="${pageContext.request.contextPath}/assets/b2b/dist/img/notification.png" style="margin-top: 5px; margin-left: 10px;">
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <span class="dropdown-item dropdown-header">15 Notifications</span>
@@ -48,25 +68,6 @@
         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
       </div>
     </li>
-    <!-- Messages Dropdown Menu -->
-    <li class="nav-item dropdown">
-      <div class="user-panel d-flex">
-        <div class="info">
-          <span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>
-        </div>
-        <div class="image">
-          <img src="${pageContext.request.contextPath}/assets/v2/dist/img/admin.png"
-               class="img-circle elevation-2" alt="User Image"/>
-        </div>
-      </div>
-
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="${pageContext.request.contextPath}/logout">
-        <i class="fas fa-sign-out-alt"></i>
-      </a>
-    </li>
-
   </ul>
 </nav>
 

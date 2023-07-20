@@ -159,5 +159,33 @@ span.small-text {
   height: 48px !important;
   font-size: 16px !important;
 }
-
+.navbar {
+  height: 80px;
+}
+.user-panel .image {
+  height: 40px;
+  width: 40px;
+}
+.black-30{
+  color: #39363c;
+}
+.black-50{
+  color: #656367;
+}
+.font-size-16{
+  font-size: 16px;
+}
+.font-size-14{
+  font-size: 14px;
+}
+.user-panel img {
+  height: 40px;
+  width: 40px;
+}
+.user-panel .image {
+  display: inline-block;
+  margin-left: 0.8rem;
+  padding-left: 0px;
+  margin-top: 6px;
+}
 
