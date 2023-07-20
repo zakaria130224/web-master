@@ -63,7 +63,7 @@ public class LoginHandler implements AuthenticationSuccessHandler {
 //                }
                 SessionManager.initSession(httpServletRequest, dtoUserSession, menuService.getPermittedSideMenusByUserId(appUser.getId()), menuService.getPermittedMenusByUserId(appUser.getId()));
 
-                redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/home");
+                redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/dashboard");
             }
         } catch (Exception e) {
             e.printStackTrace();

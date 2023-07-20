@@ -58,13 +58,20 @@
                     </div>
                 </div>
             </div>
-
             <!-- /.container-fluid -->
+        </section>
+
+        <section class="content">
+            <div class="container-fluid">
+
+            </div>
         </section>
 
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
+
+                <%--Grid block countdown--%>
                 <div class="row">
                     <div class="col-12 col-md-4 col-lg-2">
                         <div class="card">
@@ -164,6 +171,90 @@
                     </div>
                     <!-- /.col -->
                 </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>Distance Travelled (KM) Vs Estimated Fuel Used (L)</h3>
+                                <h6 style="color: #656367; font-size: 400" class="mt-1 mb-2">Last Updated on 11:59 PM, 01 July 2023</h6>
+
+                                <hr>
+
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <select class="form-control bg-dropdown select2">
+                                                <option>All Vehicles</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <select class="form-control bg-dropdown select2">
+                                                <option>Last 7 Days</option>
+                                                <option>Last 30 Days</option>
+                                                <option>Last 6 Month</option>
+                                                <option>Last 1 Year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mb-2">
+                                        <canvas id="barChart"></canvas>
+                                    </div>
+
+                                    <div class="col-md-12 mt-2 mb-2">
+                                        <div class="row">
+                                            <div class="col-md-2 text-color-gray">
+                                                <h6><span class="small-indicator color-blue"></span> Distance Travelled</h6>
+                                            </div>
+                                            <div class="col-md-2 text-color-gray">
+                                                <h6><span class="small-indicator color-hue"></span> Estimated Fuel Used</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mt-1 mb-1">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <h6>Travelled Today</h6>
+                                                <h3>65.78 <span class="small-text">km</span></h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h6>Last 7 Days</h6>
+                                                <h3>65.78 <span class="small-text">km</span></h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h6>July</h6>
+                                                <h3>7041.78 <span class="small-text">km</span></h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h6>June</h6>
+                                                <h3>8965.78 <span class="small-text">km</span></h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h6>May</h6>
+                                                <h3>6785.45 <span class="small-text">km</span></h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h6>April</h6>
+                                                <h3>6785.45 <span class="small-text">km</span></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-12 col-lg-8">
                         <div class="card">
@@ -1041,6 +1132,10 @@
 <jsp:include page="./../../partial_new/script.jsp" />
 
 <script>
+    $( document ).ready(function() {
+        $(".select2").select2();
+    });
+
     document.addEventListener("DOMContentLoaded", function () {
         var ctx = document.getElementById("myChart").getContext("2d");
         var myChart = new Chart(ctx, {
@@ -1188,6 +1283,8 @@
 
 <script>
     $(function () {
+        $('.Select2').select2({selectOnClose: true});
+
         $("#example1")
             .DataTable({
                 responsive: true,
