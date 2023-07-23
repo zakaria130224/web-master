@@ -29,6 +29,7 @@
             font-weight: 700;
             font-size: 18px;
         }
+
     </style>
 </head>
 
@@ -203,9 +204,9 @@
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
                                             <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gra001.png"
+                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gra006.png"
                                                              alt="User Image"/> </span>
-                                                <span class="info-box-b2b">Reports</span>
+                                                <span class="info-box-b2b">Driving Score</span>
                                                 <span class="progress-description">
                                                     Score based on driving parameters
                                                 </span>
@@ -214,12 +215,219 @@
                                         </div>
                                         <!-- /.info-box -->
                                     </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box b2b-bg-info">
+                                            <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
+
+                                            <div class="info-box-content">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/map003.png"
+                                                             alt="User Image"/> </span>
+                                                <span class="info-box-b2b">Trips</span>
+                                                <span class="progress-description">
+                                                    All the trips
+                                                </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box b2b-bg-info">
+                                            <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
+
+                                            <div class="info-box-content">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/med001.png"
+                                                             alt="User Image"/> </span>
+                                                <span class="info-box-b2b">Health</span>
+                                                <span class="progress-description">
+                                                    Vehicle health report
+                                                </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+
 
                                 </div>
 
                             <%--   Widgets End   --%>
+                                <div class="row mt-4 mx-1">
+                                    <h6>Logs</h6>
+                                </div>
 
+                                <%-- Logs Start --%>
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box b2b-bg-info">
+                                            <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
+                                            <div class="info-box-content">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/abs016.png"
+                                                             alt="User Image"/> </span>
+                                                <span class="info-box-b2b">Fuel Log</span>
+                                                <span class="progress-description">
+                                                    Fuel Logs
+                                                </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box b2b-bg-info">
+                                            <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
+
+                                            <div class="info-box-content">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/fin003.png"
+                                                             alt="User Image"/> </span>
+                                                <span class="info-box-b2b">Expense</span>
+                                                <span class="progress-description">
+                                                    Expense Logs
+                                                </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box b2b-bg-info">
+                                            <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
+
+                                            <div class="info-box-content">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/cod001.png"
+                                                             alt="User Image"/> </span>
+                                                <span class="info-box-b2b">Maintenance</span>
+                                                <span class="progress-description">
+                                                    Maintenance logs
+                                                </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box b2b-bg-info">
+                                            <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
+
+                                            <div class="info-box-content">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gen005.png"
+                                                             alt="User Image"/> </span>
+                                                <span class="info-box-b2b">Papers</span>
+                                                <span class="progress-description">
+                                                    All papers
+                                                </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box b2b-bg-info">
+                                            <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
+
+                                            <div class="info-box-content">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gen037.png"
+                                                             alt="User Image"/> </span>
+                                                <span class="info-box-b2b">Requisition</span>
+                                                <span class="progress-description">
+                                                    Requisition logs
+                                                </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <!-- /.col -->
+
+                                </div>
+
+                                <%-- Logs End --%>
+
+                                <%-- Setup Start --%>
+                                <div class="row mt-4 mx-1">
+                                    <h6>Setup</h6>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box b2b-bg-info">
+                                            <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
+
+                                            <div class="info-box-content">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/teh001.png"
+                                                             alt="User Image"/> </span>
+                                                <span class="info-box-b2b">Vehicles & Trackers</span>
+                                                <span class="progress-description">
+                                                    List of Vehicles
+                                                </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box b2b-bg-info">
+                                            <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
+
+                                            <div class="info-box-content">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/com014.png"
+                                                             alt="User Image"/> </span>
+                                                <span class="info-box-b2b">Driver</span>
+                                                <span class="progress-description">
+                                                    All Driver information
+                                                </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box b2b-bg-info">
+                                            <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
+
+                                            <div class="info-box-content">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/map008.png"
+                                                             alt="User Image"/> </span>
+                                                <span class="info-box-b2b">Geo Fence</span>
+                                                <span class="progress-description">
+                                                    Geo Fencing on map
+                                                </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box b2b-bg-info">
+                                            <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
+
+                                            <div class="info-box-content">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gen019.png"
+                                                             alt="User Image"/> </span>
+                                                <span class="info-box-b2b">Alert Settings</span>
+                                                <span class="progress-description">
+                                                    Geo Fencing on map
+                                                </span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <!-- /.col -->
+
+                                </div>
+                                <%-- Setup End --%>
                             </div>
                             <!-- /.card-body -->
                         </div>
