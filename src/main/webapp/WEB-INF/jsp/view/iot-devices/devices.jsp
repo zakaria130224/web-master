@@ -21,7 +21,9 @@
 
     <style>
         .b2b-bg-info {
-            background-color: #D9EBF8!important;
+            background-color: #F3FBFF!important;
+            border-radius: 12px;
+            border-color: #D9EBF8;
         }
         .info-box-b2b {
             display: block;
