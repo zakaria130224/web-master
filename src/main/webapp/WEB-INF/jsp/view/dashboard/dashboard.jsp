@@ -35,7 +35,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
-                <div class="row mx-1 py-2 mb-1 " style="background-color: white; border-radius: 8px;">
+                <div class="row py-2 mb-1 " style="background-color: white; border-radius: 8px; margin: 1px">
                     <div class="col-sm-3 col-md-2 col-lg-1">
                         <div class="tabs_bar">
                             <span class="mt-5">General</span>
@@ -77,9 +77,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="circle mr-3 bg-purple circle p-2 d-flex justify-content-center
-                       align-items-center">
-                                        <i class="fas fa-gear text-white"></i>
+                                    <div class="float-left mr-3">
+                                        <img class="b2b-icon-png" src="${pageContext.request.contextPath}/assets/b2b/dist/icon/icon-4.png">
                                     </div>
                                     <div>
                                         <h4 class="mb-1">5</h4>
@@ -93,9 +92,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="circle mr-3 bg-green circle p-2 d-flex justify-content-center
-                       align-items-center font-21">
-                                        <i class="fa fa-exchange text-white"></i>
+                                    <div class="float-left mr-3">
+                                        <img class="b2b-icon-png" src="${pageContext.request.contextPath}/assets/b2b/dist/icon/icon-5.png">
                                     </div>
                                     <div>
                                         <h4 class="mb-1">5</h4>
@@ -109,9 +107,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="circle mr-3 bg-danger circle p-2 d-flex justify-content-center
-                       align-items-center font-21">
-                                        <i class="fa fa-stop-circle-o text-white"></i>
+                                    <div class="float-left mr-3">
+                                        <img class="b2b-icon-png" src="${pageContext.request.contextPath}/assets/b2b/dist/icon/icon-6.png">
                                     </div>
                                     <div>
                                         <h4 class="mb-1">5</h4>
@@ -125,9 +122,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="circle mr-3 bg-primary circle p-2 d-flex justify-content-center
-                       align-items-center font-21">
-                                        <i class="fa fa-pause-circle-o text-white"></i>
+                                    <div class="float-left mr-3">
+                                        <img class="b2b-icon-png" src="${pageContext.request.contextPath}/assets/b2b/dist/icon/icon-7.png">
                                     </div>
                                     <div>
                                         <h4 class="mb-1">5</h4>
@@ -141,9 +137,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="circle mr-3 bg-gray circle p-2 d-flex justify-content-center
-                       align-items-center font-21">
-                                        <i class="fas fa-plug text-white"></i>
+                                    <div class="float-left mr-3">
+                                        <img class="b2b-icon-png" src="${pageContext.request.contextPath}/assets/b2b/dist/icon/icon.png">
                                     </div>
                                     <div>
                                         <h4 class="mb-1">5</h4>
@@ -157,9 +152,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="circle mr-3 bg-gray circle p-2 d-flex justify-content-center
-                       align-items-center font-21">
-                                        <i class="fa fa-question-circle-o text-white"></i>
+                                    <div class="float-left mr-3">
+                                        <img class="b2b-icon-png" src="${pageContext.request.contextPath}/assets/b2b/dist/icon/icon-9.png">
                                     </div>
                                     <div>
                                         <h4 class="mb-1">5</h4>
@@ -169,15 +163,17 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- /.col -->
                 </div>
 
+                <%--row block 1--%>
                 <div class="row">
-                    <div class="col-12 col-lg-8">
+                    <div class="col-md-8 col-lg-8 col-sm-12">
                         <div class="card">
                             <div class="card-body">
-                                <h3>Distance Travelled (KM) Vs Estimated Fuel Used (L)</h3>
-                                <h6 style="color: #656367; font-size: 400" class="mt-1 mb-2">Last Updated on 11:59 PM, 01 July 2023</h6>
+                                <h3 class="b2b-font-20-500 black-10">Distance Travelled (KM) Vs Estimated Fuel Used (L)</h3>
+                                <h6 style="color: #656367; font-weight: 400" class="mt-1 mb-2">Last Updated on 11:59 PM, 01 July 2023</h6>
 
                                 <hr>
 
@@ -210,10 +206,10 @@
 
                                     <div class="col-md-12 mt-2 mb-2">
                                         <div class="row">
-                                            <div class="col-md-2 text-color-gray">
+                                            <div class="col-md-3 text-color-gray">
                                                 <h6><span class="small-indicator color-blue"></span> Distance Travelled</h6>
                                             </div>
-                                            <div class="col-md-2 text-color-gray">
+                                            <div class="col-md-3 text-color-gray">
                                                 <h6><span class="small-indicator color-hue"></span> Estimated Fuel Used</h6>
                                             </div>
                                         </div>
@@ -223,894 +219,748 @@
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <h6>Travelled Today</h6>
-                                                <h3>65.78 <span class="small-text">km</span></h3>
+                                                <h3 class="font-24">65.78 <span class="small-text">km</span></h3>
                                             </div>
                                             <div class="col-md-2">
                                                 <h6>Last 7 Days</h6>
-                                                <h3>65.78 <span class="small-text">km</span></h3>
+                                                <h3 class="font-24">65.78 <span class="small-text">km</span></h3>
                                             </div>
                                             <div class="col-md-2">
                                                 <h6>July</h6>
-                                                <h3>7041.78 <span class="small-text">km</span></h3>
+                                                <h3 class="font-24">7041.78 <span class="small-text">km</span></h3>
                                             </div>
                                             <div class="col-md-2">
                                                 <h6>June</h6>
-                                                <h3>8965.78 <span class="small-text">km</span></h3>
+                                                <h3 class="font-24">8965.78 <span class="small-text">km</span></h3>
                                             </div>
                                             <div class="col-md-2">
                                                 <h6>May</h6>
-                                                <h3>6785.45 <span class="small-text">km</span></h3>
+                                                <h3 class="font-24">6785.45 <span class="small-text">km</span></h3>
                                             </div>
                                             <div class="col-md-2">
                                                 <h6>April</h6>
-                                                <h3>6785.45 <span class="small-text">km</span></h3>
+                                                <h3 class="font-24">6785.45 <span class="small-text">km</span></h3>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="b2b-font-20-500 black-10">Height Distance Covered (km)</h3>
+                                <h6 style="color: #656367; font-weight: 400" class="mt-1 mb-2">Last Updated on 11:59 PM, 01 July 2023</h6>
+
+                                <hr>
+
+                                <div class="col-sm-12 mb-2 mt-2 pl-0">
+                                    <!-- select -->
+                                    <div class="form-group">
+                                        <select class="form-control bg-dropdown select2">
+                                            <option>Last 7 Days</option>
+                                            <option>Last 30 Days</option>
+                                            <option>Last 6 Month</option>
+                                            <option>Last 1 Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <%--row block 2--%>
                 <div class="row">
-                    <div class="col-12 col-lg-8">
+                    <div class="col-md-8 col-lg-8 col-sm-12">
                         <div class="card">
-                            <div class="card-header">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class=" p-2">Alarms</h6>
-                                    <div class="d-flex">
-                                        <!-- <button
-                                            type="button"
-                                            class="btn custom-button-outline mr-2"
-                                          >
-                                            <i class="fa-file-arrow-down"></i>
-                                            Trip Summary
-                                          </button> -->
-                                        <!-- <button type="button" class="btn custom-button">
-                                            Export
-                                          </button> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.card-header -->
                             <div class="card-body">
+                                <h3 class="b2b-font-20-500 black-10">VTS Alert</h3>
+                                <h6 style="color: #656367; font-weight: 400" class="mt-1 mb-2">Last Updated on 11:59 PM, 01 July 2023</h6>
+
+                                <hr>
+
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="dropdown mr-2">
-                                            <button class=" text-left  btn full-width btn-outline-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Vehicle List
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Option 1</a>
-                                                <a class="dropdown-item" href="#">Option 2</a>
-                                                <a class="dropdown-item" href="#">Option 3</a>
-                                            </div>
+
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <select class="form-control bg-dropdown select2">
+                                                <option>All Vehicles</option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="dropdown mr-2">
-                                            <button class="text-left  btn full-width btn-outline-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Duration
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Option 1</a>
-                                                <a class="dropdown-item" href="#">Option 2</a>
-                                                <a class="dropdown-item" href="#">Option 3</a>
+
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <select class="form-control bg-dropdown select2">
+                                                <option>Last 7 Days</option>
+                                                <option>Last 30 Days</option>
+                                                <option>Last 6 Month</option>
+                                                <option>Last 1 Year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 mb-4">
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+
+
+                                    <div class="col-md-12 mt-1 mb-1">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <h6>Alarm Today</h6>
+                                                <h3>4</h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h6>Last 7 Days</h6>
+                                                <h3>5</h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h6>July</h6>
+                                                <h3>7</h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h6>June</h6>
+                                                <h3>24</h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h6>May</h6>
+                                                <h3>34</h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h6>April</h6>
+                                                <h3>45</h3>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
-                                <div class="row mt-4 mx-1">
-                                    <div class="col-4">Total Alarm </br>
-                                        <h5>9</h5>
-                                    </div>
-                                    <div class="col-4">Critical Alarm </br>
-                                        <h5>7</h5>
-                                    </div>
-                                    <div class="col-4">Non Critical Alarm </br>
-                                        <h5>2</h5>
-                                    </div>
-                                </div>
-                                <div class="col-12 my-2">
-                                    <canvas id="myChart"></canvas>
-                                </div>
-
 
                             </div>
-                            <!-- /.card-body -->
                         </div>
                     </div>
-                    <div class="col-12 col-lg-4">
+                    <div class="col-md-4 col-lg-4 col-sm-4">
                         <div class="card">
-                            <div class="card-header">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class=" p-2">Top Alarm Generating Vehicles</h6>
+                            <div class="card-body">
+                                <h3 class="b2b-font-20-500 black-10">Height Distance Covered (km)</h3>
+                                <h6 style="color: #656367; font-weight: 400" class="mt-1 mb-2">Last Updated on 11:59 PM, 01 July 2023</h6>
 
+                                <hr>
+
+                                <div class="col-sm-12 mb-2 mt-2 pl-0">
+                                    <!-- select -->
+                                    <div class="form-group">
+                                        <select class="form-control bg-dropdown select2">
+                                            <option>Last 7 Days</option>
+                                            <option>Last 30 Days</option>
+                                            <option>Last 6 Month</option>
+                                            <option>Last 1 Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">24</h3>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <%--row block 3--%>
+                <div class="row">
+                    <div class="col-md-5 col-lg-5 col-sm-12">
+                        <div class="card">
                             <div class="card-body">
+                                <h3 class="b2b-font-20-500 black-10">Driving Score</h3>
+                                <h6 style="color: #656367; font-weight: 400" class="mt-1 mb-2">Last Updated on 11:59 PM, 01 July 2023</h6>
+
+                                <hr>
+
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <select class="form-control bg-dropdown select2">
+                                                <option>All Vehicles</option>
+                                                <option>Personal Vehicles</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <select class="form-control bg-dropdown select2">
+                                                <option>Last 7 Days</option>
+                                                <option>Last 30 Days</option>
+                                                <option>Last 6 Month</option>
+                                                <option>Last 1 Year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mt-1 mb-1">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <h6>Trips</h6>
+                                                <h3>4</h3>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h6>Time</h6>
+                                                <h3>5d 6h 5m</h3>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <h6>Distance</h6>
+                                                <h3>134.87 km</h3>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12 mt-4 mb-1">
+                                                <p class="font-18" style="color: #B5B5C3">Score</p>
+                                            </div>
+                                        </div>
+
+                                        <%--Start driving score circle partition--%>
+                                        <div class="row align-items-center">
+                                            <div class="col-lg-4 col-md-5 col-6">
+                                                <input type="text" class="knob" value="80" data-thickness="0.2" data-width="120" data-height="120"
+                                                       data-fgColor="#47BE7D">
+                                            </div>
+
+                                            <div class="col-lg-8 col-md-7 col-6 mt-4">
+                                                <div class="d-flex flex-column">
+                                                    <div class="d-flex justify-content-between gap-3 gap-sm-1 b2b-mb-12">
+                                                        <div class="d-flex align-items-center">
+                                                            <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
+                                                            <div class="block-12 b2b-bg-green mr-2" style=""></div>
+                                                            <span class="pl-2 font-size-16" style="color: #B5B5C3">Safe</span>
+                                                        </div>
+                                                        <div>>60</div>
+                                                    </div>
+
+                                                    <div class="d-flex justify-content-between gap-3 gap-sm-1 b2b-mb-12">
+                                                        <div class="d-flex align-items-center">
+                                                            <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
+                                                                <div class="block-12 b2b-bg-yellow mr-2" style=""></div>
+                                                                <span class="pl-2 font-size-16" style="color: #B5B5C3">Risky</span>
+                                                        </div>
+                                                        <div>50 ~ 60</div>
+                                                    </div>
+
+                                                    <div class="d-flex justify-content-between gap-3 gap-sm-1 b2b-mb-12">
+                                                        <div class="d-flex align-items-center">
+                                                            <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
+                                                                <div class="block-12 b2b-bg-red mr-2" style=""></div>
+                                                            <span class="pl-2 font-size-16" style="color: #B5B5C3">Dangerous</span>
+                                                        </div>
+                                                        <div><50</div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%--End driving score circle partition--%>
+
+                                        <div class="row">
+                                            <div class="col-md-12 mt-1 mb-1 mt-5">
+                                                <a href="#scoring_criteria" class="mr-5 b2b-icon-link float-left">
+                                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                     Scoring Criteria</a>
+                                                <a href="#scoring_criteria" class="b2b-icon-link">
+                                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                     Scoring Settings</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-7 col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="b2b-font-20-500 black-10">Drivers Info</h3>
+                                <h6 style="color: #656367; font-weight: 400" class="mt-1 mb-2">Last Updated on 11:59 PM, 01 July 2023</h6>
+
+                                <hr>
+
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="dropdown mr-2">
-                                            <button class="text-left  btn full-width btn-outline-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Duration
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Option 1</a>
-                                                <a class="dropdown-item" href="#">Option 2</a>
-                                                <a class="dropdown-item" href="#">Option 3</a>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                </div>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="col-12 my-2">
-                                <div class="card pl-3 pt-1">
-                                    <div class="row">
-                                        <div class="col-3 my-2">
-                                            <div class="card-body bg-primary text-center" style="border-radius: 8px;">
-                                                <i class="fa fa-car " aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Light Demo</h5>
-                                                <p class="card-text">small details</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="card-body d-flex align-items-center justify-content-center">
-                                                <h3>4</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3 my-2">
-                                            <div class="card-body bg-primary text-center" style="border-radius: 8px;">
-                                                <i class="fa fa-car " aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Light Demo</h5>
-                                                <p class="card-text">small details</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="card-body d-flex align-items-center justify-content-center">
-                                                <h3>4</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3 my-2">
-                                            <div class="card-body bg-primary text-center" style="border-radius: 8px;">
-                                                <i class="fa fa-car " aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Light Demo</h5>
-                                                <p class="card-text">small details</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="card-body d-flex align-items-center justify-content-center">
-                                                <h3>4</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3 my-2">
-                                            <div class="card-body bg-primary text-center" style="border-radius: 8px;">
-                                                <i class="fa fa-car " aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Light Demo</h5>
-                                                <p class="card-text">small details</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="card-body d-flex align-items-center justify-content-center">
-                                                <h3>4</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3 my-2">
-                                            <div class="card-body bg-primary text-center" style="border-radius: 8px;">
-                                                <i class="fa fa-car " aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Light Demo</h5>
-                                                <p class="card-text">small details</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="card-body d-flex align-items-center justify-content-center">
-                                                <h3>4</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col-12 col-lg-8">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between">
-                                <h6 class=" p-2">Alarms</h6>
-                                <div class="d-flex">
-                                    <!-- <button
-                                        type="button"
-                                        class="btn custom-button-outline mr-2"
-                                      >
-                                        <i class="fa-file-arrow-down"></i>
-                                        Trip Summary
-                                      </button> -->
-                                    <!-- <button type="button" class="btn custom-button">
-                                        Export
-                                      </button> -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="dropdown mr-2">
-                                        <button class=" text-left  btn full-width btn-outline-secondary dropdown-toggle" type="button"
-                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Vehicle List
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Option 1</a>
-                                            <a class="dropdown-item" href="#">Option 2</a>
-                                            <a class="dropdown-item" href="#">Option 3</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="dropdown mr-2">
-                                        <button class="text-left  btn full-width btn-outline-secondary dropdown-toggle" type="button"
-                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Duration
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Option 1</a>
-                                            <a class="dropdown-item" href="#">Option 2</a>
-                                            <a class="dropdown-item" href="#">Option 3</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="row mt-4 mx-1">
-                                <div class="col-4">Total Alarm </br>
-                                    <h5>9</h5>
-                                </div>
-                                <div class="col-4">Critical Alarm </br>
-                                    <h5>7</h5>
-                                </div>
-                                <div class="col-4">Non Critical Alarm </br>
-                                    <h5>2</h5>
-                                </div>
-                            </div>
-                            <div class="col-12 my-2">
-                                <canvas id="barChart"></canvas>
-                            </div>
-
-
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between">
-                                <h6 class=" p-2">Highest Distance Covered</h6>
-
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="dropdown mr-2">
-                                        <button class="text-left  btn full-width btn-outline-secondary dropdown-toggle" type="button"
-                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Duration
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Option 1</a>
-                                            <a class="dropdown-item" href="#">Option 2</a>
-                                            <a class="dropdown-item" href="#">Option 3</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="col-12 my-2">
-                            <div class="card pl-3 pt-1">
-                                <div class="row">
-                                    <div class="col-3 my-2">
-                                        <div class="card-body bg-primary text-center" style="border-radius: 8px;">
-                                            <i class="fa fa-car " aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Light Demo</h5>
-                                            <p class="card-text">small details</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="card-body d-flex align-items-center justify-content-center">
-                                            <h3>4</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-3 my-2">
-                                        <div class="card-body bg-primary text-center" style="border-radius: 8px;">
-                                            <i class="fa fa-car " aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Light Demo</h5>
-                                            <p class="card-text">small details</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="card-body d-flex align-items-center justify-content-center">
-                                            <h3>4</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-3 my-2">
-                                        <div class="card-body bg-primary text-center" style="border-radius: 8px;">
-                                            <i class="fa fa-car " aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Light Demo</h5>
-                                            <p class="card-text">small details</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="card-body d-flex align-items-center justify-content-center">
-                                            <h3>4</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-3 my-2">
-                                        <div class="card-body bg-primary text-center" style="border-radius: 8px;">
-                                            <i class="fa fa-car " aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Light Demo</h5>
-                                            <p class="card-text">small details</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="card-body d-flex align-items-center justify-content-center">
-                                            <h3>4</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-3 my-2">
-                                        <div class="card-body bg-primary text-center" style="border-radius: 8px;">
-                                            <i class="fa fa-car " aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Light Demo</h5>
-                                            <p class="card-text">small details</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="card-body d-flex align-items-center justify-content-center">
-                                            <h3>4</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-lg-5">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between">
-                                <h6 class=" p-2">Driving Score</h6>
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="dropdown mr-2">
-                                        <button class=" text-left  btn full-width btn-outline-secondary dropdown-toggle" type="button"
-                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Vehicle List
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Option 1</a>
-                                            <a class="dropdown-item" href="#">Option 2</a>
-                                            <a class="dropdown-item" href="#">Option 3</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="dropdown mr-2">
-                                        <button class="text-left  btn full-width btn-outline-secondary dropdown-toggle" type="button"
-                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Duration
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Option 1</a>
-                                            <a class="dropdown-item" href="#">Option 2</a>
-                                            <a class="dropdown-item" href="#">Option 3</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="row mt-4 mx-1">
-                                <div class="col-4">Trips </br>
-                                    <h5>9</h5>
-                                </div>
-                                <div class="col-4">Time </br>
-                                    <h5>7</h5>
-                                </div>
-                                <div class="col-4">Distance </br>
-                                    <h5>2</h5>
-                                </div>
-                            </div>
-                            <div class="col-12 my-2">
-                                <div class="container">
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-4 col-md-5 col-6">
-                                            <div class="chart-container" style="width: 120px">
-                                                <canvas id="circle"></canvas>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-8 col-md-7 col-6 mt-4">
-                                            <div class="d-flex flex-column mt-4">
-                                                <div class="d-flex justify-content-between gap-3 gap-sm-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />
-                                                        <span class="pl-2">Safe</span>
-                                                    </div>
-                                                    <div>-60</div>
+                                        <div class="row mb-3 mt-3">
+                                            <div class="col-md-4">
+                                                <div class="float-left mr-3">
+                                                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/icon/icon-1.png">
                                                 </div>
-
-                                                <div class="d-flex justify-content-between gap-3 gap-sm-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />
-                                                        <span class="pl-2">Risk</span>
-                                                    </div>
-                                                    <div>-60</div>
-                                                </div>
-
-                                                <div class="d-flex justify-content-between gap-3 gap-sm-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />
-                                                        <span class="pl-2">Dangerous</span>
-                                                    </div>
-                                                    <div>-60</div>
-                                                </div>
-
-                                                <div class="d-flex align-items-center gap-2 mt-4">
-                                                    <img src="${pageContext.request.contextPath}/assets/dist/img/Subtract.svg" alt="png" />
-                                                    <span style="color: #0078cf" class="ml-2">Target Settings</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-7">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between">
-                                <h6 class=" p-2">Driver's Info</h6>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="row">
-
-                                        <div class="d-flex align-items-center p-2">
-                                            <div class="circle mr-3 bg-primary circle p-2 d-flex justify-content-center
-                             align-items-center">
-                                                <i class="fas fa-star text-white"></i>
-                                            </div>
-                                            <div>
-                                                <h4 class="mb-1">5</h4>
-                                                <p class="text-muted">Small Text</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center p-2">
-                                            <div class="circle mr-3 bg-primary circle p-2 d-flex justify-content-center
-                             align-items-center">
-                                                <i class="fas fa-star text-white"></i>
-                                            </div>
-                                            <div>
-                                                <h4 class="mb-1">5</h4>
-                                                <p class="text-muted">Small Text</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center p-2">
-                                            <div class="circle mr-3 bg-primary circle p-2 d-flex justify-content-center
-                             align-items-center">
-                                                <i class="fas fa-star text-white"></i>
-                                            </div>
-                                            <div>
-                                                <h4 class="mb-1">5</h4>
-                                                <p class="text-muted">Small Text</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row mt-4">
-                                        <div class="col-md-6">
-                                            <div class="dropdown mr-2">
-                                                <button class=" text-left  btn full-width btn-outline-secondary dropdown-toggle" type="button"
-                                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Vehicle List
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">Option 1</a>
-                                                    <a class="dropdown-item" href="#">Option 2</a>
-                                                    <a class="dropdown-item" href="#">Option 3</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="dropdown mr-2">
-                                                <button class="text-left  btn full-width btn-outline-secondary dropdown-toggle" type="button"
-                                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Duration
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">Option 1</a>
-                                                    <a class="dropdown-item" href="#">Option 2</a>
-                                                    <a class="dropdown-item" href="#">Option 3</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12  mt-3">
-                                        <div class="d-flex align-items-center justify-content-center row">
-
-                                            <div class="p-2 mr-3">
                                                 <div>
-                                                    <h6 class="mb-1">Estimated Fuel</h6>
-                                                    <p class="text-muted">Small Text</p>
+                                                    <h4 class="font-18">Total Drivers</h4>
+                                                    <h3 class="b2b-font-20-500 black-20">6</h3>
                                                 </div>
                                             </div>
-                                            <div class="d-flex align-items-center p-2 mr-5 ml-5">
+                                            <div class="col-md-4">
+                                                <div class="float-left mr-3">
+                                                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/icon/icon-2.png">
+                                                </div>
                                                 <div>
-                                                    <h6 class="mb-1">Excessive Idling</h6>
-                                                    <p class="text-muted">Small Text</p>
+                                                    <h4 class="font-18">On Trip</h4>
+                                                    <h3 class="b2b-font-20-500 black-20">4</h3>
                                                 </div>
                                             </div>
-                                            <div class="d-flex align-items-center p-2 ml-3">
+                                            <div class="col-md-4">
+                                                <div class="float-left mr-3">
+                                                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/icon/icon-3.png">
+                                                </div>
                                                 <div>
-                                                    <h6 class="mb-1">Driving Behavior</h6>
-                                                    <p class="text-muted">Small Text</p>
+                                                    <h4 class="font-18">Offline</h4>
+                                                    <h3 class="b2b-font-20-500 black-20">2</h3>
                                                 </div>
                                             </div>
 
                                         </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <select class="form-control bg-dropdown select2">
+                                                        <option>All Vehicles</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <select class="form-control bg-dropdown select2">
+                                                        <option>Last 7 Days</option>
+                                                        <option>Last 30 Days</option>
+                                                        <option>Last 6 Month</option>
+                                                        <option>Last 1 Year</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row mt-2">
+                                            <div class="col-md-4 col-lg-4 text-center">
+                                                <h6 class="black-10 font-size-16 mb-3 black-60">Estimated Fuel Used</h6>
+                                                <input type="text" class="knob b2b-knob-text" data-thickness="0.3" data-anglearc="250"
+                                                       data-angleoffset="-125" value="20" data-width="168" data-height="84" data-fgcolor="#00c0ef"
+                                                       style="
+                              width: 64px;
+                              height: 40px;
+                              position: absolute;
+                              vertical-align: middle;
+                              margin-top: 40px;
+                              margin-left: -92px;
+                              border: 0px;
+                              background: none;
+                              font: bold 24px Arial;
+                              text-align: center;
+                              color: rgb(0, 192, 239);
+                              padding: 0px;
+                              appearance: none;
+                            " />
+                                                <p class="black-60 mt-2">Target 200.0</p>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4 text-center">
+                                                <h6 class="black-10 font-size-16 mb-3 black-60">Excessive Idling</h6>
+                                                <input type="text" class="knob b2b-knob-text" data-thickness="0.3" data-anglearc="250"
+                                                       data-angleoffset="-125" value="54.5" data-width="168" data-height="84" data-fgcolor="#00c0ef"
+                                                       style="
+                              width: 64px;
+                              height: 40px;
+                              position: absolute;
+                              vertical-align: middle;
+                              margin-top: 40px;
+                              margin-left: -92px;
+                              border: 0px;
+                              background: none;
+                              font: bold 24px Arial;
+                              text-align: center;
+                              color: rgb(0, 192, 239);
+                              padding: 0px;
+                              appearance: none;
+                            " />
+                                                <p class="black-60 mt-2">Target 200.0</p>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4 text-center">
+                                                <h6 class="black-10 font-size-16 mb-3 black-60">Driving Behavior</h6>
+                                                <input type="text" class="knob b2b-knob-text" data-thickness="0.3" data-anglearc="250"
+                                                       data-angleoffset="-125" value="85" data-width="168" data-height="84" data-fgcolor="#00c0ef"
+                                                       style="
+                              width: 64px;
+                              height: 40px;
+                              position: absolute;
+                              vertical-align: middle;
+                              margin-top: 40px;
+                              margin-left: -92px;
+                              border: 0px;
+                              background: none;
+                              font: bold 24px Arial;
+                              text-align: center;
+                              color: rgb(0, 192, 239);
+                              padding: 0px;
+                              appearance: none;
+                            " />
+                                                <p class="black-60 mt-2">Target 200.0</p>
+                                            </div>
+                                        </div>
+
                                         <div class="row mt-3">
-                                            <div class="col-12 col-lg-4 text-center">
-                                                <!-- Knob input code -->
-                                                <input type="text" class="knob" data-thickness="0.2" data-anglearc="250"
-                                                       data-angleoffset="-125" value="30" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                                                       style="
-                              width: 64px;
-                              height: 40px;
-                              position: absolute;
-                              vertical-align: middle;
-                              margin-top: 40px;
-                              margin-left: -92px;
-                              border: 0px;
-                              background: none;
-                              font: bold 24px Arial;
-                              text-align: center;
-                              color: rgb(0, 192, 239);
-                              padding: 0px;
-                              appearance: none;
-                            " />
-                                                <span class="target-span">Target 5.0</span>
-                                            </div>
-
-                                            <div class="text-center col-12 col-lg-4">
-                                                <!-- Knob input code -->
-                                                <input type="text" class="knob" data-thickness="0.2" data-anglearc="250"
-                                                       data-angleoffset="-125" value="30" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                                                       style="
-                              width: 64px;
-                              height: 40px;
-                              position: absolute;
-                              vertical-align: middle;
-                              margin-top: 40px;
-                              margin-left: -92px;
-                              border: 0px;
-                              background: none;
-                              font: bold 24px Arial;
-                              text-align: center;
-                              color: rgb(0, 192, 239);
-                              padding: 0px;
-                              appearance: none;
-                            " />
-                                                <span class="target-span">Target 5.0</span>
-                                            </div>
-
-                                            <div class="text-center col-12 col-lg-4">
-                                                <!-- Knob input code -->
-                                                <input type="text" class="knob" data-thickness="0.2" data-anglearc="250"
-                                                       data-angleoffset="-125" value="30" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                                                       style="
-                              width: 64px;
-                              height: 40px;
-                              position: absolute;
-                              vertical-align: middle;
-                              margin-top: 40px;
-                              margin-left: -92px;
-                              border: 0px;
-                              background: none;
-                              font: bold 24px Arial;
-                              text-align: center;
-                              color: rgb(0, 192, 239);
-                              padding: 0px;
-                              appearance: none;
-                            " />
-                                                <span class="target-span">Target 5.0</span>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-
-                        </div>
-                        <div class="col-12">
-                            <div class="row">
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 ">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between">
-                                <h6 class=" p-2">Driver's Info</h6>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="row mt-4">
-                                        <div class="col-md-6">
-                                            <div class="dropdown mr-2">
-                                                <button class=" text-left  btn full-width btn-outline-secondary dropdown-toggle" type="button"
-                                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Vehicle List
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">Option 1</a>
-                                                    <a class="dropdown-item" href="#">Option 2</a>
-                                                    <a class="dropdown-item" href="#">Option 3</a>
-                                                </div>
+                                            <div class="col-md-12 text-center">
+                                                <a class="b2b-icon-link" href="#target_settings">
+                                                    <i class="fa fa-gear"></i> Target Settings
+                                                </a>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="dropdown mr-2">
-                                                <button class="text-left  btn full-width btn-outline-secondary dropdown-toggle" type="button"
-                                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Duration
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">Option 1</a>
-                                                    <a class="dropdown-item" href="#">Option 2</a>
-                                                    <a class="dropdown-item" href="#">Option 3</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12  mt-3">
-                                        <div class="d-flex align-items-center justify-content-center row">
-                                            <div class="p-2 mr-3">
-                                                <div>
-                                                    <h6 class="mb-1">Estimated Fuel</h6>
-                                                    <p class="text-muted">Small Text</p>
-                                                </div>
-                                            </div>
-                                            <div class="p-2 mr-5 ml-5">
-                                                <div>
-                                                    <h6 class="mb-1">Estimated Fuel</h6>
-                                                    <p class="text-muted">Small Text</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center p-2 mr-5 ml-5">
-                                                <div>
-                                                    <h6 class="mb-1">Excessive Idling</h6>
-                                                    <p class="text-muted">Small Text</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center p-2 ml-3">
-                                                <div>
-                                                    <h6 class="mb-1">Driving Behavior</h6>
-                                                    <p class="text-muted">Small Text</p>
-                                                </div>
-                                            </div>
 
-                                        </div>
+
                                         <div class="row mt-3">
-                                            <div class="col-12 col-md-6 col-lg-3 text-center">
-                                                <!-- Knob input code -->
-                                                <input type="text" class="knob" data-thickness="0.2" data-anglearc="250"
-                                                       data-angleoffset="-125" value="30" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                                                       style="
-                              width: 64px;
-                              height: 40px;
-                              position: absolute;
-                              vertical-align: middle;
-                              margin-top: 40px;
-                              margin-left: -92px;
-                              border: 0px;
-                              background: none;
-                              font: bold 24px Arial;
-                              text-align: center;
-                              color: rgb(0, 192, 239);
-                              padding: 0px;
-                              appearance: none;
-                            " />
-                                                <span class="target-span">Target 5.0</span>
+                                            <div class="col-md-12 mt-3 mb-1">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <h6 class="black-20 font-size-14">Harsh Acceleration</h6>
+                                                        <h3>0</h3>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <h6 class="black-20 font-size-14">Over Speeding</h6>
+                                                        <h3>5</h3>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <h6 class="black-20 font-size-14">Harsh Brake</h6>
+                                                        <h3>7</h3>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <h6 class="black-20 font-size-14">Sharp Turn</h6>
+                                                        <h3>2</h3>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <h6 class="black-20 font-size-14">Collision</h6>
+                                                        <h3>1</h3>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-12 col-md-6 col-lg-3 text-center">
-                                                <!-- Knob input code -->
-                                                <input type="text" class="knob" data-thickness="0.2" data-anglearc="250"
-                                                       data-angleoffset="-125" value="30" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                                                       style="
-                              width: 64px;
-                              height: 40px;
-                              position: absolute;
-                              vertical-align: middle;
-                              margin-top: 40px;
-                              margin-left: -92px;
-                              border: 0px;
-                              background: none;
-                              font: bold 24px Arial;
-                              text-align: center;
-                              color: rgb(0, 192, 239);
-                              padding: 0px;
-                              appearance: none;
-                            " />
-                                                <span class="target-span">Target 5.0</span>
-                                            </div>
-
-                                            <div class="text-center col-12 col-lg-3 col-md-6">
-                                                <!-- Knob input code -->
-                                                <input type="text" class="knob" data-thickness="0.2" data-anglearc="250"
-                                                       data-angleoffset="-125" value="30" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                                                       style="
-                              width: 64px;
-                              height: 40px;
-                              position: absolute;
-                              vertical-align: middle;
-                              margin-top: 40px;
-                              margin-left: -92px;
-                              border: 0px;
-                              background: none;
-                              font: bold 24px Arial;
-                              text-align: center;
-                              color: rgb(0, 192, 239);
-                              padding: 0px;
-                              appearance: none;
-                            " />
-                                                <span class="target-span">Target 5.0</span>
-                                            </div>
-
-                                            <div class="text-center col-12 col-lg-3 col-md-6">
-                                                <!-- Knob input code -->
-                                                <input type="text" class="knob" data-thickness="0.2" data-anglearc="250"
-                                                       data-angleoffset="-125" value="30" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                                                       style="
-                              width: 64px;
-                              height: 40px;
-                              position: absolute;
-                              vertical-align: middle;
-                              margin-top: 40px;
-                              margin-left: -92px;
-                              border: 0px;
-                              background: none;
-                              font: bold 24px Arial;
-                              text-align: center;
-                              color: rgb(0, 192, 239);
-                              padding: 0px;
-                              appearance: none;
-                            " />
-                                                <span class="target-span">Target 5.0</span>
-                                            </div>
-
                                         </div>
+
+
 
                                     </div>
 
+
                                 </div>
-
-
-                            </div>
-
-                        </div>
-                        <div class="col-12">
-                            <div class="row">
 
                             </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
 
+            </div>
             <!-- /.container-fluid -->
         </section>
         <!-- /.content -->
