@@ -166,11 +166,20 @@ span.small-text {
   height: 40px;
   width: 40px;
 }
+.black-10{
+  color: #151317;
+}
+.black-20{
+  color: #232026;
+}
 .black-30{
   color: #39363c;
 }
 .black-50{
   color: #656367;
+}
+.black-60{
+  color: #918F92;
 }
 .font-size-16{
   font-size: 16px;
@@ -182,10 +191,75 @@ span.small-text {
   height: 40px;
   width: 40px;
 }
+.b2b-font-20-500{
+  font-weight: 500;
+  font-size: 20px;
+}
 .user-panel .image {
   display: inline-block;
   margin-left: 0.8rem;
   padding-left: 0px;
   margin-top: 6px;
 }
-
+.block-12{
+  height: 12px;
+  width: 12px;
+  background: #FFFFFF;
+  border-radius: 2px;
+}
+.b2b-bg-green{
+  background: #47BE7D;
+}
+.b2b-bg-yellow{
+  background: #E9B500;
+}
+.b2b-bg-red{
+  background: #F1416C;
+}
+.font-18{
+  font-size: 18px;
+  font-weight: 400;
+}
+.font-12{
+  font-size: 12px;
+  font-weight: 400;
+}
+.font-20{
+  font-size: 20px;
+  font-weight: 400;
+}
+span.select2.select2-container.select2-container--default.select2-container--focus {
+  width: 100%;
+}
+.select2-container {
+  width: 100% !important;
+}
+.b2b-list-block{
+  display: inline-block;
+}
+.b2b-font-weight-500{
+  font-weight: 500;
+}
+.b2b-font-weight-600{
+  font-weight: 600 !important;
+}
+.b2b-font-weight-700{
+  font-weight: 700;
+}
+.b2b-grid-number-large{
+  font-weight: 500;
+  font-size: 32px;
+  color: #3F4254
+}
+.b2b-mb-12{
+  margin-bottom: 12px;
+}
+.b2b-bg-brand-secondary{
+  background: #19AAF8;
+}
+.b2b-knob-text {
+  font-size: 24px !important;
+  font-weight: 500 !important;
+  color: #3F4254 !important;
+  margin-top: 47px !important;
+}
