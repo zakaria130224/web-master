@@ -73,7 +73,7 @@
 
                 <%--Grid block countdown--%>
                 <div class="row">
-                    <div class="col-12 col-md-4 col-lg-2">
+                    <div type="submit" class="col-12 col-md-4 col-lg-2" data-toggle="modal" data-target="#exampleModal">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-2">
+                    <div class="col-12 col-md-4 col-lg-2" type="submit" data-toggle="modal" data-target="#exampleModal">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-2">
+                    <div class="col-12 col-md-4 col-lg-2" type="submit" data-toggle="modal" data-target="#exampleModal">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-2">
+                    <div class="col-12 col-md-4 col-lg-2" type="submit" data-toggle="modal" data-target="#exampleModal">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -133,7 +133,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-2">
+                    <div class="col-12 col-md-4 col-lg-2" type="submit" data-toggle="modal" data-target="#exampleModal">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -148,7 +148,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-2">
+                    <div class="col-12 col-md-4 col-lg-2" type="submit" data-toggle="modal" data-target="#exampleModal">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -976,6 +976,139 @@
     <!-- Control sidebar content goes here -->
 </aside>
 <!-- /.control-sidebar -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header h-75p">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>9 Results Found</p>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="b2b-custom-boder">
+                            <th>Vehicle</th>
+                            <th>Driver</th>
+                            <th>Alarms</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="w-100">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="user-panel d-flex">
+                                        <div class="image float-left">
+                                            <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/admin.png"
+                                                 class="img-circle" alt="User Image"/>
+                                        </div>
+                                        <div class="info">
+                                            <p class="black-30 font-size-16 m-0">John Doe</p>
+                                            <p class="black-50 font-size-14 m-0">+8801944439069</p>
+                                            <%--<span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>--%>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><Span class="font-size-16 b2b-font-weight-500">1</Span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="w-100">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="user-panel d-flex">
+                                        <div class="image float-left">
+                                            <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/admin.png"
+                                                 class="img-circle" alt="User Image"/>
+                                        </div>
+                                        <div class="info">
+                                            <p class="black-30 font-size-16 m-0">John Doe</p>
+                                            <p class="black-50 font-size-14 m-0">+8801944439069</p>
+                                            <%--<span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>--%>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="b2b-vertical-middle"><Span class="font-size-16 b2b-font-weight-500">1</Span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="w-100">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="user-panel d-flex">
+                                        <div class="image float-left">
+                                            <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/admin.png"
+                                                 class="img-circle" alt="User Image"/>
+                                        </div>
+                                        <div class="info">
+                                            <p class="black-30 font-size-16 m-0">John Doe</p>
+                                            <p class="black-50 font-size-14 m-0">+8801944439069</p>
+                                            <%--<span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>--%>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="b2b-vertical-middle"><Span class="font-size-16 b2b-font-weight-500">1</Span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="w-100">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="user-panel d-flex">
+                                        <div class="image float-left">
+                                            <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/admin.png"
+                                                 class="img-circle" alt="User Image"/>
+                                        </div>
+                                        <div class="info">
+                                            <p class="black-30 font-size-16 m-0">John Doe</p>
+                                            <p class="black-50 font-size-14 m-0">+8801944439069</p>
+                                            <%--<span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>--%>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="b2b-vertical-middle"><Span class="font-size-16 b2b-font-weight-500">1</Span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer h-75p">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- ./wrapper -->
 
