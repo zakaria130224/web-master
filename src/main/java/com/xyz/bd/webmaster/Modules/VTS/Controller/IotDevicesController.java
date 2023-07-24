@@ -1,4 +1,4 @@
-package com.xyz.bd.webmaster.Controller;
+package com.xyz.bd.webmaster.Modules.VTS.Controller;
 
 
 import org.springframework.stereotype.Controller;
