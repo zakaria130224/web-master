@@ -42,7 +42,7 @@ public class UserController {
         //new MenuViewer().setupSideMenu(model, request);
         model.addAttribute("responsibility", responsibilityRepository.findAllByActiveTrue());
         model.addAttribute("title", "Dashboard");
-        return new ModelAndView("user/index");
+        return new ModelAndView("user/users");
     }
 
 
