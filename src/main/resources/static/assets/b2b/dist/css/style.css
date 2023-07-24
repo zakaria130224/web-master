@@ -274,3 +274,16 @@ span.select2.select2-container.select2-container--default.select2-container--foc
 .b2b-custom-boder{
   border-top: 1px solid #EFF2F5;
 }
+.b2b-icon-link{
+  font-size: 14px;
+  font-weight: 400;
+  color: #0078CF;
+}
+.b2b-modal-header {
+  height: 80px;
+  padding-top: 25px;
+}
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+  border-color: transparent transparent #19aaf8 transparent;
+  border-width: 0 7px 10px 7px;
+}
