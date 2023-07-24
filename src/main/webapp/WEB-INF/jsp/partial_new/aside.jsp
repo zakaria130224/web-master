@@ -211,6 +211,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/active_report" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Active Time Report</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/reports/report-idle-time" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Idle Time Report</p>
