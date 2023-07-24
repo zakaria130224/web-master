@@ -15,4 +15,11 @@ public class IotDevicesController {
         model.addAttribute("menu", "IoT Devices");
         return new ModelAndView("iot-devices/devices");
     }
+
+    @RequestMapping(value="/add_device", method = RequestMethod.GET)
+    public ModelAndView showAddDevicePage(ModelMap model){
+        model.addAttribute("title", "IoT Devices");
+        model.addAttribute("menu", "IoT Devices");
+        return new ModelAndView("iot-devices/add_device");
+    }
 }

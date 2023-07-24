@@ -110,7 +110,7 @@
                                           <i class="fa-file-arrow-down"></i>
                                           Trip Summary
                                         </button> -->
-                                        <button type="button" class="btn custom-button mr-2" onclick="window.location.href = 'FirstPage.html';">
+                                        <button type="button" class="btn custom-button mr-2" onclick="window.location.href = '/add_device';">
                                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                             &nbsp;Add Device
                                         </button>
