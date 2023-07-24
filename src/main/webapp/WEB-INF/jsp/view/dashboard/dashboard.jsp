@@ -982,18 +982,18 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header h-75p">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <div class="modal-header h-75p b2b-modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Titel of the model</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/icon/x-circle.png">
                 </button>
             </div>
             <div class="modal-body">
                 <p>9 Results Found</p>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" id="dataTable">
                         <thead class="b2b-custom-boder">
-                            <th>Vehicle</th>
+                            <th class="w-50">Vehicle</th>
                             <th>Driver</th>
                             <th>Alarms</th>
                         </thead>
@@ -1117,6 +1117,9 @@
 <script>
     $( document ).ready(function() {
         $(".select2").select2();
+        $("#dataTable").dataTable({
+
+        });
     });
 
     document.addEventListener("DOMContentLoaded", function () {
