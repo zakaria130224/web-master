@@ -15,4 +15,11 @@ public class DashboardController {
         model.addAttribute("menu", "Dashboard");
         return new ModelAndView("dashboard/dashboard");
     }
+
+    @RequestMapping(value="/dashboard-welcome", method = RequestMethod.GET)
+    public ModelAndView showDashboardWelcomePage(ModelMap model){
+        model.addAttribute("title", "Dashboard-welcome");
+        model.addAttribute("menu", "Dashboard-w");
+        return new ModelAndView("dashboard/dashboard-welcome");
+    }
 }
