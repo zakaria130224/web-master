@@ -22,4 +22,11 @@ public class IotDevicesController {
         model.addAttribute("menu", "IoT Devices");
         return new ModelAndView("iot-devices/add_device");
     }
+
+    @RequestMapping(value="/vts/map", method = RequestMethod.GET)
+    public ModelAndView showVtsMapPage(ModelMap model){
+        model.addAttribute("title", "IoT Devices");
+        model.addAttribute("menu", "IoT Devices");
+        return new ModelAndView("iot-devices/add_device");
+    }
 }
