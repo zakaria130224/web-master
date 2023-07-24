@@ -1,4 +1,4 @@
-package com.xyz.bd.webmaster.Controller;
+package com.xyz.bd.webmaster.Modules.VTS.Controller;
 
 
 import org.springframework.stereotype.Controller;
@@ -18,6 +18,13 @@ public class IotDevicesController {
 
     @RequestMapping(value="/add_device", method = RequestMethod.GET)
     public ModelAndView showAddDevicePage(ModelMap model){
+        model.addAttribute("title", "IoT Devices");
+        model.addAttribute("menu", "IoT Devices");
+        return new ModelAndView("iot-devices/add_device");
+    }
+
+    @RequestMapping(value="/vts/map", method = RequestMethod.GET)
+    public ModelAndView showVtsMapPage(ModelMap model){
         model.addAttribute("title", "IoT Devices");
         model.addAttribute("menu", "IoT Devices");
         return new ModelAndView("iot-devices/add_device");
