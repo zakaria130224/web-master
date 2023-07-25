@@ -15,4 +15,11 @@ public class ReportsController {
         model.addAttribute("menu", "Active Report");
         return new ModelAndView("iot-devices/vts/reports/vts-active-reports");
     }
+    @RequestMapping(value="/alarm_summary", method = RequestMethod.GET)
+    public ModelAndView showAlarmSummaryPage(ModelMap model){
+        model.addAttribute("title", "Alarm Report");
+        model.addAttribute("menu", "Active Report");
+        return new ModelAndView("iot-devices/vts/reports/vts-alarm-summary-report");
+    }
+
 }

@@ -218,6 +218,13 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/alarm_summary" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Alarm Summary Report</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/reports/report-idle-time" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Idle Time Report</p>
