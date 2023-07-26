@@ -19,7 +19,6 @@
 <script src="${pageContext.request.contextPath}/static/assets/v2/plugins/chart.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/datatables/jquery.dataTables.min.js"></script>
 <!-- jQuery Knob -->
-<script src="${pageContext.request.contextPath}/assets/b2b/plugins/jquery-knob/jquery.knob.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -27,13 +26,12 @@
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/select2/js/select2.js"></script>
-<script src="${pageContext.request.contextPath}/assets/b2b/plugins/jszip/jszip.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/pdfmake/pdfmake.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/pdfmake/vfs_fonts.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
-<script src="${pageContext.request.contextPath}/assets/b2b/dist/js/adminlte.min.js"></script>
+<noscript src="${pageContext.request.contextPath}/assets/b2b/dist/js/adminlte.min.js"></noscript>
 <!-- AdminLTE for demo purposes -->
-<script src="${pageContext.request.contextPath}/assets/b2b/dist/js/demo.js"></script>
+<noscript src="${pageContext.request.contextPath}/assets/b2b/dist/js/demo.js"></noscript>

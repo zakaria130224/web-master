@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dashboard</title>
 
-    <jsp:include page="./../../partial_new/header-link.jsp"></jsp:include>
+    <jsp:include page="./../../partial_new/header-link-dash.jsp"></jsp:include>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -1112,7 +1112,7 @@
 
 <!-- ./wrapper -->
 
-<jsp:include page="./../../partial_new/script.jsp" />
+<jsp:include page="./../../partial_new/script-dash.jsp" />
 
 <script>
     $( document ).ready(function() {
@@ -1278,10 +1278,9 @@
                 searching: false,
                 autoWidth: false,
                 // buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-            })
-            .buttons()
-            .container()
-            .appendTo("#example1_wrapper .col-md-6:eq(0)");
+            }).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");
+
+
         $("#example2").DataTable({
             paging: true,
             lengthChange: false,
