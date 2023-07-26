@@ -22,4 +22,11 @@ public class ReportsController {
         return new ModelAndView("iot-devices/vts/reports/vts-alarm-summary-report");
     }
 
+    @RequestMapping(value="/reports/engine_off_report", method = RequestMethod.GET)
+    public ModelAndView showEngineOffReportPage(ModelMap model){
+        model.addAttribute("title", "Engine Off Report");
+        model.addAttribute("menu", "Engine Off Report");
+        return new ModelAndView("iot-devices/vts/reports/vts-engine-off-report");
+    }
+
 }

@@ -199,7 +199,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="${pageContext.request.contextPath}/reports/report-engine-off" class="nav-link">
+                            <a href="${pageContext.request.contextPath}/reports/engine_off_report" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Engine Off Report</p>
                             </a>
