@@ -15,7 +15,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dashboard</title>
+    <title>VTS</title>
 
     <jsp:include page="./../../../../partial_new/header-link.jsp"></jsp:include>
 </head>
@@ -32,6 +32,22 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-1">
+                    <div class="col-sm-6">
+                        <h5>Trips</h5>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">VTS</a></li>
+                            <li class="breadcrumb-item active">Trips</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
