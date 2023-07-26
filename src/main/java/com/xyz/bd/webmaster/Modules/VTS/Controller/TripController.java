@@ -20,7 +20,7 @@ public class TripController {
     public ModelAndView showVtsTripMapView(ModelMap model){
         model.addAttribute("title", "Map View");
         model.addAttribute("menu", "VTS Trips");
-        return new ModelAndView("iot-devices/vts/trips/vts-trip-list");
+        return new ModelAndView("iot-devices/vts/trips/vts-trip-map-view");
     }
 
     @RequestMapping(value="/vts/trip-details", method = RequestMethod.GET)
