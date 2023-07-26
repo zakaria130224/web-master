@@ -369,7 +369,7 @@
                                                         <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
                                                         <div class="b2b-block-24 gap-3 mr-2" style="background-color: #d9bbc2"></div>
                                                         <div>
-                                                            <div class=" font-size-16" style="color: #232026;font-size: 18px; font-weight: bold">0</div>
+                                                            <div class=" font-size-16" style="color: #232026;font-size: 18px; font-weight: bold">4</div>
                                                             <div class="font-size-14" style="color: #918f92">Harsh Acceleration</div>
                                                         </div>
                                                     </div>
@@ -387,49 +387,29 @@
 
                                                     <div class="d-flex align-items-center">
                                                         <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
-                                                        <div class="block-12 gap-3 b2b-bg-green mr-2" style=""></div>
+                                                        <div class="b2b-block-24 gap-3 mr-2" style="background-color: #f4c7aa"></div>
                                                         <div>
-                                                            <div class=" font-size-16" style="color: #B5B5C3">0</div>
-                                                            <div class="">Harsh Acceleration</div>
+                                                            <div class=" font-size-16" style="color: #232026;font-size: 18px; font-weight: bold">2</div>
+                                                            <div class="font-size-14" style="color: #918f92">Harsh Brake</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex gap-3 gap-sm-1 b2b-mb-12">
                                                     <div class="d-flex align-items-center b2b-flex-basis50">
                                                         <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
-                                                        <div class="block-12 gap-3 b2b-bg-green mr-2" style=""></div>
+                                                        <div class="b2b-block-24 gap-3 mr-2" style="background-color: #E9B500"></div>
                                                         <div>
-                                                            <div class=" font-size-16" style="color: #B5B5C3">0</div>
-                                                            <div class="">Collision</div>
+                                                            <div class=" font-size-16" style="color: #232026;font-size: 18px; font-weight: bold">2</div>
+                                                            <div class="font-size-14" style="color: #918f92">Displacement</div>
                                                         </div>
                                                     </div>
 
                                                     <div class="d-flex align-items-center">
                                                         <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
-                                                        <div class="block-12 gap-3 b2b-bg-green mr-2" style=""></div>
+                                                        <div class="b2b-block-24 gap-3 mr-2" style="background-color: #f9efcc"></div>
                                                         <div>
-                                                            <div class=" font-size-16" style="color: #B5B5C3">0</div>
-                                                            <div class="">Harsh Acceleration</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="d-flex gap-3 gap-sm-1 b2b-mb-12">
-                                                    <div class="d-flex align-items-center b2b-flex-basis50">
-                                                        <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
-                                                        <div class="block-12 gap-3 b2b-bg-green mr-2" style=""></div>
-                                                        <div>
-                                                            <div class=" font-size-16" style="color: #B5B5C3">0</div>
-                                                            <div class="">Collision</div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex align-items-center">
-                                                        <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
-                                                        <div class="block-12 gap-3 b2b-bg-green mr-2" style=""></div>
-                                                        <div>
-                                                            <div class=" font-size-16" style="color: #B5B5C3">0</div>
-                                                            <div class="">Harsh Acceleration</div>
+                                                            <div class=" font-size-16" style="color: #232026;font-size: 18px; font-weight: bold">1</div>
+                                                            <div class="font-size-14" style="color: #918f92">Low Battery Level</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -437,19 +417,19 @@
                                                 <div class="d-flex gap-3 gap-sm-1 b2b-mb-12">
                                                     <div class="d-flex align-items-center b2b-flex-basis50">
                                                         <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
-                                                        <div class="block-12 gap-3 b2b-bg-green mr-2" style=""></div>
+                                                        <div class="b2b-block-24 gap-3 mr-2" style="background-color: #47BE7D"></div>
                                                         <div>
-                                                            <div class=" font-size-16" style="color: #B5B5C3">0</div>
-                                                            <div class="">Collision</div>
+                                                            <div class=" font-size-16" style="color: #232026;font-size: 18px; font-weight: bold">3</div>
+                                                            <div class="font-size-14" style="color: #918f92">Engine On/Off</div>
                                                         </div>
                                                     </div>
 
                                                     <div class="d-flex align-items-center">
                                                         <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
-                                                        <div class="block-12 gap-3 b2b-bg-green mr-2" style=""></div>
+                                                        <div class="b2b-block-24 gap-3 mr-2" style="background-color: #bcd6c7"></div>
                                                         <div>
-                                                            <div class=" font-size-16" style="color: #B5B5C3">0</div>
-                                                            <div class="">Harsh Acceleration</div>
+                                                            <div class=" font-size-16" style="color: #232026;font-size: 18px; font-weight: bold">0</div>
+                                                            <div class="font-size-14" style="color: #918f92">Low Battery Voltage</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -457,19 +437,19 @@
                                                 <div class="d-flex gap-3 gap-sm-1 b2b-mb-12">
                                                     <div class="d-flex align-items-center b2b-flex-basis50">
                                                         <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
-                                                        <div class="block-12 gap-3 b2b-bg-green mr-2" style=""></div>
+                                                        <div class="b2b-block-24 gap-3 mr-2" style="background-color: #39D5FD"></div>
                                                         <div>
-                                                            <div class=" font-size-16" style="color: #B5B5C3">0</div>
-                                                            <div class="">Collision</div>
+                                                            <div class=" font-size-16" style="color: #232026;font-size: 18px; font-weight: bold">2</div>
+                                                            <div class="font-size-14" style="color: #918f92">Excessive Idling</div>
                                                         </div>
                                                     </div>
 
                                                     <div class="d-flex align-items-center">
                                                         <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
-                                                        <div class="block-12 gap-3 b2b-bg-green mr-2" style=""></div>
+                                                        <div class="b2b-block-24 gap-3 mr-2" style="background-color: #c5ebf4"></div>
                                                         <div>
-                                                            <div class=" font-size-16" style="color: #B5B5C3">0</div>
-                                                            <div class="">Harsh Acceleration</div>
+                                                            <div class=" font-size-16" style="color: #232026;font-size: 18px; font-weight: bold">0</div>
+                                                            <div class="font-size-14" style="color: #918f92">Maintenance</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -477,19 +457,39 @@
                                                 <div class="d-flex gap-3 gap-sm-1 b2b-mb-12">
                                                     <div class="d-flex align-items-center b2b-flex-basis50">
                                                         <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
-                                                        <div class="block-12 gap-3 b2b-bg-green mr-2" style=""></div>
+                                                        <div class="b2b-block-24 gap-3 mr-2" style="background-color: #2884EF"></div>
                                                         <div>
-                                                            <div class=" font-size-16" style="color: #B5B5C3">0</div>
-                                                            <div class="">Collision</div>
+                                                            <div class=" font-size-16" style="color: #232026;font-size: 18px; font-weight: bold">6</div>
+                                                            <div class="font-size-14" style="color: #918f92">Geofence</div>
                                                         </div>
                                                     </div>
 
                                                     <div class="d-flex align-items-center">
                                                         <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
-                                                        <div class="block-12 gap-3 b2b-bg-green mr-2" style=""></div>
+                                                        <div class="b2b-block-24 gap-3 mr-2" style="background-color: #d7e9ff"></div>
                                                         <div>
-                                                            <div class=" font-size-16" style="color: #B5B5C3">0</div>
-                                                            <div class="">Harsh Acceleration</div>
+                                                            <div class=" font-size-16" style="color: #232026;font-size: 18px; font-weight: bold">1</div>
+                                                            <div class="font-size-14" style="color: #918f92">Vibration</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex gap-3 gap-sm-1 b2b-mb-12">
+                                                    <div class="d-flex align-items-center b2b-flex-basis50">
+                                                        <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
+                                                        <div class="b2b-block-24 gap-3 mr-2" style="background-color: #5014d0"></div>
+                                                        <div>
+                                                            <div class=" font-size-16" style="color: #232026;font-size: 18px; font-weight: bold">3</div>
+                                                            <div class="font-size-14" style="color: #918f92">Over Speeding</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center">
+                                                        <%--<img src="${pageContext.request.contextPath}/assets/dist/img/indicator.svg" alt="png" />--%>
+                                                        <div class="b2b-block-24 gap-3 mr-2" style="background-color: #c7bbe1"></div>
+                                                        <div>
+                                                            <div class=" font-size-16" style="color: #232026;font-size: 18px; font-weight: bold">1</div>
+                                                            <div class="font-size-14" style="color: #918f92">SOS</div>
                                                         </div>
                                                     </div>
                                                 </div>
