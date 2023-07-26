@@ -18,6 +18,7 @@
     <title>VTS</title>
 
     <jsp:include page="./../../../../partial_new/header-link.jsp"></jsp:include>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -55,45 +56,226 @@
 
                 <%--row block 1--%>
                 <div class="row">
-                    <div class="col-md-8 col-lg-8 col-sm-12">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="b2b-font-20-500 black-10">Distance Travelled (KM) Vs Estimated Fuel Used (L)</h3>
-                                <h6 style="color: #656367; font-weight: 400" class="mt-1 mb-2">Last Updated on 11:59 PM, 01 July 2023</h6>
+                                <div class="card-head-custom">
+                                    <div class="float-left">
+                                        <h3 class="b2b-font-20-500 black-10 float-left">Portlet Title</h3>
+                                    </div>
+                                    <div class="float-right">
+                                        <button type="submit" class="btn btn-sm btn-custom-white mr-2">Trip Summary</button>
+                                        <button type="submit" class="btn btn-sm btn-custom-blue">View on Map</button>
+                                    </div>
+                                </div>
 
                                 <hr>
 
                                 <div class="row">
 
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12 col-md-8 col-lg-8">
                                         <!-- select -->
-                                        <div class="form-group">
-                                            <select class="form-control bg-dropdown select2">
-                                                <option>All Vehicles</option>
+                                        <div class="form-group float-left mr-2">
+                                            <select class="form-control select2">
+                                                <option>All Resources</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group float-left mr-2">
+                                            <div class="input-group">
+                                                <button type="button" class="btn btn-default pull-right btn-rounded" id="daterange-btn">
+                                                        <span>
+                                                          Date Range
+                                                        </span>
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group float-left mr-2">
+                                            <select class="form-control select2">
+                                                <option>Option</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group float-left mr-2">
+                                            <select class="form-control select2">
+                                                <option>Option</option>
                                             </select>
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <select class="form-control bg-dropdown select2">
-                                                <option>Last 7 Days</option>
-                                                <option>Last 30 Days</option>
-                                                <option>Last 6 Month</option>
-                                                <option>Last 1 Year</option>
-                                            </select>
+                                    <div class="col-md-4 col-lg-4 col-sm-12 float-right">
+                                        <!-- Actual search box -->
+                                        <div class="form-group has-search">
+                                            <span class="fa fa-search form-control-feedback"></span>
+                                            <input type="text" class="form-control" placeholder="Search">
                                         </div>
                                     </div>
+
+
+
 
 
                                     <div class="col-md-12 mt-2 mb-2">
                                         <div class="row">
-                                            <div class="col-md-3 text-color-gray">
-                                                <h6><span class="small-indicator color-blue"></span> Distance Travelled</h6>
-                                            </div>
-                                            <div class="col-md-3 text-color-gray">
-                                                <h6><span class="small-indicator color-hue"></span> Estimated Fuel Used</h6>
+                                            <div class="table-responsive">
+                                                <table class="table" id="dataTable">
+                                                    <thead class="b2b-custom-boder">
+                                                    <th>Vehicle</th>
+                                                    <th>Start Location</th>
+                                                    <th>End Location</th>
+                                                    <th>Start Time</th>
+                                                    <th>End Time</th>
+                                                    <th>Time</th>
+                                                    <th>Distance</th>
+                                                    <th>Alert</th>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="w-100">
+                                                                <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                                                <div class="b2b-list-block">
+                                                                    <p class="black-30 font-16 b2b-font-weight-500 mb-0">Light Demo</p>
+                                                                    <p class="card-text black-60 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>Motijheel</td>
+                                                        <td>Badda</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>1h 30m</td>
+                                                        <td>6.8 Km</td>
+                                                        <td>6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="w-100">
+                                                                <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                                                <div class="b2b-list-block">
+                                                                    <p class="black-30 font-16 b2b-font-weight-500 mb-0">Light Demo</p>
+                                                                    <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>Motijheel</td>
+                                                        <td>Badda</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>1h 30m</td>
+                                                        <td>6.8 Km</td>
+                                                        <td>6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="w-100">
+                                                                <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                                                <div class="b2b-list-block">
+                                                                    <p class="black-30 font-16 b2b-font-weight-500 mb-0">Light Demo</p>
+                                                                    <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>Motijheel</td>
+                                                        <td>Badda</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>1h 30m</td>
+                                                        <td>6.8 Km</td>
+                                                        <td>6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="w-100">
+                                                                <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                                                <div class="b2b-list-block">
+                                                                    <p class="black-30 font-16 b2b-font-weight-500 mb-0">Light Demo</p>
+                                                                    <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>Motijheel</td>
+                                                        <td>Badda</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>1h 30m</td>
+                                                        <td>6.8 Km</td>
+                                                        <td>6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="w-100">
+                                                                <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                                                <div class="b2b-list-block">
+                                                                    <p class="black-30 font-16 b2b-font-weight-500 mb-0">Light Demo</p>
+                                                                    <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>Motijheel</td>
+                                                        <td>Badda</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>1h 30m</td>
+                                                        <td>6.8 Km</td>
+                                                        <td>6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="w-100">
+                                                                <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                                                <div class="b2b-list-block">
+                                                                    <p class="black-30 font-16 b2b-font-weight-500 mb-0">Light Demo</p>
+                                                                    <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>Motijheel</td>
+                                                        <td>Badda</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>1h 30m</td>
+                                                        <td>6.8 Km</td>
+                                                        <td>6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="w-100">
+                                                                <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                                                <div class="b2b-list-block">
+                                                                    <p class="black-30 font-16 b2b-font-weight-500 mb-0">Light Demo</p>
+                                                                    <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>Motijheel</td>
+                                                        <td>Badda</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>1h 30m</td>
+                                                        <td>6.8 Km</td>
+                                                        <td>6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="w-100">
+                                                                <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                                                <div class="b2b-list-block">
+                                                                    <p class="black-30 font-16 b2b-font-weight-500 mb-0">Light Demo</p>
+                                                                    <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>Motijheel</td>
+                                                        <td>Badda</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>10:12 am, 2 Apr 2023</td>
+                                                        <td>1h 30m</td>
+                                                        <td>6.8 Km</td>
+                                                        <td>6</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
@@ -126,147 +308,46 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header h-75p b2b-modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Titel of the model</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/icon/x-circle.png">
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>9 Results Found</p>
-                <div class="table-responsive">
-                    <table class="table" id="dataTable">
-                        <thead class="b2b-custom-boder">
-                        <th class="w-50">Vehicle</th>
-                        <th>Driver</th>
-                        <th>Alarms</th>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <div class="w-100">
-                                    <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
-                                    <div class="b2b-list-block">
-                                        <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                        <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="user-panel d-flex">
-                                    <div class="image float-left">
-                                        <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/admin.png"
-                                             class="img-circle" alt="User Image"/>
-                                    </div>
-                                    <div class="info">
-                                        <p class="black-30 font-size-16 m-0">John Doe</p>
-                                        <p class="black-50 font-size-14 m-0">+8801944439069</p>
-                                        <%--<span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>--%>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><Span class="font-size-16 b2b-font-weight-500">1</Span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="w-100">
-                                    <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
-                                    <div class="b2b-list-block">
-                                        <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                        <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="user-panel d-flex">
-                                    <div class="image float-left">
-                                        <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/admin.png"
-                                             class="img-circle" alt="User Image"/>
-                                    </div>
-                                    <div class="info">
-                                        <p class="black-30 font-size-16 m-0">John Doe</p>
-                                        <p class="black-50 font-size-14 m-0">+8801944439069</p>
-                                        <%--<span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>--%>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="b2b-vertical-middle"><Span class="font-size-16 b2b-font-weight-500">1</Span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="w-100">
-                                    <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
-                                    <div class="b2b-list-block">
-                                        <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                        <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="user-panel d-flex">
-                                    <div class="image float-left">
-                                        <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/admin.png"
-                                             class="img-circle" alt="User Image"/>
-                                    </div>
-                                    <div class="info">
-                                        <p class="black-30 font-size-16 m-0">John Doe</p>
-                                        <p class="black-50 font-size-14 m-0">+8801944439069</p>
-                                        <%--<span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>--%>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="b2b-vertical-middle"><Span class="font-size-16 b2b-font-weight-500">1</Span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="w-100">
-                                    <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
-                                    <div class="b2b-list-block">
-                                        <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                        <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="user-panel d-flex">
-                                    <div class="image float-left">
-                                        <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/admin.png"
-                                             class="img-circle" alt="User Image"/>
-                                    </div>
-                                    <div class="info">
-                                        <p class="black-30 font-size-16 m-0">John Doe</p>
-                                        <p class="black-50 font-size-14 m-0">+8801944439069</p>
-                                        <%--<span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>--%>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="b2b-vertical-middle"><Span class="font-size-16 b2b-font-weight-500">1</Span></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="modal-footer h-75p">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- ./wrapper -->
 
 <jsp:include page="./../../../../partial_new/script.jsp" />
+<script src="${pageContext.request.contextPath}/assets/b2b/plugins/moment/min/moment.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.css">
 
 <script>
     $( document ).ready(function() {
         $(".select2").select2();
         $("#dataTable").dataTable({
-
+            paging: true,
+            lengthChange: false,
+            searching: false,
+            ordering: true,
+            info: true,
+            autoWidth: false,
+            responsive: true,
         });
+
+        //Date range as a button
+        $('#daterange-btn').daterangepicker(
+            {
+                ranges   : {
+                    'Today'       : [moment(), moment()],
+                    'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate  : moment(),
+                opens: 'right'
+            },
+            function (start, end) {
+                $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+            }
+        );
     });
 </script>
 
