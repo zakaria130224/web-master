@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "TBL_AUDIT_LOGGER")
+@Table(name = "sf_tbl_audit_logger")
 public class AuditLogger {
     @Id
     @Column(name = "ID")
