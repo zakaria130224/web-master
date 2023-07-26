@@ -225,9 +225,23 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/reports/vts-report-summary" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Summary Report</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/reports/report-idle-time" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Idle Time Report</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/reports/report-excessive-idle-time" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Excessive Idle Time Report</p>
                             </a>
                         </li>
                         <li class="nav-item">
