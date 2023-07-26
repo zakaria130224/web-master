@@ -13,7 +13,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "MD_RESPONSIBILITY_MENU_MAP")
+@Table(name = "sf_md_responsibility_menu_map")
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor

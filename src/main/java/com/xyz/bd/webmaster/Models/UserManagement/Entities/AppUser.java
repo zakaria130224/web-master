@@ -15,7 +15,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "MD_USER")
+@Table(name = "sf_md_user")
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor

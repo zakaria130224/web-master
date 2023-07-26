@@ -15,7 +15,7 @@ import java.util.Date;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "TBL_CHANGE_PASSWORD_HISTORY")
+@Table(name = "sf_tbl_change_password_history")
 public class AppUserPasswordHistory {
     @Id
     @Column(name = "ID")
