@@ -232,6 +232,13 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/reports/vts-expenditure-summary" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Expenditure Report</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/reports/report-idle-time" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Idle Time Report</p>

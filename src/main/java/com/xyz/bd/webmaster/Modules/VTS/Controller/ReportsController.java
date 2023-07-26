@@ -50,5 +50,12 @@ public class ReportsController {
         return new ModelAndView("iot-devices/vts/reports/vts-summary-report");
     }
 
+    @RequestMapping(value="/reports/vts-expenditure-summary", method = RequestMethod.GET)
+    public ModelAndView showExpenditureReportPage(ModelMap model){
+        model.addAttribute("title", "Expenditure Report");
+        model.addAttribute("menu", "Expenditure Report");
+        return new ModelAndView("iot-devices/vts/reports/vts-expenditure-report");
+    }
+
 
 }
