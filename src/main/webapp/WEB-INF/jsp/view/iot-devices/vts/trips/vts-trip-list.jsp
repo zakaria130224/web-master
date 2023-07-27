@@ -64,8 +64,8 @@
                                         <h3 class="b2b-font-20-500 black-10 float-left">Portlet Title</h3>
                                     </div>
                                     <div class="float-right">
-                                        <button type="submit" class="btn btn-sm btn-custom-white mr-2">Trip Summary</button>
-                                        <button type="submit" class="btn btn-sm btn-custom-blue">View on Map</button>
+                                        <a type="submit" class="btn btn-sm btn-custom-white mr-2">Trip Summary</a>
+                                        <a href="${pageContext.request.contextPath}/vts/trip-map-view" class="btn btn-sm btn-custom-blue">View on Map</a>
                                     </div>
                                 </div>
 

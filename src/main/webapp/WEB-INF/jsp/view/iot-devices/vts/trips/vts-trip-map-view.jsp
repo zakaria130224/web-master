@@ -19,8 +19,9 @@
 
     <jsp:include page="./../../../../partial_new/header-link.jsp"></jsp:include>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBReZYNJkZMsbONTHWrci1uYEzcYI_Dtj4&callback=initMap"></script>
-
+    <script defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBReZYNJkZMsbONTHWrci1uYEzcYI_Dtj4&libraries=visualization&callback=initMap">
+    </script>
 
 </head>
 
@@ -67,8 +68,8 @@
                                         <h3 class="b2b-font-20-500 black-10 float-left">Map View</h3>
                                     </div>
                                     <div class="float-right">
-                                        <button type="submit" class="btn btn-sm btn-custom-white mr-2">Trip Summary</button>
-                                        <button type="submit" class="btn btn-sm btn-custom-blue">List View</button>
+                                        <a type="submit" class="btn btn-sm btn-custom-white mr-2">Trip Summary</a>
+                                        <a href="${pageContext.request.contextPath}/vts/trip-list" class="btn btn-sm btn-custom-blue">List View</a>
                                     </div>
                                 </div>
 
@@ -83,208 +84,142 @@
                                                         <div id="map"></div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-5">
-                                                        <div class="d-flex gap-4">
-                                                            <div
-                                                                    class="dropdown col-5 d-flex justify-content-between align-items-center gap-3 border rounded-3 px-3 py-2"
-                                                                    id="my-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> All Vehicles
-
-                                                                <!-- <button  class="btn btn-primary btn-block dropdown-toggle" >Text</button> -->
-                                                                <div class="dropdown-menu" aria-labelledby="my-dropdown">
-                                                                    <a class="dropdown-item active" href="#">All Vehicle</a>
-                                                                    <a class="dropdown-item " href="#">Vehicle #1</a>
-                                                                    <a class="dropdown-item " href="#">Vehicle #2</a>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group float-left mr-2">
+                                                                    <select class="form-control select2">
+                                                                        <option>All Resources</option>
+                                                                    </select>
                                                                 </div>
 
-                                                                <div><img src="${pageContext.request.contextPath}/assets/b2b/dist/img/Vector 62.png" alt="" /></div>
-                                                            </div>
-                                                            <div
-                                                                    class="dropdown col-5 d-flex justify-content-between align-items-center gap-3 border rounded-3 px-3 py-2"
-                                                                    id="my-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> All Vehicles
-
-                                                                <!-- <button  class="btn btn-primary btn-block dropdown-toggle" >Text</button> -->
-                                                                <div class="dropdown-menu" aria-labelledby="my-dropdown">
-                                                                    <a class="dropdown-item active" href="#">Today</a>
-                                                                    <a class="dropdown-item " href="#">This Week</a>
-                                                                    <a class="dropdown-item " href="#">This Moneth</a>
-                                                                </div>
-
-                                                                <div><img src="${pageContext.request.contextPath}/assets/b2b/dist/img/Vector 62.png" alt="" /></div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <h2 class="font-weight-500 my-3">15 Trips</h2>
-                                                        </div>
-
-                                                        <div class="border-bottom mb-2">
-                                                            <div class="d-flex gap-2">
-                                                                <div>
-                                                                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/location-icon.svg" width="22" height="22" alt="" />
-                                                                </div>
-
-                                                                <div class="w-60">
-                                                                    <p>On Motijheel Road, 33m North</p>
-                                                                </div>
-
-                                                                <div class="">
-                                                                    <p class="color-light-danger">5:49 PM</p>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="position-relative lh-0">
-                                                                <hr />
-
-                                                                <div class="d-flex gap-2 pl-29 mt-1 mb-1">
-                                                                    <div class="text-color-light-gray">
-                                                                        <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/alaram-icon.svg" width="12" height="12" alt="" />
+                                                                <div class="form-group float-left mr-2">
+                                                                    <div class="input-group">
+                                                                        <button type="button" class="btn btn-default pull-right btn-rounded" id="daterange-btn">
+                                                                            <span>
+                                                                              Date Range
+                                                                            </span>
+                                                                            <i class="fa fa-calendar"></i>
+                                                                        </button>
                                                                     </div>
-                                                                    <p class="text-color-light-gray">14.12 KM</p>
-                                                                </div>
-                                                                <div class="d-flex gap-2 pl-29 mt-1 mb-1">
-                                                                    <div class="text-color-light-gray">
-                                                                        <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/time-icon.svg" width="12" height="12" alt="" />
-                                                                    </div>
-                                                                    <p class="text-color-light-gray">
-                                                                        1 hour 48 mins 21 seconds
-                                                                    </p>
-                                                                </div>
-                                                                <div class="d-flex gap-2 pl-29 mt-1 mb-1">
-                                                                    <div class="text-color-light-gray">
-                                                                        <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/time-icon.svg" width="12" height="12" alt="" />
-                                                                    </div>
-                                                                    <p class="text-color-light-gray">
-                                                                        1 hour 48 mins 21 seconds
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="d-flex gap-2 mb-3">
-                                                                <div>
-                                                                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/location-icon.svg" width="22" height="22" alt="" />
-                                                                </div>
-
-                                                                <div class="w-60">
-                                                                    <p>On Motijheel Road, 33m North</p>
-                                                                </div>
-
-                                                                <div class="">
-                                                                    <p class="color-light-danger">5:49 PM</p>
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                        <div class="border-bottom mb-2">
-                                                            <div class="d-flex gap-2">
-                                                                <div>
-                                                                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/location-icon.svg" width="22" height="22" alt="" />
-                                                                </div>
-
-                                                                <div class="w-60">
-                                                                    <p>On Motijheel Road, 33m North</p>
-                                                                </div>
-
-                                                                <div class="">
-                                                                    <p class="color-light-danger">5:49 PM</p>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="position-relative lh-0">
-                                                                <hr />
-
-                                                                <div class="d-flex gap-2 pl-29 mt-1 mb-1">
-                                                                    <div class="text-color-light-gray">
-                                                                        <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/alaram-icon.svg" width="12" height="12" alt="" />
-                                                                    </div>
-                                                                    <p class="text-color-light-gray">14.12 KM</p>
-                                                                </div>
-                                                                <div class="d-flex gap-2 pl-29 mt-1 mb-1">
-                                                                    <div class="text-color-light-gray">
-                                                                        <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/time-icon.svg" width="12" height="12" alt="" />
-                                                                    </div>
-                                                                    <p class="text-color-light-gray">
-                                                                        1 hour 48 mins 21 seconds
-                                                                    </p>
-                                                                </div>
-                                                                <div class="d-flex gap-2 pl-29 mt-1 mb-1">
-                                                                    <div class="text-color-light-gray">
-                                                                        <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/time-icon.svg" width="12" height="12" alt="" />
-                                                                    </div>
-                                                                    <p class="text-color-light-gray">
-                                                                        1 hour 48 mins 21 seconds
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="d-flex gap-2 mb-3">
-                                                                <div>
-                                                                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/location-icon.svg" width="22" height="22" alt="" />
-                                                                </div>
-
-                                                                <div class="w-60">
-                                                                    <p>On Motijheel Road, 33m North</p>
-                                                                </div>
-
-                                                                <div class="">
-                                                                    <p class="color-light-danger">5:49 PM</p>
-                                                                </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <h2 class="font-weight-500 my-3">15 Trips</h2>
                                                             </div>
                                                         </div>
 
-                                                        <div class="border-bottom mb-2">
-                                                            <div class="d-flex gap-2">
-                                                                <div>
-                                                                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/location-icon.svg" width="22" height="22" alt="" />
-                                                                </div>
-
-                                                                <div class="w-60">
-                                                                    <p>On Motijheel Road, 33m North</p>
-                                                                </div>
-
-                                                                <div class="">
-                                                                    <p class="color-light-danger">5:49 PM</p>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="position-relative lh-0">
-                                                                <hr />
-
-                                                                <div class="d-flex gap-2 pl-29 mt-1 mb-1">
-                                                                    <div class="text-color-light-gray">
-                                                                        <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/alaram-icon.svg" width="12" height="12" alt="" />
+                                                        <a href="${pageContext.request.contextPath}/vts/trip-details">
+                                                            <div class="row">
+                                                                <div class="col-md-12 trip-block mt-2">
+                                                                    <div class="float-left">
+                                                                        <p class="trip-block-primary-text">
+                                                                            <img class="mr-2" src="${pageContext.request.contextPath}/assets/b2b/dist/icon/trip_target.png">
+                                                                            On Motijheel Road, 33m North
+                                                                        </p>
                                                                     </div>
-                                                                    <p class="text-color-light-gray">14.12 KM</p>
-                                                                </div>
-                                                                <div class="d-flex gap-2 pl-29 mt-1 mb-1">
-                                                                    <div class="text-color-light-gray">
-                                                                        <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/time-icon.svg" width="12" height="12" alt="" />
+                                                                    <div class="float-right trip-timing-block">
+                                                                        <h6 class="font-12 b2b-font-weight-700">5:49 PM</h6>
                                                                     </div>
-                                                                    <p class="text-color-light-gray">
-                                                                        1 hour 48 mins 21 seconds
-                                                                    </p>
                                                                 </div>
-                                                                <div class="d-flex gap-2 pl-29 mt-1 mb-1">
-                                                                    <div class="text-color-light-gray">
-                                                                        <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/time-icon.svg" width="12" height="12" alt="" />
+
+                                                                <div class="col-md-12 trip-block-middle pl-4 ml-3 mb-2 border-left-dotted-black">
+                                                                    <p><i class="fa fa-expand"></i> 14.34 KM</p>
+                                                                    <p><i class="fa fa-clock-o"></i> 1 hour 34 min 21 seconds</p>
+                                                                    <p><i class="fa fa-exclamation-circle"></i> 0 Alarms</p>
+                                                                </div>
+
+                                                                <div class="col-md-12 trip-block">
+                                                                    <div class="float-left">
+                                                                        <p class="trip-block-primary-text">
+                                                                            <img class="mr-2" src="${pageContext.request.contextPath}/assets/b2b/dist/icon/navigation.png">
+                                                                            On Motijheel Road, 33m North
+                                                                        </p>
                                                                     </div>
-                                                                    <p class="text-color-light-gray">
-                                                                        1 hour 48 mins 21 seconds
-                                                                    </p>
+                                                                    <div class="float-right trip-timing-block">
+                                                                        <h6 class="font-12 b2b-font-weight-700">5:49 PM</h6>
+                                                                    </div>
                                                                 </div>
+
+                                                                <hr class="m-2 w-100 color-hr">
+
                                                             </div>
+                                                        </a>
 
-                                                            <div class="d-flex gap-2 mb-3">
-                                                                <div>
-                                                                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/location-icon.svg" width="22" height="22" alt="" />
+                                                        <a href="${pageContext.request.contextPath}/vts/trip-details">
+                                                            <div class="row">
+                                                                <div class="col-md-12 trip-block mt-2">
+                                                                    <div class="float-left">
+                                                                        <p class="trip-block-primary-text">
+                                                                            <img class="mr-2" src="${pageContext.request.contextPath}/assets/b2b/dist/icon/trip_target.png">
+                                                                            On Motijheel Road, 33m North
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="float-right trip-timing-block">
+                                                                        <h6 class="font-12 b2b-font-weight-700">5:49 PM</h6>
+                                                                    </div>
                                                                 </div>
 
-                                                                <div class="w-60">
-                                                                    <p>On Motijheel Road, 33m North</p>
+                                                                <div class="col-md-12 trip-block-middle pl-4 ml-3 mb-2 border-left-dotted-black">
+                                                                    <p><i class="fa fa-expand"></i> 14.34 KM</p>
+                                                                    <p><i class="fa fa-clock-o"></i> 1 hour 34 min 21 seconds</p>
+                                                                    <p><i class="fa fa-exclamation-circle"></i> 0 Alarms</p>
                                                                 </div>
 
-                                                                <div class="">
-                                                                    <p class="color-light-danger">5:49 PM</p>
+                                                                <div class="col-md-12 trip-block">
+                                                                    <div class="float-left">
+                                                                        <p class="trip-block-primary-text">
+                                                                            <img class="mr-2" src="${pageContext.request.contextPath}/assets/b2b/dist/icon/navigation.png">
+                                                                            On Motijheel Road, 33m North
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="float-right trip-timing-block">
+                                                                        <h6 class="font-12 b2b-font-weight-700">5:49 PM</h6>
+                                                                    </div>
                                                                 </div>
+
+                                                                <hr class="m-2 w-100 color-hr">
+
                                                             </div>
-                                                        </div>
+                                                        </a>
+
+                                                        <a href="${pageContext.request.contextPath}/vts/trip-details">
+                                                            <div class="row">
+                                                                <div class="col-md-12 trip-block mt-2">
+                                                                    <div class="float-left">
+                                                                        <p class="trip-block-primary-text">
+                                                                            <img class="mr-2" src="${pageContext.request.contextPath}/assets/b2b/dist/icon/trip_target.png">
+                                                                            On Motijheel Road, 33m North
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="float-right trip-timing-block">
+                                                                        <h6 class="font-12 b2b-font-weight-700">5:49 PM</h6>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-12 trip-block-middle pl-4 ml-3 mb-2 border-left-dotted-black">
+                                                                    <p><i class="fa fa-expand"></i> 14.34 KM</p>
+                                                                    <p><i class="fa fa-clock-o"></i> 1 hour 34 min 21 seconds</p>
+                                                                    <p><i class="fa fa-exclamation-circle"></i> 0 Alarms</p>
+                                                                </div>
+
+                                                                <div class="col-md-12 trip-block">
+                                                                    <div class="float-left">
+                                                                        <p class="trip-block-primary-text">
+                                                                            <img class="mr-2" src="${pageContext.request.contextPath}/assets/b2b/dist/icon/navigation.png">
+                                                                            On Motijheel Road, 33m North
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="float-right trip-timing-block">
+                                                                        <h6 class="font-12 b2b-font-weight-700">5:49 PM</h6>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </a>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -342,7 +277,7 @@
                 },
                 startDate: moment().subtract(29, 'days'),
                 endDate  : moment(),
-                opens: 'right'
+                opens: 'left'
             },
             function (start, end) {
                 $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
@@ -350,36 +285,23 @@
         );
     });
 </script>
+
 <script>
-    $(document).ready(function () {
-        $("#toggle-navbar").click("click", function () {
-            $("#left-navbar").toggleClass("open");
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 0, lng: 0},
+            zoom: 3,
+            styles: [{
+                featureType: 'poi',
+                stylers: [{ visibility: 'off' }]  // Turn off points of interest.
+            }, {
+                featureType: 'transit.station',
+                stylers: [{ visibility: 'off' }]  // Turn off bus stations, train stations, etc.
+            }],
+            disableDoubleClickZoom: true,
+            streetViewControl: false
         });
-    });
-
-    const map = L.map("map").setView([23.81, 90.43], 13);
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
-
-    const markerGroup = L.layerGroup().addTo(map);
-
-    const markerData = [
-        [23.812, 90.435],
-        [23.811, 90.434],
-        [23.810, 90.433],
-        [23.809, 90.432],
-        [13.808, 90.331],
-    ];
-
-    markerData.forEach(function (coords) {
-        const marker = L.marker(coords).addTo(markerGroup);
-        marker.bindPopup("A pretty CSS popup.<br> Easily customizable.");
-    });
-
-    markerGroup.addTo(map);
-
+    }
 </script>
 
 </body>
