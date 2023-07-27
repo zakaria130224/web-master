@@ -16,7 +16,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "MD_MENU")
+@Table(name = "sf_md_menu")
 @DynamicUpdate
 public class Menu extends BaseEntity implements Serializable {
 

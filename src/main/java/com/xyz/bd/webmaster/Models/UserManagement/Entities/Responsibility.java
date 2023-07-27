@@ -14,7 +14,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "MD_RESPONSIBILITY")
+@Table(name = "sf_md_responsibility")
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor

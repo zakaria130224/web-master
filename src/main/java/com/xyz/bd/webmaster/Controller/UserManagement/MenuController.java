@@ -43,7 +43,7 @@ public class MenuController {
         List<Menu> menuList = menuRepository.findAllByActiveTrue();
         model.addAttribute("menus", menuList);
         model.addAttribute("title", "User Management");
-        return new ModelAndView("menu/index2");
+        return new ModelAndView("menu/menus");
     }
 
 

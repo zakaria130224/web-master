@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "MD_USER_RESPONSIBILITY_MAP")
+@Table(name = "sf_md_user_responsibility_map")
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor

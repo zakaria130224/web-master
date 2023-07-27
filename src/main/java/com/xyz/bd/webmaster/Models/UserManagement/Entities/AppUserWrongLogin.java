@@ -15,7 +15,7 @@ import java.util.Date;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "APP_WRONG_LOGIN")
+@Table(name = "sf_app_wrong_login")
 public class AppUserWrongLogin {
     @Id
     @Column(name = "ID")
