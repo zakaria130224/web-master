@@ -52,6 +52,19 @@
     }
     .b2b-custom-card{
       border-radius: 12px;
+      margin-top: 15px;
+      padding: 8px 9px;
+    }
+    .b2b-custom-card .card-header-no-border-bt{
+      border-bottom: none;
+    }
+    .b2b-custom-card-top .nav-link.active{
+      padding: 8px 31px;
+      border-radius: 8px;
+      background: #D9EBF8;
+      color: #003053;
+      font-size: 14px;
+      font-weight: 400;
     }
   </style>
 
@@ -69,36 +82,28 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-
-    <section class="content-header">
+    <!-- Main content -->
+    <section class="content">
       <div class="container-fluid">
-        <div class="row py-2 mb-1 " style="background-color: white; border-radius: 8px; margin: 1px">
-          <div class="col-sm-3 col-md-2 col-lg-1">
-            <div class="tabs_bar">
-              <span class="mt-5">General</span>
+        <div class="row">
+          <div class="col-12">
+            <!-- Custom Tabs -->
+            <div class="card b2b-custom-card b2b-custom-card-top">
+              <div class="card-header card-header-no-border-bt d-flex p-0">
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">VTS</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">GS</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">OBD</a></li>
+                </ul>
+              </div><!-- /.card-header -->
             </div>
+            <!-- ./card -->
           </div>
-          <div class="col-sm-3 col-md-2 col-lg-1">
-            <div class="tabs_bar">
-              <span class="mt-5">VTS</span>
-            </div>
-          </div>
-          <div class="col-sm-3 col-md-2 col-lg-1">
-            <div class="tabs_bar">
-              <span class="mt-5">OBD</span>
-            </div>
-          </div>
-          <div class="col-sm-3 col-md-2 col-lg-1">
-            <div class="tabs_bar">
-              <span class="mt-5">Product2</span>
-            </div>
-          </div>
+          <!-- /.col -->
         </div>
       </div>
-      <!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <%--row block 1--%>
