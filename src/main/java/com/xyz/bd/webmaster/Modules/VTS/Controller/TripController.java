@@ -35,4 +35,11 @@ public class TripController {
         model.addAttribute("menu", "VTS Trips");
         return new ModelAndView("iot-devices/vts/alerts/alerts");
     }
+
+    @RequestMapping(value="/vts/requisitions", method = RequestMethod.GET)
+    public ModelAndView showVtsRequisitionView(ModelMap model){
+        model.addAttribute("title", "Map View");
+        model.addAttribute("menu", "VTS Trips");
+        return new ModelAndView("iot-devices/vts/requisitions/requisitions");
+    }
 }
