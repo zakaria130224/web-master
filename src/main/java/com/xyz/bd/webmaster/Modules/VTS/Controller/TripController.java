@@ -60,4 +60,17 @@ public class TripController {
         model.addAttribute("menu", "requisitions");
         return new ModelAndView("iot-devices/vts/requisitions/requisition-details");
     }
+
+    @RequestMapping(value="/vts/papers", method = RequestMethod.GET)
+    public ModelAndView showVtsGeoFencePapersView(ModelMap model){
+        model.addAttribute("title", "Requisitions");
+        model.addAttribute("menu", "requisitions");
+        return new ModelAndView("iot-devices/vts/geo-fence/papers");
+    }
+    @RequestMapping(value="/vts/papers-details", method = RequestMethod.GET)
+    public ModelAndView showVtsGeoFencePapersDetailsView(ModelMap model){
+        model.addAttribute("title", "Requisitions");
+        model.addAttribute("menu", "requisitions");
+        return new ModelAndView("iot-devices/vts/geo-fence/papers-details");
+    }
 }
