@@ -37,6 +37,20 @@
             padding: 24px;
             margin-bottom: 15px;
         }
+        .papers-block h3{
+            font-size: 32px;
+            font-weight: 500;
+            color: #181C32;
+        }
+        .papers-block p{
+            font-size: 14px;
+            font-weight: 400;
+        }
+        .papers-block a{
+            font-size: 12px;
+            font-weight: 700;
+            color: #3699FF;
+        }
     </style>
 </head>
 
@@ -97,7 +111,7 @@
                                                 <span style="color: #353535"> 9 July 2023</span>
                                             </p>
                                             <div class="link-group">
-                                                <a href="" class="mr-3"><i class="fa fa-plus"></i> Details</a>
+                                                <a href="" class="mr-3"><i class="fa fa-bars"></i> Details</a>
                                                 <a href="" class="mr-3"><i class="fa fa-pencil"></i> Edit</a>
                                                 <a href="" class="mr-3"><i class="fa fa-trash"></i> Delete</a>
                                             </div>
@@ -105,14 +119,14 @@
                                     </div>
                                     <div class="col-md-4 col-sm-6">
                                         <div class="p-3 papers-block">
-                                            <h3>Registration</h3>
+                                            <h3>Insurance</h3>
                                             <p class="mb-5">
                                                 <span class="right badge badge-success font-12">valid</span>
                                                 <span class="" style="color: #A1A6AB"> Expiry Date</span>
                                                 <span style="color: #353535"> 9 July 2023</span>
                                             </p>
                                             <div class="link-group">
-                                                <a href="" class="mr-3"><i class="fa fa-plus"></i> Details</a>
+                                                <a href="" class="mr-3"><i class="fa fa-bars"></i> Details</a>
                                                 <a href="" class="mr-3"><i class="fa fa-pencil"></i> Edit</a>
                                                 <a href="" class="mr-3"><i class="fa fa-trash"></i> Delete</a>
                                             </div>
@@ -120,14 +134,14 @@
                                     </div>
                                     <div class="col-md-4 col-sm-6">
                                         <div class="p-3 papers-block">
-                                            <h3>Registration</h3>
+                                            <h3>Fitness</h3>
                                             <p class="mb-5">
                                                 <span class="right badge badge-success font-12">valid</span>
                                                 <span class="" style="color: #A1A6AB"> Expiry Date</span>
                                                 <span style="color: #353535"> 9 July 2023</span>
                                             </p>
                                             <div class="link-group">
-                                                <a href="" class="mr-3"><i class="fa fa-plus"></i> Details</a>
+                                                <a href="" class="mr-3"><i class="fa fa-bars"></i> Details</a>
                                                 <a href="" class="mr-3"><i class="fa fa-pencil"></i> Edit</a>
                                                 <a href="" class="mr-3"><i class="fa fa-trash"></i> Delete</a>
                                             </div>
@@ -135,14 +149,14 @@
                                     </div>
                                     <div class="col-md-4 col-sm-6">
                                         <div class="p-3 papers-block">
-                                            <h3>Registration</h3>
+                                            <h3>Tax Token</h3>
                                             <p class="mb-5">
                                                 <span class="right badge badge-success font-12">valid</span>
                                                 <span class="" style="color: #A1A6AB"> Expiry Date</span>
                                                 <span style="color: #353535"> 9 July 2023</span>
                                             </p>
                                             <div class="link-group">
-                                                <a href="" class="mr-3"><i class="fa fa-plus"></i> Details</a>
+                                                <a href="" class="mr-3"><i class="fa fa-bars"></i> Details</a>
                                                 <a href="" class="mr-3"><i class="fa fa-pencil"></i> Edit</a>
                                                 <a href="" class="mr-3"><i class="fa fa-trash"></i> Delete</a>
                                             </div>
@@ -150,14 +164,14 @@
                                     </div>
                                     <div class="col-md-4 col-sm-6">
                                         <div class="p-3 papers-block">
-                                            <h3>Registration</h3>
+                                            <h3>Route Permit</h3>
                                             <p class="mb-5">
                                                 <span class="right badge badge-success font-12">valid</span>
                                                 <span class="" style="color: #A1A6AB"> Expiry Date</span>
                                                 <span style="color: #353535"> 9 July 2023</span>
                                             </p>
                                             <div class="link-group">
-                                                <a href="" class="mr-3"><i class="fa fa-plus"></i> Details</a>
+                                                <a href="" class="mr-3"><i class="fa fa-bars"></i> Details</a>
                                                 <a href="" class="mr-3"><i class="fa fa-pencil"></i> Edit</a>
                                                 <a href="" class="mr-3"><i class="fa fa-trash"></i> Delete</a>
                                             </div>
@@ -165,14 +179,14 @@
                                     </div>
                                     <div class="col-md-4 col-sm-6">
                                         <div class="p-3 papers-block">
-                                            <h3>Registration</h3>
+                                            <h3>Others</h3>
                                             <p class="mb-5">
                                                 <span class="right badge badge-success font-12">valid</span>
                                                 <span class="" style="color: #A1A6AB"> Expiry Date</span>
                                                 <span style="color: #353535"> 9 July 2023</span>
                                             </p>
                                             <div class="link-group">
-                                                <a href="" class="mr-3"><i class="fa fa-plus"></i> Details</a>
+                                                <a href="" class="mr-3"><i class="fa fa-bars"></i> Details</a>
                                                 <a href="" class="mr-3"><i class="fa fa-pencil"></i> Edit</a>
                                                 <a href="" class="mr-3"><i class="fa fa-trash"></i> Delete</a>
                                             </div>
