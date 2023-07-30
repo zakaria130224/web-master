@@ -91,122 +91,239 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 d-flex">
-                                        <div class="dropdown mr-2">
-                                            <button
-                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"
-                                                    type="button"
-                                                    id="dropdownMenuButton"
-                                                    data-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"
-                                            >
-                                                All Resources
-                                            </button>
-                                            <div
-                                                    class="dropdown-menu"
-                                                    aria-labelledby="dropdownMenuButton"
-                                            >
-                                                <a class="dropdown-item" href="#">Option 1</a>
-                                                <a class="dropdown-item" href="#">Option 2</a>
-                                                <a class="dropdown-item" href="#">Option 3</a>
-                                            </div>
-                                        </div>
-                                        <div class="dropdown mr-2">
-                                            <button
-                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"
-                                                    type="button"
-                                                    id="dropdownMenuButton"
-                                                    data-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"
-                                            >
-                                                Date Range
-                                            </button>
-                                            <div
-                                                    class="dropdown-menu"
-                                                    aria-labelledby="dropdownMenuButton"
-                                            >
-                                                <a class="dropdown-item" href="#">Option 1</a>
-                                                <a class="dropdown-item" href="#">Option 2</a>
-                                                <a class="dropdown-item" href="#">Option 3</a>
-                                            </div>
-                                        </div>
-                                        <div class="dropdown mr-2">
-                                            <button
-                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"
-                                                    type="button"
-                                                    id="dropdownMenuButton"
-                                                    data-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"
-                                            >
-                                                Option
-                                            </button>
-                                            <div
-                                                    class="dropdown-menu"
-                                                    aria-labelledby="dropdownMenuButton"
-                                            >
-                                                <a class="dropdown-item" href="#">Option 1</a>
-                                                <a class="dropdown-item" href="#">Option 2</a>
-                                                <a class="dropdown-item" href="#">Option 3</a>
-                                            </div>
-                                        </div>
-                                        <div class="dropdown mr-2">
-                                            <button
-                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"
-                                                    type="button"
-                                                    id="dropdownMenuButton"
-                                                    data-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"
-                                            >
-                                                Option
-                                            </button>
-                                            <div
-                                                    class="dropdown-menu"
-                                                    aria-labelledby="dropdownMenuButton"
-                                            >
-                                                <a class="dropdown-item" href="#">Option 1</a>
-                                                <a class="dropdown-item" href="#">Option 2</a>
-                                                <a class="dropdown-item" href="#">Option 3</a>
-                                            </div>
-                                        </div>
-                                        <div class="dropdown mr-2">
-                                            <button
-                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"
-                                                    type="button"
-                                                    id="dropdownMenuButton"
-                                                    data-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"
-                                            >
-                                                Option
-                                            </button>
-                                            <div
-                                                    class="dropdown-menu"
-                                                    aria-labelledby="dropdownMenuButton"
-                                            >
-                                                <a class="dropdown-item" href="#">Option 1</a>
-                                                <a class="dropdown-item" href="#">Option 2</a>
-                                                <a class="dropdown-item" href="#">Option 3</a>
-                                            </div>
-                                        </div>
-                                    </div>
+<%--                                <div class="row">--%>
+<%--                                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 d-flex">--%>
+<%--                                        <div class="dropdown mr-2">--%>
+<%--                                            <button--%>
+<%--                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"--%>
+<%--                                                    type="button"--%>
+<%--                                                    id="dropdownMenuButton"--%>
+<%--                                                    data-toggle="dropdown"--%>
+<%--                                                    aria-haspopup="true"--%>
+<%--                                                    aria-expanded="false"--%>
+<%--                                            >--%>
+<%--                                                All Resources--%>
+<%--                                            </button>--%>
+<%--                                            <div--%>
+<%--                                                    class="dropdown-menu"--%>
+<%--                                                    aria-labelledby="dropdownMenuButton"--%>
+<%--                                            >--%>
+<%--                                                <a class="dropdown-item" href="#">Option 1</a>--%>
+<%--                                                <a class="dropdown-item" href="#">Option 2</a>--%>
+<%--                                                <a class="dropdown-item" href="#">Option 3</a>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="dropdown mr-2">--%>
+<%--                                            <button--%>
+<%--                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"--%>
+<%--                                                    type="button"--%>
+<%--                                                    id="dropdownMenuButton"--%>
+<%--                                                    data-toggle="dropdown"--%>
+<%--                                                    aria-haspopup="true"--%>
+<%--                                                    aria-expanded="false"--%>
+<%--                                            >--%>
+<%--                                                Date Range--%>
+<%--                                            </button>--%>
+<%--                                            <div--%>
+<%--                                                    class="dropdown-menu"--%>
+<%--                                                    aria-labelledby="dropdownMenuButton"--%>
+<%--                                            >--%>
+<%--                                                <a class="dropdown-item" href="#">Option 1</a>--%>
+<%--                                                <a class="dropdown-item" href="#">Option 2</a>--%>
+<%--                                                <a class="dropdown-item" href="#">Option 3</a>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="dropdown mr-2">--%>
+<%--                                            <button--%>
+<%--                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"--%>
+<%--                                                    type="button"--%>
+<%--                                                    id="dropdownMenuButton"--%>
+<%--                                                    data-toggle="dropdown"--%>
+<%--                                                    aria-haspopup="true"--%>
+<%--                                                    aria-expanded="false"--%>
+<%--                                            >--%>
+<%--                                                Option--%>
+<%--                                            </button>--%>
+<%--                                            <div--%>
+<%--                                                    class="dropdown-menu"--%>
+<%--                                                    aria-labelledby="dropdownMenuButton"--%>
+<%--                                            >--%>
+<%--                                                <a class="dropdown-item" href="#">Option 1</a>--%>
+<%--                                                <a class="dropdown-item" href="#">Option 2</a>--%>
+<%--                                                <a class="dropdown-item" href="#">Option 3</a>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="dropdown mr-2">--%>
+<%--                                            <button--%>
+<%--                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"--%>
+<%--                                                    type="button"--%>
+<%--                                                    id="dropdownMenuButton"--%>
+<%--                                                    data-toggle="dropdown"--%>
+<%--                                                    aria-haspopup="true"--%>
+<%--                                                    aria-expanded="false"--%>
+<%--                                            >--%>
+<%--                                                Option--%>
+<%--                                            </button>--%>
+<%--                                            <div--%>
+<%--                                                    class="dropdown-menu"--%>
+<%--                                                    aria-labelledby="dropdownMenuButton"--%>
+<%--                                            >--%>
+<%--                                                <a class="dropdown-item" href="#">Option 1</a>--%>
+<%--                                                <a class="dropdown-item" href="#">Option 2</a>--%>
+<%--                                                <a class="dropdown-item" href="#">Option 3</a>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="dropdown mr-2">--%>
+<%--                                            <button--%>
+<%--                                                    class="btn btn-sm btn-outline-secondary dropdown-toggle"--%>
+<%--                                                    type="button"--%>
+<%--                                                    id="dropdownMenuButton"--%>
+<%--                                                    data-toggle="dropdown"--%>
+<%--                                                    aria-haspopup="true"--%>
+<%--                                                    aria-expanded="false"--%>
+<%--                                            >--%>
+<%--                                                Option--%>
+<%--                                            </button>--%>
+<%--                                            <div--%>
+<%--                                                    class="dropdown-menu"--%>
+<%--                                                    aria-labelledby="dropdownMenuButton"--%>
+<%--                                            >--%>
+<%--                                                <a class="dropdown-item" href="#">Option 1</a>--%>
+<%--                                                <a class="dropdown-item" href="#">Option 2</a>--%>
+<%--                                                <a class="dropdown-item" href="#">Option 3</a>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                   --%>
 
-                                    <div
-                                            class="col-lg-6 col-md-6 col-sm-12 col-12 mt-2 mt-lg-0 mt-md-0"
-                                    >
-                                        <div class="search-box float-right">
-                                            <input
-                                                    class="search-input"
-                                                    type="text"
-                                                    placeholder="Search"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
+<%--                                    <div--%>
+<%--                                            class="col-lg-6 col-md-6 col-sm-12 col-12 mt-2 mt-lg-0 mt-md-0"--%>
+<%--                                    >--%>
+<%--                                        <div class="search-box float-right">--%>
+<%--                                            <input--%>
+<%--                                                    class="search-input"--%>
+<%--                                                    type="text"--%>
+<%--                                                    placeholder="Search"--%>
+<%--                                            />--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+    <div class="d-flex justify-content-between">
+        <div class="d-flex">
+            <div class="dropdown mr-2">
+                <button
+                        class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                >
+                    All Resources
+                </button>
+                <div
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton"
+                >
+                    <a class="dropdown-item" href="#">Option 1</a>
+                    <a class="dropdown-item" href="#">Option 2</a>
+                    <a class="dropdown-item" href="#">Option 3</a>
+                </div>
+            </div>
+            <div class="dropdown mr-2">
+                <button
+                        class="btn btn-sm btn-outline-secondary"
+                        type="button"
+                        id="dropdownMenuButton"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                >
+                    Date Range
+                    <img
+                            src="${pageContext.request.contextPath}/assets/b2b/dist/img/calendar-fill.png"
+                            width="10"
+                            class="ml-1"
+                    />
+                </button>
+                <div
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton"
+                >
+                    <a class="dropdown-item" href="#">Option 1</a>
+                    <a class="dropdown-item" href="#">Option 2</a>
+                    <a class="dropdown-item" href="#">Option 3</a>
+                </div>
+            </div>
+            <div class="dropdown mr-2">
+                <button
+                        class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                >
+                    Option
+                </button>
+                <div
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton"
+                >
+                    <a class="dropdown-item" href="#">Option 1</a>
+                    <a class="dropdown-item" href="#">Option 2</a>
+                    <a class="dropdown-item" href="#">Option 3</a>
+                </div>
+            </div>
+            <div class="dropdown mr-2">
+                <button
+                        class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                >
+                    Option
+                </button>
+                <div
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton"
+                >
+                    <a class="dropdown-item" href="#">Option 1</a>
+                    <a class="dropdown-item" href="#">Option 2</a>
+                    <a class="dropdown-item" href="#">Option 3</a>
+                </div>
+            </div>
+            <div class="dropdown mr-2">
+                <button
+                        class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                >
+                    Option
+                </button>
+                <div
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton"
+                >
+                    <a class="dropdown-item" href="#">Option 1</a>
+                    <a class="dropdown-item" href="#">Option 2</a>
+                    <a class="dropdown-item" href="#">Option 3</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-box">
+          <input
+            class="search-input"
+            type="text"
+            placeholder="Search"
+          />
+        </div>
+    </div>
                                 <div class="row mt-4 mx-1">
                                     <h6>9 Results Found</h6>
                                 </div>
