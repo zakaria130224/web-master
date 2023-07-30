@@ -73,7 +73,7 @@ public class TripController {
         model.addAttribute("menu", "requisitions");
         return new ModelAndView("iot-devices/vts/geo-fence/papers-details");
     }
-    @RequestMapping(value="/vts/maintenance -log", method = RequestMethod.GET)
+    @RequestMapping(value="/vts/maintenance-log", method = RequestMethod.GET)
     public ModelAndView showVtsMaintenanceLogView(ModelMap model){
         model.addAttribute("title", "maintenance");
         model.addAttribute("menu", "maintenance");
