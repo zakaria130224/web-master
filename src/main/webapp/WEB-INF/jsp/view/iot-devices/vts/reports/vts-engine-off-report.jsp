@@ -74,7 +74,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
-                                    <h3 class="card-title">Report For Summary</h3>
+                                    <h3 class="card-title">Report For Engine Off</h3>
                                     <div class="d-flex">
                                         <!-- <button
                                           type="button"
@@ -330,58 +330,40 @@
                                 <table id="example1" class="table">
                                     <thead class="header-bg">
                                     <tr>
-                                        <th>Month</th>
-                                        <th>Harsh Accel.<br>(Count)</th>
-                                        <th>Harsh Brake<br>(Count)</th>
-                                        <th>Collision Alert<br>(Count)</th>
-                                        <th>Overspeeding<br>(Count)</th>
-                                        <th>Sharp Corner<br>(Count)</th>
-                                        <th>Travel Distance<br>(Km)</th>
-                                        <th>Fuel <br>Used/100Km <br>(Ltr)</th>
+                                        <th>Vehicle</th>
+                                        <th>Driver</th>
+                                        <th>Engine Off Time</th>
+                                        <th>Duration (Hours) </th>
+                                        <th>Location</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-
                                         <td>
-                                           May
+                                            <div class="w-100">
+                                                <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                                <div class="b2b-list-block">
+                                                    <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                                    <p class="card-text black-50 font-12 b2b-font-weight-700">Light Demo</p>
+                                                </div>
+                                            </div>
                                         </td>
-                                        <td>Driver Name</td>
-                                        <td>1h 25m</td>
-                                        <td>5</td>
-                                        <td>25m</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-
-                                    </tr>
-                                    <tr>
-
                                         <td>
-                                            May
+                                            <div class="user-panel d-flex">
+                                                <div class="image float-left">
+                                                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/admin.png"
+                                                         class="img-circle" alt="User Image"/>
+                                                </div>
+                                                <div class="info">
+                                                    <p class="black-30 font-size-16 m-0">John Doe</p>
+                                                    <p class="black-50 font-size-14 m-0">+8801944439069</p>
+                                                    <%--<span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>--%>
+                                                </div>
+                                            </div>
                                         </td>
-                                        <td>Driver Name</td>
                                         <td>1h 25m</td>
-                                        <td>5</td>
-                                        <td>25m</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-
-                                    </tr>
-                                    <tr>
-
-                                        <td>
-                                            May
-                                        </td>
-                                        <td>Driver Name</td>
-                                        <td>1h 25m</td>
-                                        <td>5</td>
-                                        <td>25m</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-
+                                        <td>25h</td>
+                                        <td>Banani Dhaka</td>
                                     </tr>
 
                                     </tbody>
