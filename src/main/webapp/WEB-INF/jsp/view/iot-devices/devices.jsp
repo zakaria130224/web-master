@@ -133,7 +133,9 @@
                                 </div>
                             <%--  Widget starts  --%>
                                 <div class="row">
+
                                     <div class="col-md-3 col-sm-6 col-12">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/map">
                                         <div class="info-box b2b-bg-info">
 <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -148,9 +150,12 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                         <!-- /.info-box -->
+                                        </a>
                                     </div>
+
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
+
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -164,6 +169,7 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+
                                         <!-- /.info-box -->
                                     </div>
                                     <!-- /.col -->
@@ -185,6 +191,7 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/active_report">
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -199,6 +206,7 @@
                                             <!-- /.info-box-content -->
                                         </div>
                                         <!-- /.info-box -->
+                                        </a>
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
@@ -219,6 +227,7 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/trip-list">
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -232,6 +241,7 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+                                        </a>
                                         <!-- /.info-box -->
                                     </div>
 
@@ -263,6 +273,7 @@
                                 <%-- Logs Start --%>
                                 <div class="row">
                                     <div class="col-md-3 col-sm-6 col-12">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/fuel-log">
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -276,10 +287,12 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+                                        </a>
                                         <!-- /.info-box -->
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/expense-log">
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -293,10 +306,12 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+                                        </a>
                                         <!-- /.info-box -->
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/maintenance-log">
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -310,10 +325,13 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+                                        </a>
                                         <!-- /.info-box -->
                                     </div>
                                     <!-- /.col -->
+
                                     <div class="col-md-3 col-sm-6 col-12">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/papers">
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -327,8 +345,10 @@
                                             </div>
                                             <!-- /.info-box-content -->
                                         </div>
+                                        </a>
                                         <!-- /.info-box -->
                                     </div>
+
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
                                         <div class="info-box b2b-bg-info">
