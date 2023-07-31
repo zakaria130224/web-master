@@ -14,18 +14,38 @@
 
 
 %>
+
+<style>
+    .brand-link {
+        display: block;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        padding: 0.8125rem 0.5rem;
+        transition: width .3s ease-in-out;
+        white-space: nowrap;
+        height: 80px;
+        text-align: center;
+    }
+    .brand-link .brand-image-xs {
+        float: left;
+        line-height: .8;
+        margin-top: -0.1rem;
+        max-height: 60px;
+        width: auto;
+    }
+</style>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="position: fixed">
     <!-- Brand Logo -->
     <a href="#" class="brand-link logo-switch">
-        <img src="${pageContext.request.contextPath}/assets/v2/dist/img/mini-white-logo.svg"
-             alt="Grameenphone" class="brand-image-xl logo-xs">
-        <img src="${pageContext.request.contextPath}/assets/v2/dist/img/logo-white.svg" alt="Grameenphone"
-             class="brand-image-xs logo-xl" style="left: 12px">
+        <div class="text-center w-100">
+            <img src="${pageContext.request.contextPath}/assets/v2/dist/img/mini-white-logo.svg"
+                 alt="Grameenphone" class="brand-image-xl logo-xs">
+            <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/icons/logo_white.png" alt="Grameenphone"
+                 class="brand-image-xs logo-xl" style="left: 18px; width: 160px; height: 46px">
+        </div>
     </a>
 
-
-    <hr>
     <!-- Vertical Nav -->
     <%--<div class="sidebar">
         <!-- Sidebar Menu -->
