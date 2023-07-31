@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "telonor-regular";
+  src: url("../img/fonts/telenor.ttf");
+}
+@font-face {
+  font-family: "telonor-bold";
+  src: url("../img/fonts/telenorbold.ttf");
+}
+
 [class*="sidebar-dark-"] {
   background-color: #000F3C;
 }

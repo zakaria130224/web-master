@@ -6,10 +6,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/assets/b2b/dist/apple-touch-icon.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath}/assets/b2b/dist/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/assets/b2b/dist/favicon-16x16.png" />
-<link rel="manifest" href="${pageContext.request.contextPath}/assets/b2b/dist/site.webmanifest" />
-<!-- Google Font: Source Sans Pro -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
-<!-- Font Awesome -->
+<!-- Google Font: Source Sans Pro --> <!-- Font Awesome -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/fontawesome-free/css/all.min.css" />
 <!-- DataTables -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" />
