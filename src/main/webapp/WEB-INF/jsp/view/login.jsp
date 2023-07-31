@@ -7,24 +7,16 @@
     <%--    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>--%>
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico"/>
     <%--    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"/>--%>
-    <link rel="manifest" href="site.webmanifest"/>
 
     <!-- Google Font: Source Sans Pro -->
-    <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
-    />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/v2/dist/css/all.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/all.min.css"/>
     <!-- icheck bootstrap -->
-    <link
-            rel="stylesheet"
-            href="AdminLTE-3.2.0/plugins/icheck-bootstrap/icheck-bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="AdminLTE-3.2.0/plugins/icheck-bootstrap/icheck-bootstrap.min.css"/>
     <!-- Theme style -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/v2/dist/css/adminlte.min.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/v2/dist/css/pages/index.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/v2/dist/css/pages/login.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/adminlte.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/pages/index.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/pages/login.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="hold-transition login-page">
@@ -168,7 +160,7 @@
                                     checked
                             />
                             <span class="mt-1 ml-2 font-telenor-regular"
-                            >Stay logged in.</span
+                            > I agree to the Terms & Conditions</span
                             >
                         </label>
                     </div>

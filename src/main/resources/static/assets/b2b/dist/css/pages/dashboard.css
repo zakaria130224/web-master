@@ -1,12 +1,3 @@
-@font-face {
-  font-family: "telonor-regular";
-  src: url("../../img/fonts/telenor-regular.ttf");
-}
-@font-face {
-  font-family: "telonor-bold";
-  src: url("../../img/fonts/telenor_bold.ttf");
-}
-
 * {
   padding: 0;
   margin: 0;
