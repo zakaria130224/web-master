@@ -341,3 +341,44 @@ span.small-text {
 .btn-rounded{
   border-radius: 8px;
 }
+.tab-custom-number {
+  height: 40px;
+  width: 40px;
+  background: #e9e9e9;
+  border-radius: 9px;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  font-size: 18px;
+  font-weight: 500;
+  color: #446AA4;
+  padding: 6px 0;
+  margin-right: 15px;
+}
+
+.tab-custom-number.active{
+  background: #446AA4;
+  color: #FFFFFF;
+}
+
+.tab-custom-text {
+  color: #3F4254;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px;
+  margin-left: 20px;
+}
+.card-body-form-tab{
+  padding: 10px 20px;
+}
+.b2b-custom-card{
+  border-radius: 12px;
+}
+.b2b-btn-submit-blue{
+  padding: 12px 32px 12px 32px;
+  background: #000F3C;
+  color: #FFFFFF;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+}

@@ -80,7 +80,7 @@
                                         <h3 class="b2b-font-20-500 black-10 float-left">Vehicle Requisitions</h3>
                                     </div>
                                     <div class="float-right">
-                                        <button type="submit" class="btn btn-sm btn-custom-white mr-2"><i class="fa fa-plus-circle"></i> Add A New Requisition</button>
+                                        <a href="${pageContext.request.contextPath}/add-vehicle-type" class="btn btn-sm btn-custom-white mr-2"><i class="fa fa-plus-circle"></i> Add New Entry</a>
                                         <button type="submit" class="btn btn-sm btn-custom-blue"><i class="fa fa-download"></i> Export</button>
                                     </div>
                                 </div>
@@ -129,7 +129,37 @@
                                                                 </div>
                                                                 <div class="b2b-list-block">
                                                                     <p class="black-30 font-16 b2b-font-weight-500 mb-0">Asset Doe</p>
-                                                                    <p class="card-text black-60 font-12 b2b-font-weight-700">+Asset Demo</p>
+                                                                    <p class="card-text black-60 font-12 b2b-font-weight-700">Asset Demo</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>40.00</td>
+                                                        <td>Package</td>
+                                                        <td>
+                                                            <div class="w-100">
+                                                                <div class="float-left mr-2" style="border-radius: 50px; height: 40px; width: 40px;">
+                                                                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/admin.png"
+                                                                         class="img-circle" alt="User Image"/>
+                                                                </div>
+                                                                <div class="b2b-list-block">
+                                                                    <p class="black-30 font-16 b2b-font-weight-500 mb-0">John Doe</p>
+                                                                    <p class="card-text black-60 font-12 b2b-font-weight-700">+8801744439069</p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>July 16, 2023</td>
+                                                        <td>Expired</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="w-100">
+                                                                <div class="float-left mr-2" style="border-radius: 50px; height: 40px; width: 40px;">
+                                                                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/admin.png"
+                                                                         class="img-circle" alt="User Image"/>
+                                                                </div>
+                                                                <div class="b2b-list-block">
+                                                                    <p class="black-30 font-16 b2b-font-weight-500 mb-0">Asset Doe</p>
+                                                                    <p class="card-text black-60 font-12 b2b-font-weight-700">Asset Demo</p>
                                                                 </div>
                                                             </div>
                                                         </td>

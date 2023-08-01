@@ -73,118 +73,99 @@
                 <%--row block 1--%>
                     <div class="row">
 
-                        <div class="col-md-4 col-lg-4 col-sm-12">
-                            <div class="card b2b-custom-card">
-                                <div class="card-body">
+                        <div class="col-md-3 col-lg-3 col-sm-12">
+                            <div class="card b2b-custom-card p-2">
+                                <a class="active-form" href="${pageContext.request.contextPath}/vts/add-vehicle-type">
+                                    <div class="card-body card-body-form-tab">
+                                        <div class="tab-custom-number active float-left">1</div>
+                                        <div class="tab-custom-text">Vehicle Type</div>
+                                    </div>
+                                </a>
+                                <a class="" href="${pageContext.request.contextPath}/vts/add-vehicle-info">
+                                    <div class="card-body card-body-form-tab">
+                                        <div class="tab-custom-number float-left">2</div>
+                                        <div class="tab-custom-text">Additional Info</div>
+                                    </div>
+                                </a>
+                                <a class="" href="${pageContext.request.contextPath}/vts/add-vehicle-purchase-info">
+                                    <div class="card-body card-body-form-tab">
+                                        <div class="tab-custom-number float-left">3</div>
+                                        <div class="tab-custom-text">Purchase Info</div>
+                                    </div>
+                                </a>
+                                <a class="" href="${pageContext.request.contextPath}/vts/add-ownership-info">
+                                    <div class="card-body card-body-form-tab">
+                                        <div class="tab-custom-number float-left">4</div>
+                                        <div class="tab-custom-text">Ownership Type</div>
+                                    </div>
+                                </a>
+                                <a class="" href="${pageContext.request.contextPath}/vts/add-linked-device">
+                                    <div class="card-body card-body-form-tab">
+                                        <div class="tab-custom-number float-left">5</div>
+                                        <div class="tab-custom-text">Linked Vehicles</div>
+                                    </div>
+                                </a>
 
-                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-8 col-lg-8 col-sm-12">
+                        <div class="col-md-9 col-lg-9 col-sm-12">
                             <div class="card b2b-custom-card">
                                 <div class="card-body">
                                     <div class="card-head-custom">
                                         <div class="float-left">
-                                            <h3 class="b2b-font-20-500 black-10 float-left">Create Requisition</h3>
-                                        </div>
-                                        <div class="float-right">
-                                            <button type="submit" class="btn btn-sm btn-custom-white mr-2"><i class="fa fa-plus-circle"></i> Add A New Requisition</button>
-                                            <button type="submit" class="btn btn-sm btn-custom-blue"><i class="fa fa-download"></i> Export</button>
+                                            <h3 class="b2b-font-20-500 black-10 float-left">Vehicle Type</h3>
                                         </div>
                                     </div>
 
                                     <hr>
 
                                     <form class="form-horizontal b2b-custom-form">
-                                        <div class="card-body">
-                                            <div class="form-group row">
-                                                <label for="full_name" class="col-sm-4 col-md-3 col-form-label">Full Name</label>
-                                                <div class="col-sm-8 col-md-9">
-                                                    <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Write your name here">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="mobile_name" class="col-sm-4 col-md-3 col-form-label">Mobile Number</label>
-                                                <div class="col-sm-8 col-md-9">
-                                                    <input type="text" class="form-control" id="mobile_name" placeholder="+880">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="from_location" class="col-sm-4 col-md-3 col-form-label">From Location <span class="text-red">*</span></label>
-                                                <div class="col-sm-8 col-md-9">
-                                                    <input type="text" class="form-control" id="from_location" placeholder="Set your location">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="to_location" class="col-sm-4 col-md-3 col-form-label">To Location <span class="text-red">*</span></label>
-                                                <div class="col-sm-8 col-md-9">
-                                                    <input type="text" class="form-control" id="to_location" placeholder="Set your location">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="from_time" class="col-sm-4 col-md-3 col-form-label">From Date & Time <span class="text-red">*</span></label>
-                                                <div class="col-sm-8 col-md-9">
-                                                    <input type="text" class="form-control" id="from_time" placeholder="03-04-2023 3:15 pm">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="to_time" class="col-sm-4 col-md-3 col-form-label">To Date & Time</label>
-                                                <div class="col-sm-8 col-md-9">
-                                                    <input type="text" class="form-control" id="to_time" placeholder="03-04-2023 3:15 pm">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="vehicle_type" class="col-sm-4 col-md-3 col-form-label">Vehicle Type <span class="text-red">*</span></label>
-                                                <div class="col-sm-8 col-md-9">
-                                                    <input type="text" class="form-control" id="vehicle_type" placeholder="Select Option">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="persons" class="col-sm-4 col-md-3 col-form-label">Persons</label>
-                                                <div class="col-sm-8 col-md-9">
-                                                    <input type="number" class="form-control" id="persons" placeholder="Select Option">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="purpose" class="col-sm-4 col-md-3 col-form-label">Purpose</label>
-                                                <div class="col-sm-8 col-md-9">
-                                                    <textarea type="text" class="form-control" id="purpose" placeholder="Write here"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="goods_type" class="col-sm-4 col-md-3 col-form-label">Goods Type</label>
-                                                <div class="col-sm-8 col-md-9">
-                                                    <input type="number" class="form-control" id="goods_type" placeholder="i.e : Cash, Oil, Electronics etc.">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="goods_weight" class="col-sm-4 col-md-3 col-form-label">Goods Weight</label>
-                                                <div class="col-sm-8 col-md-9">
-                                                    <input type="number" class="form-control" id="goods_weight" placeholder="i.e : 40Kg, 12000BD, 40 Litre etc.">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="attached_file" class="col-sm-4 col-md-3 col-form-label">Attach File</label>
-                                                <div class="col-sm-8 col-md-9">
-                                                    <input type="file" class="form-control" id="attached_file">
-                                                </div>
-                                            </div>
-
-                                            <hr class="w-100">
-                                            <div class="form-group row">
-                                                <div class="col-sm-12 col-md-12">
-                                                    * Marked Fields Are Mendatory
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="attached_file" class="col-sm-4 col-md-3 col-form-label"></label>
-                                                <div class="col-sm-8 col-md-9 text-right">
-                                                    <button type="submit" class="btn btn-info b2b-submit-btn-base">Request</button>
-                                                </div>
-                                            </div>
+                                        <div class="form-group">
+                                            <label>Type</label>
+                                            <select class="form-control">
+                                                <option>Please Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Display Name</label>
+                                            <select class="form-control">
+                                                <option>Please Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>License Number</label>
+                                            <input type="text" class="form-control" id="license_no" placeholder="Write License Number">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Asset Type</label>
+                                            <select class="form-control" id="asset_type">
+                                                <option>Please Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Vehicle Model</label>
+                                            <select class="form-control" id="vehicle_model">
+                                                <option>Please Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Build Year</label>
+                                            <select class="form-control" id="build_year">
+                                                <option>Please Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Fuel Capacity (In Litre) *</label>
+                                            <input type="text" class="form-control" id="fuel_capacity" placeholder="Fuel in litre">
                                         </div>
                                     </form>
+
+                                    <div class="row">
+                                        <div class="col-md-12 text-right">
+                                            <button class="btn b2b-btn-submit-blue">Add Entry</button>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
