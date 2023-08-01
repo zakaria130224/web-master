@@ -374,11 +374,20 @@ span.small-text {
 .b2b-custom-card{
   border-radius: 12px;
 }
-.b2b-btn-submit-blue{
+.b2b-btn-submit-blue, .b2b-btn-submit-blue:hover{
   padding: 12px 32px 12px 32px;
   background: #000F3C;
   color: #FFFFFF;
   border-radius: 8px;
   font-size: 16px;
   font-weight: 700;
+}
+.b2b-btn-submit-blue-small, .b2b-btn-submit-blue-small:hover{
+  padding: 12px 32px 12px 32px;
+  background: #000F3C;
+  color: #FFFFFF;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  height: 36px;
 }
