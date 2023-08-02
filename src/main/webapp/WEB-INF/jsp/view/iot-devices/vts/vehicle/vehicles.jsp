@@ -80,7 +80,7 @@
                                         <h3 class="b2b-font-20-500 black-10 float-left">Vehicle Requisitions</h3>
                                     </div>
                                     <div class="float-right">
-                                        <a href="${pageContext.request.contextPath}/add-vehicle-type" class="btn btn-sm btn-custom-white mr-2"><i class="fa fa-plus-circle"></i> Add New Entry</a>
+                                        <a href="${pageContext.request.contextPath}/vts/add-vehicle-type" class="btn btn-sm btn-custom-white mr-2"><i class="fa fa-plus-circle"></i> Add New Entry</a>
                                         <button type="submit" class="btn btn-sm btn-custom-blue"><i class="fa fa-download"></i> Export</button>
                                     </div>
                                 </div>
