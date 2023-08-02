@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "telonor-regular";
+  src: url("../../img/fonts/telenor.ttf");
+}
+@font-face {
+  font-family: "telonor-bold";
+  src: url("../../img/fonts/telenorbold.ttf");
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -8,7 +17,7 @@ body {
 }
 
 .left-div {
-  background-color: #00a3ff;
+  background-color: #000F3C;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,7 +118,7 @@ input[type="radio"] {
 }
 
 .cta {
-  background-color: #0078cf;
+  background-color: #000F3C;
   color: white;
   padding: 10px 20px;
   border: none;

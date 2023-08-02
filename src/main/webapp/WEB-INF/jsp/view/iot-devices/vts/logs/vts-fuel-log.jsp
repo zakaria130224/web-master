@@ -135,38 +135,20 @@
                                             <div class="table-responsive">
                                                 <table class="table" id="dataTableMaintenance">
                                                     <thead class="b2b-custom-boder">
-                                                    <th>Vehicle Name</th>
+                                                    <th>Vehicle</th>
                                                     <th>Driver</th>
-                                                    <th>Type</th>
-                                                    <th>Parts Type</th>
-                                                    <th>Quantity</th>
-                                                    <th>Date</th>
-                                                    <th>Cost</th>
-                                                    <th>Next Due</th>
+                                                    <th>Odometer Reading</th>
+                                                    <th>Fuel Type</th>
+                                                    <th>Time</th>
+                                                    <th>Vol(Litre)</th>
+                                                    <th>Est.Mileage</th>
+                                                    <th>Cost (BDT)</th>
+                                                    <th>Est. Fuel Cost//KM</th>
                                                     </thead>
                                                     <tbody>
                                                     <tr>
-                                                        <td>
-                                                            <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
-                                                            <div class="b2b-list-block">
-                                                                <h5 class="card-title black-30 font-16 b2b-font-weight-500">Light Demo</h5>
-                                                                <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="w-100">
-                                                                <div class="float-left mr-2" style="border-radius: 50px; height: 40px; width: 40px;">
-                                                                    <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/admin.png"
-                                                                         class="img-circle" alt="User Image"/>
-                                                                </div>
-                                                                <div class="b2b-list-block">
-                                                                    <p class="black-30 font-16 b2b-font-weight-500 mb-0">John Doe</p>
-                                                                    <p class="card-text black-60 font-12 b2b-font-weight-700">+8801744439069</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>AC Gas Charge</td>
-                                                        <td>XYZ</td>
+                                                        <td>Light Demo</td>
+                                                        <td>John Dao</td>
                                                         <td>10</td>
                                                         <td>May 6, 2023</td>
                                                         <td>BDT 1000.00</td>
