@@ -56,4 +56,11 @@ public class DriversRestController {
 
     }
 
+    @RequestMapping(value = "/VTS/driver/update-additional-info", method = RequestMethod.POST)
+    public CommonRestResponse updateDriverAdditionalInfo(HttpServletRequest request,
+                                                      @RequestParam("driverAdditionalInfo") String driverAdditionalInfo, @RequestParam("id") Long id) {
+        return driverService.updateDriverAdditionalInfo(request, driverAdditionalInfo, id);
+
+    }
+
 }

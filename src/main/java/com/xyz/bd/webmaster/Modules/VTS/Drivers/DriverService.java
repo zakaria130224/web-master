@@ -19,4 +19,6 @@ public interface DriverService {
 
 
     CommonRestResponse updateDriverLicenseInfo(HttpServletRequest request, String driverLicenseInfo, Long id);
+
+    CommonRestResponse updateDriverAdditionalInfo(HttpServletRequest request, String driverAdditionalInfo, Long id);
 }

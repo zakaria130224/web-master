@@ -175,4 +175,35 @@ public class DriverServiceImpl implements DriverService{
         return commonRestResponse;
     }
 
+    @Override
+    public CommonRestResponse updateDriverAdditionalInfo(HttpServletRequest request, String driverAdditionalInfo, Long id) {
+        try
+        {
+            DriversModelEntity newUserUpdate = new Gson().fromJson(driverAdditionalInfo, new TypeToken<DriversModelEntity>() {}.getType());
+
+            DriversModelEntity driverModelAdditionalUpdate = driversRepository.findByDriverId(id);
+
+            driverModelAdditionalUpdate.setReport_manager_id(newUserUpdate.getReport_manager_id());
+            driverModelAdditionalUpdate.setReport_manager_name(newUserUpdate.getReport_manager_name());
+            driverModelAdditionalUpdate.setAdditional_note(newUserUpdate.getAdditional_note());
+            driverModelAdditionalUpdate.setUpdatedBy(SessionManager.getUserLoginName(request));
+            driverModelAdditionalUpdate.setUpdatedAt(Helper.getCurrentDate());
+
+
+            driversRepository.save(driverModelAdditionalUpdate);
+            commonRestResponse.setData(driverModelAdditionalUpdate.getId());
+            commonRestResponse.setCode(200);
+            commonRestResponse.setMessage("Driver's Additional info has been Updated Successfully");
+        }
+        catch(ArrayIndexOutOfBoundsException ex)
+        {
+            commonRestResponse.setCode(402);
+            commonRestResponse.setData(null);
+            commonRestResponse.setMessage("Driver's Additional info update request has been Failed");
+            LOGGER.error(ex.toString());
+        }
+
+        return commonRestResponse;
+    }
+
 }
