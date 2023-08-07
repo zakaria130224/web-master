@@ -57,7 +57,7 @@ public class QueryBuilderServiceImpl implements QueryBuilderService{
     public String generatePaginationQuery(Integer skip, Integer dataPerPage, String query) {
 
         StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("SELECT * FROM (SELECT "+ dataPerPage +",a.* FROM(" + query + " ORDER BY ID DESC) a ) AS T WHERE "+ dataPerPage +" BETWEEN "+(++skip)+" AND "+(skip+dataPerPage-1));
+        queryBuilder.append("SELECT * FROM (SELECT 10,a.* FROM(" + query + " ORDER BY ID DESC) a ) AS T WHERE 10 BETWEEN "+(++skip)+" AND "+(skip+dataPerPage-1));
 
         return queryBuilder.toString();
     }

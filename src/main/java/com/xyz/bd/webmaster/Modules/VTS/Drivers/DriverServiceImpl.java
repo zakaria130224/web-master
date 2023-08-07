@@ -1,6 +1,11 @@
 package com.xyz.bd.webmaster.Modules.VTS.Drivers;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.xyz.bd.webmaster.Config.session.SessionManager;
 import com.xyz.bd.webmaster.Repositories.CommonRepository;
+import com.xyz.bd.webmaster.Utility.CommonRestResponse;
+import com.xyz.bd.webmaster.Utility.Helper;
 import com.xyz.bd.webmaster.Utility.Utility;
 import com.xyz.bd.webmaster.Utility.dataTable.QueryBuilderService;
 import org.slf4j.Logger;
@@ -12,6 +17,10 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,6 +40,8 @@ public class DriverServiceImpl implements DriverService{
 
     @Autowired
     DriversRepository driversRepository;
+
+    CommonRestResponse commonRestResponse = new CommonRestResponse();
 
 
     @Override
@@ -55,6 +66,44 @@ public class DriverServiceImpl implements DriverService{
         tableData.setDraw(input.getDraw());
 
         return tableData;
+    }
+
+    @Override
+    public CommonRestResponse addNewDriverBasicInfo(HttpServletRequest request, String driverBasicInfo) {
+        try
+        {
+            DriversModelEntity newUser = new Gson().fromJson(driverBasicInfo, new TypeToken<DriversModelEntity>() {
+            }.getType());
+
+            Calendar calendar = Calendar.getInstance();
+            java.util.Date currentTime = calendar.getTime();
+            long time = currentTime.getTime();
+
+            DriversModelEntity driverModelData = new DriversModelEntity();
+
+            driverModelData.setName(newUser.getName());
+            driverModelData.setDob(newUser.getDob());
+            driverModelData.setMobile_number(newUser.getMobile_number());
+            driverModelData.setEmail(newUser.getEmail());
+            driverModelData.setDesignation(newUser.getDesignation());
+            driverModelData.setCreatedBy(SessionManager.getUserLoginName(request));
+            driverModelData.setCreatedAt(Helper.getCurrentDate());
+
+
+            driversRepository.save(driverModelData);
+            commonRestResponse.setData(driverModelData.getId());
+            commonRestResponse.setCode(200);
+            commonRestResponse.setMessage("Driver has been Added Successfully");
+        }
+        catch(ArrayIndexOutOfBoundsException ex)
+        {
+            commonRestResponse.setCode(402);
+            commonRestResponse.setData(null);
+            commonRestResponse.setMessage("Driver Creation request has been Failed");
+            LOGGER.error(ex.toString());
+        }
+
+        return commonRestResponse;
     }
 
 }

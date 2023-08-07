@@ -18,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class BaseEntity {
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

@@ -1,12 +1,13 @@
 package com.xyz.bd.webmaster.Modules.VTS.Drivers;
 
 
+import com.xyz.bd.webmaster.Models.common.Entities.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -16,11 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tbl_driver_info")
-public class DriversModelEntity {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+public class DriversModelEntity extends BaseEntity implements Serializable {
     private String name;
     private String father_name;
     private String mother_name;
@@ -51,9 +48,4 @@ public class DriversModelEntity {
     private String religion;
     private Number company_id;
     private String user_type;
-    private Timestamp created_at;
-    private String created_by;
-    private Timestamp updated_at;
-    private String updated_by;
-
 }

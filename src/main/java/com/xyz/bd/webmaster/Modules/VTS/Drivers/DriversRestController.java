@@ -1,5 +1,11 @@
 package com.xyz.bd.webmaster.Modules.VTS.Drivers;
 
+import com.google.gson.Gson;
+import com.xyz.bd.webmaster.Models.UserManagement.DTOs.DTOUser;
+import com.xyz.bd.webmaster.Models.common.ResponseModel.FailedResponse;
+import com.xyz.bd.webmaster.Models.common.ResponseModel.Response;
+import com.xyz.bd.webmaster.Utility.CommonRestResponse;
+import com.xyz.bd.webmaster.Utility.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +33,13 @@ public class DriversRestController {
     public DataTablesOutput<DriversModelEntity> getAllUserListDT(@Valid DataTablesInput input, HttpServletRequest request, @RequestParam(value = "customQuery",required = false) String customQuery) {
         return driverService.findAllDriversList(request, customQuery, input);
         //return customSRDTQueryService.findSrList(input, customQuery, request, LOGGER, customSearchCriteria);
+    }
+
+    @RequestMapping(value = "/VTS/driver/save", method = RequestMethod.POST)
+    public CommonRestResponse addNewAccountUser(HttpServletRequest request,
+                                                @RequestParam("driverBasicInfo") String driverBasicInfo) {
+        return driverService.addNewDriverBasicInfo(request, driverBasicInfo);
+
     }
 
 }
