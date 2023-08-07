@@ -144,4 +144,35 @@ public class DriverServiceImpl implements DriverService{
         return commonRestResponse;
     }
 
+    @Override
+    public CommonRestResponse updateDriverLicenseInfo(HttpServletRequest request, String driverLicenseInfo, Long id) {
+        try
+        {
+            DriversModelEntity newUserUpdate = new Gson().fromJson(driverLicenseInfo, new TypeToken<DriversModelEntity>() {}.getType());
+
+            DriversModelEntity driverModelLicenseUpdate = driversRepository.findByDriverId(id);
+
+            driverModelLicenseUpdate.setLicense_no(newUserUpdate.getLicense_no());
+            driverModelLicenseUpdate.setLicense_issue_date(newUserUpdate.getLicense_issue_date());
+            driverModelLicenseUpdate.setLicense_expired_date(newUserUpdate.getLicense_expired_date());
+            driverModelLicenseUpdate.setUpdatedBy(SessionManager.getUserLoginName(request));
+            driverModelLicenseUpdate.setUpdatedAt(Helper.getCurrentDate());
+
+
+            driversRepository.save(driverModelLicenseUpdate);
+            commonRestResponse.setData(driverModelLicenseUpdate.getId());
+            commonRestResponse.setCode(200);
+            commonRestResponse.setMessage("Driver's license info has been Updated Successfully");
+        }
+        catch(ArrayIndexOutOfBoundsException ex)
+        {
+            commonRestResponse.setCode(402);
+            commonRestResponse.setData(null);
+            commonRestResponse.setMessage("Driver's license info update request has been Failed");
+            LOGGER.error(ex.toString());
+        }
+
+        return commonRestResponse;
+    }
+
 }

@@ -36,16 +36,23 @@ public class DriversRestController {
     }
 
     @RequestMapping(value = "/VTS/driver/save-basic-info", method = RequestMethod.POST)
-    public CommonRestResponse addNewAccountUser(HttpServletRequest request,
+    public CommonRestResponse addNewDriver(HttpServletRequest request,
                                                 @RequestParam("driverBasicInfo") String driverBasicInfo) {
         return driverService.addNewDriverBasicInfo(request, driverBasicInfo);
 
     }
 
     @RequestMapping(value = "/VTS/driver/update-basic-info", method = RequestMethod.POST)
-    public CommonRestResponse addNewAccountUser(HttpServletRequest request,
+    public CommonRestResponse updateDriverBasicInfo(HttpServletRequest request,
                                                 @RequestParam("driverBasicInfo") String driverBasicInfo, @RequestParam("id") Long id) {
         return driverService.updateDriverBasicInfo(request, driverBasicInfo, id);
+
+    }
+
+    @RequestMapping(value = "/VTS/driver/update-license-info", method = RequestMethod.POST)
+    public CommonRestResponse updateDriverLicenseInfo(HttpServletRequest request,
+                                                @RequestParam("driverLicenseInfo") String driverLicenseInfo, @RequestParam("id") Long id) {
+        return driverService.updateDriverLicenseInfo(request, driverLicenseInfo, id);
 
     }
 
