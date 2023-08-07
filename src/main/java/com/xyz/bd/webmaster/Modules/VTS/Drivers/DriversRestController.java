@@ -1,15 +1,9 @@
 package com.xyz.bd.webmaster.Modules.VTS.Drivers;
 
-import com.google.gson.Gson;
-import com.xyz.bd.webmaster.Models.UserManagement.DTOs.DTOUser;
-import com.xyz.bd.webmaster.Models.common.ResponseModel.FailedResponse;
-import com.xyz.bd.webmaster.Models.common.ResponseModel.Response;
 import com.xyz.bd.webmaster.Utility.CommonRestResponse;
-import com.xyz.bd.webmaster.Utility.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.datatables.mapping.Column;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Map;
 
 @RestController
 public class DriversRestController {
