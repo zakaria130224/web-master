@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DriverServiceImpl implements DriverService{
@@ -100,6 +101,43 @@ public class DriverServiceImpl implements DriverService{
             commonRestResponse.setCode(402);
             commonRestResponse.setData(null);
             commonRestResponse.setMessage("Driver Creation request has been Failed");
+            LOGGER.error(ex.toString());
+        }
+
+        return commonRestResponse;
+    }
+
+    @Override
+    public CommonRestResponse updateDriverBasicInfo(HttpServletRequest request, String driverBasicInfoUpdate, Long id) {
+        try
+        {
+            DriversModelEntity newUserUpdate = new Gson().fromJson(driverBasicInfoUpdate, new TypeToken<DriversModelEntity>() {}.getType());
+
+            Calendar calendar = Calendar.getInstance();
+            java.util.Date currentTime = calendar.getTime();
+            long time = currentTime.getTime();
+
+            DriversModelEntity driverModelDataUpdate = driversRepository.findByDriverId(id);
+
+            driverModelDataUpdate.setName(newUserUpdate.getName());
+            driverModelDataUpdate.setDob(newUserUpdate.getDob());
+            driverModelDataUpdate.setMobile_number(newUserUpdate.getMobile_number());
+            driverModelDataUpdate.setEmail(newUserUpdate.getEmail());
+            driverModelDataUpdate.setDesignation(newUserUpdate.getDesignation());
+            driverModelDataUpdate.setUpdatedBy(SessionManager.getUserLoginName(request));
+            driverModelDataUpdate.setUpdatedAt(Helper.getCurrentDate());
+
+
+            driversRepository.save(driverModelDataUpdate);
+            commonRestResponse.setData(driverModelDataUpdate.getId());
+            commonRestResponse.setCode(200);
+            commonRestResponse.setMessage("Driver has been Updated Successfully");
+        }
+        catch(ArrayIndexOutOfBoundsException ex)
+        {
+            commonRestResponse.setCode(402);
+            commonRestResponse.setData(null);
+            commonRestResponse.setMessage("Driver Update request has been Failed");
             LOGGER.error(ex.toString());
         }
 

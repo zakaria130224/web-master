@@ -15,4 +15,8 @@ public interface DriverService {
 
     CommonRestResponse addNewDriverBasicInfo(HttpServletRequest request, String driverBasicInfo);
 
+    CommonRestResponse updateDriverBasicInfo(HttpServletRequest request, String driverBasicInfo, Long id);
+
+
+
 }

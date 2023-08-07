@@ -35,10 +35,17 @@ public class DriversRestController {
         //return customSRDTQueryService.findSrList(input, customQuery, request, LOGGER, customSearchCriteria);
     }
 
-    @RequestMapping(value = "/VTS/driver/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/VTS/driver/save-basic-info", method = RequestMethod.POST)
     public CommonRestResponse addNewAccountUser(HttpServletRequest request,
                                                 @RequestParam("driverBasicInfo") String driverBasicInfo) {
         return driverService.addNewDriverBasicInfo(request, driverBasicInfo);
+
+    }
+
+    @RequestMapping(value = "/VTS/driver/update-basic-info", method = RequestMethod.POST)
+    public CommonRestResponse addNewAccountUser(HttpServletRequest request,
+                                                @RequestParam("driverBasicInfo") String driverBasicInfo, @RequestParam("id") Long id) {
+        return driverService.updateDriverBasicInfo(request, driverBasicInfo, id);
 
     }
 
