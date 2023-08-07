@@ -1,4 +1,4 @@
-package com.xyz.bd.webmaster.Modules.VTS.Controller;
+package com.xyz.bd.webmaster.Modules.VTS.Drivers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
