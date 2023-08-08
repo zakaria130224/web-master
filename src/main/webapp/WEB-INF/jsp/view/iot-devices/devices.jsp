@@ -135,7 +135,7 @@
                                 <div class="row">
 
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/trip-map">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/map">
                                         <div class="info-box b2b-bg-info">
 <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -155,7 +155,7 @@
 
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/trip-list">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/map-vehicle-track">
 
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
@@ -175,7 +175,7 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/alerts">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/alert">
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -218,6 +218,7 @@
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
                                             <div class="info-box-content">
+                                                <a style="color: inherit" href="${pageContext.request.contextPath}/dashboard">
                                                 <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gra006.png"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Driving Score</span>
@@ -299,7 +300,7 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/expense-log">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/expense-list">
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -359,7 +360,7 @@
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
 
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/requision">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/requisitions">
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -389,7 +390,7 @@
 
                                 <div class="row">
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/trackers">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/vehicle-list">
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -408,7 +409,7 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/driver">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/drivers-list">
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
@@ -427,7 +428,7 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/geofence">
+                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/map">
                                         <div class="info-box b2b-bg-info">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
