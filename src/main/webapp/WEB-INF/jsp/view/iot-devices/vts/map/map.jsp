@@ -74,17 +74,6 @@
             font-size: 14px;
         }
 
-        /* Modal container */
-        .modal {
-            background-color: transparent; /* or 'rgba(0, 0, 0, 0)' */
-            /* Your other styles here */
-        }
-
-        /* Overlay element */
-        .modal-overlay {
-            display: none; /* or remove this element altogether */
-        }
-
     </style>
 
 </head>
@@ -650,7 +639,8 @@
             var devs_imei;
            // var devs_imei = $('#carIMEI').val()
           //  alert("hello world");
-            $("#vehicleStatus").modal("show");
+          //  $("#vehicleStatus").modal("show");
+            window.location.href="${pageContext.request.contextPath}/vts/map-selected";
         });
     };
 </script>
