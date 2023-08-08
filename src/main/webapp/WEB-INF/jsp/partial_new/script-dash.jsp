@@ -12,7 +12,7 @@
 <!-- Bootstrap 4 -->
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables  & Plugins -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="${pageContext.request.contextPath}/assets/b2b/dist/js/chart.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/dist/js/charts/CircleChart.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/dist/js/charts/semiChart.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/dist/js/charts/barChartSecond.js"></script>

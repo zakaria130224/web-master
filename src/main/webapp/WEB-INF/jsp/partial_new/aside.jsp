@@ -183,7 +183,7 @@
 
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/vts/alert" class="nav-link">
-                        <i class="nav-icon far fa-bell"></i>
+                        <i class="nav-icon fa fa-bell"></i>
                         <p>Alarm</p>
                     </a>
                 </li>
