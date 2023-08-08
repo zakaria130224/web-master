@@ -15,45 +15,56 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/api/web/VTS/driver")
 public class DriversRestController {
-
-    private static final Logger LOGGER= LoggerFactory.getLogger(DriversRestController.class);
 
     @Autowired
     DriverService driverService;
 
-    @RequestMapping(value = "/VTS/driver/listDT", method = RequestMethod.GET)
+    @RequestMapping(value = "/listDT", method = RequestMethod.GET)
     public DataTablesOutput<DriversModelEntity> getAllUserListDT(@Valid DataTablesInput input, HttpServletRequest request, @RequestParam(value = "customQuery",required = false) String customQuery) {
         return driverService.findAllDriversList(request, customQuery, input);
-        //return customSRDTQueryService.findSrList(input, customQuery, request, LOGGER, customSearchCriteria);
     }
 
-    @RequestMapping(value = "/VTS/driver/save-basic-info", method = RequestMethod.POST)
+    @RequestMapping(value = "/save-basic-info", method = RequestMethod.POST)
     public CommonRestResponse addNewDriver(HttpServletRequest request,
                                                 @RequestParam("driverBasicInfo") String driverBasicInfo) {
         return driverService.addNewDriverBasicInfo(request, driverBasicInfo);
 
     }
 
-    @RequestMapping(value = "/VTS/driver/update-basic-info", method = RequestMethod.POST)
+    @RequestMapping(value = "/update-basic-info", method = RequestMethod.POST)
     public CommonRestResponse updateDriverBasicInfo(HttpServletRequest request,
                                                 @RequestParam("driverBasicInfo") String driverBasicInfo, @RequestParam("id") Long id) {
         return driverService.updateDriverBasicInfo(request, driverBasicInfo, id);
 
     }
 
-    @RequestMapping(value = "/VTS/driver/update-license-info", method = RequestMethod.POST)
+    @RequestMapping(value = "/update-license-info", method = RequestMethod.POST)
     public CommonRestResponse updateDriverLicenseInfo(HttpServletRequest request,
                                                 @RequestParam("driverLicenseInfo") String driverLicenseInfo, @RequestParam("id") Long id) {
         return driverService.updateDriverLicenseInfo(request, driverLicenseInfo, id);
 
     }
 
-    @RequestMapping(value = "/VTS/driver/update-additional-info", method = RequestMethod.POST)
+    @RequestMapping(value = "/update-additional-info", method = RequestMethod.POST)
     public CommonRestResponse updateDriverAdditionalInfo(HttpServletRequest request,
                                                       @RequestParam("driverAdditionalInfo") String driverAdditionalInfo, @RequestParam("id") Long id) {
         return driverService.updateDriverAdditionalInfo(request, driverAdditionalInfo, id);
 
     }
+
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public CommonRestResponse removeDriver(HttpServletRequest request, @RequestParam("id") Long id) {
+        return driverService.removeDriver(request, id);
+
+    }
+
+    @RequestMapping(value = "/get-info", method = RequestMethod.POST)
+    public CommonRestResponse getDriverBasicInfo(HttpServletRequest request, @RequestParam("id") Long id) {
+        return driverService.getDriverBasicInfo(request, id);
+
+    }
+
 
 }
