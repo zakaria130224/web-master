@@ -42,7 +42,7 @@ public class DriverServiceImpl implements DriverService{
     @Autowired
     DriversRepository driversRepository;
 
-    CommonRestResponse commonRestResponse = new CommonRestResponse();
+
 
 
     @Override
@@ -71,6 +71,7 @@ public class DriverServiceImpl implements DriverService{
 
     @Override
     public CommonRestResponse addNewDriverBasicInfo(HttpServletRequest request, String driverBasicInfo) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
         try
         {
             DriversModelEntity newUser = new Gson().fromJson(driverBasicInfo, new TypeToken<DriversModelEntity>() {
@@ -105,12 +106,10 @@ public class DriverServiceImpl implements DriverService{
 
     @Override
     public CommonRestResponse updateDriverBasicInfo(HttpServletRequest request, String driverBasicInfoUpdate, Long id) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
         try
         {
             DriversModelEntity newUserUpdate = new Gson().fromJson(driverBasicInfoUpdate, new TypeToken<DriversModelEntity>() {}.getType());
-
-            Calendar calendar = Calendar.getInstance();
-            java.util.Date currentTime = calendar.getTime();
 
             DriversModelEntity driverModelDataUpdate = driversRepository.findByDriverId(id);
 
@@ -141,6 +140,7 @@ public class DriverServiceImpl implements DriverService{
 
     @Override
     public CommonRestResponse updateDriverLicenseInfo(HttpServletRequest request, String driverLicenseInfo, Long id) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
         try
         {
             DriversModelEntity newUserUpdate = new Gson().fromJson(driverLicenseInfo, new TypeToken<DriversModelEntity>() {}.getType());
@@ -172,6 +172,7 @@ public class DriverServiceImpl implements DriverService{
 
     @Override
     public CommonRestResponse updateDriverAdditionalInfo(HttpServletRequest request, String driverAdditionalInfo, Long id) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
         try
         {
             DriversModelEntity newUserUpdate = new Gson().fromJson(driverAdditionalInfo, new TypeToken<DriversModelEntity>() {}.getType());
@@ -203,6 +204,7 @@ public class DriverServiceImpl implements DriverService{
 
     @Override
     public CommonRestResponse removeDriver(HttpServletRequest request, Long id) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
         try
         {
             driversRepository.deleteById(id);
@@ -223,6 +225,7 @@ public class DriverServiceImpl implements DriverService{
 
     @Override
     public CommonRestResponse getDriverBasicInfo(HttpServletRequest request, Long id) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
         try
         {
             DriversModelEntity getDriversDataById = driversRepository.findByDriverId(id);

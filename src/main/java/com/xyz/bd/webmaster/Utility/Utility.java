@@ -20,5 +20,6 @@ import java.util.Map;
 @Service
 public class Utility {
     public static String tbl_driver_info="tbl_driver_info";
+    public static String tbl_expense_logs="tbl_expense_logs";
 
 }
