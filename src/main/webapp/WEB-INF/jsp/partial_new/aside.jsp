@@ -203,6 +203,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/order-Management" class="nav-link">
+                        <i class="nav-icon fa fa-car"></i>
+                        <p>Order Management</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/vts/settings" class="nav-link">
                         <i class="nav-icon fa fa-gear"></i>
                         <p>Settings</p>
