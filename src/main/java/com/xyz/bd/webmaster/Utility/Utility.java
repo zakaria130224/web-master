@@ -1,5 +1,24 @@
 package com.xyz.bd.webmaster.Utility;
 
-public interface Utility {
-    public String tbl_sr = "TBL_SR";
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.springframework.data.jpa.datatables.mapping.Column;
+import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
+
+@Service
+public class Utility {
+    public static String tbl_driver_info="tbl_driver_info";
+
 }
