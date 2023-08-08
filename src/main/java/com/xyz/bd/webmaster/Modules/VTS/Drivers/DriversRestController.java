@@ -17,15 +17,12 @@ import javax.validation.Valid;
 @RestController
 public class DriversRestController {
 
-    private static final Logger LOGGER= LoggerFactory.getLogger(DriversRestController.class);
-
     @Autowired
     DriverService driverService;
 
     @RequestMapping(value = "/VTS/driver/listDT", method = RequestMethod.GET)
     public DataTablesOutput<DriversModelEntity> getAllUserListDT(@Valid DataTablesInput input, HttpServletRequest request, @RequestParam(value = "customQuery",required = false) String customQuery) {
         return driverService.findAllDriversList(request, customQuery, input);
-        //return customSRDTQueryService.findSrList(input, customQuery, request, LOGGER, customSearchCriteria);
     }
 
     @RequestMapping(value = "/VTS/driver/save-basic-info", method = RequestMethod.POST)
@@ -55,5 +52,18 @@ public class DriversRestController {
         return driverService.updateDriverAdditionalInfo(request, driverAdditionalInfo, id);
 
     }
+
+    @RequestMapping(value = "/VTS/driver/remove", method = RequestMethod.POST)
+    public CommonRestResponse removeDriver(HttpServletRequest request, @RequestParam("id") Long id) {
+        return driverService.removeDriver(request, id);
+
+    }
+
+    @RequestMapping(value = "/VTS/driver/get-info", method = RequestMethod.POST)
+    public CommonRestResponse getDriverBasicInfo(HttpServletRequest request, @RequestParam("id") Long id) {
+        return driverService.getDriverBasicInfo(request, id);
+
+    }
+
 
 }

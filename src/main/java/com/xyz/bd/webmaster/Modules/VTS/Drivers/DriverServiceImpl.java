@@ -76,10 +76,6 @@ public class DriverServiceImpl implements DriverService{
             DriversModelEntity newUser = new Gson().fromJson(driverBasicInfo, new TypeToken<DriversModelEntity>() {
             }.getType());
 
-            Calendar calendar = Calendar.getInstance();
-            java.util.Date currentTime = calendar.getTime();
-            long time = currentTime.getTime();
-
             DriversModelEntity driverModelData = new DriversModelEntity();
 
             driverModelData.setName(newUser.getName());
@@ -115,7 +111,6 @@ public class DriverServiceImpl implements DriverService{
 
             Calendar calendar = Calendar.getInstance();
             java.util.Date currentTime = calendar.getTime();
-            long time = currentTime.getTime();
 
             DriversModelEntity driverModelDataUpdate = driversRepository.findByDriverId(id);
 
@@ -200,6 +195,45 @@ public class DriverServiceImpl implements DriverService{
             commonRestResponse.setCode(402);
             commonRestResponse.setData(null);
             commonRestResponse.setMessage("Driver's Additional info update request has been Failed");
+            LOGGER.error(ex.toString());
+        }
+
+        return commonRestResponse;
+    }
+
+    @Override
+    public CommonRestResponse removeDriver(HttpServletRequest request, Long id) {
+        try
+        {
+            driversRepository.deleteById(id);
+            commonRestResponse.setData("");
+            commonRestResponse.setCode(200);
+            commonRestResponse.setMessage("Driver's info has been deleted Successfully");
+        }
+        catch(ArrayIndexOutOfBoundsException ex)
+        {
+            commonRestResponse.setCode(402);
+            commonRestResponse.setData(null);
+            commonRestResponse.setMessage("Driver's deleted request has been Failed");
+            LOGGER.error(ex.toString());
+        }
+
+        return commonRestResponse;
+    }
+
+    @Override
+    public CommonRestResponse getDriverBasicInfo(HttpServletRequest request, Long id) {
+        try
+        {
+            DriversModelEntity getDriversDataById = driversRepository.findByDriverId(id);
+
+            commonRestResponse.setData(getDriversDataById);
+            commonRestResponse.setCode(200);
+        }
+        catch(ArrayIndexOutOfBoundsException ex)
+        {
+            commonRestResponse.setCode(402);
+            commonRestResponse.setData(null);
             LOGGER.error(ex.toString());
         }
 
