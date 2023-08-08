@@ -148,7 +148,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <div class="trip-details-blue-block text-center">
+                                                            <div class="trip-details-blue-block text-center" id="nearbyFunctions">
                                                                 <img src="${pageContext.request.contextPath}/assets/v2/dist/img/share.png">
                                                                 <p>Nearby</p>
                                                             </div>
@@ -320,6 +320,15 @@
         $('#trackFunctions').click(function(e) {
             // alert(1);
             window.location.href="${pageContext.request.contextPath}/vts/map-vehicle-track";
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#nearbyFunctions').click(function(e) {
+            // alert(1);
+            window.location.href="${pageContext.request.contextPath}/vts/map-nearby-vehicle";
         });
     });
 </script>

@@ -122,94 +122,20 @@
 
                                                     <div class="row mb-3">
                                                         <div class="col-md-12">
-                                                            <div class="w-100">
-                                                                <div class="text-center">
-                                                                    <img src="${pageContext.request.contextPath}/assets/v2/dist/img/car_photo.png">
+                                                            <div class="info-box b2b-bg-info">
+                                                                <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
+                                                                <span class="info-box-icon"><img src="${pageContext.request.contextPath}/assets/v2/dist/img/car_photo.png"></span>
+                                                                <div class="info-box-content">
+                                                                    <span class="info-box-b2b"> Vehicle Name </span>
+                                                                    <span class="info-box-info-b2b black-50 font-14 b2b-font-weight-400"><i class="fa fa-car" style="width: 23px"></i>Vehicle Type <i class="fa fa-circle" style="margin-left: 5px"></i>&nbsp;&nbsp;Vehicle Model</span>
+                                                                    <span class="progress-description info-box-info-b2b black-50 font-14 b2b-font-weight-400">
+                                                                        <i class="fa fa-user"></i>  &nbsp;&nbsp;Driver Name
+                                                                        </span>
                                                                 </div>
-                                                                <div class="text-center">
-                                                                    <p class="info-box-b2b">Vehicle Name</p>
-                                                                </div>
-                                                                <div class="text-center">
-                                                                    <span class="info-box-info-b2b black-50 font-14 b2b-font-weight-400"></i>Vehicle Type <i class="fa fa-circle" style="margin-left: 5px"></i>&nbsp;&nbsp;Vehicle Model</span>
-                                                                </div>
-                                                                <div class="text-center">
-                                                                    <span class="info-box-info-b2b black-50 font-14 b2b-font-weight-400">Driver Name<i class="fa fa-circle" style="margin-left: 5px"></i>&nbsp;&nbsp;Driver Number</span>
-                                                                </div>
+                                                                <!-- /.info-box-content -->
                                                             </div>
                                                         </div>
                                                     </div>
-
-
-                                                    <div class="row mt-4">
-                                                        <div class="col-md-3">
-                                                            <div class="trip-details-blue-block text-center" id="trackFunctions">
-                                                                <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gps.png">
-                                                                <p>Track</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="trip-details-blue-block text-center" id="nearbyFunctions">
-                                                                <img src="${pageContext.request.contextPath}/assets/v2/dist/img/share.png">
-                                                                <p>Nearby</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="trip-details-blue-block text-center">
-                                                                <img src="${pageContext.request.contextPath}/assets/b2b/dist/icon/user.png">
-                                                                <p>Driver</p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                            <div class="trip-details-blue-block text-center">
-                                                                <img src="${pageContext.request.contextPath}/assets/b2b/dist/icon/car.png">
-                                                                <p>Vehicle</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="info-box b2b-bg-info-map" style="margin-top: 20px">
-
-                                                        <div class="row ">
-                                                            <div class="col-md-6 p-3">
-                                                                <p class="font-14 mb-1 font-weight-400">Distance Travelled</p>
-                                                                <span><i class="fa fa-angle-double-right" style="font-size: 20px"></i></span>
-                                                                <span class="font-20 font-weight-500">&nbsp;32.2 Km</span>
-                                                            </div>
-                                                            <div class="col-md-6 p-3">
-                                                                <p class="font-14 mb-1 font-weight-400">Fuel Consumed</p>
-                                                                <span><i class="fa fa-spinner" style="font-size: 20px"></i></span>
-                                                                <span class="font-20 font-weight-500">&nbsp;32.2 Km</span>
-                                                            </div>
-                                                            <div class="col-md-6 p-3">
-                                                                <p class="font-14 mb-1 font-weight-400">Engine</p>
-                                                                <span><i class="fa fa-play-circle-o" style="font-size: 20px"></i></span>
-                                                                <span class="font-20 font-weight-500">&nbsp;32.2 Km</span>
-                                                            </div>
-                                                            <div class="col-md-6 p-3">
-                                                                <p class="font-14 mb-1 font-weight-400">Speed</p>
-                                                                <span><i class="fa fa-play-circle-o" style="font-size: 20px"></i></span>
-                                                                <span class="font-20 font-weight-500">&nbsp;12.4 Km/H</span>
-                                                            </div>
-                                                            <div class="col-md-6 p-3">
-                                                                <p class="font-14 mb-1 font-weight-400">Battery Voltage</p>
-                                                                <span><i class="fa fa-battery-half" style="font-size: 20px"></i></span>
-                                                                <span class="font-20 font-weight-500">&nbsp;13.3 V</span>
-                                                            </div>
-                                                            <div class="col-md-6 p-3">
-                                                                <p class="font-14 mb-1 font-weight-400">Speed</p>
-                                                                <span><i class="fa fa-play-circle-o" style="font-size: 20px"></i></span>
-                                                                <span class="font-20 font-weight-500">&nbsp;12.4 Km/H</span>
-                                                            </div>
-                                                            <div class="col-md-12 p-3">
-                                                                <p class="font-14 mb-1 font-weight-400">Last Location</p>
-                                                                <span><i class="fa fa-map-marker" style="font-size: 20px"></i></span>
-                                                                <span class="font-14 font-weight-500">&nbsp;Mufti Abdur Rahman Road, 149m West from Marakajul ploat, Block D, Bashundhara R/A, Vatara Dhaka.</span>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
 
                                                 </div>
                                             </div>
@@ -315,6 +241,7 @@
         });
     });
 </script>
+
 <script>
     $(document).ready(function() {
         $('#trackFunctions').click(function(e) {

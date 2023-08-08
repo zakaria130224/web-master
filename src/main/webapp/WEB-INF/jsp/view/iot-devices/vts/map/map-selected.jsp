@@ -187,14 +187,14 @@
 
 
                                                         <div class="row mt-3">
-                                                            <div class="col-md-4">
-                                                                <div class="trip-details-blue-block text-center">
+                                                            <div class="col-md-4" >
+                                                                <div class="trip-details-blue-block text-center" id="trackFunctions">
                                                                     <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gps.png">
                                                                     <p>Track</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <div class="trip-details-blue-block text-center">
+                                                                <div class="trip-details-blue-block text-center" id="nearbyFunctions">
                                                                     <img src="${pageContext.request.contextPath}/assets/v2/dist/img/share.png">
                                                                     <p>Nearby</p>
                                                                 </div>
@@ -309,6 +309,24 @@
         $('#detailFunctions').click(function(e) {
             // alert(1);
             window.location.href="${pageContext.request.contextPath}/vts/map-vehicles-details";
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#trackFunctions').click(function(e) {
+            // alert(1);
+            window.location.href="${pageContext.request.contextPath}/vts/map-vehicle-track";
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#nearbyFunctions').click(function(e) {
+            // alert(1);
+            window.location.href="${pageContext.request.contextPath}/vts/map-nearby-vehicle";
         });
     });
 </script>

@@ -39,4 +39,13 @@ public class MapController {
         return new ModelAndView("iot-devices/vts/map/map-vehicle-track");
 
     }
+
+    @RequestMapping(value = "/vts/map-nearby-vehicle", method = RequestMethod.GET)
+    public ModelAndView showMapNearbyVehiclePage(ModelMap model) {
+        model.addAttribute("title", "Map Vehicle Nearby");
+        model.addAttribute("menu", "Map Vehicle Nearby");
+        return new ModelAndView("iot-devices/vts/map/map-nearby-vehicle");
+
+    }
+
 }
