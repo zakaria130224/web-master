@@ -47,7 +47,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 
         searchQuery = queryBuilderService.generatePaginationQuery(input.getStart(), input.getLength(), searchQuery);
 
-        String count = queryBuilderService.countQuery("ID", whereQuery, Utility.tbl_expense_logs, DriversModelEntity.class);
+        String count = queryBuilderService.countQuery("ID", whereQuery, Utility.tbl_expense_logs, ExpenseModelEntity.class);
 
         int totalData = commonRepository.CommoNumberOfRow(count);
 
