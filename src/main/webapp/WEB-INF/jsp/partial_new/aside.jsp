@@ -182,28 +182,35 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/alarm" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/vts/alert" class="nav-link">
                         <i class="nav-icon far fa-bell"></i>
                         <p>Alarm</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/map" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/vts/map" class="nav-link">
                         <i class="nav-icon fa fa-map"></i>
                         <p>Map</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/trips" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/vts/trip-list" class="nav-link">
                         <i class="nav-icon fa fa-car"></i>
                         <p>Trips</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/settings" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/order-Management" class="nav-link">
+                        <i class="nav-icon fa fa-car"></i>
+                        <p>Order Management</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/vts/settings" class="nav-link">
                         <i class="nav-icon fa fa-gear"></i>
                         <p>Settings</p>
                     </a>
@@ -290,14 +297,14 @@
 
 
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/logs" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/vts/maintenance-log" class="nav-link">
                         <i class="nav-icon fa fa-list-alt"></i>
                         <p>Logs</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/support" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/vts/support" class="nav-link">
                         <i class="nav-icon fa fa-phone-square"></i>
                         <p>Support</p>
                     </a>
