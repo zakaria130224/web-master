@@ -15,7 +15,7 @@
 <script src="${pageContext.request.contextPath}/assets/b2b/dist/js/charts/CircleChart.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/dist/js/charts/semiChart.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/dist/js/charts/barChartSecond.js"></script>
-<script src="${pageContext.request.contextPath}/static/b2b/dist/js/chart.js"></script>
+<script src="${pageContext.request.contextPath}/assets/b2b/dist/js/charts/Chart.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/datatables/jquery.dataTables.min.js"></script>
 <!-- jQuery Knob -->
 
