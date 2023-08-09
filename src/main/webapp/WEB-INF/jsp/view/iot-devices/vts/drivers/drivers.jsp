@@ -39,6 +39,15 @@
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+
+    <div class="loader_body">
+        <div class="large-indicator">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <jsp:include page="./../../../../partial_new/nevbar.jsp"></jsp:include>
     <!-- /.navbar -->
@@ -283,7 +292,98 @@
                 $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
             }
         );
+
+        getDriversData();
+
+
     });
+
+    function getDriversData() {
+        $(".loader_body").show();
+
+        $.ajax({
+            type: 'get',
+            url: base_url + "api/web/VTS/driver/listDT",
+            success: function (data) {
+                console.log(data.data);
+                $(".loader_body").hide();
+                initUserTable(data.data);
+            },
+            error: function (error) {
+                $(".loader_body").hide();
+                console.log(error);
+            }
+        });
+    }
+
+    function initUserTable(data) {
+        "use strict";
+        if ($.fn.dataTable.isDataTable('#tblChecker')) {
+            $('#tblChecker').DataTable().clear();
+            $('#tblChecker').DataTable().destroy();
+        }
+        $('#tblChecker')
+        let dataTable = $('#tblChecker').DataTable({
+            dom: 'Bfrtip',
+            data: data,
+            buttons: [
+                'copy', 'csv', 'excel',
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'A4',
+                    exportOptions: {
+                        columns: [0,1,2,3,4,5,6,7,8]
+                    }
+                },
+                'print'
+            ],
+            order: [[3, 'desc']],
+            columns: [
+                {data: 'fromAccount'},
+                {data: 'toAccount'},
+                {data: 'txnType'},
+                {data: 'txnTime',
+                    autowidth: true,
+                    render: function (data, type, full, row) {
+                        let date_str = new Date(data);
+                        return type === 'sort' ? data:date_str.toLocaleString();
+                    }
+                },
+                {data: 'amount'},
+                {data: 'description'},
+                {data: 'status',
+                    autowidth: true,
+                    render: function (data, type, full, row) {
+                        if (data == 0) {
+                            return 'Pending';
+                        } else if(data == 1){
+                            return 'Approved';
+                        }else if(data== 2){
+                            return 'Rejected';
+                        }else if(data == 3){
+                            return 'failed';
+                        }else if(data== 4){
+                            return 'Exception';
+                        }
+
+                    }},
+                {data: 'checkerName'},
+                {data: 'makerName'},
+                {
+                    data: 'status',
+                    autowidth: true,
+                    render: function (data, type, full, row) {
+                        if (data == 0) {
+                            return '<button class="btn btn-info btn-sm" id="active_btn" onclick="transactionApproval(this)">Approve</button>  ' +
+                                '<button class="btn btn-info btn-sm" id="reject_btn" data-toggle="modal" data-target="#my-modal" onclick="transactionReject(this)">Reject</button>';
+                        } else
+                            return '';
+                    }
+                }
+            ]
+        });
+    }
 </script>
 
 </body>
