@@ -12,12 +12,12 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/all.min.css"/>
     <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="AdminLTE-3.2.0/plugins/icheck-bootstrap/icheck-bootstrap.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/icheck-bootstrap.css"/>
     <!-- Theme style -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/adminlte.min.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/pages/index.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/pages/login.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/font-awesome-4/css/font-awesome.min.css">
 </head>
 <body class="hold-transition login-page">
 <!-- /.login-logo -->
@@ -253,12 +253,11 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="${pageContext.request.contextPath}/assets/vendors4/jquery/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/b2b/plugins/jquery/jquery.js"></script>
 <!-- Bootstrap 4 -->
-
-<script src=".${pageContext.request.contextPath}/assets/vendors4/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/b2b/plugins/bootstrap.js"></script>
 <!-- AdminLTE App -->
-<script src="${pageContext.request.contextPath}/assets/v2/dist/js/adminlte.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/b2b/dist/js/adminlte.js"></script>
 
 <script>
     const togglePassword = document.querySelector("#togglePassword");
