@@ -201,7 +201,9 @@
 <%--                                                                <h5 class="card-title black-30 font-16 b2b-font-weight-500">Light Demo</h5>--%>
 <%--                                                                <p class="card-text black-50 font-12 b2b-font-weight-700">CSD4345354345t</p>--%>
 <%--                                                            </div>--%>
-                                                            82093402999
+
+                                                        <a data-target="#detailsOrderView" data-toggle="modal" class="MainNavText" id="MainNavHelp"
+                                                         href="#detailsOrderView">82093402999</a>
                                                         </td>
                                                         <td>3rd May, 2023</td>
                                                         <td>017155812091</td>
@@ -239,6 +241,155 @@
         </section>
         <!-- /.content -->
     </div>
+
+    <!-- Details View -->
+    <div class="modal left fade" id="detailsOrderView" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title float-left" id="detailOrder">Order Details</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            style="height: 20px;width:
+                            20px;border: 1px solid;
+                            display: block;
+                            border-radius: 50%;
+                            padding: 0px;
+                            line-height: 17px;
+                            margin-top: 5px;
+                            margin-right: 5px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal b2b-custom-form">
+                        <div class="card-body p-0">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="status_date">Last Status Change Date</label>
+                                        <input type="text" class="form-control" name="status_date" id="status_date"  placeholder="Select">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="cloud_id">Cloud ID</label>
+                                        <input type="text" name="cloud_id" id= "cloud_id" class="form-control" placeholder="Cloud id">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="ticket_id">Ticket ID</label>
+                                        <input type="text" name="ticket_id" id= "ticket_id" class="form-control" placeholder="Ticket id">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="bs_code">BS Code</label>
+                                        <input type="text" name="bs_code" id= "bs_code" class="form-control" placeholder="BS Code">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="company_name">Company Name</label>
+                                        <input type="text" name="company_name" id= "company_name" class="form-control" placeholder="Company Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="vts_sim">VTS Mobile Number</label>
+                                        <input type="number" name="vts_sim" id= "vts_sim" class="form-control" placeholder="VTS SIM">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="sim_kit">SIM Kit</label>
+                                        <input type="text" name="sim_kit" id= "sim_kit" class="form-control" placeholder="SIM Kit">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="pack_name">Pack Name</label>
+                                        <input type="text" name="pack_name" id= "pack_name" class="form-control" placeholder="Pack Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="base_price">Base Price (excluding VAT,SD,SC)</label>
+                                        <input type="text" name="base_price" id= "base_price" class="form-control" placeholder="Base price">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="mrp">MRP</label>
+                                        <input type="text" name="mrp" id= "mrp" class="form-control" placeholder="MRP">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="alt_cont_num">Alternative Contact No.</label>
+                                        <input type="text" name="alt_cont_num" id= "alt_cont_num" class="form-control" placeholder="Alt. Contact Number">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="kcp_name">KCP Name</label>
+                                        <input type="text" name="kcp_name" id= "kcp_name" class="form-control" placeholder="KCP Name">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="kcp_contact">KCP Contact Number</label>
+                                        <input type="text" name="kcp_contact" id= "kcp_contact" class="form-control" placeholder="KCP Contact">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="kcp_email">KCP Email</label>
+                                        <input type="text" name="kcp_email" id= "kcp_email" class="form-control" placeholder="KCP Email">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="support_partner">Support Partner Name</label>
+                                        <input type="text" name="support_partner" id= "support_partner" class="form-control" placeholder="Support Partner">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="product_type">Product Type</label>
+                                        <input type="text" name="product_type" id= "product_type" class="form-control" placeholder="Product Type">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="aud_auth_number">Audio Listen in Authorized Number</label>
+                                        <input type="text" name="aud_auth_number" id= "aud_auth_number" class="form-control" placeholder="Audio Listen in Authorized Number">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-custom-dark-blue float-left mr-2">Close</button>
+                    <%--                    <button type="submit" class="btn b2b-submit-btn-base btn-outline-danger float-left mr-2">Delete</button>--%>
+<%--                    <button type="submit" class="btn btn-custom-dark-blue" id="orderSuccess">Add New Order</button>--%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- End Details View Modal -->
 
     <div class="modal left fade" id="newOrderEntry" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -310,7 +461,7 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-custom-dark-blue float-left mr-2">Close</button>
 <%--                    <button type="submit" class="btn b2b-submit-btn-base btn-outline-danger float-left mr-2">Delete</button>--%>
-                    <button type="submit" class="btn btn-custom-dark-blue">Add New Order</button>
+                    <button type="submit" class="btn btn-custom-dark-blue" id="orderSuccess">Add New Order</button>
                 </div>
             </div>
         </div>
@@ -388,8 +539,57 @@
                 </div>
                 <div class="modal-footer">
 <%--                    <button type="submit" class="btn b2b-submit-btn-base btn-outline-primary float-left">close</button>--%>
-                    <button type="submit" class="btn btn-custom-grey">Update</button>
+                    <button type="submit" class="btn btn-custom-grey" id="successmodal">Update</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="statusSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+<%--                <div class="modal-header">--%>
+<%--                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>--%>
+<%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+<%--                        <span aria-hidden="true">&times;</span>--%>
+<%--                    </button>--%>
+<%--                </div>--%>
+                <div class="modal-body text-center" style="font-size: 18px">
+                   Status updated <br>
+                    Successfully<br>
+                    <button type="button" class="btn btn-secondary" style="width: 247px" data-dismiss="modal">Close</button>
+                </div>
+<%--                <div class="modal-footer ">--%>
+<%--&lt;%&ndash;                    <button type="button" class="btn btn-secondary" style="width: 247px" data-dismiss="modal">Close</button>&ndash;%&gt;--%>
+<%--                </div>--%>
+            </div>
+        </div>
+    </div>
+
+<!-- Order Success Modal -->
+    <div class="modal fade" id="orderSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <%--                <div class="modal-header">--%>
+                <%--                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>--%>
+                <%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+                <%--                        <span aria-hidden="true">&times;</span>--%>
+                <%--                    </button>--%>
+                <%--                </div>--%>
+                <div class="modal-body text-center" >
+                  <p style="font-size: 20px;">New Order Added Successfully.</p>
+                   <p style="font-size: 14px;">"Kite N Co" is emailed.</p>
+                    <p style="font-size: 14px;">40 rows of devices are added</p>
+
+                    <button type="button" class="btn btn-secondary" style="width: 247px" data-dismiss="modal">Close</button>
+                </div>
+                <%--                <div class="modal-footer ">--%>
+                <%--&lt;%&ndash;                    <button type="button" class="btn btn-secondary" style="width: 247px" data-dismiss="modal">Close</button>&ndash;%&gt;--%>
+                <%--                </div>--%>
             </div>
         </div>
     </div>
@@ -477,6 +677,27 @@
     });
 </script>
 
+<script>
+    $(document).ready(function() {
+        $('#successmodal').click(function(e) {
+            // alert(1);
+            // $('#vehicleDetails').modal('hide');
+            $("#statusSuccessModal").modal("show");
+            $("#changeStatusModal").modal("hide");
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#orderSuccess').click(function(e) {
+            // alert(1);
+            // $('#vehicleDetails').modal('hide');
+            $("#orderSuccessModal").modal("show");
+            $("#newOrderEntry").modal("hide");
+        });
+    });
+</script>
 </body>
 
 </html>
