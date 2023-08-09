@@ -12,7 +12,7 @@ public class OrderController {
     public ModelAndView showOrderListPage(ModelMap model) {
         model.addAttribute("title", "Order List");
         model.addAttribute("menu", "Order List");
-        return new ModelAndView("iot-devices/vts/map/map");
+        return new ModelAndView("order-management/order-list");
 
     }
 

@@ -203,7 +203,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/order-Management" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/order-list" class="nav-link">
                         <i class="nav-icon fa fa-car"></i>
                         <p>Order Management</p>
                     </a>
