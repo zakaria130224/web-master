@@ -180,6 +180,7 @@
                                             <div class="table-responsive">
                                                 <table class="table" id="dataTableMaintenance">
                                                     <thead class="b2b-custom-boder">
+                                                    <th>Cloud ID</th>
                                                     <th>Ticket No</th>
                                                     <th>Date</th>
                                                     <th>VTS SIM</th>
@@ -195,13 +196,13 @@
                                                     </thead>
                                                     <tbody>
                                                     <tr>
+                                                        <td>324244</td>
                                                         <td>
 <%--                                                            <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>--%>
 <%--                                                            <div class="b2b-list-block">--%>
 <%--                                                                <h5 class="card-title black-30 font-16 b2b-font-weight-500">Light Demo</h5>--%>
 <%--                                                                <p class="card-text black-50 font-12 b2b-font-weight-700">CSD4345354345t</p>--%>
 <%--                                                            </div>--%>
-
                                                         <a data-target="#detailsOrderView" data-toggle="modal" class="MainNavText" id="MainNavHelp"
                                                          href="#detailsOrderView">82093402999</a>
                                                         </td>
@@ -426,34 +427,23 @@
 <%--                                </div>--%>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="ticket_number">Ticket Number</label>
+                                        <label for="ticket_number">CHT Ticket Number</label>
                                         <input type="text" class="form-control" name="ticket_number" id="ticket_number"  placeholder="Select">
                                     </div>
                                 </div>
-<%--                                <div class="col-md-6">--%>
-<%--                                    <div class="form-group">--%>
-<%--                                        <label for="quantity">Expense Unit Price (BDT)</label>--%>
-<%--                                        <input type="text" class="form-control" id="quantity_d" placeholder="Type">--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="col-md-6">--%>
-<%--                                    <div class="form-group">--%>
-<%--                                        <label for="cost">Total Price (BDT)</label>--%>
-<%--                                        <input type="text" class="form-control" id="cost_d" placeholder="Type">--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
+
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Upload File(.xlxs)</label>
                                         <input type="file" class="form-control" id="upload_file" placeholder="Uploaded file have to be less than 10MB">
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="user_password">User Password</label>
-                                        <input type="password" name="user_password" id= "user_password" class="form-control" placeholder="Password">
-                                    </div>
-                                </div>
+<%--                                <div class="col-md-12">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="user_password">User Password</label>--%>
+<%--                                        <input type="password" name="user_password" id= "user_password" class="form-control" placeholder="Password">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
                             </div>
                         </div>
                     </form>
