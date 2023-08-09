@@ -477,3 +477,143 @@ div#map {
 .tabs_bar:hover {
   background: #d9ebf8;
 }
+
+.loader_body {
+  --action-primary-color: rgba(0,159,227,1);
+  --alert-watched-color: rgb(180, 13, 18);
+  --warning-new-color: rgb(68, 129, 10);
+}
+
+.loader_body {
+  align-items: center;
+  -webkit-align-items: center;
+  background-color: rgba(0,0,0,0.8);
+  box-sizing: border-box;
+  display: none;
+  display: flex;
+  font-size: 16px;
+  justify-content: center;
+  -webkit-justify-content: center;
+  height: 100vh;
+  width: 100%;
+  z-index: 1122221111;
+  position: fixed;
+}
+
+.large-indicator {
+  display: flex;
+  display: -webkit-flex;
+}
+
+.large-indicator div {
+  height: 2em;
+  margin-right: 1em;
+  width: 2em;
+}
+
+.large-indicator div {
+  animation-duration: 0.9s, 2.7s;
+  -webkit-animation-duration: 0.9s, 2.7s;
+  animation-name: blink, rainbow;
+  -webkit-animation-name: blink, rainbow;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+}
+
+.large-indicator div:nth-of-type(2) {
+  animation-delay: 0.3s;
+  -webkit-animation-delay: 0.3s;
+}
+
+.large-indicator div:nth-of-type(3) {
+  animation-delay: 0.6s;
+  -webkit-animation-delay: 0.6s;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+
+  33% {
+    opacity: 1;
+  }
+
+  66% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+
+  33% {
+    opacity: 1;
+  }
+
+  66% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    background-color: var(--action-primary-color);
+  }
+
+  33% {
+    background-color: var(--action-primary-color);
+  }
+
+  33.5% {
+    background-color: var(--warning-new-color);
+  }
+
+  66.5% {
+    background-color: var(--warning-new-color);
+  }
+
+  67% {
+    background-color: var(--alert-watched-color);
+  }
+
+  100% {
+    background-color: var(--alert-watched-color);
+  }
+}
+
+@-webkit-keyframes rainbow {
+  0% {
+    background-color: var(--action-primary-color);
+  }
+
+  33% {
+    background-color: var(--action-primary-color);
+  }
+
+  33.5% {
+    background-color: var(--warning-new-color);
+  }
+
+  66.5% {
+    background-color: var(--warning-new-color);
+  }
+
+  67% {
+    background-color: var(--alert-watched-color);
+  }
+
+  100% {
+    background-color: var(--alert-watched-color);
+  }
+}
