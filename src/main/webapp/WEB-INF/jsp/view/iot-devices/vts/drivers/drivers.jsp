@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <spring:eval expression="@environment.getProperty('app.name')" var="appName"/>
 <spring:eval expression="@environment.getProperty('app.domain_url')" var="domain_url"/>
@@ -17,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>VTS</title>
 
+    <input type="hidden" id="domain_url">
     <jsp:include page="./../../../../partial_new/header-link.jsp"></jsp:include>
 
     <style>
@@ -126,10 +128,9 @@
                                                     <th>License Number</th>
                                                     <th>Joined Date</th>
                                                     <th>Status</th>
-                                                    <th>Actions</th>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
+                                                    <%--<tr>
                                                         <td>
                                                             <div class="w-100">
                                                                 <div class="float-left mr-2" style="border-radius: 50px; height: 40px; width: 40px;">
@@ -216,7 +217,7 @@
                                                         <td>
                                                             <button class="btn b2b-btn-submit-blue-small">Actions <i class="fa fa-plus-circle"></i></button>
                                                         </td>
-                                                    </tr>
+                                                    </tr>--%>
 
                                                     </tbody>
                                                 </table>
@@ -261,17 +262,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.css">
 
 <script>
+    const base_url = $("#domain_url").val() + "/";
     $( document ).ready(function() {
         $(".select2").select2();
-        $("#dataTable").dataTable({
-            paging: true,
-            lengthChange: false,
-            searching: false,
-            ordering: true,
-            info: true,
-            autoWidth: false,
-            responsive: true,
-        });
 
         //Date range as a button
         $('#daterange-btn').daterangepicker(
@@ -318,69 +311,43 @@
 
     function initUserTable(data) {
         "use strict";
-        if ($.fn.dataTable.isDataTable('#tblChecker')) {
-            $('#tblChecker').DataTable().clear();
-            $('#tblChecker').DataTable().destroy();
+        if ($.fn.dataTable.isDataTable('#dataTable')) {
+            $('#dataTable').DataTable().clear();
+            $('#dataTable').DataTable().destroy();
         }
-        $('#tblChecker')
-        let dataTable = $('#tblChecker').DataTable({
-            dom: 'Bfrtip',
+        $('#dataTable')
+        let dataTable = $('#dataTable').DataTable({
+            paging: true,
+            lengthChange: false,
+            searching: false,
+            ordering: true,
+            info: true,
+            autoWidth: false,
+            responsive: true,
             data: data,
-            buttons: [
-                'copy', 'csv', 'excel',
-                {
-                    extend: 'pdfHtml5',
-                    orientation: 'landscape',
-                    pageSize: 'A4',
-                    exportOptions: {
-                        columns: [0,1,2,3,4,5,6,7,8]
-                    }
-                },
-                'print'
-            ],
             order: [[3, 'desc']],
             columns: [
-                {data: 'fromAccount'},
-                {data: 'toAccount'},
-                {data: 'txnType'},
-                {data: 'txnTime',
+                {data: 'name'},
+                {data: 'mobile_number'},
+                {data: 'license_no'},
+                {data: 'join_date',
                     autowidth: true,
                     render: function (data, type, full, row) {
                         let date_str = new Date(data);
                         return type === 'sort' ? data:date_str.toLocaleString();
                     }
                 },
-                {data: 'amount'},
-                {data: 'description'},
-                {data: 'status',
+                {data: 'is_active',
                     autowidth: true,
                     render: function (data, type, full, row) {
-                        if (data == 0) {
-                            return 'Pending';
-                        } else if(data == 1){
-                            return 'Approved';
-                        }else if(data== 2){
-                            return 'Rejected';
-                        }else if(data == 3){
-                            return 'failed';
-                        }else if(data== 4){
-                            return 'Exception';
+                        if (data == true) {
+                            return '<span class="right badge badge-info">In Service</span>';
+                        } else if(data == false){
+                            return '<span class="right badge badge-warning">Out of Service</span>';
+                        }else{
+                            return '<span class="right badge badge-danger">N/A</span>';
                         }
-
                     }},
-                {data: 'checkerName'},
-                {data: 'makerName'},
-                {
-                    data: 'status',
-                    autowidth: true,
-                    render: function (data, type, full, row) {
-                        if (data == 0) {
-                            return '<button class="btn btn-info btn-sm" id="active_btn" onclick="transactionApproval(this)">Approve</button>  ' +
-                                '<button class="btn btn-info btn-sm" id="reject_btn" data-toggle="modal" data-target="#my-modal" onclick="transactionReject(this)">Reject</button>';
-                        } else
-                            return '';
-                    }
-                }
             ]
         });
     }

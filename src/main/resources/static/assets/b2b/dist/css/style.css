@@ -479,9 +479,9 @@ div#map {
 }
 
 .loader_body {
-  --action-primary-color: rgba(0,159,227,1);
-  --alert-watched-color: rgb(180, 13, 18);
-  --warning-new-color: rgb(68, 129, 10);
+  --action-primary-color: #00B4E5;
+  --alert-watched-color: #FFF;
+  --warning-new-color: #000F3C;
 }
 
 .loader_body {
