@@ -13,7 +13,7 @@
   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" data-enable-remember="true" data-auto-collapse-size="4048"
-         href="#" role="button"><i class="fas fa-bars"></i></a>
+         href="#" role="button"><i class="fa fa-bars"></i></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
       <strong><a href="#" class="nav-link">Dashboard</a></strong>
@@ -40,7 +40,7 @@
     </li>
     <%--<li class="nav-item">
       <a class="nav-link" href="${pageContext.request.contextPath}/logout">
-        <i class="fas fa-sign-out-alt"></i>
+        <i class="fa fa-sign-out-alt"></i>
       </a>
     </li>--%>
     <li class="nav-item dropdown">
@@ -51,17 +51,17 @@
         <span class="dropdown-item dropdown-header">15 Notifications</span>
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">
-          <i class="fas fa-envelope mr-2"></i> 4 new messages
+          <i class="fa fa-envelope mr-2"></i> 4 new messages
           <span class="float-right text-muted text-sm">3 mins</span>
         </a>
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">
-          <i class="fas fa-users mr-2"></i> 8 friend requests
+          <i class="fa fa-users mr-2"></i> 8 friend requests
           <span class="float-right text-muted text-sm">12 hours</span>
         </a>
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">
-          <i class="fas fa-file mr-2"></i> 3 new reports
+          <i class="fa fa-file mr-2"></i> 3 new reports
           <span class="float-right text-muted text-sm">2 days</span>
         </a>
         <div class="dropdown-divider"></div>
@@ -74,7 +74,7 @@
 <%--<nav class="ecommerce-navbar navbar-expand navbar-light bg-white justify-content-between">
   <div class="container-small d-flex flex-between-center" data-navbar="data-navbar">
     <div class="dropdown">
-      <button class="btn text-900 ps-0 pe-5 text-nowrap dropdown-toggle dropdown-caret-none" data-category-btn="data-category-btn" data-bs-toggle="dropdown"><span class="fas fa-bars me-2"></span>Category</button>
+      <button class="btn text-900 ps-0 pe-5 text-nowrap dropdown-toggle dropdown-caret-none" data-category-btn="data-category-btn" data-bs-toggle="dropdown"><span class="fa fa-bars me-2"></span>Category</button>
       <div class="dropdown-menu border py-0 category-dropdown-menu">
         <div class="card border-0 scrollbar" style="max-height: 657px;">
           <div class="card-body p-6 pb-3">
@@ -151,7 +151,7 @@
                 </div>
               </div>
             </div>
-            <div class="text-center border-top pt-3"><a class="fw-bold" href="#!">See all Categories<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a></div>
+            <div class="text-center border-top pt-3"><a class="fw-bold" href="#!">See all Categories<span class="fa fa-angle-right ms-1" data-fa-transform="down-1"></span></a></div>
           </div>
         </div>
       </div>

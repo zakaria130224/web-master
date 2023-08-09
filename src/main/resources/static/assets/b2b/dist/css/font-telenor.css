@@ -1,0 +1,11 @@
+@font-face {
+    font-family: "telonor-regular";
+    src: url("../img/fonts/telenormedium.ttf");
+}
+@font-face {
+    font-family: "telonor-bold";
+    src: url("../img/fonts/telenorbold.ttf");
+}
+*{
+    font-family: Telenor, "telonor-regular", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
