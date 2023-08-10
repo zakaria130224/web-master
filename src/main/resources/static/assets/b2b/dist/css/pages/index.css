@@ -1,10 +1,10 @@
 @font-face {
   font-family: "telonor-regular";
-  src: url("../../img/fonts/telenor-regular.otf");
+  src: url("../../img/fonts/telenormedium.ttf");
 }
 @font-face {
   font-family: "telonor-bold";
-  src: url("../../img/fonts/telenor_bold.otf");
+  src: url("../../img/fonts/telenorbold.ttf");
 }
 
 * {
@@ -16,7 +16,7 @@
 }
 body {
   background: #f4f4f4;
-  font-family: "telonor-regular";
+  font-family: Telenor;
 }
 
 ul {

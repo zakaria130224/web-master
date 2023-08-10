@@ -10,3 +10,6 @@ table.dataTable td {
     font-weight: 500;
     color: #232026;
 }
+table.dataTable tbody>tr.selected, table.dataTable tbody>tr>.selected {
+    background-color: #E6FAFF;
+}

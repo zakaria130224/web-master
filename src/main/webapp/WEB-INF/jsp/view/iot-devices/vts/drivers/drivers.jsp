@@ -258,6 +258,7 @@
 
 <script>
     const base_url = $("#domain_url").val() + "/";
+    let dataTable;
     $( document ).ready(function() {
         $(".select2").select2();
 
@@ -310,8 +311,7 @@
             $('#dataTable').DataTable().clear();
             $('#dataTable').DataTable().destroy();
         }
-        $('#dataTable')
-        let dataTable = $('#dataTable').DataTable({
+        dataTable = $('#dataTable').DataTable({
             paging: true,
             lengthChange: false,
             searching: false,
@@ -321,6 +321,7 @@
             responsive: true,
             data: data,
             order: [[3, 'desc']],
+            select:true,
             columns: [
                 {data: 'name'},
                 {data: 'mobile_number'},
@@ -347,6 +348,20 @@
         });
 
     }
+
+    dataTable.on('click', 'tbody tr', (e) => {
+        let classList = e.currentTarget.classList;
+
+        if (classList.contains('selected')) {
+            classList.remove('selected');
+        }
+        else {
+            dataTable.api().rows('.selected').nodes().each((row) => row.classList.remove('selected'));
+            classList.add('selected');
+            console.log("data::"+ dataTable.rows({selected:  true}).data())
+            console.log("data::"+ dataTable.rows({selected:  true}).data()[0])
+        }
+    } );
 </script>
 
 </body>

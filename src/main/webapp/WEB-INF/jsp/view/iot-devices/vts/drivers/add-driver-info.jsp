@@ -57,7 +57,7 @@
                     <div class="col-sm-6">
                         <h5>Add Drivers Info</h5>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/vts/driver-list">Drivers </a></li>
+                            <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/vts/drivers-list">Drivers </a></li>
                             <li class="breadcrumb-item active">Add New Driver</li>
                         </ol>
                     </div>
@@ -431,12 +431,16 @@
         $("#driver-license-form-card").addClass("active-form");
         $("#basic_tab_btn").addClass("active");
         $("#license_tab_btn").addClass("active");
+        $("#additional_tab_btn").removeClass("active");
     }
     function switchBasicForm(){
         $("#driver-basic-form-card").addClass("active-form");
         $("#driver-additional-form-card").removeClass("active-form");
         $("#driver-license-form-card").removeClass("active-form");
         $("#basic_tab_btn").addClass("active");
+        $("#basic_tab_btn").addClass("active");
+        $("#license_tab_btn").removeClass("active");
+        $("#additional_tab_btn").removeClass("active");
     }
     function switchAdditionalForm(){
         $("#driver-basic-form-card").removeClass("active-form");
@@ -450,6 +454,9 @@
         $("#driver-basic-form-card").removeClass("active-form");
         $("#driver-additional-form-card").removeClass("active-form");
         $("#driver-license-form-card").removeClass("active-form");
+        $("#basic_tab_btn").addClass("active");
+        $("#license_tab_btn").addClass("active");
+        $("#additional_tab_btn").addClass("active");
     }
 
 </script>
