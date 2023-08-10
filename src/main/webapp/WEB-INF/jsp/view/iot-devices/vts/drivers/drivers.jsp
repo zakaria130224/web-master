@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <spring:eval expression="@environment.getProperty('app.name')" var="appName"/>
 <spring:eval expression="@environment.getProperty('app.domain_url')" var="domain_url"/>
@@ -17,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>VTS</title>
 
+    <input type="hidden" id="domain_url">
     <jsp:include page="./../../../../partial_new/header-link.jsp"></jsp:include>
 
     <style>
@@ -39,6 +41,15 @@
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+
+    <div class="loader_body">
+        <div class="large-indicator">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <jsp:include page="./../../../../partial_new/nevbar.jsp"></jsp:include>
     <!-- /.navbar -->
@@ -117,10 +128,9 @@
                                                     <th>License Number</th>
                                                     <th>Joined Date</th>
                                                     <th>Status</th>
-                                                    <th>Actions</th>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
+                                                    <%--<tr>
                                                         <td>
                                                             <div class="w-100">
                                                                 <div class="float-left mr-2" style="border-radius: 50px; height: 40px; width: 40px;">
@@ -207,7 +217,7 @@
                                                         <td>
                                                             <button class="btn b2b-btn-submit-blue-small">Actions <i class="fa fa-plus-circle"></i></button>
                                                         </td>
-                                                    </tr>
+                                                    </tr>--%>
 
                                                     </tbody>
                                                 </table>
@@ -252,17 +262,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.css">
 
 <script>
+    const base_url = $("#domain_url").val() + "/";
     $( document ).ready(function() {
         $(".select2").select2();
-        $("#dataTable").dataTable({
-            paging: true,
-            lengthChange: false,
-            searching: false,
-            ordering: true,
-            info: true,
-            autoWidth: false,
-            responsive: true,
-        });
 
         //Date range as a button
         $('#daterange-btn').daterangepicker(
@@ -283,7 +285,72 @@
                 $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
             }
         );
+
+        getDriversData();
+
+
     });
+
+    function getDriversData() {
+        $(".loader_body").show();
+
+        $.ajax({
+            type: 'get',
+            url: base_url + "api/web/VTS/driver/listDT",
+            success: function (data) {
+                console.log(data.data);
+                $(".loader_body").hide();
+                initUserTable(data.data);
+            },
+            error: function (error) {
+                $(".loader_body").hide();
+                console.log(error);
+            }
+        });
+    }
+
+    function initUserTable(data) {
+        "use strict";
+        if ($.fn.dataTable.isDataTable('#dataTable')) {
+            $('#dataTable').DataTable().clear();
+            $('#dataTable').DataTable().destroy();
+        }
+        $('#dataTable')
+        let dataTable = $('#dataTable').DataTable({
+            paging: true,
+            lengthChange: false,
+            searching: false,
+            ordering: true,
+            info: true,
+            autoWidth: false,
+            responsive: true,
+            data: data,
+            order: [[3, 'desc']],
+            columns: [
+                {data: 'name'},
+                {data: 'mobile_number'},
+                {data: 'license_no'},
+                {data: 'join_date',
+                    autowidth: true,
+                    render: function (data, type, full, row) {
+                        let date_str = new Date(data);
+                        return type === 'sort' ? data:date_str.toLocaleString();
+                    }
+                },
+                {data: 'is_active',
+                    autowidth: true,
+                    render: function (data, type, full, row) {
+                        if (data == true) {
+                            return '<span class="right badge badge-info">In Service</span>';
+                        } else if(data == false){
+                            return '<span class="right badge badge-warning">Out of Service</span>';
+                        }else{
+                            return '<span class="right badge badge-danger">N/A</span>';
+                        }
+                    }},
+            ]
+        });
+    }
 </script>
 
 </body>

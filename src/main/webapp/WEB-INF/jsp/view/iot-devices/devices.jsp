@@ -31,6 +31,14 @@
             font-weight: 700;
             font-size: 18px;
         }
+        h6{
+            color: #181C32;
+            font-family: Telenor;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 28px; /* 140% */
+        }
 
     </style>
 </head>
@@ -51,40 +59,25 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
-                <div class="row mx-1 py-2 mb-1 " style="background-color: white; border-radius: 8px;">
+                <div class="row py-2 mb-1 " style="background-color: white; border-radius: 8px; margin: 1px">
                     <div class="col-sm-3 col-md-2 col-lg-1">
                         <div class="tabs_bar">
-                            <span class="mt-5">Tab</span>
+                            <span class="mt-5">General</span>
                         </div>
                     </div>
                     <div class="col-sm-3 col-md-2 col-lg-1">
                         <div class="tabs_bar">
-                            <span class="mt-5">Tab</span>
+                            <span class="mt-5">VTS</span>
                         </div>
                     </div>
                     <div class="col-sm-3 col-md-2 col-lg-1">
                         <div class="tabs_bar">
-                            <span class="mt-5">Tab</span>
+                            <span class="mt-5">OBD</span>
                         </div>
                     </div>
                     <div class="col-sm-3 col-md-2 col-lg-1">
                         <div class="tabs_bar">
-                            <span class="mt-5">Tab</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-md-2 col-lg-1">
-                        <div class="tabs_bar">
-                            <span class="mt-5">Tab</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-md-2 col-lg-1">
-                        <div class="tabs_bar">
-                            <span class="mt-5">Tab</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-md-2 col-lg-1">
-                        <div class="tabs_bar">
-                            <span class="mt-5">Tab</span>
+                            <span class="mt-5">Product2</span>
                         </div>
                     </div>
                 </div>
@@ -110,11 +103,11 @@
                                           <i class="fa-file-arrow-down"></i>
                                           Trip Summary
                                         </button> -->
-                                        <button type="button" class="btn custom-button mr-2" onclick="window.location.href = '/add_device';">
+                                        <button type="button" class="btn b2b-btn-submit-blue-small mr-2" onclick="window.location.href = '/add_device';">
                                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                             &nbsp;Add Device
                                         </button>
-                                        <button type="button" class="btn custom-button">
+                                        <button type="button" class="btn b2b-btn-submit-blue-small">
                                             <i class="fa fa-gear"></i>
                                             &nbsp;Settings
                                         </button>
@@ -135,12 +128,12 @@
                                 <div class="row">
 
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/map">
-                                        <div class="info-box b2b-bg-info">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/map">
+                                        <div class="info-box b2b-bg-info p-15p">
 <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/map002.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/map002.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Map</span>
                                                 <span class="progress-description">
@@ -155,13 +148,13 @@
 
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/map-vehicle-track">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/map-vehicle-track">
 
-                                        <div class="info-box b2b-bg-info">
+                                        <div class="info-box b2b-bg-info p-15p">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/abs015.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/abs015.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">History</span>
                                                 <span class="progress-description">
@@ -175,12 +168,12 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/alert">
-                                        <div class="info-box b2b-bg-info">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/alert">
+                                        <div class="info-box b2b-bg-info p-15p">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gen007.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/gen007.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Alerts</span>
                                                 <span class="progress-description">
@@ -194,12 +187,12 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/active_report">
-                                        <div class="info-box b2b-bg-info">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/active_report">
+                                        <div class="info-box b2b-bg-info p-15p">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gra001.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/gra001.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Reports</span>
                                                 <span class="progress-description">
@@ -212,33 +205,35 @@
                                         </a>
                                     </div>
                                     <!-- /.col -->
-                                    <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/driving_score">
-                                        <div class="info-box b2b-bg-info">
-                                            <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <a style="color: inherit" href="${pageContext.request.contextPath}/dashboard">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gra006.png"
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/driving_score">
+                                            <div class="info-box b2b-bg-info p-15p">
+                                                <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
+
+                                                <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/gra006.svg"
                                                              alt="User Image"/> </span>
-                                                <span class="info-box-b2b">Driving Score</span>
-                                                <span class="progress-description">
+                                                    <span class="info-box-b2b">Driving Score</span>
+                                                    <span class="progress-description">
                                                     Score based on driving parameters
                                                 </span>
+                                                </div>
+                                                <!-- /.info-box-content -->
                                             </div>
-                                            <!-- /.info-box-content -->
-                                        </div>
                                         </a>
                                         <!-- /.info-box -->
                                     </div>
+
+
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/trip-list">
-                                        <div class="info-box b2b-bg-info">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/trip-list">
+                                        <div class="info-box b2b-bg-info p-15p">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/map003.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/map003.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Trips</span>
                                                 <span class="progress-description">
@@ -252,12 +247,12 @@
                                     </div>
 
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/vts-health">
-                                        <div class="info-box b2b-bg-info">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/vts-health">
+                                        <div class="info-box b2b-bg-info p-15p">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/med001.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/med001.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Health</span>
                                                 <span class="progress-description">
@@ -281,12 +276,12 @@
                                 <%-- Logs Start --%>
                                 <div class="row">
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/fuel-log">
-                                        <div class="info-box b2b-bg-info">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/fuel-log">
+                                        <div class="info-box b2b-bg-info p-15p">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/abs016.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/abs016.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Fuel Log</span>
                                                 <span class="progress-description">
@@ -300,12 +295,12 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/expense-list">
-                                        <div class="info-box b2b-bg-info">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/expense-list">
+                                        <div class="info-box b2b-bg-info p-15p">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/fin003.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/fin003.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Expense</span>
                                                 <span class="progress-description">
@@ -319,12 +314,12 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/maintenance-log">
-                                        <div class="info-box b2b-bg-info">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/maintenance-log">
+                                        <div class="info-box b2b-bg-info p-15p">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/cod001.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/cod001.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Maintenance</span>
                                                 <span class="progress-description">
@@ -339,12 +334,12 @@
                                     <!-- /.col -->
 
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/papers">
-                                        <div class="info-box b2b-bg-info">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/papers">
+                                        <div class="info-box b2b-bg-info p-15p">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gen005.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/gen005.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Papers</span>
                                                 <span class="progress-description">
@@ -357,15 +352,15 @@
                                         <!-- /.info-box -->
                                     </div>
 
-                                    <!-- /.col -->
+                                   <%-- <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
 
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/requisitions">
-                                        <div class="info-box b2b-bg-info">
-                                            <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/requisitions">
+                                        <div class="info-box b2b-bg-info p-15p">
+                                            &lt;%&ndash;                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>&ndash;%&gt;
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gen037.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/gen037.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Requisition</span>
                                                 <span class="progress-description">
@@ -376,7 +371,7 @@
                                         </div>
                                         </a>
                                         <!-- /.info-box -->
-                                    </div>
+                                    </div>--%>
                                     <!-- /.col -->
 
                                 </div>
@@ -390,12 +385,12 @@
 
                                 <div class="row">
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/vehicle-list">
-                                        <div class="info-box b2b-bg-info">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/vehicle-list">
+                                        <div class="info-box b2b-bg-info p-15p">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/teh001.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/teh001.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Vehicles & Trackers</span>
                                                 <span class="progress-description">
@@ -409,12 +404,12 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/drivers-list">
-                                        <div class="info-box b2b-bg-info">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/drivers-list">
+                                        <div class="info-box b2b-bg-info p-15p">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/com014.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/com014.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Driver</span>
                                                 <span class="progress-description">
@@ -428,12 +423,12 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/map">
-                                        <div class="info-box b2b-bg-info">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/map">
+                                        <div class="info-box b2b-bg-info p-15p">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/map008.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/map008.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Geo Fence</span>
                                                 <span class="progress-description">
@@ -447,12 +442,12 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-3 col-sm-6 col-12">
-                                        <a style="color: inherit" href="${pageContext.request.contextPath}/vts/alert">
-                                        <div class="info-box b2b-bg-info">
+                                        <a style="color: inherit" class="" href="${pageContext.request.contextPath}/vts/alert">
+                                        <div class="info-box b2b-bg-info p-15p">
                                             <%--                                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>--%>
 
-                                            <div class="info-box-content">
-                                                <span > <img src="${pageContext.request.contextPath}/assets/v2/dist/img/gen019.png"
+                                            <div class="info-box-content info-box-devices">
+                                                <span > <img src="${pageContext.request.contextPath}/assets/b2b/dist/img/gen019.svg"
                                                              alt="User Image"/> </span>
                                                 <span class="info-box-b2b">Alert Settings</span>
                                                 <span class="progress-description">

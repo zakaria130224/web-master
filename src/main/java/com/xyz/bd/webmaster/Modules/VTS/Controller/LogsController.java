@@ -14,10 +14,4 @@ public class LogsController {
         model.addAttribute("menu", "maintenance");
         return new ModelAndView("iot-devices/vts/logs/vts-maintenance-log");
     }
-    @RequestMapping(value="/vts/fuel-log", method = RequestMethod.GET)
-    public ModelAndView showVtsFuelLogView(ModelMap model){
-        model.addAttribute("title", "maintenance");
-        model.addAttribute("menu", "maintenance");
-        return new ModelAndView("iot-devices/vts/logs/vts-fuel-log");
-    }
 }
