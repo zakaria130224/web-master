@@ -18,7 +18,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>VTS</title>
 
-    <input type="hidden" id="domain_url">
     <jsp:include page="./../../../../partial_new/header-link.jsp"></jsp:include>
 
     <style>
@@ -42,15 +41,10 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
-    <div class="loader_body">
-        <div class="large-indicator">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
+
 
     <!-- Navbar -->
+    <jsp:include page="./../../../../partial_new/loader.jsp"></jsp:include>
     <jsp:include page="./../../../../partial_new/nevbar.jsp"></jsp:include>
     <!-- /.navbar -->
 
@@ -68,8 +62,13 @@
                         <h5>Vehicle List</h5>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Devices </a></li>
-                            <li class="breadcrumb-item active">Vehicle List</li>
+                            <li class="breadcrumb-item active">Driver List</li>
                         </ol>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="float-right">
+                            <a href="${pageContext.request.contextPath}/vts/add-driver-info"class="btn b2b-btn-submit-blue mr-2"><i class="fa fa-plus-circle"></i> Add New Entry</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,11 +87,7 @@
                             <div class="card-body">
                                 <div class="card-head-custom">
                                     <div class="float-left">
-                                        <h3 class="b2b-font-20-500 black-10 float-left">Vehicle Requisitions</h3>
-                                    </div>
-                                    <div class="float-right">
-                                        <a href="${pageContext.request.contextPath}/vts/add-driver-info" class="btn btn-sm btn-custom-white mr-2"><i class="fa fa-plus-circle"></i> Add New Entry</a>
-                                        <button type="submit" class="btn btn-sm btn-custom-blue"><i class="fa fa-download"></i> Export</button>
+                                        <h3 class="b2b-font-20-500 black-10 float-left">Driver List</h3>
                                     </div>
                                 </div>
 
@@ -350,6 +345,7 @@
                     }},
             ]
         });
+
     }
 </script>
 
