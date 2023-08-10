@@ -617,3 +617,28 @@ div#map {
     background-color: var(--alert-watched-color);
   }
 }
+
+#createSrNotification .alert {
+  position: relative;
+  padding: 1.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 12px;
+}
+
+#createSrNotification .alert-danger{
+  background: #F1416C;
+}
+#createSrNotification .alert-success{
+  background: #47BE7D;
+}
+#createSrNotification .alert button{
+  margin-top: 15px;
+}
+
+#driver-basic-form-card, #driver-license-form-card, #driver-additional-form-card{
+  display: none;
+}
+#driver-basic-form-card.active-form, #driver-license-form-card.active-form, #driver-additional-form-card.active-form{
+  display: block;
+}

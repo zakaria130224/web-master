@@ -20,5 +20,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/datatable-custom.css" />
 
+<input type="hidden" id="domain_url">
+
 
 
