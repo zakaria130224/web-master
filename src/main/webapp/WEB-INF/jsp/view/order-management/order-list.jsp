@@ -5,6 +5,9 @@
   Time: 5:22 AM
   To change this template use File | Settings | File Templates.
 --%>
+
+<%--<c:out value="${orders}" />--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <spring:eval expression="@environment.getProperty('app.name')" var="appName"/>
@@ -75,6 +78,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
+
 <div class="wrapper">
     <!-- Navbar -->
     <jsp:include page="./../../partial_new/nevbar.jsp"></jsp:include>
@@ -195,8 +199,8 @@
 
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>324244</td>
+                                                    <c:forEach items="${orders}" var="order">
+                                                        <tr>
                                                         <td>
 <%--                                                            <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>--%>
 <%--                                                            <div class="b2b-list-block">--%>
@@ -204,23 +208,26 @@
 <%--                                                                <p class="card-text black-50 font-12 b2b-font-weight-700">CSD4345354345t</p>--%>
 <%--                                                            </div>--%>
                                                         <a data-target="#detailsOrderView" data-toggle="modal" class="MainNavText" id="MainNavHelp"
-                                                         href="#detailsOrderView">82093402999</a>
+                                                         href="#detailsOrderView">${order.id}</a>
                                                         </td>
-                                                        <td>3rd May, 2023</td>
-                                                        <td>017155812091</td>
-                                                        <td>Basic</td>
-                                                        <td>129210919919123</td>
-                                                        <td>IoT VTS Wired</td>
-                                                        <td>Kite N Co</td>
+
+                                                        <td>${order.msisdn}</td>
+                                                        <td>${order.email}</td>
+                                                            <td>${order.msisdn}</td>
+                                                            <td>${order.email}</td>
+                                                        <td>${order.customer_name}</td>
+                                                        <td>${order.is_paid}</td>
                                                         <td><button type="button" class="btn btn-primary">
                                                             New Order
                                                         </button></td>
-                                                        <td>IoT VTS Wired</td>
+                                                        <td>${order.status}</td>
+                                                        <td>${order.address}</td>
                                                         <td><button class="btn btn-download"><i class="fa fa-download"></i> Download</button></td>
                                                         <td><button type="button" class="btn" style="background-color: #000F3C;color: #F2FCFF" id="changeStatus">
                                                             Change Status
                                                         </button></td>
-                                                    </tr>
+                                                        </tr>
+                                                    </c:forEach>
 
                                                     </tbody>
                                                 </table>
@@ -410,7 +417,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal b2b-custom-form">
+                    <form class="form-horizontal b2b-custom-form" id="dataForm">
                         <div class="card-body p-0">
                             <div class="row">
 <%--                                <div class="col-md-6">--%>
@@ -428,7 +435,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="ticket_number">CHT Ticket Number</label>
-                                        <input type="text" class="form-control" name="ticket_number" id="ticket_number"  placeholder="Select">
+                                        <input type="text" class="form-control" name="msisdn" id="ticket_number"  placeholder="Select">
                                     </div>
                                 </div>
 
@@ -451,7 +458,7 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-custom-dark-blue float-left mr-2">Close</button>
 <%--                    <button type="submit" class="btn b2b-submit-btn-base btn-outline-danger float-left mr-2">Delete</button>--%>
-                    <button type="submit" class="btn btn-custom-dark-blue" id="orderSuccess">Add New Order</button>
+                    <button type="submit" class="btn btn-custom-dark-blue" id="saveBtn">Add New Order</button>
                 </div>
             </div>
         </div>
@@ -599,6 +606,47 @@
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/moment/min/moment.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.css">
+
+<%--<script>--%>
+<%--    $(document).ready(function() {--%>
+<%--        $.ajax({--%>
+<%--            url: '/get-orders', // The URL of your controller endpoint--%>
+<%--            method: 'GET',--%>
+<%--            dataType: 'json',--%>
+<%--            success: function(data) {--%>
+<%--                var tableBody = $('#dataTableMaintenance tbody');--%>
+<%--                $.each(data, function(index, order) {--%>
+<%--                    var row = '<tr>' +--%>
+<%--                        '<td>' + order.id + '</td>' +--%>
+<%--                        '<td>' + order.msisdn + '</td>' +--%>
+<%--                        '<td>' + order.email + '</td>' +--%>
+<%--                        // Add more columns as needed--%>
+<%--                        '</tr>';--%>
+<%--                    tableBody.append(row);--%>
+<%--                });--%>
+<%--            }--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
+<script>
+    $(document).ready(function() {
+        $("#saveBtn").click(function() {
+            var formData = $("#dataForm").serialize();
+            $.ajax({
+                url: "/save-data",
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    alert(response);
+                    $("#myModal").modal("hide");
+                },
+                error: function(xhr) {
+                    alert("Error saving data: " + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 
 <script>
     $( document ).ready(function() {
