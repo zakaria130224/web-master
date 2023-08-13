@@ -333,7 +333,7 @@
                         return type === 'sort' ? data:date_str.toLocaleString();
                     }
                 },
-                {data: 'is_active',
+                {data: 'active',
                     autowidth: true,
                     render: function (data, type, full, row) {
                         if (data == true) {
@@ -360,6 +360,8 @@
             classList.add('selected');
             console.log("data::"+ dataTable.rows({selected:  true}).data())
             console.log("data::"+ dataTable.rows({selected:  true}).data()[0])
+
+           // dataTable.rows({selected:  true}).data()
         }
     } );
 </script>
