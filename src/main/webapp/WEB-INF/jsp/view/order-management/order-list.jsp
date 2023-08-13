@@ -631,6 +631,31 @@
 <script>
     $(document).ready(function() {
         $("#saveBtn").click(function() {
+            var formData = new FormData();
+            formData.append("msisdn", $("#ticket_number").val());
+            formData.append("excelFile", $("#upload_file")[0].files[0]);
+
+            $.ajax({
+                url: "/save-data",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alert(response);
+                },
+                error: function(xhr) {
+                    alert("Error saving data: " + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $("#saveBtn").click(function() {
             var formData = $("#dataForm").serialize();
             $.ajax({
                 url: "/save-data",

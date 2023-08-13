@@ -3,8 +3,8 @@ package com.xyz.bd.webmaster.Modules.VTS.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -47,11 +47,30 @@ public class OrderController {
 //        return orderService.getAllOrder();
 //    }
 
-    @PostMapping("/save-data")
-    @ResponseBody
-    public String saveData(@ModelAttribute OrderModelEntity orderModelEntity) {
-        orderService.saveData(orderModelEntity);
-        return "Data saved successfully!";
-    }
+//    @PostMapping("/save-data")
+//    @ResponseBody
+//    public String saveData(@ModelAttribute OrderModelEntity orderModelEntity) {
+//        orderService.saveData(orderModelEntity);
+//        return "Data saved successfully!";
+//    }
+
+//    @PostMapping("/upload-excel-ajax")
+//    @ResponseBody
+//    public String uploadExcelAjax(@RequestParam("msisdn") String msisdn,
+//                                  @RequestParam("excelFile") MultipartFile excelFile) {
+//        orderService.processExcelAndSaveToDatabase(msisdn, excelFile);
+//        return "Data and file uploaded successfully!";
+//    }
+
+
+        @PostMapping("/save-data")
+        @ResponseBody
+        public String saveData(@RequestParam("msisdn") String msisdn,
+                               @RequestParam("excelFile") MultipartFile excelFile) {
+            orderService.saveData(msisdn, excelFile);
+            return "Data saved successfully!";
+        }
+
+
 
 }
