@@ -245,4 +245,8 @@ public class AppUserService {
     public List<Responsibility> getResponsibilityByUserId(Long usrId) {
         return responsibilityRepository.findAllByUserIdExceptMapped(usrId);
     }
+
+    public List<AppUser> getAllUsersList() {
+        return (List<AppUser>) appUserRepository.findAll();
+    }
 }

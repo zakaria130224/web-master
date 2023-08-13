@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -77,10 +78,15 @@ public class DriverServiceImpl implements DriverService{
             DriversModelEntity newUser = new Gson().fromJson(driverBasicInfo, new TypeToken<DriversModelEntity>() {
             }.getType());
 
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+
+            java.util.Date utilDate = format.parse("newUser.getDob()");
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
             DriversModelEntity driverModelData = new DriversModelEntity();
 
             driverModelData.setName(newUser.getName());
-            driverModelData.setDob(newUser.getDob());
+            driverModelData.setDob(sqlDate);
             driverModelData.setMobile_number(newUser.getMobile_number());
             driverModelData.setEmail(newUser.getEmail());
             driverModelData.setDesignation(newUser.getDesignation());
@@ -99,6 +105,8 @@ public class DriverServiceImpl implements DriverService{
             commonRestResponse.setData(null);
             commonRestResponse.setMessage("Driver Creation request has been Failed");
             LOGGER.error(ex.toString());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
 
         return commonRestResponse;
@@ -241,6 +249,11 @@ public class DriverServiceImpl implements DriverService{
         }
 
         return commonRestResponse;
+    }
+
+    @Override
+    public DriversModelEntity getDriverById(Long id) {
+        return driversRepository.findByDriverId(id);
     }
 
 }

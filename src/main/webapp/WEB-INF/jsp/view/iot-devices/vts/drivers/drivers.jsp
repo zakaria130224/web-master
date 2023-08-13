@@ -294,13 +294,11 @@
             type: 'get',
             url: base_url + "api/web/VTS/driver/listDT",
             success: function (data) {
-                console.log(data.data);
                 $(".loader_body").hide();
                 initUserTable(data.data);
             },
             error: function (error) {
                 $(".loader_body").hide();
-                console.log(error);
             }
         });
     }
@@ -349,7 +347,7 @@
 
     }
 
-    dataTable.on('click', 'tbody tr', (e) => {
+    /*dataTable.on('click', 'tbody tr', (e) => {
         let classList = e.currentTarget.classList;
 
         if (classList.contains('selected')) {
@@ -361,9 +359,21 @@
             console.log("data::"+ dataTable.rows({selected:  true}).data())
             console.log("data::"+ dataTable.rows({selected:  true}).data()[0])
 
-           // dataTable.rows({selected:  true}).data()
+           // dataTable.rows({selected:  true}).data().name
+
+            JSON.parse(dataTable.rows({selected:  true}).data()).name;
         }
+
+        console.log("Data row selected");
+    } );*/
+
+    $('#dataTable tbody').on( 'click', 'tr', function () {
+        console.log(dataTable.row( this ).data());
+
     } );
+
+
+
 </script>
 
 </body>

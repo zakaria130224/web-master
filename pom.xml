@@ -10,8 +10,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.xyz.bd</groupId>
-    <artifactId>web-master</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>store-front</artifactId>
+    <version>0.0.1</version>
     <packaging>war</packaging>
     <name>web-master</name>
     <description>web-master</description>

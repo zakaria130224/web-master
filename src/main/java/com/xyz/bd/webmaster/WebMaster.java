@@ -2,12 +2,13 @@ package com.xyz.bd.webmaster;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.datatables.repository.DataTablesRepositoryFactoryBean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-public class WebMaster {
+public class WebMaster extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(WebMaster.class, args);
