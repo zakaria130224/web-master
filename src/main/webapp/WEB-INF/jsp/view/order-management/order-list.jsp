@@ -223,7 +223,9 @@
                                                         <td>${order.status}</td>
                                                         <td>${order.address}</td>
                                                         <td><button class="btn btn-download"><i class="fa fa-download"></i> Download</button></td>
-                                                        <td><button type="button" class="btn" style="background-color: #000F3C;color: #F2FCFF" id="changeStatus">
+                                                        <td><button type="button" class="btn btn-status" style="background-color: #000F3C;color: #F2FCFF" id="changeStatus"
+                                                                    data-toggle="modal" data-target="#changeStatusModal" data-id="${order.id}" data-msisdn="${order.msisdn}"
+                                                                    data-email="${order.email}" data-status="${order.status}" data-customer="${order.customer_name}">
                                                             Change Status
                                                         </button></td>
                                                         </tr>
@@ -417,21 +419,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal b2b-custom-form" id="dataForm">
+                    <form class="form-horizontal b2b-custom-form" id="dataForm" enctype="multipart/form-data" action="/save-data" method="post">
                         <div class="card-body p-0">
                             <div class="row">
-<%--                                <div class="col-md-6">--%>
-<%--                                    <div class="form-group">--%>
-<%--                                        <label for="vehicle_type">Select Vehicle</label>--%>
-<%--                                        <input type="text" class="form-control" id="vehicle_type_d" placeholder="Select">--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="col-md-6">--%>
-<%--                                    <div class="form-group">--%>
-<%--                                        <label for="expense_type">Type</label>--%>
-<%--                                        <input type="text" class="form-control" id="expense_type_d" placeholder="Select">--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
+
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="ticket_number">CHT Ticket Number</label>
@@ -445,14 +436,10 @@
                                         <input type="file" class="form-control" id="upload_file" placeholder="Uploaded file have to be less than 10MB">
                                     </div>
                                 </div>
-<%--                                <div class="col-md-12">--%>
-<%--                                    <div class="form-group">--%>
-<%--                                        <label for="user_password">User Password</label>--%>
-<%--                                        <input type="password" name="user_password" id= "user_password" class="form-control" placeholder="Password">--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
+
                             </div>
                         </div>
+                        <button type="submit">Save</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -482,42 +469,28 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal b2b-custom-form">
+                    <form class="form-horizontal b2b-custom-form" id="updateForm">
+                        <input type="hidden" id="editOrderId" name="id">
                         <div class="card-body p-0">
                             <div class="row">
-<%--                                <div class="col-md-6">--%>
-<%--                                    <div class="form-group">--%>
-<%--                                        <label for="vehicle_type">Select Vehicle</label>--%>
-<%--                                        <input type="text" class="form-control" id="vehicle_type" placeholder="Select">--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="col-md-6">--%>
-<%--                                    <div class="form-group">--%>
-<%--                                        <label for="expense_type">Type</label>--%>
-<%--                                        <input type="text" class="form-control" id="expense_type" placeholder="Select">--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
                                 <div class="col-md-12">
+
                                     <div class="form-group">
-                                        <label for="update_status">Update Status</label>
-                                        <select name="update_status" id="update_status" class="form-control">
-                                            <option value="new_order">New Order</option>
-                                            <option value="in_progress">In Progress</option>
+                                        <label for="editStatus">Update Status</label>
+                                        <select name="editStatus" id="editStatus" class="form-control">
+                                            <option value="0">New Order</option>
+                                            <option value="1">In Progress</option>
                                         </select>
                                     </div>
                                 </div>
-<%--                                <div class="col-md-6">--%>
-<%--                                    <div class="form-group">--%>
-<%--                                        <label for="quantity">Expense Unit Price (BDT)</label>--%>
-<%--                                        <input type="text" class="form-control" id="quantity" placeholder="Type">--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="col-md-6">--%>
-<%--                                    <div class="form-group">--%>
-<%--                                        <label for="cost">Total Price (BDT)</label>--%>
-<%--                                        <input type="text" class="form-control" id="cost" placeholder="Type">--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="add_note">Msisdn</label>
+                                        <input type="text" class="form-control" name="editMsisdn" id="editMsisdn" placeholder="">
+                                    </div>
+                                </div>
+
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="add_note">Add Note</label>
@@ -606,28 +579,51 @@
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/moment/min/moment.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.css">
+<script>
+    $(document).ready(function() {
+        // When the edit button is clicked, populate the modal with data
+        $(".btn-select").click(function() {
+            var id = $(this).data("id");
+            var email = $(this).data("email");
+            var customer = $(this).data("customer");
+            var msisdn = $(this).data("msisdn");
 
-<%--<script>--%>
-<%--    $(document).ready(function() {--%>
-<%--        $.ajax({--%>
-<%--            url: '/get-orders', // The URL of your controller endpoint--%>
-<%--            method: 'GET',--%>
-<%--            dataType: 'json',--%>
-<%--            success: function(data) {--%>
-<%--                var tableBody = $('#dataTableMaintenance tbody');--%>
-<%--                $.each(data, function(index, order) {--%>
-<%--                    var row = '<tr>' +--%>
-<%--                        '<td>' + order.id + '</td>' +--%>
-<%--                        '<td>' + order.msisdn + '</td>' +--%>
-<%--                        '<td>' + order.email + '</td>' +--%>
-<%--                        // Add more columns as needed--%>
-<%--                        '</tr>';--%>
-<%--                    tableBody.append(row);--%>
-<%--                });--%>
-<%--            }--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>
+            $("#editOrderId").val(id);
+            $("#editEmail").val(email);
+            $("#editCustomerName").val(customer);
+            $("#editMsisdn").val(msisdn);
+        });
+
+        // Handle the update button click
+        $("#updateButton").click(function() {
+            var id = $("#editOrderId").val();
+            var email = $("#editEmail").val();
+            var customer = $("#editCustomerName").val();
+
+            // Send AJAX request to update data using id, email, customer values
+            $.ajax({
+                url: "/update-data",
+                type: "POST",
+                data: {
+                    id: id,
+                    email: email,
+                    customerName: customer
+                },
+                success: function(response) {
+                    // Handle success
+                    alert("Data updated successfully");
+                    // Close the modal
+                    $("#editModal").modal("hide");
+                },
+                error: function(xhr) {
+                    // Handle error
+                    alert("Error updating data");
+                }
+            });
+        });
+    });
+
+</script>
 <script>
     $(document).ready(function() {
         $("#saveBtn").click(function() {
@@ -650,28 +646,51 @@
             });
         });
     });
+    //
+    // $(document).ready(function () {
+    //     $("#saveBtn").click(function() {
+    //  //       event.preventDefault(); // Prevent the default form submission
+    //
+    //         var formData = new FormData(this);
+    //
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "/save-data",
+    //             data: formData,
+    //             processData: false,
+    //             contentType: false,
+    //             success: function (response) {
+    //                 alert(response); // Display a success message
+    //             },
+    //             error: function (xhr, status, error) {
+    //                 alert("Error: " + error); // Display an error message
+    //             }
+    //         });
+    //     });
+    // });
+
 </script>
 
 
-<script>
-    $(document).ready(function() {
-        $("#saveBtn").click(function() {
-            var formData = $("#dataForm").serialize();
-            $.ajax({
-                url: "/save-data",
-                type: "POST",
-                data: formData,
-                success: function(response) {
-                    alert(response);
-                    $("#myModal").modal("hide");
-                },
-                error: function(xhr) {
-                    alert("Error saving data: " + xhr.responseText);
-                }
-            });
-        });
-    });
-</script>
+<%--<script>--%>
+<%--    $(document).ready(function() {--%>
+<%--        $("#saveBtn").click(function() {--%>
+<%--            var formData = $("#dataForm").serialize();--%>
+<%--            $.ajax({--%>
+<%--                url: "/save-data",--%>
+<%--                type: "POST",--%>
+<%--                data: formData,--%>
+<%--                success: function(response) {--%>
+<%--                    alert(response);--%>
+<%--                    $("#myModal").modal("hide");--%>
+<%--                },--%>
+<%--                error: function(xhr) {--%>
+<%--                    alert("Error saving data: " + xhr.responseText);--%>
+<%--                }--%>
+<%--            });--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
 
 <script>
     $( document ).ready(function() {
@@ -730,15 +749,15 @@
 
 </script>
 
-<script>
-    $(document).ready(function() {
-        $('#changeStatus').click(function(e) {
-            // alert(1);
-           // $('#vehicleDetails').modal('hide');
-            $("#changeStatusModal").modal("show");
-        });
-    });
-</script>
+<%--<script>--%>
+<%--    $(document).ready(function() {--%>
+<%--        $('#changeStatus').click(function(e) {--%>
+<%--            // alert(1);--%>
+<%--           // $('#vehicleDetails').modal('hide');--%>
+<%--            $("#changeStatusModal").modal("show");--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
 
 <script>
     $(document).ready(function() {
