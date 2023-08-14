@@ -10,7 +10,7 @@ public interface OrderService {
     List<OrderModelEntity> getAllOrder();
    // void saveData(OrderModelEntity orderModelEntity);
 
-    void saveData(String msisdn, MultipartFile excelFile);
+    void saveData(String chtticket, MultipartFile excelFile);
 
 }
 

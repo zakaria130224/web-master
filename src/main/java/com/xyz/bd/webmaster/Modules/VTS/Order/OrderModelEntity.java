@@ -16,7 +16,7 @@ import java.util.Date;
 @Table(name = "tbl_order")
 public class OrderModelEntity extends BaseEntity implements Serializable {
 
-    private String msisdn;
+    private String chtTicket;
     private String email;
     private String customer_name;
     private String is_paid;
@@ -35,6 +35,22 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
     private String alternative_number;
     private String payment_method;
     private Integer user_id;
+    private String bs_code;
+    private String vts_sim;
+    private String sim_kit;
+    private String pack_name;
+    private String base_price;
+    private String vid;
+    private String rate_plan_name;
+    private String mrp;
+    private String alt_contact_num;
+    private String kcp_name;
+    private String kcp_email;
+    private String sup_partner_name;
+    private String product_type;
+    private String audio_num;
+    private String company_name;
+    private String kcp_contact_num;
 
 
 

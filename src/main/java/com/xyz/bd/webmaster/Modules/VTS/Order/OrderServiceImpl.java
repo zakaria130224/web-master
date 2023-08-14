@@ -68,7 +68,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     @Transactional
-    public void saveData(String msisdn, MultipartFile excelFile) {
+    public void saveData(String chtticket, MultipartFile excelFile) {
         try {
             byte[] excelBytes = excelFile.getBytes();
             InputStream inputStream = new ByteArrayInputStream(excelBytes);
@@ -85,16 +85,45 @@ public class OrderServiceImpl implements OrderService{
             // Skip the first row (header row) by starting the loop from index 1
             for (int rowIndex = 1; rowIndex < sheet.getPhysicalNumberOfRows(); rowIndex++) {
                 Row row = sheet.getRow(rowIndex);
-                String email = dataFormatter.formatCellValue(row.getCell(0));
-                String customerName = dataFormatter.formatCellValue(row.getCell(1));
+                String bsCode = dataFormatter.formatCellValue(row.getCell(0));
+                String companyName = dataFormatter.formatCellValue(row.getCell(1));
+                String vtsSim = dataFormatter.formatCellValue(row.getCell(2));
+                String simKit = dataFormatter.formatCellValue(row.getCell(3));
+                String packName = dataFormatter.formatCellValue(row.getCell(4));
+                String basePrice = dataFormatter.formatCellValue(row.getCell(5));
+                String vid = dataFormatter.formatCellValue(row.getCell(6));
+                String ratePlan = dataFormatter.formatCellValue(row.getCell(7));
+                String mrp = dataFormatter.formatCellValue(row.getCell(8));
+                String altContact = dataFormatter.formatCellValue(row.getCell(9));
+                String kcpName = dataFormatter.formatCellValue(row.getCell(10));
+                String kcpContact = dataFormatter.formatCellValue(row.getCell(11));
+                String kcpEmail = dataFormatter.formatCellValue(row.getCell(12));
+                String supportPartner = dataFormatter.formatCellValue(row.getCell(13));
+                String productType = dataFormatter.formatCellValue(row.getCell(14));
+                String audNum = dataFormatter.formatCellValue(row.getCell(15));
 
-                System.out.println(email);
-                System.out.println(customerName);
+                System.out.println(bsCode);
+                System.out.println(companyName);
 
                 OrderModelEntity orderModelEntity = new OrderModelEntity();
-                orderModelEntity.setMsisdn(msisdn);
-                orderModelEntity.setEmail(email);
-                orderModelEntity.setCustomer_name(customerName);
+                orderModelEntity.setChtTicket(chtticket);
+                orderModelEntity.setBs_code(bsCode);
+                orderModelEntity.setCompany_name(companyName);
+                orderModelEntity.setVts_sim(vtsSim);
+                orderModelEntity.setSim_kit(simKit);
+                orderModelEntity.setPack_name(packName);
+                orderModelEntity.setBase_price(basePrice);
+                orderModelEntity.setVid(vid);
+                orderModelEntity.setRate_plan_name(ratePlan);
+                orderModelEntity.setMrp(mrp);
+                orderModelEntity.setAlt_contact_num(altContact);
+                orderModelEntity.setKcp_name(kcpName);
+                orderModelEntity.setAlt_contact_num(kcpContact);
+                orderModelEntity.setKcp_email(kcpEmail);
+                orderModelEntity.setSup_partner_name(supportPartner);
+                orderModelEntity.setProduct_type(productType);
+                orderModelEntity.setAudio_num(audNum);
+                
 
                 orderRepository.save(orderModelEntity);
             }

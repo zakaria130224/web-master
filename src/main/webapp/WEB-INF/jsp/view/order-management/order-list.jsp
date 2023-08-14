@@ -202,29 +202,26 @@
                                                     <c:forEach items="${orders}" var="order">
                                                         <tr>
                                                         <td>
-<%--                                                            <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>--%>
-<%--                                                            <div class="b2b-list-block">--%>
-<%--                                                                <h5 class="card-title black-30 font-16 b2b-font-weight-500">Light Demo</h5>--%>
-<%--                                                                <p class="card-text black-50 font-12 b2b-font-weight-700">CSD4345354345t</p>--%>
-<%--                                                            </div>--%>
+
                                                         <a data-target="#detailsOrderView" data-toggle="modal" class="MainNavText" id="MainNavHelp"
                                                          href="#detailsOrderView">${order.id}</a>
                                                         </td>
 
-                                                        <td>${order.msisdn}</td>
-                                                        <td>${order.email}</td>
-                                                            <td>${order.msisdn}</td>
-                                                            <td>${order.email}</td>
-                                                        <td>${order.customer_name}</td>
-                                                        <td>${order.is_paid}</td>
+                                                        <td>${order.chtTicket}</td>
+                                                        <td>${order.createdAt}</td>
+                                                            <td>${order.vts_sim}</td>
+                                                            <td>${order.pack_name}</td>
+                                                        <td>${order.sim_kit}</td>
+                                                        <td>${order.product_type}</td>
+                                                            <td>${order.sup_partner_name}</td>
                                                         <td><button type="button" class="btn btn-primary">
                                                             New Order
                                                         </button></td>
-                                                        <td>${order.status}</td>
-                                                        <td>${order.address}</td>
+                                                            <td>${order.rate_plan_name}</td>
+<%--                                                        <td>${order.address}</td>--%>
                                                         <td><button class="btn btn-download"><i class="fa fa-download"></i> Download</button></td>
                                                         <td><button type="button" class="btn btn-status" style="background-color: #000F3C;color: #F2FCFF" id="changeStatus"
-                                                                    data-toggle="modal" data-target="#changeStatusModal" data-id="${order.id}" data-msisdn="${order.msisdn}"
+                                                                    data-toggle="modal" data-target="#changeStatusModal" data-id="${order.id}" data-chtticket="${order.chtTicket}"
                                                                     data-email="${order.email}" data-status="${order.status}" data-customer="${order.customer_name}">
                                                             Change Status
                                                         </button></td>
@@ -425,8 +422,8 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="ticket_number">CHT Ticket Number</label>
-                                        <input type="text" class="form-control" name="msisdn" id="ticket_number"  placeholder="Select">
+                                        <label for="chtticket">CHT Ticket Number</label>
+                                        <input type="text" class="form-control" name="chtticket" id="chtticket"  placeholder="">
                                     </div>
                                 </div>
 
@@ -628,7 +625,7 @@
     $(document).ready(function() {
         $("#saveBtn").click(function() {
             var formData = new FormData();
-            formData.append("msisdn", $("#ticket_number").val());
+            formData.append("chtticket", $("#chtticket").val());
             formData.append("excelFile", $("#upload_file")[0].files[0]);
 
             $.ajax({

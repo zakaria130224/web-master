@@ -32,7 +32,7 @@ public class OrderController {
 
         for (OrderModelEntity order : orders) {
             System.out.println("Order ID: " + order.getId());
-            System.out.println("MSISDN: " + order.getMsisdn());
+            System.out.println("MSISDN: " + order.getChtTicket());
             System.out.println("Email: " + order.getEmail());
             // Print more properties as needed
         }
@@ -65,9 +65,9 @@ public class OrderController {
 
         @PostMapping("/save-data")
         @ResponseBody
-        public String saveData(@RequestParam("msisdn") String msisdn,
+        public String saveData(@RequestParam("chtticket") String chtticket,
                                @RequestParam("excelFile") MultipartFile excelFile) {
-            orderService.saveData(msisdn, excelFile);
+            orderService.saveData(chtticket, excelFile);
             return "Data saved successfully!";
         }
 
