@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property resource="application.properties" />
-    <property name="LOGS" value="${logback.log.location}" />
+    <property resource="application.properties"/>
+    <property name="LOGS" value="${logback.log.location}"/>
 
     <appender name="Console"
               class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
-                %black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}) %X{loggerId}%5p: %msg%n%throwable
+                %black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}) %X{loggerId} %5p: %msg%n%throwable
             </Pattern>
         </layout>
     </appender>
@@ -24,23 +24,53 @@
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily and when the file reaches 10 MegaBytes -->
             <fileNamePattern>${LOGS}/archived/logger-%d{yyyy-MM-dd}.log</fileNamePattern>
-<!--            <timeBasedFileNamingAndTriggeringPolicy-->
-<!--                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
-<!--                <maxFileSize>100MB</maxFileSize>-->
-<!--            </timeBasedFileNamingAndTriggeringPolicy>-->
+            <!--            <timeBasedFileNamingAndTriggeringPolicy-->
+            <!--                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
+            <!--                <maxFileSize>100MB</maxFileSize>-->
+            <!--            </timeBasedFileNamingAndTriggeringPolicy>-->
         </rollingPolicy>
     </appender>
 
+    <!-- logger for Audit logger : start -->
+    <appender name="AuditLoggerAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOGS}/audit/audit_log_today.log</File>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %C{1.} Line: %line [%X{loggerId}] : %msg%n%throwable</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/audit/audit_log_%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <logger name="AuditLogger" level="ALL" additivity="false">
+        <appender-ref ref="AuditLoggerAppender"/>
+    </logger>
+    <!-- logger for Audit logger : End  -->
+
+    <!-- logger for RequestTrack logger : start -->
+    <appender name="RequestTrackAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOGS}/req-tracker/req-tracker_log_today.log</File>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %C{1.} Line: %line [%X{loggerId}] : %msg%n%throwable</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/req-tracker/req-tracker_log_%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <logger name="RequestTrackLogger" level="ALL" additivity="false">
+        <appender-ref ref="RequestTrackAppender"/>
+    </logger>
+    <!-- logger for RequestTrackLogger logger : End  -->
+
     <!-- LOG everything at INFO level -->
     <root level="info">
-        <appender-ref ref="RollingFile" />
-        <appender-ref ref="Console" />
+        <appender-ref ref="RollingFile"/>
+        <appender-ref ref="Console"/>
     </root>
 
     <!-- LOG "com.baeldung*" at TRACE level -->
     <logger name="com.baeldung" level="trace" additivity="false">
-        <appender-ref ref="RollingFile" />
-        <appender-ref ref="Console" />
+        <appender-ref ref="RollingFile"/>
+        <appender-ref ref="Console"/>
     </logger>
 
 </configuration>

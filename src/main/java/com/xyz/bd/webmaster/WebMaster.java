@@ -8,7 +8,7 @@ import org.springframework.data.jpa.datatables.repository.DataTablesRepositoryFa
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-public class WebMaster extends SpringBootServletInitializer {
+public class WebMaster {
 
     public static void main(String[] args) {
         SpringApplication.run(WebMaster.class, args);
