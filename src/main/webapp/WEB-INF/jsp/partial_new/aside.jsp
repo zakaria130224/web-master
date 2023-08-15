@@ -204,7 +204,7 @@
 
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/order-list" class="nav-link">
-                        <i class="nav-icon fa fa-car"></i>
+                        <i class="nav-icon fa fa-first-order"></i>
                         <p>Order Management</p>
                     </a>
                 </li>

@@ -10,6 +10,11 @@ import javax.transaction.Transactional;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +32,22 @@ public class OrderServiceImpl implements OrderService{
     @Transactional
     public void saveData(String chtticket, MultipartFile excelFile) {
         try {
+            //save excel
+            String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+
+            // Define the upload directory
+            String uploadDirectory = "./upload";
+
+            // Generate the filename using the timestamp and original filename
+            String filename = timestamp + "_" + excelFile.getOriginalFilename();
+
+            // Create the path for the file
+            Path filePath = Paths.get(uploadDirectory, filename);
+
+            // Save the uploaded Excel file to the specified path
+            Files.copy(excelFile.getInputStream(), filePath);
+            //save excel
+
             byte[] excelBytes = excelFile.getBytes();
             InputStream inputStream = new ByteArrayInputStream(excelBytes);
 
@@ -75,11 +96,12 @@ public class OrderServiceImpl implements OrderService{
                 orderModelEntity.setMrp(mrp);
                 orderModelEntity.setAlt_contact_num(altContact);
                 orderModelEntity.setKcp_name(kcpName);
-                orderModelEntity.setAlt_contact_num(kcpContact);
+                orderModelEntity.setKcp_contact_num(kcpContact);
                 orderModelEntity.setKcp_email(kcpEmail);
                 orderModelEntity.setSup_partner_name(supportPartner);
                 orderModelEntity.setProduct_type(productType);
                 orderModelEntity.setAudio_num(audNum);
+                orderModelEntity.setStatus(0);
 
 
                 orderRepository.save(orderModelEntity);

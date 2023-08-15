@@ -203,8 +203,15 @@
                                                         <tr>
                                                         <td>
 
-                                                        <a data-target="#detailsOrderView" data-toggle="modal" class="MainNavText" id="MainNavHelp"
-                                                         href="#detailsOrderView">${order.id}</a>
+                                                        <a data-target="#detailsOrderView" data-toggle="modal" class="MainNavText" id="DetailsOrders"
+                                                         href="#detailsOrderView"  data-toggle="modal"  data-id="${order.id}" data-chttickets="${order.chtTicket}"
+                                                           data-email="${order.email}" data-status="${order.status}" data-bs_code="${order.bs_code}"
+                                                           data-vts_sim="${order.vts_sim}" data-sim_kit="${order.sim_kit}" data-pack_name="${order.pack_name}"
+                                                           data-base_price="${order.base_price}" data-rate_plan_name="${order.rate_plan_name}"
+                                                           data-mrp="${order.mrp}" data-alt_num="${order.alt_contact_num}" data-kcp_name="${order.kcp_name}"
+                                                           data-kcp_email="${order.kcp_email}" data-kcp_contact="${order.kcp_contact_num}"
+                                                           data-support_partner="${order.sup_partner_name}" data-product_type="${order.product_type}"
+                                                           data-aud_num="${order.audio_num}" data-company_name="${order.company_name}">${order.id}</a>
                                                         </td>
 
                                                         <td>${order.chtTicket}</td>
@@ -235,8 +242,11 @@
                                                                     <c:when test="${order.status == 4}">
                                                                         <button type="button" class="btn" style="background-color: #9B51E0; color: #F2FCFF">Finalization</button>
                                                                     </c:when>
-                                                                    <c:otherwise>
+                                                                    <c:when test="${order.status == 5}">
                                                                         <button type="button" class="btn" style="background-color: #6FCF97; color: #F2FCFF">Onboarded</button>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <button type="button" class="btn" style="background-color: #00C8FF; color: #F2FCFF">New Order</button>
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                             </td>
@@ -445,8 +455,8 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="chttickets">CHT Ticket Number</label>
-                                        <input type="text" class="form-control" name="chttickets" id="chttickets"  placeholder="">
+                                        <label for="chtticket">CHT Ticket Number</label>
+                                        <input type="text" class="form-control" name="chtticket" id="chtticket"  placeholder="">
                                     </div>
                                 </div>
 
@@ -637,6 +647,67 @@ $(document).ready(function() {
         });
 </script>
 
+
+
+<script>
+    $(document).ready(function() {
+        // Ensure that the DOM is fully loaded before attaching the event listener
+        $(document).on("click", "#DetailsOrders", function() {
+            // Prevent the default behavior of the link (navigating to a new page)
+            event.preventDefault();
+
+            // Capture data attributes
+            var id = $(this).data("id");
+            var status = $(this).data("status");
+            var chttickets = $(this).data("chttickets");
+            var bs_code = $(this).data("bs_code");
+            var company_name = $(this).data("company_name");
+            var vts_sim = $(this).data("vts_sim");
+            var sim_kit = $(this).data("sim_kit");
+            var pack_name = $(this).data("pack_name");
+            var base_price = $(this).data("base_price");
+            var mrp = $(this).data("mrp");
+            var alt_num = $(this).data("alt_num");
+            var kcp_name = $(this).data("kcp_name");
+            var kcp_email = $(this).data("kcp_email");
+            var kcp_contact = $(this).data("kcp_contact");
+            var supp_partner = $(this).data("support_partner");
+            var product_type = $(this).data("product_type");
+            var aud_num = $(this).data("aud_num");
+
+            // Log the captured values to the console
+            console.log("Link clicked! Your task goes here.");
+            console.log("ID:", id);
+            console.log("Status:", status);
+            console.log("Cht Tickets:", chttickets);
+
+            // Perform your desired task here
+            // For example, populate the modal with the captured data
+            $("#cloud_id").val(id);
+            $("#ticket_id").val(chttickets);
+            $("#bs_code").val(bs_code);
+            $("#company_name").val(company_name);
+            $("#vts_sim").val(vts_sim);
+            $("#sim_kit").val(sim_kit);
+            $("#pack_name").val(pack_name);
+            $("#base_price").val(base_price);
+            $("#mrp").val(mrp);
+            $("#alt_cont_num").val(alt_num);
+            $("#kcp_name").val(kcp_name);
+            $("#kcp_email").val(kcp_email);
+            $("#kcp_contact").val(kcp_contact);
+            $("#support_partner").val(supp_partner);
+            $("#product_type").val(product_type);
+            $("#aud_auth_number").val(aud_num);
+            // ... Other code
+        });
+    });
+</script>
+
+
+
+
+
 <script>
     $(document).ready(function() {
         // When the edit button is clicked, populate the modal with data
@@ -660,7 +731,8 @@ $(document).ready(function() {
                 $("#editCht").val(chttickets);
                 $("#editCustomerName").val(customer);
                 $("#editMsisdn").val(msisdn);
-                $("#newOrderEntry").modal("show");
+               // $("#newOrderEntry").modal("show");
+                $("#changeStatusModal").modal("show");
             }
         });
 
