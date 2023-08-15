@@ -214,14 +214,37 @@
                                                         <td>${order.sim_kit}</td>
                                                         <td>${order.product_type}</td>
                                                             <td>${order.sup_partner_name}</td>
-                                                        <td><button type="button" class="btn btn-primary">
-                                                            New Order
-                                                        </button></td>
+<%--                                                        <td><button type="button" class="btn btn-primary">--%>
+<%--                                                            New Order--%>
+<%--                                                        </button></td>--%>
+                                                            <td>
+                                                                <!-- Use conditional classes to change button color -->
+                                                                <c:choose>
+                                                                    <c:when test="${order.status == 0}">
+                                                                        <button type="button" class="btn" style="background-color: #00C8FF; color: #F2FCFF">New Order</button>
+                                                                    </c:when>
+                                                                    <c:when test="${order.status == 1}">
+                                                                        <button type="button" class="btn" style="background-color: #2F80ED; color: #F2FCFF">Scheduled</button>
+                                                                    </c:when>
+                                                                    <c:when test="${order.status == 2}">
+                                                                        <button type="button" class="btn" style="background-color: #EB5757; color: #F2FCFF">Sim Active</button>
+                                                                    </c:when>
+                                                                    <c:when test="${order.status == 3}">
+                                                                        <button type="button" class="btn" style="background-color: #F2994A; color: #F2FCFF">Installation</button>
+                                                                    </c:when>
+                                                                    <c:when test="${order.status == 4}">
+                                                                        <button type="button" class="btn" style="background-color: #9B51E0; color: #F2FCFF">Finalization</button>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <button type="button" class="btn" style="background-color: #6FCF97; color: #F2FCFF">Onboarded</button>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </td>
                                                             <td>${order.rate_plan_name}</td>
 <%--                                                        <td>${order.address}</td>--%>
                                                         <td><button class="btn btn-download"><i class="fa fa-download"></i> Download</button></td>
                                                         <td><button type="button" class="btn btn-status" style="background-color: #000F3C;color: #F2FCFF" id="changeStatus"
-                                                                    data-toggle="modal" data-target="#changeStatusModal" data-id="${order.id}" data-chtticket="${order.chtTicket}"
+                                                                    data-toggle="modal"  data-id="${order.id}" data-chttickets="${order.chtTicket}"
                                                                     data-email="${order.email}" data-status="${order.status}" data-customer="${order.customer_name}">
                                                             Change Status
                                                         </button></td>
@@ -422,8 +445,8 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="chtticket">CHT Ticket Number</label>
-                                        <input type="text" class="form-control" name="chtticket" id="chtticket"  placeholder="">
+                                        <label for="chttickets">CHT Ticket Number</label>
+                                        <input type="text" class="form-control" name="chttickets" id="chttickets"  placeholder="">
                                     </div>
                                 </div>
 
@@ -436,7 +459,7 @@
 
                             </div>
                         </div>
-                        <button type="submit">Save</button>
+<%--                        <button type="submit">Save</button>--%>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -483,8 +506,8 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="add_note">Msisdn</label>
-                                        <input type="text" class="form-control" name="editMsisdn" id="editMsisdn" placeholder="">
+                                        <label for="editCht">Cht Ticket</label>
+                                        <input type="text" class="form-control" name="editCht" id="editCht" placeholder="">
                                     </div>
                                 </div>
 
@@ -576,19 +599,69 @@
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/moment/min/moment.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.css">
+
+<script>
+$(document).ready(function() {
+// When the update button is clicked, send data to the server
+        $("#successmodal").click(function() {
+// Get values from modal inputs
+        var orderId = $("#editOrderId").val();
+        var updatedStatus = $("#editStatus").val();
+        var updatedCht = $("#editCht").val();
+        var addNote = $("#add_note").val();
+        var userOtp = $("#user_otp").val();
+
+// Create data object to send to the server
+        var data = {
+        orderId: orderId,
+        updatedStatus: updatedStatus,
+        updatedCht: updatedCht,
+        addNote: addNote,
+        userOtp: userOtp
+        };
+
+        // Send data to the server using AJAX
+        $.ajax({
+        url: "/update-data", // Replace with your server URL
+        type: "POST",
+        data: data,
+        success: function(response) {
+        alert("Data updated successfully!");
+        // Close the modal or update UI as needed
+        },
+        error: function(xhr) {
+        alert("Error updating data: " + xhr.responseText);
+        }
+        });
+        });
+        });
+</script>
+
 <script>
     $(document).ready(function() {
         // When the edit button is clicked, populate the modal with data
-        $(".btn-select").click(function() {
+        $(".btn-status").click(function() {
             var id = $(this).data("id");
-            var email = $(this).data("email");
+            var status = $(this).data("status");
+            var chttickets = $(this).data("chttickets");
             var customer = $(this).data("customer");
             var msisdn = $(this).data("msisdn");
+            console.log(chttickets);
 
-            $("#editOrderId").val(id);
-            $("#editEmail").val(email);
-            $("#editCustomerName").val(customer);
-            $("#editMsisdn").val(msisdn);
+            if(status == 1) {
+                $("#editOrderId").val(id);
+                $("#editCht").val(chttickets);
+                $("#editCustomerName").val(customer);
+                $("#editMsisdn").val(msisdn);
+                $("#changeStatusModal").modal("show");
+            }
+            else if(status == 0 || status == '') {
+                $("#editOrderId").val(id);
+                $("#editCht").val(chttickets);
+                $("#editCustomerName").val(customer);
+                $("#editMsisdn").val(msisdn);
+                $("#newOrderEntry").modal("show");
+            }
         });
 
         // Handle the update button click

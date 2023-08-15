@@ -12,5 +12,8 @@ public interface OrderService {
 
     void saveData(String chtticket, MultipartFile excelFile);
 
+    OrderModelEntity getOrderById(Long orderId);
+    void saveOrder(OrderModelEntity order);
+
 }
 

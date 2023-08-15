@@ -71,6 +71,33 @@ public class OrderController {
             return "Data saved successfully!";
         }
 
+        @PostMapping("/update-data")
+        @ResponseBody
+        public String updateData(@RequestParam("orderId") Long orderId,
+                                 @RequestParam("updatedStatus") String updatedStatus,
+                                 @RequestParam("updatedCht") String updatedCht,
+                                 @RequestParam("addNote") String addNote,
+                                 @RequestParam("userOtp") String userOtp) {
+            try {
+                // Use the orderId to fetch the existing order entity from the database
+                OrderModelEntity order = orderService.getOrderById(orderId);
+
+                // Update the fields based on the inputs
+                order.setStatus(Integer.parseInt(updatedStatus));
+             //   order.setChtTicket(updatedCht); // Assuming there's a setChtTicket method
+
+                // Update other fields as needed
+
+                // Save the updated entity
+                orderService.saveOrder(order);
+
+                return "Data updated successfully!";
+            } catch (Exception e) {
+                return "Error updating data: " + e.getMessage();
+            }
+        }
+
+
 
 
 }

@@ -11,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -21,50 +22,6 @@ public class OrderServiceImpl implements OrderService{
     public List<OrderModelEntity> getAllOrder() {
         return orderRepository.findAll();
     }
-
-//    @Override
-//    public void saveData(OrderModelEntity orderModelEntity) {
-//        orderRepository.save(orderModelEntity);
-//    }
-
-//    public void saveData(String msisdn, MultipartFile excelFile) {
-//        OrderModelEntity orderModelEntity = new OrderModelEntity();
-//        orderModelEntity.setMsisdn(msisdn);
-//        // Process excelFile and set appropriate data in dataEntity
-//
-//        orderRepository.save(orderModelEntity);
-//    }
-
-//        @Override
-//        @Transactional
-//        public void saveData(String msisdn, MultipartFile excelFile) {
-//            try {
-//                byte[] excelBytes = excelFile.getBytes();
-//                InputStream inputStream = new ByteArrayInputStream(excelBytes);
-//
-//                Workbook workbook = WorkbookFactory.create(inputStream);
-//                Sheet sheet = workbook.getSheetAt(0);
-//                DataFormatter dataFormatter = new DataFormatter();
-//
-//                for (Row row : sheet) {
-//                    String email = dataFormatter.formatCellValue(row.getCell(0));
-//                    String customerName = dataFormatter.formatCellValue(row.getCell(1));
-//
-//                    System.out.println("Email: " + email + ", Customer Name: " + customerName);
-//
-//                    OrderModelEntity orderModelEntity = new OrderModelEntity();
-//                    orderModelEntity.setMsisdn(msisdn);
-//                    orderModelEntity.setEmail(email);
-//                    orderModelEntity.setCustomer_name(customerName);
-//
-//                    orderRepository.save(orderModelEntity);
-//                    System.out.println("Data saved successfully");
-//                }
-//
-//            } catch (IOException | EncryptedDocumentException e) {
-//                // Handle exceptions
-//            }
-//        }
 
     @Override
     @Transactional
@@ -123,7 +80,7 @@ public class OrderServiceImpl implements OrderService{
                 orderModelEntity.setSup_partner_name(supportPartner);
                 orderModelEntity.setProduct_type(productType);
                 orderModelEntity.setAudio_num(audNum);
-                
+
 
                 orderRepository.save(orderModelEntity);
             }
@@ -133,6 +90,23 @@ public class OrderServiceImpl implements OrderService{
             // Handle exceptions
         }
     }
+
+
+
+    @Override
+    public OrderModelEntity getOrderById(Long orderId) {
+        // Implement the logic to get the order by ID from the repository
+        Optional<OrderModelEntity> optionalOrder = orderRepository.findById(orderId);
+        return optionalOrder.orElse(null);
+    }
+
+    @Override
+    public void saveOrder(OrderModelEntity order) {
+        // Implement the logic to save the order to the repository
+        orderRepository.save(order);
+    }
+
+
 
 
 
