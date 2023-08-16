@@ -1,5 +1,7 @@
 package com.xyz.bd.webmaster.Modules.VTS.Order;
 
+import com.xyz.bd.webmaster.Modules.VTS.Company.CompanyModelEntity;
+import com.xyz.bd.webmaster.Modules.VTS.Company.CompanyRepository;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class OrderServiceImpl implements OrderService{
 
    @Autowired
     private OrderRepository orderRepository;
+   @Autowired
+   private CompanyRepository companyRepository;
     @Override
     public List<OrderModelEntity> getAllOrder() {
         return orderRepository.findAll();
@@ -55,11 +59,6 @@ public class OrderServiceImpl implements OrderService{
             Sheet sheet = workbook.getSheetAt(0);
             DataFormatter dataFormatter = new DataFormatter();
 
-//            XSSFWorkbook workbook = new XSSFWorkbook(UPLOADED_FOLDER + timestamp.getTime() + "_" + file.getOriginalFilename().replace(" ", "_"));
-//            XSSFSheet sheet = workbook.getSheetAt(0);
-//            XSSFRow row = sheet.getRow(0);
-//            int colNum = row.getLastCellNum();
-
             // Skip the first row (header row) by starting the loop from index 1
             for (int rowIndex = 1; rowIndex < sheet.getPhysicalNumberOfRows(); rowIndex++) {
                 Row row = sheet.getRow(rowIndex);
@@ -82,6 +81,17 @@ public class OrderServiceImpl implements OrderService{
 
                 System.out.println(bsCode);
                 System.out.println(companyName);
+
+                CompanyModelEntity existingCompany = companyRepository.findByCompanyNameAndBsCode(companyName, bsCode);
+
+                if (existingCompany == null) {
+                    // Create a new company entry in tbl_company
+                    CompanyModelEntity newCompany = new CompanyModelEntity();
+                    newCompany.setCompanyName(companyName);
+                    newCompany.setBsCode(bsCode);
+                    // ... (set other properties)
+                    companyRepository.save(newCompany);
+                }
 
                 OrderModelEntity orderModelEntity = new OrderModelEntity();
                 orderModelEntity.setChtTicket(chtticket);
