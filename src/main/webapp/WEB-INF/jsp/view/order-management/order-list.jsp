@@ -255,7 +255,8 @@
                                                         <td><button class="btn btn-download"><i class="fa fa-download"></i> Download</button></td>
                                                         <td><button type="button" class="btn btn-status" style="background-color: #000F3C;color: #F2FCFF" id="changeStatus"
                                                                     data-toggle="modal"  data-id="${order.id}" data-chttickets="${order.chtTicket}"
-                                                                    data-email="${order.email}" data-status="${order.status}" data-customer="${order.customer_name}">
+                                                                    data-email="${order.email}" data-status="${order.status}" data-customer="${order.customer_name}"
+                                                        data-kcp_name = "${order.kcp_name} data-kcp_contact = "${order.kcp_contact_num} data-kcp_email = "${order.kcp_email}">
                                                             Change Status
                                                         </button></td>
                                                         </tr>
@@ -545,6 +546,86 @@
         </div>
     </div>
 
+    <!-- Imei and user add modal -->
+    <div class="modal left fade" id="changeFinalStatusModal" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title float-left" id="myModalLabel5">Change Status</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            style="height: 20px;width:
+                            20px;border: 1px solid;
+                            display: block;
+                            border-radius: 50%;
+                            padding: 0px;
+                            line-height: 17px;
+                            margin-top: 5px;
+                            margin-right: 5px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal b2b-custom-form" id="updateFinalStatusForm">
+                        <input type="hidden" id="excelOrderId" name="excel_order_id">
+                        <input type="hidden" id="kcpName" name="kcpName">
+                        <input type="hidden" id="kcpEmail" name="kcpEmail">
+                        <input type="hidden" id="kcpContact" name="kcpContact">
+                        <div class="card-body p-0">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="form-group">
+                                        <label for="editStatus">Update Status</label>
+                                        <select name="updateFinalStatus" id="updateFinalStatus" class="form-control">
+                                            <option value="0">New Order</option>
+                                            <option value="1">Schedule</option>
+                                            <option value="2">Sim Active</option>
+                                            <option value="3">Installation</option>
+                                            <option value="4">Finalization</option>
+                                            <option value="5">Onboarded</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="chtvalue">Cht Ticket</label>
+                                        <input type="text" class="form-control" name="chtvalue" id="chtvalue" placeholder="" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="add_note">Add Note</label>
+                                        <textarea type="text" class="form-control" name="add_final_note" id="add_final_note" placeholder="Add Note"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="imei">IMEI</label>
+                                        <input type="text" class="form-control" name="imei" id="imei" placeholder="Add IMEI">
+                                    </div>
+                                </div>
+<%--                                <div class="col-md-12">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="user_otp_final">User OTP</label>--%>
+<%--                                        <input type="password" class="form-control" name="user_otp_final" id="user_otp_final" placeholder="Type">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <%--                    <button type="submit" class="btn b2b-submit-btn-base btn-outline-primary float-left">close</button>--%>
+                    <button type="submit" class="btn btn-custom-grey" id="successfinalmodal">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Imei and user add modal -->
+
     <!-- Button trigger modal -->
 
 
@@ -647,6 +728,44 @@ $(document).ready(function() {
         });
 </script>
 
+<script>
+    $(document).ready(function() {
+// When the update button is clicked, send data to the server
+        $("#successfinalmodal").click(function() {
+// Get values from modal inputs
+            var excelOrderId = $("#excelOrderId").val();
+            var updateFinalStatus = $("#updateFinalStatus").val();
+       //     var updatedCht = $("#editCht").val();
+      //      var addNote = $("#add_note").val();
+            var kcpName = $("#kcpName").val();
+            var kcpEmail = $("#kcpEmail").val();
+            var kcpContact = $("#kcpContact").val();
+
+// Create data object to send to the server
+            var data = {
+                orderId: orderId,
+                updatedStatus: updatedStatus,
+                updatedCht: updatedCht,
+                addNote: addNote,
+                userOtp: userOtp
+            };
+
+            // Send data to the server using AJAX
+            $.ajax({
+                url: "/update-data", // Replace with your server URL
+                type: "POST",
+                data: data,
+                success: function(response) {
+                    alert("Data updated successfully!");
+                    // Close the modal or update UI as needed
+                },
+                error: function(xhr) {
+                    alert("Error updating data: " + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 
 
 <script>
@@ -717,6 +836,10 @@ $(document).ready(function() {
             var chttickets = $(this).data("chttickets");
             var customer = $(this).data("customer");
             var msisdn = $(this).data("msisdn");
+            var kcp_name = $(this).data("kcp_name");
+            var kcp_email = $(this).data("kcp_email");
+            var kcp_contact = $(this).data("kcp_contact");
+
             console.log(chttickets);
 
             if(status == 1) {
@@ -734,6 +857,17 @@ $(document).ready(function() {
                // $("#newOrderEntry").modal("show");
                 $("#changeStatusModal").modal("show");
             }
+
+            else if(status == 4) {
+                $("#excelOrderId").val(id);
+                $("#chtvalue").val(chttickets);
+                $("#kcp_contact").val(kcp_contact);
+                $("#kcp_name").val(kcp_name);
+                $("#kcp_email").val(kcp_email);
+
+                $("#changeFinalStatusModal").modal("show");
+            }
+
         });
 
         // Handle the update button click
