@@ -16,7 +16,7 @@
       <a class="text-muted mr-4" href="#" target="_blank">Terms & Condition</a>
     </div>
     <div class="col-6 text-right">
-      <strong>All rights reserved @ AppMarket</strong>
+      <strong>All rights reserved @ Grameenphone</strong>
     </div>
   </div>
   <!-- <div class="float-left d-none d-sm-block"><b>Version</b> 3.2.0</div>

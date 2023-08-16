@@ -33,7 +33,7 @@ public class DriversModelEntity extends BaseEntity implements Serializable {
     private Date license_expired_date;
     private Long report_manager_id;
     private String report_manager_name;
-    private Boolean is_active;
+    private Boolean active;
     private String additional_note;
     private Boolean is_assigned;
     private Long device_id;

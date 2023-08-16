@@ -7,9 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.datatables.repository.DataTablesRepositoryFactoryBean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-
 @SpringBootApplication
-//@ComponentScan(basePackages = "com.xyz.bd")
 public class WebMaster {
 
     public static void main(String[] args) {

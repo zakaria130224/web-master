@@ -25,4 +25,6 @@ public interface DriverService {
     CommonRestResponse removeDriver(HttpServletRequest request, Long id);
 
     CommonRestResponse getDriverBasicInfo(HttpServletRequest request, Long id);
+
+    DriversModelEntity getDriverById(Long id);
 }

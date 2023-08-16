@@ -1,5 +1,10 @@
 spring.mvc.view.prefix=/WEB-INF/jsp/view/
 spring.mvc.view.suffix=.jsp
+
+app.name=Store Front
+#app.domain_url=/crimson_admin_portal-0.0.1-SNAPSHOT
+app.domain_url=
+
 #Session
 spring.session.store-type=redis
 spring.redis.host=43.204.7.133
@@ -21,21 +26,4 @@ spring.jpa.show-sql=true
 spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 logging.level.com.zaxxer.hikari=debug
 server.port=8090
-logback.log.location=/opt/tomcat/apache-tomcat-9.0.78/logs
-
-
-#CMP Cred
-cmp.url=https://gpcmp.grameenphone.com/ecmapigw/webresources/ecmapigw.v2
-cmp.username=B2Bdevopp
-cmp.password=a7Cxr*^QA$jBsSX9
-cmp.cli=B2Bdevopp
-#Mail Server Configuration SMTP
-spring.mail.host=a0410pdasmtp01.grameenphone.com
-spring.mail.port=587
-spring.mail.from=Grameenphone Smart Solutions <iot@grameenphone.com>
-#spring.mail.username=dCRM
-#spring.mail.password=dCRM#897
-spring.mail.properties.mail.smtp.auth=false
-spring.mail.properties.mail.smtp.starttls.enable=true
-#Google App Key
-google.app.key=AIzaSyAQGa9Gqeryd43kUXCaV-D1y_Quqp8F0Kk
+logback.log.location=/data/applogs/web-master
