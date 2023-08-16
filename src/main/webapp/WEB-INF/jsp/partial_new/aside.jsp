@@ -288,6 +288,44 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-luggage-cart"></i>
+                        <p>
+                            Orders
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/orders/b2c-gpc" class="nav-link">
+                                <i class="fa fa-circle nav-icon"></i>
+                                <p>B2C GPC Order</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/orders/b2c-gp-shop" class="nav-link">
+                                <i class="fa fa-circle nav-icon"></i>
+                                <p>B2C GP Shop</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/orders/b2b" class="nav-link">
+                                <i class="fa fa-circle nav-icon"></i>
+                                <p>B2B Device only</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/orders/b2b-sim-based" class="nav-link">
+                                <i class="fa fa-circle nav-icon"></i>
+                                <p>B2B Sim Based</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/vts/maintenance-log" class="nav-link">
                         <i class="nav-icon fa fa-list-alt"></i>
                         <p>Logs</p>
