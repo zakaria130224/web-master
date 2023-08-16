@@ -1,8 +1,7 @@
-package com.xyz.bd.webmaster.Modules.VTS.Order;
+package com.xyz.bd.webmaster.Modules.Orders.B2bSimBasedOrders;
 
-import com.xyz.bd.webmaster.Modules.VTS.Company.CompanyModelEntity;
-import com.xyz.bd.webmaster.Modules.VTS.Company.CompanyRepository;
-import org.apache.poi.EncryptedDocumentException;
+import com.xyz.bd.webmaster.Modules.CommonPackages.Company.CompanyModelEntity;
+import com.xyz.bd.webmaster.Modules.CommonPackages.Company.CompanyRepository;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;

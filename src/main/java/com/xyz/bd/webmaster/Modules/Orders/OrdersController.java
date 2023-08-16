@@ -30,11 +30,4 @@ public class OrdersController {
         model.addAttribute("menu", "Orders");
         return new ModelAndView("orders/b2c");
     }
-
-    @RequestMapping(value="/b2b-sim-based", method = RequestMethod.GET)
-    public ModelAndView showB2BSimBasedOrders(ModelMap model){
-        model.addAttribute("title", "B2B Sim Based");
-        model.addAttribute("menu", "Orders");
-        return new ModelAndView("orders/b2b-sim-based");
-    }
 }

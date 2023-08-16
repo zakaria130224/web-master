@@ -1,4 +1,4 @@
-package com.xyz.bd.webmaster.Modules.VTS.Company;
+package com.xyz.bd.webmaster.Modules.CommonPackages.Company;
 
 import com.xyz.bd.webmaster.Models.common.Entities.BaseEntity;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.xyz.bd.webmaster.Modules.VTS.Order;
+package com.xyz.bd.webmaster.Modules.Orders.B2bSimBasedOrders;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,12 +10,13 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
+@RequestMapping("/orders")
 public class OrderController {
 
    @Autowired
     private OrderService orderService;
 
-    @RequestMapping(value = "/order-list", method = RequestMethod.GET)
+    @RequestMapping(value = "/b2b-sim-based", method = RequestMethod.GET)
     public ModelAndView showOrderListPage(Model model) {
 
         List<OrderModelEntity> orders = orderService.getAllOrder();
@@ -37,7 +38,7 @@ public class OrderController {
             // Print more properties as needed
         }
 
-        return new ModelAndView("order-management/order-list");
+        return new ModelAndView("orders/b2b-sim-based");
 
     }
 

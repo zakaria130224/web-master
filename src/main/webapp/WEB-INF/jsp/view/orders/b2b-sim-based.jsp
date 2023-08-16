@@ -20,7 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>VTS - Maintenance</title>
 
-    <jsp:include page="./../../partial_new/header-link.jsp"></jsp:include>
+    <jsp:include page="../../partial_new/header-link.jsp"></jsp:include>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/modal-style.css">
 
@@ -81,12 +81,12 @@
 
 <div class="wrapper">
     <!-- Navbar -->
-    <jsp:include page="./../../partial_new/nevbar.jsp"></jsp:include>
+    <jsp:include page="../../partial_new/nevbar.jsp"></jsp:include>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
 
-    <jsp:include page="./../../partial_new/aside.jsp"></jsp:include>
+    <jsp:include page="../../partial_new/aside.jsp"></jsp:include>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -675,7 +675,7 @@
         </div>
     </div>
 
-    <jsp:include page="./../../partial_new/footer.jsp" />
+    <jsp:include page="../../partial_new/footer.jsp" />
 
 </div>
 <!-- /.content-wrapper -->
@@ -686,7 +686,7 @@
 
 <!-- ./wrapper -->
 
-<jsp:include page="./../../partial_new/script.jsp" />
+<jsp:include page="../../partial_new/script.jsp" />
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/moment/min/moment.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.css">

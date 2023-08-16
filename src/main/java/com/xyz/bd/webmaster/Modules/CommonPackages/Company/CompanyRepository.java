@@ -1,4 +1,4 @@
-package com.xyz.bd.webmaster.Modules.VTS.Company;
+package com.xyz.bd.webmaster.Modules.CommonPackages.Company;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
