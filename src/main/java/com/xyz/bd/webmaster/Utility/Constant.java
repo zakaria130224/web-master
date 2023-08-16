@@ -24,6 +24,8 @@ public class Constant {
     public static DTOStatus srActionForward = new DTOStatus(3, "Forward");
     public static DTOStatus srActionNote = new DTOStatus(4, "Note");
 
+    public static final String applicationJson = "application/json";
+
     //Notification
     public static String notificationEmail = "EMAIL";
     public static String notificationSMS = "SMS";

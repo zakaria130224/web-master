@@ -18,6 +18,13 @@
     <title>Dashboard</title>
 
     <jsp:include page="./../../partial_new/header-link-dash.jsp"></jsp:include>
+
+    <style>
+        .tabs_bar .active {
+            background: #d9ebf8;
+        }
+    </style>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -37,12 +44,7 @@
             <div class="container-fluid">
                 <div class="row py-2 mb-1 " style="background-color: white; border-radius: 8px; margin: 1px">
                     <div class="col-sm-3 col-md-2 col-lg-1">
-                        <div class="tabs_bar">
-                            <span class="mt-5">General</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-md-2 col-lg-1">
-                        <div class="tabs_bar">
+                        <div class="tabs_bar active">
                             <span class="mt-5">VTS</span>
                         </div>
                     </div>

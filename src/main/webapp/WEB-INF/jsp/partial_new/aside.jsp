@@ -177,14 +177,14 @@
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/devices" class="nav-link">
                         <i class="nav-icon fa fa-cube"></i>
-                        <p>IoT Devices</p>
+                        <p>Devices</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/vts/alert" class="nav-link">
                         <i class="nav-icon fa fa-bell"></i>
-                        <p>Alarm</p>
+                        <p>Alert</p>
                     </a>
                 </li>
 
@@ -192,20 +192,6 @@
                     <a href="${pageContext.request.contextPath}/vts/map" class="nav-link">
                         <i class="nav-icon fa fa-map"></i>
                         <p>Map</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/vts/trip-list" class="nav-link">
-                        <i class="nav-icon fa fa-car"></i>
-                        <p>Trips</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/order-Management" class="nav-link">
-                        <i class="nav-icon fa fa-car"></i>
-                        <p>Order Management</p>
                     </a>
                 </li>
 
@@ -294,7 +280,12 @@
                     </a>
                 </li>
 
-
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/order-Management" class="nav-link">
+                        <i class="nav-icon fa fa-car"></i>
+                        <p>Order Management</p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/vts/maintenance-log" class="nav-link">
