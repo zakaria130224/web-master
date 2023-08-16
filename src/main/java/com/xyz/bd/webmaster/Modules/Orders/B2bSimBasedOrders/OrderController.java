@@ -1,5 +1,6 @@
 package com.xyz.bd.webmaster.Modules.Orders.B2bSimBasedOrders;
 
+import com.xyz.bd.webmaster.Modules.Orders.OrderModelEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

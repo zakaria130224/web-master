@@ -1,4 +1,27 @@
 package com.xyz.bd.webmaster.Modules.Orders;
 
+import com.xyz.bd.webmaster.Modules.Orders.B2cGpcOrders.B2cGpcServices;
+import com.xyz.bd.webmaster.Modules.VTS.Drivers.DriversModelEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+@RestController
+@RequestMapping("/api/web/orders/b2c-gpc")
 public class OrdersRestController {
+
+    @Autowired
+    B2cGpcServices b2cGpcServices;
+
+    @RequestMapping(value = "/listDT", method = RequestMethod.GET)
+    public DataTablesOutput<OrderModelEntity> getB2cGpcOrdersDT(@Valid DataTablesInput input, HttpServletRequest request, @RequestParam(value = "customQuery",required = false) String customQuery) {
+        return b2cGpcServices.findAllB2cOrdersList(request, customQuery, input);
+    }
 }

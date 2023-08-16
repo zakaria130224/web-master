@@ -1,4 +1,4 @@
-package com.xyz.bd.webmaster.Modules.Orders.B2bSimBasedOrders;
+package com.xyz.bd.webmaster.Modules.Orders;
 
 import com.xyz.bd.webmaster.Models.common.Entities.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Table(name = "tbl_order")
 public class OrderModelEntity extends BaseEntity implements Serializable {
-
     private String chtTicket;
     private String email;
     private String customer_name;
@@ -51,7 +50,4 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
     private String audio_num;
     private String company_name;
     private String kcp_contact_num;
-
-
-
 }

@@ -1,5 +1,6 @@
 package com.xyz.bd.webmaster.Modules.Orders.B2bSimBasedOrders;
 
+import com.xyz.bd.webmaster.Modules.Orders.OrderModelEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

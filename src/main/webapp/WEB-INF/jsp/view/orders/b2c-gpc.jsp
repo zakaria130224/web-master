@@ -213,13 +213,13 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.css">
 
 
-<script>
+<noscript>
   $( document ).ready(function() {
     $(".loader_body").hide();
   });
-</script>
+</noscript>
 
-<noscript>
+<script>
   const base_url = $("#domain_url").val() + "/";
   let dataTable;
   $( document ).ready(function() {
@@ -245,20 +245,20 @@
             }
     );
 
-    getDriversData();
+    getOrderData();
 
 
   });
 
-  function getDriversData() {
+  function getOrderData() {
     $(".loader_body").show();
 
     $.ajax({
       type: 'get',
-      url: base_url + "api/web/VTS/driver/listDT",
+      url: base_url + "api/web/orders/b2c-gpc/listDT",
       success: function (data) {
         $(".loader_body").hide();
-        initUserTable(data.data);
+        initOrderTable(data.data);
       },
       error: function (error) {
         $(".loader_body").hide();
@@ -266,7 +266,7 @@
     });
   }
 
-  function initUserTable(data) {
+  function initOrderTable(data) {
     "use strict";
     if ($.fn.dataTable.isDataTable('#dataTable')) {
       $('#dataTable').DataTable().clear();
@@ -284,16 +284,12 @@
       order: [[3, 'desc']],
       select:true,
       columns: [
-        {data: 'name'},
-        {data: 'mobile_number'},
-        {data: 'license_no'},
-        {data: 'join_date',
-          autowidth: true,
-          render: function (data, type, full, row) {
-            let date_str = new Date(data);
-            return type === 'sort' ? data:date_str.toLocaleString();
-          }
-        },
+        {data: 'id'},
+        {data: 'chtTicket'},
+        {data: 'vts_sim'},
+        {data: 'sim_kit'},
+        {data: 'product_type'},
+
         {data: 'active',
           autowidth: true,
           render: function (data, type, full, row) {
@@ -317,7 +313,7 @@
 
 
 
-</noscript>
+</script>
 
 </body>
 
