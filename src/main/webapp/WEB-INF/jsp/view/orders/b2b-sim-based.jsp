@@ -679,7 +679,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="imei">IMEI</label>
-                                        <input type="text" class="form-control" name="imei" id="imei" placeholder="Add IMEI">
+                                        <input type="text" class="form-control" name="imei" id="imei" placeholder="Add IMEI" required>
                                     </div>
                                 </div>
 <%--                                <div class="col-md-12">--%>
@@ -718,7 +718,7 @@
                 <div class="modal-body text-center" style="font-size: 18px">
                    Status updated <br>
                     Successfully<br>
-                    <button type="button" class="btn btn-secondary" style="width: 247px" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" style="width: 247px" data-dismiss="modal" id="closeSuccessModalButton">Close</button>
                 </div>
 <%--                <div class="modal-footer ">--%>
 <%--&lt;%&ndash;                    <button type="button" class="btn btn-secondary" style="width: 247px" data-dismiss="modal">Close</button>&ndash;%&gt;--%>
@@ -739,10 +739,10 @@
                 <%--                </div>--%>
                 <div class="modal-body text-center" >
                   <p style="font-size: 20px;">New Order Added Successfully.</p>
-                   <p style="font-size: 14px;">"Kite N Co" is emailed.</p>
-                    <p style="font-size: 14px;">40 rows of devices are added</p>
+<%--                   <p style="font-size: 14px;">"Kite N Co" is emailed.</p>--%>
+<%--                    <p style="font-size: 14px;">40 rows of devices are added</p>--%>
 
-                    <button type="button" class="btn btn-secondary" style="width: 247px" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" style="width: 247px" data-dismiss="modal"  id="closeModalButton">Close</button>
                 </div>
                 <%--                <div class="modal-footer ">--%>
                 <%--&lt;%&ndash;                    <button type="button" class="btn btn-secondary" style="width: 247px" data-dismiss="modal">Close</button>&ndash;%&gt;--%>
@@ -794,8 +794,9 @@ $(document).ready(function() {
         type: "POST",
         data: data,
         success: function(response) {
-        alert("Data updated successfully!");
+       // alert("Data updated successfully!");
         // Close the modal or update UI as needed
+            $('#statusSuccessModal').modal('show');
         },
         error: function(xhr) {
         alert("Error updating data: " + xhr.responseText);
@@ -837,8 +838,9 @@ $(document).ready(function() {
                     type: "POST",
                     data: data,
                     success: function (response) {
-                        alert("Data updated successfully!");
+                     //   alert("Data updated successfully!");
                         // Close the modal or update UI as needed
+                        $('#statusSuccessModal').modal('show');
                     },
                     error: function (xhr) {
                         alert("Error updating data: " + xhr.responseText);
@@ -892,7 +894,8 @@ $(document).ready(function() {
                 success: function(response) {
                     // Handle success
                   //  console.log(data);
-                    alert("Order and user updated successfully");
+                //    alert("Order and user updated successfully");
+                    $('#statusSuccessModal').modal('show');
                     // Refresh or update UI as needed
                 },
                 error: function(xhr, status, error) {
@@ -987,6 +990,7 @@ $(document).ready(function() {
                 $("#editCht").val(chttickets);
                 $("#editCustomerName").val(customer);
                 $("#editMsisdn").val(msisdn);
+                $("#updateFinalStatus").val(status);
                 $("#changeStatusModal").modal("show");
             }
             else if(status == 0 || status == null) {
@@ -1046,9 +1050,10 @@ $(document).ready(function() {
                 },
                 success: function(response) {
                     // Handle success
-                    alert("Data updated successfully");
+                  //  alert("Data updated successfully");
                     // Close the modal
-                    $("#editModal").modal("hide");
+                  //  $("#editModal").modal("hide");
+                    $('#statusSuccessModal').modal('show');
                 },
                 error: function(xhr) {
                     // Handle error
@@ -1076,7 +1081,8 @@ $(document).ready(function() {
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    alert(response);
+                  //  alert(response);
+                    $('#orderSuccessModal').modal('show');
                 },
                 error: function(xhr) {
                     alert("Error saving data: " + xhr.responseText);
@@ -1197,16 +1203,16 @@ $(document).ready(function() {
 <%--    });--%>
 <%--</script>--%>
 
-<script>
-    $(document).ready(function() {
-        $('#successmodal').click(function(e) {
-            // alert(1);
-            // $('#vehicleDetails').modal('hide');
-            $("#statusSuccessModal").modal("show");
-            $("#changeStatusModal").modal("hide");
-        });
-    });
-</script>
+<%--<script>--%>
+<%--    $(document).ready(function() {--%>
+<%--        $('#successmodal').click(function(e) {--%>
+<%--            // alert(1);--%>
+<%--            // $('#vehicleDetails').modal('hide');--%>
+<%--          //  $("#statusSuccessModal").modal("show");--%>
+<%--            $("#changeStatusModal").modal("hide");--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
 
 <script>
     $(document).ready(function() {
@@ -1217,7 +1223,27 @@ $(document).ready(function() {
             $("#newOrderEntry").modal("hide");
         });
     });
+
 </script>
+
+<script>
+    $(document).ready(function() {
+        $("#closeModalButton").click(function() {
+            // Redirect to the specified page
+            location.reload();
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#closeSuccessModalButton").click(function() {
+            // Redirect to the specified page
+            location.reload();
+        });
+    });
+</script>
+
 </body>
 
 </html>

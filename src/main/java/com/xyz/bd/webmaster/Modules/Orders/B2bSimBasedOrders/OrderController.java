@@ -1,5 +1,7 @@
 package com.xyz.bd.webmaster.Modules.Orders.B2bSimBasedOrders;
 
+import com.xyz.bd.webmaster.Modules.CommonPackages.TrackerDevice.TrackerDeviceModelEntity;
+import com.xyz.bd.webmaster.Modules.CommonPackages.TrackerDevice.TrackerDeviceService;
 import com.xyz.bd.webmaster.Modules.CommonPackages.User.UserFormData;
 import com.xyz.bd.webmaster.Modules.CommonPackages.User.UserModelEntity;
 import com.xyz.bd.webmaster.Modules.CommonPackages.User.UserService;
@@ -19,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static java.lang.Long.parseLong;
+
 @Controller
 @RequestMapping("/orders")
 public class OrderController {
@@ -31,6 +35,9 @@ public class OrderController {
 
    @Autowired
     EmailSenderService emailSenderService;
+
+   @Autowired
+    TrackerDeviceService trackerDeviceService;
 
     @RequestMapping(value = "/b2b-sim-based", method = RequestMethod.GET)
     public ModelAndView showOrderListPage(Model model) {
@@ -275,6 +282,15 @@ public class OrderController {
                 order.setImei(imei);
            //     order.setChtTicket(updatedCht);
                 orderService.updateFinalOrder(order);
+
+
+                //add imei
+                TrackerDeviceModelEntity deviceInfo = new TrackerDeviceModelEntity();
+                deviceInfo.setUserId(existingUser.getId()); // Set the user ID
+                deviceInfo.setImei(imei);
+                // Set other device info fields as needed
+                trackerDeviceService.saveDeviceInfo(deviceInfo);
+                //add imei
 
                 // Send email
                 String toEmail = kcpEmail; // Replace with recipient's email
