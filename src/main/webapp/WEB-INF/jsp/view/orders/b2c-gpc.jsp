@@ -20,6 +20,8 @@
 
   <jsp:include page="./../../partial_new/header-link.jsp"></jsp:include>
 
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/modal-style.css">
+
   <style>
     .severity-dot {
       width: 16px;
@@ -33,6 +35,26 @@
     }
     table.dataTable td {
       vertical-align: middle;
+    }
+    .btn-b2b-sm{
+      border-radius: 6px;
+      padding: 12px 20px 12px 20px;
+      color: #FFF;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .btn-disabled{
+      pointer-events: none;
+    }
+    .btn-b2b-sm-download{
+      background: #FFF;
+      color: #000F3C;
+      border-color: #000F3C;
+    }
+    .btn-b2b-sm-base, .btn-b2b-sm-base:hover{
+      background: #000F3C;
+      color: #FFF;
+      border-color: #000F3C;
     }
   </style>
 
@@ -67,7 +89,7 @@
           </div>
           <div class="col-md-6">
             <div class="float-right">
-              <a href="${pageContext.request.contextPath}/vts/add-driver-info"class="btn b2b-btn-submit-blue mr-2"><i class="fa fa-plus-circle"></i> Add New Entry</a>
+              <button data-toggle="modal" data-target="#newOrderEntry" class="btn b2b-btn-submit-blue mr-2"> Add New Order</button>
             </div>
           </div>
         </div>
@@ -83,6 +105,9 @@
         <%--row block 1--%>
         <div class="row">
           <div class="col-md-12 col-lg-12 col-sm-12">
+
+            <div id="createSrNotification"></div>
+
             <div class="card">
               <div class="card-body">
                 <div class="card-head-custom">
@@ -131,44 +156,6 @@
                           <th>Action</th>
                           </thead>
                           <tbody>
-                          <tr>
-                              <td>820999 402999</td>
-                              <td>E222230 8000001</td>
-                              <td>To Be Shared</td>
-                              <td>To Be Shared</td>
-                              <td>Basic</td>
-                              <td>Kite N Co</td>
-                              <td>
-                                  <button class="btn btn-info btn-sm">New Order</button>
-                              </td>
-                            <td>VTS Wired</td>
-                            <td>GP_KNC_Tracker</td>
-                            <td>
-                              <button class="btn btn-default btn-sm">Download Excel</button>
-                            </td>
-                            <td>
-                              <button class="btn btn-info btn-sm">Changes Status</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>820999 402999</td>
-                            <td>E222230 8000001</td>
-                            <td>To Be Shared</td>
-                            <td>To Be Shared</td>
-                            <td>Basic</td>
-                            <td>Kite N Co</td>
-                            <td>
-                              <button class="btn btn-success btn-sm">New Order</button>
-                            </td>
-                            <td>VTS Wired</td>
-                            <td>GP_KNC_Tracker</td>
-                            <td>
-                              <button class="btn btn-default btn-sm">Download Excel</button>
-                            </td>
-                            <td>
-                              <button class="btn btn-info btn-sm">Changes Status</button>
-                            </td>
-                          </tr>
 
                           </tbody>
                         </table>
@@ -189,6 +176,150 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+  </div>
+
+  <div class="modal left fade" id="newOrderEntry" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title float-left" id="myModalLabel3">Order Entry</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                  style="height: 20px;width:
+                            20px;border: 1px solid;
+                            display: block;
+                            border-radius: 50%;
+                            padding: 0px;
+                            line-height: 17px;
+                            margin-top: 5px;
+                            margin-right: 5px;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal b2b-custom-form" id="create_order_form">
+            <div class="card-body p-0">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="customer_name">Customer name <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="customer_name" placeholder="Select" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="address">Address <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="address" placeholder="Select" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_type">Product Type <span class="text-danger"> *</span></label>
+                    <select class="form-control" id="product_type" required>
+                      <option value="1">SIM Less</option>
+                      <option value="2">SIM Based</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="vts_sim">VTS Sim</label>
+                    <input type="text" class="form-control" id="vts_sim" placeholder="Select">
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="kcp_contact_num">Contact Number <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="kcp_contact_num" placeholder="Select" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_name">Product Name</label>
+                    <input type="text" class="form-control" id="product_name" placeholder="Select">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn b2b-submit-btn-base btn-outline-primary float-left">close</button>
+          <button type="submit" class="btn btn-primary b2b-submit-btn-base" onclick="createNewOrder()">Add Entry</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal left fade" id="changeStatus" tabindex="" role="dialog" aria-labelledby="changeStatus" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title float-left" id="myModalLabel2">Update Status</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                  style="height: 20px;width:
+                            20px;border: 1px solid;
+                            display: block;
+                            border-radius: 50%;
+                            padding: 0px;
+                            line-height: 17px;
+                            margin-top: 5px;
+                            margin-right: 5px;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal b2b-custom-form" id="update_order_form">
+            <div class="card-body p-0">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="current_status">Current Status </label>
+                    <input type="hidden" id="row_id">
+                    <select class="form-control" id="current_status" disabled>
+                      <option value="">Please Select</option>
+                      <option value="0">New Order</option>
+                      <option value="1">Scheduled</option>
+                      <option value="2">Sim Active</option>
+                      <option value="3">Installation</option>
+                      <option value="4">Finalization</option>
+                      <option value="5">Onboarded</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="updated_status">Update Status <span class="text-danger"> *</span></label>
+                    <select class="form-control" id="updated_status" required>
+                      <option value="">Please Select</option>
+                      <option value="0">New Order</option>
+                      <option value="1">Scheduled</option>
+                      <option value="2">Sim Active</option>
+                      <option value="3">Installation</option>
+                      <option value="4">Finalization</option>
+                      <option value="5">Onboarded</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="note">Add Note (Optional)</label>
+                    <textarea type="text" class="form-control" id="note" placeholder="Select"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary b2b-submit-btn-base" onclick="updateStatus()">Update</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <jsp:include page="./../../partial_new/footer.jsp" />
@@ -213,18 +344,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.css">
 
 
-<noscript>
-  $( document ).ready(function() {
-    $(".loader_body").hide();
-  });
-</noscript>
-
 <script>
   const base_url = $("#domain_url").val() + "/";
   let dataTable;
   $( document ).ready(function() {
     $(".select2").select2();
-
     //Date range as a button
     $('#daterange-btn').daterangepicker(
             {
@@ -289,18 +413,45 @@
         {data: 'vts_sim'},
         {data: 'sim_kit'},
         {data: 'product_type'},
+        {
+          data: 'product_type',
+          render: function (data, type, full, row) {
+            return "Kite & CO";
+          }
+        },
 
-        {data: 'active',
+        {data: 'status',
           autowidth: true,
           render: function (data, type, full, row) {
-            if (data == true) {
-              return '<span class="right badge badge-info">In Service</span>';
-            } else if(data == false){
-              return '<span class="right badge badge-warning">Out of Service</span>';
+            if (data == 0) {
+              return '<button class="btn btn-b2b-sm btn-info btn-sm btn-disabled">New Order</button>';
+            } else if(data == 1){
+              return '<button class="btn btn-b2b-sm btn-dark btn-sm btn-disabled">Scheduled</button>';
+            } else if(data == 2){
+              return '<button class="btn btn-b2b-sm btn-danger btn-sm btn-disabled">Sim Active</button>';
+            } else if(data == 3){
+              return '<button class="btn btn-b2b-sm btn-warning btn-sm btn-disabled">Installation</button>';
+            } else if(data == 4){
+              return '<button class="btn btn-b2b-sm btn-primary btn-sm btn-disabled">Finalization</button>';
             }else{
-              return '<span class="right badge badge-danger">N/A</span>';
+              return '<button class="btn btn-b2b-sm btn-success btn-sm btn-disabled">Onboarded</button>';
             }
           }},
+
+        {data: 'pack_name'},
+        {data: 'rate_plan_name'},
+        {
+          data: 'id',
+          render: function (data, type, full, row){
+            return '<button class="btn btn-b2b-sm btn-b2b-sm-download btn-sm">Download Excel</button>';
+          }
+        },
+        {
+          data: 'id',
+          render: function (data, type, full, row){
+            return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status">Change Status</button>';
+          }
+        }
       ]
     });
 
@@ -311,7 +462,116 @@
 
   } );
 
+  function createNewOrder(){
+    $(".loader_body").show();
 
+    if($("#create_order_form").parsley().validate()){
+
+      let orderInfo = {
+        customer_name: $("#customer_name").val(),
+        kcp_contact_num: $("#kcp_contact_num").val(),
+        address: $( "#address" ).val(),
+      }
+
+
+      $.ajax({
+        type: 'POST',
+        url: base_url + "api/web/orders/b2c-gpc/save",
+        data: {orderInfo: JSON.stringify(orderInfo)},
+        success: function (resultData) {
+          $(".loader_body").hide();
+          if (resultData.code === 200) {
+            let custom_msg = "<div class='alert alert-success success-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+            //$("#notification_bar").show();
+            $("#createSrNotification").html(custom_msg);
+            modalClose();
+            getOrderData();
+            $('#create_order_form')[0].reset();
+          } else {
+            $(".loader_body").hide();
+            let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+            $("#createSrNotification").html(custom_msg);
+            $('#create_order_form')[0].reset();
+            modalClose()
+          }
+        },
+        error: function (resultData) {
+          $(".loader_body").hide();
+          let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+          $("#createSrNotification").html(custom_msg);
+          modalClose()
+          $('#create_order_form')[0].reset();
+        }
+      });
+    } else{
+      $(".loader_body").hide();
+    }
+  }
+
+  function modalClose(){
+    $("#newOrderEntry").modal('hide');
+  }
+
+  $('#dataTable tbody').on( 'click', 'button.change-status', function (e) {
+    //$("#update_order_form").clear();
+    $('#create_order_form')[0].reset();
+    let data = dataTable.row( $(this).parents('#dataTable tbody tr') ).data();
+    $("#current_status").val(data.status).change();
+    $("#row_id").val(data.id);
+    $("#changeStatus").modal("show");
+  } );
+
+  $('#dataTable tbody').on( 'click', 'button.btn-b2b-sm-download', function () {
+    let data = dataTable.row( $(this).parents('tr') ).data();
+    alert( data[0] +"'Download: "+ data[ 5 ] );
+  } );
+
+
+  function updateStatus(){
+    $(".loader_body").show();
+
+    if($("#update_order_form").parsley().validate()){
+
+      let orderStatusData = {
+        status: $("#updated_status").val(),
+      }
+      let id = $("#row_id").val();
+
+
+      $.ajax({
+        type: 'POST',
+        url: base_url + "api/web/orders/b2c-gpc/update-status",
+        data: {orderStatusData: JSON.stringify(orderStatusData), id: parseInt(id)},
+        success: function (resultData) {
+          $(".loader_body").hide();
+          if (resultData.code === 200) {
+            let custom_msg = "<div class='alert alert-success success-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+            //$("#notification_bar").show();
+            $("#createSrNotification").html(custom_msg);
+            $("#changeStatus").modal("hide");
+            getOrderData();
+            $('#update_order_form')[0].reset();
+          } else {
+            $(".loader_body").hide();
+            let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+            $("#createSrNotification").html(custom_msg);
+            $("#changeStatus").modal("hide");
+            $('#update_order_form')[0].reset();
+          }
+        },
+        error: function (resultData) {
+          $(".loader_body").hide();
+          let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+          $("#createSrNotification").html(custom_msg);
+          $("#changeStatus").modal("hide");
+          $('#update_order_form')[0].reset();
+        }
+      });
+    } else{
+      $(".loader_body").hide();
+    }
+
+  }
 
 </script>
 
