@@ -211,7 +211,7 @@
                                                            data-mrp="${order.mrp}" data-alt_num="${order.alt_contact_num}" data-kcp_name="${order.kcp_name}"
                                                            data-kcp_email="${order.kcp_email}" data-kcp_contact="${order.kcp_contact_num}"
                                                            data-support_partner="${order.sup_partner_name}" data-product_type="${order.product_type}"
-                                                           data-aud_num="${order.audio_num}" data-company_name="${order.company_name}">${order.id}</a>
+                                                           data-aud_num="${order.audio_num}" data-company_name="${order.company_name}" data-updated_at="${order.updatedAt}">${order.id}</a>
                                                         </td>
 
                                                         <td>${order.chtTicket}</td>
@@ -308,7 +308,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="status_date">Last Status Change Date</label>
-                                        <input type="text" class="form-control" name="status_date" id="status_date"  placeholder="Select">
+                                        <input type="hidden" class="form-control" name="status_date" id="status_date"  placeholder="Select">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -930,6 +930,7 @@ $(document).ready(function() {
             var supp_partner = $(this).data("support_partner");
             var product_type = $(this).data("product_type");
             var aud_num = $(this).data("aud_num");
+            var updated_at = $(this).data("updatedAt");
 
             // Log the captured values to the console
             console.log("Link clicked! Your task goes here.");
@@ -955,6 +956,7 @@ $(document).ready(function() {
             $("#support_partner").val(supp_partner);
             $("#product_type").val(product_type);
             $("#aud_auth_number").val(aud_num);
+            $("#status_date").val(updated_at);
             // ... Other code
         });
     });

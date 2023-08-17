@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -76,6 +79,7 @@ public class OrderController {
 
                 // Update the fields based on the inputs
                 order.setStatus(Integer.parseInt(updatedStatus));
+                order.setUpdatedAt(new Date());
              //   order.setChtTicket(updatedCht); // Assuming there's a setChtTicket method
 
                 // Update other fields as needed
@@ -135,8 +139,13 @@ public class OrderController {
             // Use the orderId to fetch the existing order entity from the database
             OrderModelEntity order = orderService.getOrderById(orderId);
 
+
             // Update the fields based on the inputs
             order.setStatus(Integer.parseInt(updatedStatus));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = dateFormat.format(new Date());
+            order.setUpdatedAt(Timestamp.valueOf(formattedDate));
+          //  order.setUpdatedAt(new Date());
             //   order.setChtTicket(updatedCht); // Assuming there's a setChtTicket method
 
             // Update other fields as needed
@@ -174,7 +183,7 @@ public class OrderController {
             boolean emailSent = emailSenderService.sendEmail(toEmail, body, subject, cc);
 
             String toEmail_kcp = kcpMail;
-            String body_kcp = "Order Onboarded Successfully. " + "Username : "+ kcpPhone;
+            String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "880"+kcpPhone;
             String subject_kcp = "VTS Order Update Notification";
             String cc_kcp = "jobaidur@grameenphone.com";
 
