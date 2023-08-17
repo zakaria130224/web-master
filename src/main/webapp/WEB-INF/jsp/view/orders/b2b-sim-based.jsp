@@ -990,7 +990,9 @@ $(document).ready(function() {
                 $("#editCht").val(chttickets);
                 $("#editCustomerName").val(customer);
                 $("#editMsisdn").val(msisdn);
-                $("#updateFinalStatus").val(status);
+                $("#editStatus").val(status);
+                console.log("Status:", status);
+                console.log("Selected Value:", $("#editStatus").val());
                 $("#changeStatusModal").modal("show");
             }
             else if(status == 0 || status == null) {
@@ -999,6 +1001,9 @@ $(document).ready(function() {
                 $("#editCustomerName").val(customer);
                 $("#editMsisdn").val(msisdn);
                // $("#newOrderEntry").modal("show");
+                $("#editStatus").val(status);
+                console.log("Status:", status);
+                console.log("Selected Value:", $("#editStatus").val());
                 $("#changeStatusModal").modal("show");
             }
             else if(status == 2) {
@@ -1007,6 +1012,9 @@ $(document).ready(function() {
                 $("#editCustomerName").val(customer);
                 $("#editMsisdn").val(msisdn);
                 // $("#newOrderEntry").modal("show");
+                $("#editStatus").val(status);
+                console.log("Status:", status);
+                console.log("Selected Value:", $("#editStatus").val());
                 $("#changeStatusModal").modal("show");
             }
 
@@ -1016,6 +1024,9 @@ $(document).ready(function() {
                 $("#kcp_contact").val(kcp_contact);
                 $("#kcp_name").val(kcp_name);
                 $("#kcp_email").val(kcp_email);
+                $("#updateFinalStatus").val(status);
+                console.log("Status:", status);
+                console.log("Selected Value:", $("#updateFinalStatus").val());
 
                 $("#changeFinalStatusModal").modal("show");
             }
@@ -1026,6 +1037,9 @@ $(document).ready(function() {
                 $("#editCustomerNames").val(customer);
                 $("#kcpmail").val(kcp_email);
                 $("#kcpphone").val(kcp_contact);
+                $("#editStatuss").val(status);
+                console.log("Status:", status);
+                console.log("Selected Value:", $("#editStatuss").val());
                // console.log(kcp_contact);
                 // $("#newOrderEntry").modal("show");
                 $("#changeStatusOnboardModal").modal("show");

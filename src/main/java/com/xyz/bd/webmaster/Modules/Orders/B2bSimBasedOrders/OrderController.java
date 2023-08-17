@@ -119,7 +119,7 @@ public class OrderController {
                 String toEmail = "mahmud.md@grameenphone.com";
                 String body = "Order data has been updated for order ID: " + orderId + ". " + "Order Status : "+ updatedStatus;
                 String subject = "VTS Order Data Update Notification";
-                String cc = "jobaidur@grameenphone.com";
+                String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com";
 
                 boolean emailSent = emailSenderService.sendEmail(toEmail, body, subject, cc);
                 if (emailSent) {
@@ -185,7 +185,7 @@ public class OrderController {
             String toEmail = "mahmud.md@grameenphone.com";
             String body = "Order data has been updated for order ID: " + orderId + ". " + "Order Status : "+ updatedStatus;
             String subject = "VTS Order Data Update Notification";
-            String cc = "jobaidur@grameenphone.com";
+            String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com";
 
             boolean emailSent = emailSenderService.sendEmail(toEmail, body, subject, cc);
 
@@ -296,7 +296,7 @@ public class OrderController {
                 String toEmail = kcpEmail; // Replace with recipient's email
                 String body = "Order updated for user: " + kcpContact;
                 String subject = "Order Update Notification";
-                String cc = ""; // Add CC emails if needed
+                String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com,mahmud.md@grameenphone.com"; // Add CC emails if needed
 
                 boolean emailSent = emailSenderService.sendEmail(toEmail, body, subject, cc);
                 if (emailSent) {
