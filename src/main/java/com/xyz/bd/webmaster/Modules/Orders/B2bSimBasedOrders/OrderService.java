@@ -16,5 +16,7 @@ public interface OrderService {
     OrderModelEntity getOrderById(Long orderId);
     void saveOrder(OrderModelEntity order);
 
+    void updateFinalOrder(OrderModelEntity order);
+
 }
 

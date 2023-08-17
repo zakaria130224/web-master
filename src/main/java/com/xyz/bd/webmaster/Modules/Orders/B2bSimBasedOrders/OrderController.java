@@ -1,7 +1,13 @@
 package com.xyz.bd.webmaster.Modules.Orders.B2bSimBasedOrders;
 
+import com.xyz.bd.webmaster.Modules.CommonPackages.User.UserFormData;
+import com.xyz.bd.webmaster.Modules.CommonPackages.User.UserModelEntity;
+import com.xyz.bd.webmaster.Modules.CommonPackages.User.UserService;
 import com.xyz.bd.webmaster.Modules.Orders.OrderModelEntity;
+import com.xyz.bd.webmaster.Services.CommonServices.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +22,12 @@ public class OrderController {
 
    @Autowired
     private OrderService orderService;
+
+   @Autowired
+   private UserService userService;
+
+   @Autowired
+    EmailSenderService emailSenderService;
 
     @RequestMapping(value = "/b2b-sim-based", method = RequestMethod.GET)
     public ModelAndView showOrderListPage(Model model) {
@@ -43,27 +55,6 @@ public class OrderController {
 
     }
 
-//    @RequestMapping(value = "/get-orders", method = RequestMethod.GET)
-//    @ResponseBody // This annotation indicates that the returned data should be treated as the response body, not a view
-//    public List<OrderModelEntity> getOrders() {
-//        return orderService.getAllOrder();
-//    }
-
-//    @PostMapping("/save-data")
-//    @ResponseBody
-//    public String saveData(@ModelAttribute OrderModelEntity orderModelEntity) {
-//        orderService.saveData(orderModelEntity);
-//        return "Data saved successfully!";
-//    }
-
-//    @PostMapping("/upload-excel-ajax")
-//    @ResponseBody
-//    public String uploadExcelAjax(@RequestParam("msisdn") String msisdn,
-//                                  @RequestParam("excelFile") MultipartFile excelFile) {
-//        orderService.processExcelAndSaveToDatabase(msisdn, excelFile);
-//        return "Data and file uploaded successfully!";
-//    }
-
 
         @PostMapping("/save-data")
         @ResponseBody
@@ -78,8 +69,7 @@ public class OrderController {
         public String updateData(@RequestParam("orderId") Long orderId,
                                  @RequestParam("updatedStatus") String updatedStatus,
                                  @RequestParam("updatedCht") String updatedCht,
-                                 @RequestParam("addNote") String addNote,
-                                 @RequestParam("userOtp") String userOtp) {
+                                 @RequestParam("addNote") String addNote) {
             try {
                 // Use the orderId to fetch the existing order entity from the database
                 OrderModelEntity order = orderService.getOrderById(orderId);
@@ -93,11 +83,210 @@ public class OrderController {
                 // Save the updated entity
                 orderService.saveOrder(order);
 
-                return "Data updated successfully!";
+
+                if(updatedStatus == "0"){
+                    updatedStatus = "New Order";
+                }
+                else if(updatedStatus == "1"){
+                    updatedStatus  = "Schedule";
+                }
+                else if(updatedStatus == "2"){
+                    updatedStatus  = "Sim Active";
+                }
+                else if(updatedStatus == "3"){
+                    updatedStatus  = "Installation";
+                }
+                else if(updatedStatus == "4"){
+                    updatedStatus  = "Finalization";
+                }
+                else if(updatedStatus == "5"){
+                    updatedStatus  = "Onboarded";
+                }
+
+
+
+                String toEmail = "mahmud.md@grameenphone.com";
+                String body = "Order data has been updated for order ID: " + orderId + ". " + "Order Status : "+ updatedStatus;
+                String subject = "VTS Order Data Update Notification";
+                String cc = "jobaidur@grameenphone.com";
+
+                boolean emailSent = emailSenderService.sendEmail(toEmail, body, subject, cc);
+                if (emailSent) {
+                    return "Data updated successfully! Email sent";
+                } else {
+                    return "Data updated successfully! Email sending failed";
+                }
+
+                //return "Data updated successfully!";
             } catch (Exception e) {
                 return "Error updating data: " + e.getMessage();
             }
         }
+
+    @PostMapping("/update-data-onboard")
+    @ResponseBody
+    public String updateOnboardData(@RequestParam("orderId") Long orderId,
+                             @RequestParam("updatedStatus") String updatedStatus,
+                             @RequestParam("updatedCht") String updatedCht,
+                             @RequestParam("addNote") String addNote,
+                             @RequestParam("kcpMail") String kcpMail,
+                              @RequestParam("kcpPhone") String kcpPhone) {
+        try {
+            // Use the orderId to fetch the existing order entity from the database
+            OrderModelEntity order = orderService.getOrderById(orderId);
+
+            // Update the fields based on the inputs
+            order.setStatus(Integer.parseInt(updatedStatus));
+            //   order.setChtTicket(updatedCht); // Assuming there's a setChtTicket method
+
+            // Update other fields as needed
+
+            // Save the updated entity
+            orderService.saveOrder(order);
+
+
+            if(updatedStatus == "0"){
+                updatedStatus = "New Order";
+            }
+            else if(updatedStatus == "1"){
+                updatedStatus  = "Schedule";
+            }
+            else if(updatedStatus == "2"){
+                updatedStatus  = "Sim Active";
+            }
+            else if(updatedStatus == "3"){
+                updatedStatus  = "Installation";
+            }
+            else if(updatedStatus == "4"){
+                updatedStatus  = "Finalization";
+            }
+            else if(updatedStatus == "5"){
+                updatedStatus  = "Onboarded";
+            }
+
+
+
+            String toEmail = "mahmud.md@grameenphone.com";
+            String body = "Order data has been updated for order ID: " + orderId + ". " + "Order Status : "+ updatedStatus;
+            String subject = "VTS Order Data Update Notification";
+            String cc = "jobaidur@grameenphone.com";
+
+            boolean emailSent = emailSenderService.sendEmail(toEmail, body, subject, cc);
+
+            String toEmail_kcp = kcpMail;
+            String body_kcp = "Order Onboarded Successfully. " + "Username : "+ kcpPhone;
+            String subject_kcp = "VTS Order Update Notification";
+            String cc_kcp = "jobaidur@grameenphone.com";
+
+            boolean emailSent_kcp = emailSenderService.sendEmail(toEmail_kcp, body_kcp, subject_kcp, cc_kcp);
+            if (emailSent) {
+                return "Data updated successfully! Email sent";
+            } else {
+                return "Data updated successfully! Email sending failed";
+            }
+
+            //return "Data updated successfully!";
+        } catch (Exception e) {
+            return "Error updating data: " + e.getMessage();
+        }
+    }
+
+//    @PostMapping("/updateOrderAndUser")
+//    @ResponseBody
+//    public ResponseEntity<String> updateOrderAndUser(
+//            @RequestParam Long excelOrderId,
+//            @RequestParam Integer updateFinalStatus,
+//            @RequestParam String kcpName,
+//            @RequestParam String kcpContact,
+//            @RequestParam String kcpEmail,
+//            @RequestParam String imei,
+//            @RequestParam String updatedCht) {
+//        try {
+//            // Check if the user exists by username (kcpContact)
+//            UserModelEntity existingUser = userService.findByUserName(kcpContact);
+//
+//            if (existingUser == null) {
+//                // Create a new user entry in tbl_user
+//                UserModelEntity newUser = new UserModelEntity();
+//                newUser.setUserName(kcpContact);
+//                newUser.setFullName(kcpName);
+//                newUser.setMobileNumber(kcpContact);
+//                newUser.setIsActive(1);
+//                userService.save(newUser);
+//            }
+//
+//            // Update the order by orderId (excelOrderId)
+//            OrderModelEntity order = orderService.getOrderById(excelOrderId);
+//
+//            if (order != null) {
+//                order.setStatus(updateFinalStatus);
+//                // Update other fields as needed
+//                orderService.updateFinalOrder(order);
+//            }
+//
+//            return ResponseEntity.ok("Order and user updated successfully");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+//        }
+//    }
+
+    @PostMapping("/update-imei-status")
+    @ResponseBody
+    public String updateImeiStatus(
+            @RequestParam Long excelOrderId,
+            @RequestParam Integer updateFinalStatus,
+            @RequestParam String kcpName,
+            @RequestParam String kcpContact,
+            @RequestParam String kcpEmail,
+            @RequestParam String imei,
+            @RequestParam String updatedCht) {
+        try {
+            // Check if the user exists by username (kcpContact)
+            UserModelEntity existingUser = userService.findByUserName(kcpContact);
+
+            if (existingUser == null) {
+                // Create a new user entry in tbl_user
+                UserModelEntity newUser = new UserModelEntity();
+                newUser.setUserName(kcpContact);
+                newUser.setFullName(kcpName);
+                newUser.setMobileNumber(kcpContact);
+                newUser.setIsActive(1);
+                userService.save(newUser);
+            }
+
+            // Update the order by orderId (excelOrderId)
+            OrderModelEntity order = orderService.getOrderById(excelOrderId);
+
+            if (order != null) {
+                order.setStatus(updateFinalStatus);
+              //  order.setKcp_name(kcpName); // Update other fields as needed
+            //    order.setKcp_contact_num(kcpContact);
+            //    order.setKcp_email(kcpEmail);
+                order.setImei(imei);
+           //     order.setChtTicket(updatedCht);
+                orderService.updateFinalOrder(order);
+
+                // Send email
+                String toEmail = kcpEmail; // Replace with recipient's email
+                String body = "Order updated for user: " + kcpContact;
+                String subject = "Order Update Notification";
+                String cc = ""; // Add CC emails if needed
+
+                boolean emailSent = emailSenderService.sendEmail(toEmail, body, subject, cc);
+                if (emailSent) {
+                    return "Order and user updated successfully, email sent";
+                } else {
+                    return "Order and user updated successfully, email sending failed";
+                }
+            }
+
+            return "Order and user updated successfully";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "An error occurred";
+        }
+    }
 
 
 

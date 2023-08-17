@@ -50,4 +50,5 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
     private String audio_num;
     private String company_name;
     private String kcp_contact_num;
+    private String imei;
 }

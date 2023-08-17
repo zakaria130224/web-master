@@ -4,8 +4,10 @@ import com.xyz.bd.webmaster.Modules.CommonPackages.Company.CompanyModelEntity;
 import com.xyz.bd.webmaster.Modules.CommonPackages.Company.CompanyRepository;
 import com.xyz.bd.webmaster.Modules.Orders.OrderModelEntity;
 import com.xyz.bd.webmaster.Modules.Orders.OrderRepository;
+import com.xyz.bd.webmaster.Services.CommonServices.EmailSenderService;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,9 +29,13 @@ public class OrderServiceImpl implements OrderService{
     private OrderRepository orderRepository;
    @Autowired
    private CompanyRepository companyRepository;
+
+    @Autowired
+    private EmailSenderService emailSenderService;
     @Override
     public List<OrderModelEntity> getAllOrder() {
-        return orderRepository.findAll();
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        return orderRepository.findAll(sort);
     }
 
     @Override
@@ -135,6 +141,24 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public void saveOrder(OrderModelEntity order) {
         // Implement the logic to save the order to the repository
+        orderRepository.save(order);
+
+//        String toEmail = "recipient@example.com";
+//        String body = "Email body content";
+//        String subject = "Email subject";
+//        String cc = "cc@example.com"; // Optional, can be an empty string
+//        boolean emailSent = emailSenderService.sendEmail(toEmail, body, subject, cc);
+//
+//        if (emailSent) {
+//            System.out.println("Email sent successfully");
+//        } else {
+//            System.out.println("Failed to send email");
+//        }
+
+    }
+
+    @Override
+    public void updateFinalOrder(OrderModelEntity order) {
         orderRepository.save(order);
     }
 

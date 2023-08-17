@@ -256,7 +256,7 @@
                                                         <td><button type="button" class="btn btn-status" style="background-color: #000F3C;color: #F2FCFF" id="changeStatus"
                                                                     data-toggle="modal"  data-id="${order.id}" data-chttickets="${order.chtTicket}"
                                                                     data-email="${order.email}" data-status="${order.status}" data-customer="${order.customer_name}"
-                                                        data-kcp_name = "${order.kcp_name} data-kcp_contact = "${order.kcp_contact_num} data-kcp_email = "${order.kcp_email}">
+                                                        data-kcp_name = "${order.kcp_name}" data-kcp_contact = "${order.kcp_contact_num}" data-kcp_email = "${order.kcp_email}">
                                                             Change Status
                                                         </button></td>
                                                         </tr>
@@ -510,7 +510,11 @@
                                         <label for="editStatus">Update Status</label>
                                         <select name="editStatus" id="editStatus" class="form-control">
                                             <option value="0">New Order</option>
-                                            <option value="1">In Progress</option>
+                                            <option value="1">Schedule</option>
+                                            <option value="2">Sim Active</option>
+                                            <option value="3">Installation</option>
+                                            <option value="4">Finalization</option>
+                                            <option value="5">Onboarded</option>
                                         </select>
                                     </div>
                                 </div>
@@ -518,7 +522,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="editCht">Cht Ticket</label>
-                                        <input type="text" class="form-control" name="editCht" id="editCht" placeholder="">
+                                        <input type="text" class="form-control" name="editCht" id="editCht" placeholder="" readonly>
                                     </div>
                                 </div>
 
@@ -528,12 +532,12 @@
                                         <textarea type="text" class="form-control" name="add_note" id="add_note" placeholder="Add Note"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="user_otp">User OTP</label>
-                                        <input type="password" class="form-control" name="user_otp" id="user_otp" placeholder="Type">
-                                    </div>
-                                </div>
+<%--                                <div class="col-md-12">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="user_otp">User OTP</label>--%>
+<%--                                        <input type="password" class="form-control" name="user_otp" id="user_otp" placeholder="Type">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
                             </div>
                         </div>
                     </form>
@@ -545,6 +549,78 @@
             </div>
         </div>
     </div>
+
+    <!-- Onboard Modal -->
+    <div class="modal left fade" id="changeStatusOnboardModal" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title float-left" id="myModalLabel8">Change Status</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            style="height: 20px;width:
+                            20px;border: 1px solid;
+                            display: block;
+                            border-radius: 50%;
+                            padding: 0px;
+                            line-height: 17px;
+                            margin-top: 5px;
+                            margin-right: 5px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal b2b-custom-form" id="updateOnboardForm">
+                        <input type="hidden" id="editOrderIds" name="id">
+                        <input type="hidden" id="kcpmail" name="kcpmail">
+                        <input type="hidden" id="kcpphone" name="kcpphone">
+                        <div class="card-body p-0">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="form-group">
+                                        <label for="editStatus">Update Status</label>
+                                        <select name="editStatus" id="editStatuss" class="form-control">
+                                            <option value="0">New Order</option>
+                                            <option value="1">Schedule</option>
+                                            <option value="2">Sim Active</option>
+                                            <option value="3">Installation</option>
+                                            <option value="4">Finalization</option>
+                                            <option value="5">Onboarded</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="editCht">Cht Ticket</label>
+                                        <input type="text" class="form-control" name="editCht" id="editChts" placeholder="" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="add_note">Add Note</label>
+                                        <textarea type="text" class="form-control" name="add_note" id="add_notes" placeholder="Add Note"></textarea>
+                                    </div>
+                                </div>
+                                 <div class="col-md-12">
+                                  <div class="form-group">
+                                  <label for="user_otp">User OTP</label>
+                                  <input type="password" class="form-control" name="user_otp" id="user_otp"  pattern="123456" placeholder="OTP">
+                                   </div>
+                                  </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <%--                    <button type="submit" class="btn b2b-submit-btn-base btn-outline-primary float-left">close</button>--%>
+                    <button type="submit" class="btn btn-custom-grey" id="successOnboardmodal">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Onboard Modal -->
 
     <!-- Imei and user add modal -->
     <div class="modal left fade" id="changeFinalStatusModal" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -692,6 +768,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.css">
 
 <script>
+    const base_url_third = $("#domain_url").val() + "/";
 $(document).ready(function() {
 // When the update button is clicked, send data to the server
         $("#successmodal").click(function() {
@@ -700,20 +777,20 @@ $(document).ready(function() {
         var updatedStatus = $("#editStatus").val();
         var updatedCht = $("#editCht").val();
         var addNote = $("#add_note").val();
-        var userOtp = $("#user_otp").val();
+       // var userOtp = $("#user_otp").val();
 
 // Create data object to send to the server
         var data = {
         orderId: orderId,
         updatedStatus: updatedStatus,
         updatedCht: updatedCht,
-        addNote: addNote,
-        userOtp: userOtp
+        addNote: addNote
+        //userOtp: userOtp
         };
 
         // Send data to the server using AJAX
         $.ajax({
-        url: "/update-data", // Replace with your server URL
+        url: base_url_third + "orders/update-data", // Replace with your server URL
         type: "POST",
         data: data,
         success: function(response) {
@@ -729,42 +806,102 @@ $(document).ready(function() {
 </script>
 
 <script>
+    const base_url_4 = $("#domain_url").val() + "/";
     $(document).ready(function() {
 // When the update button is clicked, send data to the server
-        $("#successfinalmodal").click(function() {
+        $("#successOnboardmodal").click(function() {
 // Get values from modal inputs
-            var excelOrderId = $("#excelOrderId").val();
-            var updateFinalStatus = $("#updateFinalStatus").val();
-       //     var updatedCht = $("#editCht").val();
-      //      var addNote = $("#add_note").val();
-            var kcpName = $("#kcpName").val();
-            var kcpEmail = $("#kcpEmail").val();
-            var kcpContact = $("#kcpContact").val();
+            var orderId = $("#editOrderIds").val();
+            var updatedStatus = $("#editStatuss").val();
+            var updatedCht = $("#editChts").val();
+            var addNote = $("#add_notes").val();
+             var kcpmail = $("#kcpmail").val();
+             var kcpphone = $("#kcpphone").val();
+            var user_otp = $("#user_otp").val();
+            if(user_otp == '123456') {
+                console.log(kcpphone);
 
 // Create data object to send to the server
-            var data = {
-                orderId: orderId,
-                updatedStatus: updatedStatus,
-                updatedCht: updatedCht,
-                addNote: addNote,
-                userOtp: userOtp
-            };
+                var data = {
+                    orderId: orderId,
+                    updatedStatus: updatedStatus,
+                    updatedCht: updatedCht,
+                    addNote: addNote,
+                    kcpMail: kcpmail,
+                    kcpPhone: kcpphone
+                };
 
-            // Send data to the server using AJAX
+                // Send data to the server using AJAX
+                $.ajax({
+                    url: base_url_4 + "orders/update-data-onboard", // Replace with your server URL
+                    type: "POST",
+                    data: data,
+                    success: function (response) {
+                        alert("Data updated successfully!");
+                        // Close the modal or update UI as needed
+                    },
+                    error: function (xhr) {
+                        alert("Error updating data: " + xhr.responseText);
+                    }
+                });
+            }
+            else {
+                alert("OTP Error");
+            }
+        });
+    });
+</script>
+
+<script>
+    const base_url_second = $("#domain_url").val() + "/";
+
+        $("#successfinalmodal").click(function() {
+
+            var excelOrderId =  $("#excelOrderId").val();
+            var updateFinalStatus = $("#updateFinalStatus").val();
+            var updatedCht =  $("#chtvalue").val();
+            var kcpName =  $("#kcp_name").val();
+            var kcpEmail =  $("#kcp_email").val();
+            var kcpContact = $("#kcp_contact").val();
+            var imei = $("#imei").val();
+            console.log(excelOrderId);
+
+            $("#updateFinalStatus").val(updateFinalStatus);
+            // $("#kcpName").val(kcpName);
+            // $("#kcpContact").val(kcpContact);
+            // $("#kcpEmail").val(kcpEmail);
+            // $("#imei").val(imei);
+            // $("#chtvalue").val(updatedCht);
+
+
+
+            // Send the form data to the server
             $.ajax({
-                url: "/update-data", // Replace with your server URL
+                url: base_url_second + "orders/update-imei-status",
                 type: "POST",
-                data: data,
-                success: function(response) {
-                    alert("Data updated successfully!");
-                    // Close the modal or update UI as needed
+                data: {
+                    excelOrderId: excelOrderId,
+                    updateFinalStatus: updateFinalStatus,
+                    kcpName: kcpName,
+                    kcpContact: "880"+ kcpContact,
+                    kcpEmail: kcpEmail,
+                    imei: imei,
+                    updatedCht: updatedCht
                 },
-                error: function(xhr) {
-                    alert("Error updating data: " + xhr.responseText);
+
+                success: function(response) {
+                    // Handle success
+                  //  console.log(data);
+                    alert("Order and user updated successfully");
+                    // Refresh or update UI as needed
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.log('test');
+                    alert("An error occurred");
                 }
             });
         });
-    });
 </script>
 
 
@@ -828,6 +965,7 @@ $(document).ready(function() {
 
 
 <script>
+    const base_url_first = $("#domain_url").val() + "/";
     $(document).ready(function() {
         // When the edit button is clicked, populate the modal with data
         $(".btn-status").click(function() {
@@ -849,7 +987,7 @@ $(document).ready(function() {
                 $("#editMsisdn").val(msisdn);
                 $("#changeStatusModal").modal("show");
             }
-            else if(status == 0 || status == '') {
+            else if(status == 0 || status == null) {
                 $("#editOrderId").val(id);
                 $("#editCht").val(chttickets);
                 $("#editCustomerName").val(customer);
@@ -857,8 +995,16 @@ $(document).ready(function() {
                // $("#newOrderEntry").modal("show");
                 $("#changeStatusModal").modal("show");
             }
+            else if(status == 2) {
+                $("#editOrderId").val(id);
+                $("#editCht").val(chttickets);
+                $("#editCustomerName").val(customer);
+                $("#editMsisdn").val(msisdn);
+                // $("#newOrderEntry").modal("show");
+                $("#changeStatusModal").modal("show");
+            }
 
-            else if(status == 4) {
+            else if(status == 3) {
                 $("#excelOrderId").val(id);
                 $("#chtvalue").val(chttickets);
                 $("#kcp_contact").val(kcp_contact);
@@ -866,6 +1012,17 @@ $(document).ready(function() {
                 $("#kcp_email").val(kcp_email);
 
                 $("#changeFinalStatusModal").modal("show");
+            }
+
+            else if(status == 4) {
+                $("#editOrderIds").val(id);
+                $("#editChts").val(chttickets);
+                $("#editCustomerNames").val(customer);
+                $("#kcpmail").val(kcp_email);
+                $("#kcpphone").val(kcp_contact);
+               // console.log(kcp_contact);
+                // $("#newOrderEntry").modal("show");
+                $("#changeStatusOnboardModal").modal("show");
             }
 
         });
@@ -878,7 +1035,7 @@ $(document).ready(function() {
 
             // Send AJAX request to update data using id, email, customer values
             $.ajax({
-                url: "/update-data",
+                url: base_url_first+ "orders/update-data",
                 type: "POST",
                 data: {
                     id: id,
@@ -902,13 +1059,16 @@ $(document).ready(function() {
 </script>
 <script>
     $(document).ready(function() {
+        const base_url = $("#domain_url").val() + "/";
         $("#saveBtn").click(function() {
+            var contextPath = '<%= request.getContextPath() %>';
+            console.log(contextPath);
             var formData = new FormData();
             formData.append("chtticket", $("#chtticket").val());
             formData.append("excelFile", $("#upload_file")[0].files[0]);
 
             $.ajax({
-                url: "/save-data",
+                url: base_url + "orders/save-data",
                 type: "POST",
                 data: formData,
                 contentType: false,
@@ -975,7 +1135,7 @@ $(document).ready(function() {
             paging: true,
             lengthChange: false,
             searching: false,
-            ordering: true,
+            ordering: false,
             info: true,
             autoWidth: false,
             responsive: true,
