@@ -100,7 +100,7 @@ public class OrderServiceImpl implements OrderService{
                 }
 
                 OrderModelEntity orderModelEntity = new OrderModelEntity();
-                orderModelEntity.setChtTicket(chtticket);
+                /*orderModelEntity.setChtTicket(chtticket);
                 orderModelEntity.setBs_code(bsCode);
                 orderModelEntity.setCompany_name(companyName);
                 orderModelEntity.setVts_sim(vtsSim);
@@ -117,7 +117,7 @@ public class OrderServiceImpl implements OrderService{
                 orderModelEntity.setSup_partner_name(supportPartner);
                 orderModelEntity.setProduct_type(productType);
                 orderModelEntity.setAudio_num(audNum);
-                orderModelEntity.setStatus(0);
+                orderModelEntity.setStatus(0);*/
 
 
                 orderRepository.save(orderModelEntity);
