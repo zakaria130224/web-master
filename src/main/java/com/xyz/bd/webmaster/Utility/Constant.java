@@ -14,6 +14,8 @@ public class Constant {
     public static ResponseHeader generalFailed = new ResponseHeader(1, "Operations Failed");
     public static String applicationName = "web-master";
 
+    public static String baseRestApiPath = "/api/web/";
+
     public static DTOStatus srOpenStatus = new DTOStatus(1, "Open");
     public static DTOStatus srInProgressStatus = new DTOStatus(2, "In Progress");
     public static DTOStatus srCancelledStatus = new DTOStatus(3, "Cancelled");
@@ -45,5 +47,7 @@ public class Constant {
         }
         return obj1;
     }
+
+
 
 }
