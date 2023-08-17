@@ -55,9 +55,9 @@ public class OrderController {
 //        }
 
         for (OrderModelEntity order : orders) {
-            System.out.println("Order ID: " + order.getId());
+            /*System.out.println("Order ID: " + order.getId());
             System.out.println("MSISDN: " + order.getChtTicket());
-            System.out.println("Email: " + order.getEmail());
+            System.out.println("Email: " + order.getEmail());*/
             // Print more properties as needed
         }
 
@@ -85,7 +85,7 @@ public class OrderController {
                 OrderModelEntity order = orderService.getOrderById(orderId);
 
                 // Update the fields based on the inputs
-                order.setStatus(Integer.parseInt(updatedStatus));
+                //order.setStatus(Integer.parseInt(updatedStatus));
                 order.setUpdatedAt(new Date());
              //   order.setChtTicket(updatedCht); // Assuming there's a setChtTicket method
 
@@ -148,7 +148,7 @@ public class OrderController {
 
 
             // Update the fields based on the inputs
-            order.setStatus(Integer.parseInt(updatedStatus));
+            //order.setStatus(Integer.parseInt(updatedStatus));
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String formattedDate = dateFormat.format(new Date());
             order.setUpdatedAt(Timestamp.valueOf(formattedDate));
@@ -275,7 +275,7 @@ public class OrderController {
             OrderModelEntity order = orderService.getOrderById(excelOrderId);
 
             if (order != null) {
-                order.setStatus(updateFinalStatus);
+                //order.setStatus(updateFinalStatus);
               //  order.setKcp_name(kcpName); // Update other fields as needed
             //    order.setKcp_contact_num(kcpContact);
             //    order.setKcp_email(kcpEmail);

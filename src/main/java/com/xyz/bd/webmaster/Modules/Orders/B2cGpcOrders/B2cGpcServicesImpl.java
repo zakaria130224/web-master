@@ -76,10 +76,11 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
             OrderModelEntity orderModelEntity = new OrderModelEntity();
 
-            orderModelEntity.setCustomer_name(order.getCustomer_name());
+            orderModelEntity.setCustomerName(order.getCustomerName());
             orderModelEntity.setAddress(order.getAddress());
-            orderModelEntity.setProduct_type(order.getProduct_type());
-            orderModelEntity.setKcp_contact_num(order.getKcp_contact_num());
+            orderModelEntity.setProductId(order.getProductId());
+            orderModelEntity.setCustomerContactNumber(order.getCustomerContactNumber());
+            orderModelEntity.setStatusName("New Order");
 
             orderModelEntity.setCreatedBy(SessionManager.getUserLoginName(request));
             orderModelEntity.setCreatedAt(Helper.getCurrentDate());
@@ -111,7 +112,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
             OrderModelEntity orderModelEntity = orderRepository.getById(id);
 
-            orderModelEntity.setStatus(updateStatus.getStatus());
+            orderModelEntity.setStatusName(updateStatus.getStatusName());
 
             orderModelEntity.setUpdatedBy(SessionManager.getUserLoginName(request));
             orderModelEntity.setUpdatedAt(Helper.getCurrentDate());

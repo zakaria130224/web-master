@@ -56,6 +56,9 @@
       color: #FFF;
       border-color: #000F3C;
     }
+    .card-head-custom{
+      height: 50px;
+    }
   </style>
 
 </head>
@@ -112,7 +115,19 @@
               <div class="card-body">
                 <div class="card-head-custom">
                   <div class="float-left">
-                    <h3 class="b2b-font-20-500 black-10 float-left">Order and Installation List</h3>
+                    <h3 class="b2b-font-20-500 black-10 float-left pt-2">Order and Installation List</h3>
+                  </div>
+
+                  <div class="float-right mr-5">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="padding-left:30px; padding-right: 30px">
+                        Export
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Export in PDF</a>
+                        <a class="dropdown-item" href="#">Export in Excel</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
