@@ -15,4 +15,6 @@ public interface B2cGpcServices {
     DataTablesOutput<OrderModelEntity> findAllB2cOrdersList(HttpServletRequest request, String customQuery, DataTablesInput input);
 
     CommonRestResponse addNewOrder(HttpServletRequest request, String orderInfo);
+
+    CommonRestResponse updateOrderStatus(HttpServletRequest request, String orderStatusData, Long id);
 }

@@ -36,6 +36,26 @@
     table.dataTable td {
       vertical-align: middle;
     }
+    .btn-b2b-sm{
+      border-radius: 6px;
+      padding: 12px 20px 12px 20px;
+      color: #FFF;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .btn-disabled{
+      pointer-events: none;
+    }
+    .btn-b2b-sm-download{
+      background: #FFF;
+      color: #000F3C;
+      border-color: #000F3C;
+    }
+    .btn-b2b-sm-base, .btn-b2b-sm-base:hover{
+      background: #000F3C;
+      color: #FFF;
+      border-color: #000F3C;
+    }
   </style>
 
 </head>
@@ -162,7 +182,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title float-left" id="myModalLabel2">Order Entry</h4>
+          <h4 class="modal-title float-left" id="myModalLabel3">Order Entry</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                   style="height: 20px;width:
                             20px;border: 1px solid;
@@ -233,6 +253,75 @@
     </div>
   </div>
 
+  <div class="modal left fade" id="changeStatus" tabindex="" role="dialog" aria-labelledby="changeStatus" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title float-left" id="myModalLabel2">Update Status</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                  style="height: 20px;width:
+                            20px;border: 1px solid;
+                            display: block;
+                            border-radius: 50%;
+                            padding: 0px;
+                            line-height: 17px;
+                            margin-top: 5px;
+                            margin-right: 5px;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal b2b-custom-form" id="update_order_form">
+            <div class="card-body p-0">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="current_status">Current Status </label>
+                    <input type="hidden" id="row_id">
+                    <select class="form-control" id="current_status" disabled>
+                      <option value="">Please Select</option>
+                      <option value="0">New Order</option>
+                      <option value="1">Scheduled</option>
+                      <option value="2">Sim Active</option>
+                      <option value="3">Installation</option>
+                      <option value="4">Finalization</option>
+                      <option value="5">Onboarded</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="updated_status">Update Status <span class="text-danger"> *</span></label>
+                    <select class="form-control" id="updated_status" required>
+                      <option value="">Please Select</option>
+                      <option value="0">New Order</option>
+                      <option value="1">Scheduled</option>
+                      <option value="2">Sim Active</option>
+                      <option value="3">Installation</option>
+                      <option value="4">Finalization</option>
+                      <option value="5">Onboarded</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="note">Add Note (Optional)</label>
+                    <textarea type="text" class="form-control" id="note" placeholder="Select"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary b2b-submit-btn-base" onclick="updateStatus()">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <jsp:include page="./../../partial_new/footer.jsp" />
 
 </div>
@@ -255,18 +344,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.css">
 
 
-<noscript>
-  $( document ).ready(function() {
-    $(".loader_body").hide();
-  });
-</noscript>
-
 <script>
   const base_url = $("#domain_url").val() + "/";
   let dataTable;
   $( document ).ready(function() {
     $(".select2").select2();
-
     //Date range as a button
     $('#daterange-btn').daterangepicker(
             {
@@ -341,18 +423,18 @@
         {data: 'status',
           autowidth: true,
           render: function (data, type, full, row) {
-            if (data == 1) {
-              return '<button class="btn btn-info btn-sm">New Order</button>';
+            if (data == 0) {
+              return '<button class="btn btn-b2b-sm btn-info btn-sm btn-disabled">New Order</button>';
+            } else if(data == 1){
+              return '<button class="btn btn-b2b-sm btn-dark btn-sm btn-disabled">Scheduled</button>';
             } else if(data == 2){
-              return '<button class="btn btn-dark btn-sm">Scheduled</button>';
+              return '<button class="btn btn-b2b-sm btn-danger btn-sm btn-disabled">Sim Active</button>';
             } else if(data == 3){
-              return '<button class="btn btn-danger btn-sm">Sim Active</button>';
+              return '<button class="btn btn-b2b-sm btn-warning btn-sm btn-disabled">Installation</button>';
             } else if(data == 4){
-              return '<button class="btn btn-warning btn-sm">Installation</button>';
-            } else if(data == 5){
-              return '<button class="btn btn-primary btn-sm">Finalization</button>';
+              return '<button class="btn btn-b2b-sm btn-primary btn-sm btn-disabled">Finalization</button>';
             }else{
-              return '<button class="btn btn-success btn-sm">Onboarded</button>';
+              return '<button class="btn btn-b2b-sm btn-success btn-sm btn-disabled">Onboarded</button>';
             }
           }},
 
@@ -361,13 +443,13 @@
         {
           data: 'id',
           render: function (data, type, full, row){
-            return '<button class="btn btn-default btn-sm">Download Excel</button>';
+            return '<button class="btn btn-b2b-sm btn-b2b-sm-download btn-sm">Download Excel</button>';
           }
         },
         {
           data: 'id',
           render: function (data, type, full, row){
-            return '<button class="btn btn-dark btn-sm">Change Status</button>';
+            return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status">Change Status</button>';
           }
         }
       ]
@@ -402,11 +484,14 @@
             let custom_msg = "<div class='alert alert-success success-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
             //$("#notification_bar").show();
             $("#createSrNotification").html(custom_msg);
-            modalClose()
+            modalClose();
+            getOrderData();
+            $('#create_order_form')[0].reset();
           } else {
             $(".loader_body").hide();
             let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
             $("#createSrNotification").html(custom_msg);
+            $('#create_order_form')[0].reset();
             modalClose()
           }
         },
@@ -415,6 +500,7 @@
           let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
           $("#createSrNotification").html(custom_msg);
           modalClose()
+          $('#create_order_form')[0].reset();
         }
       });
     } else{
@@ -426,6 +512,66 @@
     $("#newOrderEntry").modal('hide');
   }
 
+  $('#dataTable tbody').on( 'click', 'button.change-status', function (e) {
+    //$("#update_order_form").clear();
+    $('#create_order_form')[0].reset();
+    let data = dataTable.row( $(this).parents('#dataTable tbody tr') ).data();
+    $("#current_status").val(data.status).change();
+    $("#row_id").val(data.id);
+    $("#changeStatus").modal("show");
+  } );
+
+  $('#dataTable tbody').on( 'click', 'button.btn-b2b-sm-download', function () {
+    let data = dataTable.row( $(this).parents('tr') ).data();
+    alert( data[0] +"'Download: "+ data[ 5 ] );
+  } );
+
+
+  function updateStatus(){
+    $(".loader_body").show();
+
+    if($("#update_order_form").parsley().validate()){
+
+      let orderStatusData = {
+        status: $("#updated_status").val(),
+      }
+      let id = $("#row_id").val();
+
+
+      $.ajax({
+        type: 'POST',
+        url: base_url + "api/web/orders/b2c-gpc/update-status",
+        data: {orderStatusData: JSON.stringify(orderStatusData), id: parseInt(id)},
+        success: function (resultData) {
+          $(".loader_body").hide();
+          if (resultData.code === 200) {
+            let custom_msg = "<div class='alert alert-success success-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+            //$("#notification_bar").show();
+            $("#createSrNotification").html(custom_msg);
+            $("#changeStatus").modal("hide");
+            getOrderData();
+            $('#update_order_form')[0].reset();
+          } else {
+            $(".loader_body").hide();
+            let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+            $("#createSrNotification").html(custom_msg);
+            $("#changeStatus").modal("hide");
+            $('#update_order_form')[0].reset();
+          }
+        },
+        error: function (resultData) {
+          $(".loader_body").hide();
+          let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+          $("#createSrNotification").html(custom_msg);
+          $("#changeStatus").modal("hide");
+          $('#update_order_form')[0].reset();
+        }
+      });
+    } else{
+      $(".loader_body").hide();
+    }
+
+  }
 
 </script>
 

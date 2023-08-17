@@ -32,4 +32,10 @@ public class OrdersRestController {
         return b2cGpcServices.addNewOrder(request, orderInfo);
 
     }
+    @RequestMapping(value = "/update-status", method = RequestMethod.POST)
+    public CommonRestResponse updateDriverBasicInfo(HttpServletRequest request,
+                                                    @RequestParam("orderStatusData") String orderStatusData, @RequestParam("id") Long id) {
+        return b2cGpcServices.updateOrderStatus(request, orderStatusData, id);
+
+    }
 }

@@ -100,4 +100,36 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
         return commonRestResponse;
     }
+
+    @Override
+    public CommonRestResponse updateOrderStatus(HttpServletRequest request, String orderStatusData, Long id) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
+        try
+        {
+            OrderModelEntity updateStatus = new Gson().fromJson(orderStatusData, new TypeToken<OrderModelEntity>() {
+            }.getType());
+
+            OrderModelEntity orderModelEntity = orderRepository.getById(id);
+
+            orderModelEntity.setStatus(updateStatus.getStatus());
+
+            orderModelEntity.setUpdatedBy(SessionManager.getUserLoginName(request));
+            orderModelEntity.setUpdatedAt(Helper.getCurrentDate());
+
+
+            orderRepository.save(orderModelEntity);
+            commonRestResponse.setData(orderModelEntity.getId());
+            commonRestResponse.setCode(200);
+            commonRestResponse.setMessage("Order Status has been Added Successfully");
+        }
+        catch(ArrayIndexOutOfBoundsException ex)
+        {
+            commonRestResponse.setCode(402);
+            commonRestResponse.setData(null);
+            commonRestResponse.setMessage("Order Update Status request has been Failed");
+            LOGGER.error(ex.toString());
+        }
+
+        return commonRestResponse;
+    }
 }
