@@ -226,6 +226,16 @@
                     <input type="text" class="form-control" id="address" placeholder="Select" required>
                   </div>
                 </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_name">Product Name</label>
+                    <select class="form-control" id="product_name" required>
+
+                    </select>
+                  </div>
+                </div>
+
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="product_type">Product Type <span class="text-danger"> *</span></label>
@@ -246,13 +256,6 @@
                   <div class="form-group">
                     <label for="kcp_contact_num">Contact Number <span class="text-danger"> *</span></label>
                     <input type="text" class="form-control" id="kcp_contact_num" placeholder="Select" required>
-                  </div>
-                </div>
-
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="product_name">Product Name</label>
-                    <input type="text" class="form-control" id="product_name" placeholder="Select">
                   </div>
                 </div>
 
@@ -385,7 +388,7 @@
     );
 
     getOrderData();
-
+    getProductList();
 
   });
 
@@ -586,6 +589,22 @@
       $(".loader_body").hide();
     }
 
+  }
+
+  function getProductList() {
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/product-list",
+      success: function (data) {
+        data.data.forEach(element => {
+
+          $('#product_name').append('<option value="' + element.id + '">' + element.product_name + '</option>');
+        });
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
   }
 
 </script>

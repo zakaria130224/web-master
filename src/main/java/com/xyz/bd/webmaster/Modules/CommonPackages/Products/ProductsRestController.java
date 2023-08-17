@@ -5,9 +5,9 @@ import com.xyz.bd.webmaster.Utility.CommonRestResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/web/utility")
@@ -23,4 +23,12 @@ public class ProductsRestController {
         commonRestResponse.setData(productService.getProductList());
         return commonRestResponse;
     }
+
+    @PostMapping("/product-detail")
+    public CommonRestResponse getProductDetail(HttpServletRequest request, @RequestParam("id") Long id) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
+        commonRestResponse.setData(productService.getProductDetail(id));
+        return commonRestResponse;
+    }
+
 }
