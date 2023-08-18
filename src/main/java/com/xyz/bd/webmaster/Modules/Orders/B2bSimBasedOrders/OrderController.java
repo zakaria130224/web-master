@@ -148,7 +148,7 @@ public class OrderController {
 
 
             // Update the fields based on the inputs
-            //order.setStatus(Integer.parseInt(updatedStatus));
+            order.setStatusName(updatedStatus);
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String formattedDate = dateFormat.format(new Date());
             order.setUpdatedAt(Timestamp.valueOf(formattedDate));
@@ -251,7 +251,7 @@ public class OrderController {
     @ResponseBody
     public String updateImeiStatus(
             @RequestParam Long excelOrderId,
-            @RequestParam Integer updateFinalStatus,
+            @RequestParam String updateFinalStatus,
             @RequestParam String kcpName,
             @RequestParam String kcpContact,
             @RequestParam String kcpEmail,
@@ -275,12 +275,12 @@ public class OrderController {
             OrderModelEntity order = orderService.getOrderById(excelOrderId);
 
             if (order != null) {
-                //order.setStatus(updateFinalStatus);
+                order.setStatusName(updateFinalStatus);
               //  order.setKcp_name(kcpName); // Update other fields as needed
             //    order.setKcp_contact_num(kcpContact);
             //    order.setKcp_email(kcpEmail);
                 order.setImei(imei);
-           //     order.setChtTicket(updatedCht);
+         //       order.setChtTicket(updatedCht);
                 orderService.updateFinalOrder(order);
 
 
