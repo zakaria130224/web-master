@@ -55,9 +55,9 @@ public class OrderController {
 //        }
 
         for (OrderModelEntity order : orders) {
-            /*System.out.println("Order ID: " + order.getId());
-            System.out.println("MSISDN: " + order.getChtTicket());
-            System.out.println("Email: " + order.getEmail());*/
+            System.out.println("Order ID: " + order.getId());
+            System.out.println("MSISDN: " + order.getChtTicketId());
+            System.out.println("Email: " + order.getCustomerEmail());
             // Print more properties as needed
         }
 
@@ -85,7 +85,7 @@ public class OrderController {
                 OrderModelEntity order = orderService.getOrderById(orderId);
 
                 // Update the fields based on the inputs
-                //order.setStatus(Integer.parseInt(updatedStatus));
+                order.setStatusName(updatedStatus);
                 order.setUpdatedAt(new Date());
              //   order.setChtTicket(updatedCht); // Assuming there's a setChtTicket method
 
@@ -95,24 +95,24 @@ public class OrderController {
                 orderService.saveOrder(order);
 
 
-                if(updatedStatus == "0"){
-                    updatedStatus = "New Order";
-                }
-                else if(updatedStatus == "1"){
-                    updatedStatus  = "Schedule";
-                }
-                else if(updatedStatus == "2"){
-                    updatedStatus  = "Sim Active";
-                }
-                else if(updatedStatus == "3"){
-                    updatedStatus  = "Installation";
-                }
-                else if(updatedStatus == "4"){
-                    updatedStatus  = "Finalization";
-                }
-                else if(updatedStatus == "5"){
-                    updatedStatus  = "Onboarded";
-                }
+//                if(updatedStatus == "0"){
+//                    updatedStatus = "New Order";
+//                }
+//                else if(updatedStatus == "1"){
+//                    updatedStatus  = "Schedule";
+//                }
+//                else if(updatedStatus == "2"){
+//                    updatedStatus  = "Sim Active";
+//                }
+//                else if(updatedStatus == "3"){
+//                    updatedStatus  = "Installation";
+//                }
+//                else if(updatedStatus == "4"){
+//                    updatedStatus  = "Finalization";
+//                }
+//                else if(updatedStatus == "5"){
+//                    updatedStatus  = "Onboarded";
+//                }
 
 
 

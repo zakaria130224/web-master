@@ -100,24 +100,24 @@ public class OrderServiceImpl implements OrderService{
                 }
 
                 OrderModelEntity orderModelEntity = new OrderModelEntity();
-                /*orderModelEntity.setChtTicket(chtticket);
-                orderModelEntity.setBs_code(bsCode);
-                orderModelEntity.setCompany_name(companyName);
-                orderModelEntity.setVts_sim(vtsSim);
-                orderModelEntity.setSim_kit(simKit);
-                orderModelEntity.setPack_name(packName);
-                orderModelEntity.setBase_price(basePrice);
+                orderModelEntity.setChtTicketId(chtticket);
+                orderModelEntity.setBsCode(bsCode);
+                orderModelEntity.setCompanyName(companyName);
+                orderModelEntity.setVtsSimNo(vtsSim);
+                orderModelEntity.setSimKit(simKit);
+                orderModelEntity.setPackName(packName);
+                orderModelEntity.setBasePrice(Double.parseDouble(basePrice));
                 orderModelEntity.setVid(vid);
-                orderModelEntity.setRate_plan_name(ratePlan);
-                orderModelEntity.setMrp(mrp);
-                orderModelEntity.setAlt_contact_num(altContact);
-                orderModelEntity.setKcp_name(kcpName);
-                orderModelEntity.setKcp_contact_num(kcpContact);
-                orderModelEntity.setKcp_email(kcpEmail);
-                orderModelEntity.setSup_partner_name(supportPartner);
-                orderModelEntity.setProduct_type(productType);
-                orderModelEntity.setAudio_num(audNum);
-                orderModelEntity.setStatus(0);*/
+                orderModelEntity.setRatePlan(ratePlan);
+                orderModelEntity.setUnitPrice(Double.parseDouble(mrp));
+                orderModelEntity.setAltContactNum(altContact);
+                orderModelEntity.setKcpName(kcpName);
+                orderModelEntity.setKcpContactNumber(kcpContact);
+                orderModelEntity.setKamEmail(kcpEmail);
+                orderModelEntity.setSupportPartnerName(supportPartner);
+                orderModelEntity.setProductType(productType);
+                orderModelEntity.setAudioListenMsisdn(audNum);
+                orderModelEntity.setStatusName("New Order");
 
 
                 orderRepository.save(orderModelEntity);

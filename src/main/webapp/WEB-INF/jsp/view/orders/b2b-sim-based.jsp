@@ -204,45 +204,45 @@
                                                         <td>
 
                                                         <a data-target="#detailsOrderView" data-toggle="modal" class="MainNavText" id="DetailsOrders"
-                                                         href="#detailsOrderView"  data-toggle="modal"  data-id="${order.id}" data-chttickets="${order.chtTicket}"
-                                                           data-email="${order.email}" data-status="${order.status}" data-bs_code="${order.bs_code}"
-                                                           data-vts_sim="${order.vts_sim}" data-sim_kit="${order.sim_kit}" data-pack_name="${order.pack_name}"
-                                                           data-base_price="${order.base_price}" data-rate_plan_name="${order.rate_plan_name}"
-                                                           data-mrp="${order.mrp}" data-alt_num="${order.alt_contact_num}" data-kcp_name="${order.kcp_name}"
-                                                           data-kcp_email="${order.kcp_email}" data-kcp_contact="${order.kcp_contact_num}"
-                                                           data-support_partner="${order.sup_partner_name}" data-product_type="${order.product_type}"
-                                                           data-aud_num="${order.audio_num}" data-company_name="${order.company_name}" data-updated_at="${order.updatedAt}">${order.id}</a>
+                                                         href="#detailsOrderView"  data-toggle="modal"  data-id="${order.id}" data-chttickets="${order.chtTicketId}"
+                                                           data-status="${order.statusName}" data-bs_code="${order.bsCode}"
+                                                           data-vts_sim="${order.vtsSimNo}" data-sim_kit="${order.simKit}" data-pack_name="${order.packName}"
+                                                           data-base_price="${order.basePrice}" data-rate_plan_name="${order.ratePlan}"
+                                                           data-mrp="${order.unitPrice}" data-alt_num="${order.altContactNum}" data-kcp_name="${order.kcpName}"
+                                                           data-kcp_email="${order.kcpEmail}" data-kcp_contact="${order.kcpContactNumber}"
+                                                           data-support_partner="${order.supportPartnerName}" data-product_type="${order.productType}"
+                                                           data-aud_num="${order.audioListenMsisdn}" data-company_name="${order.companyName}" data-updated_at="${order.updatedAt}">${order.id}</a>
                                                         </td>
 
-                                                        <td>${order.chtTicket}</td>
+                                                        <td>${order.chtTicketId}</td>
                                                         <td>${order.createdAt}</td>
-                                                            <td>${order.vts_sim}</td>
-                                                            <td>${order.pack_name}</td>
-                                                        <td>${order.sim_kit}</td>
-                                                        <td>${order.product_type}</td>
-                                                            <td>${order.sup_partner_name}</td>
+                                                            <td>${order.vtsSimNo}</td>
+                                                            <td>${order.packName}</td>
+                                                        <td>${order.simKit}</td>
+                                                        <td>${order.productType}</td>
+                                                            <td>${order.supportPartnerName}</td>
 <%--                                                        <td><button type="button" class="btn btn-primary">--%>
 <%--                                                            New Order--%>
 <%--                                                        </button></td>--%>
                                                             <td>
                                                                 <!-- Use conditional classes to change button color -->
                                                                 <c:choose>
-                                                                    <c:when test="${order.status == 0}">
+                                                                    <c:when test="${order.statusName == 'New Order'}">
                                                                         <button type="button" class="btn" style="background-color: #00C8FF; color: #F2FCFF">New Order</button>
                                                                     </c:when>
-                                                                    <c:when test="${order.status == 1}">
+                                                                    <c:when test="${order.statusName == 'Scheduled'}">
                                                                         <button type="button" class="btn" style="background-color: #2F80ED; color: #F2FCFF">Scheduled</button>
                                                                     </c:when>
-                                                                    <c:when test="${order.status == 2}">
+                                                                    <c:when test="${order.statusName == 'Sim Active'}">
                                                                         <button type="button" class="btn" style="background-color: #EB5757; color: #F2FCFF">Sim Active</button>
                                                                     </c:when>
-                                                                    <c:when test="${order.status == 3}">
+                                                                    <c:when test="${order.statusName == 'Installation'}">
                                                                         <button type="button" class="btn" style="background-color: #F2994A; color: #F2FCFF">Installation</button>
                                                                     </c:when>
-                                                                    <c:when test="${order.status == 4}">
+                                                                    <c:when test="${order.statusName == 'Finalization'}">
                                                                         <button type="button" class="btn" style="background-color: #9B51E0; color: #F2FCFF">Finalization</button>
                                                                     </c:when>
-                                                                    <c:when test="${order.status == 5}">
+                                                                    <c:when test="${order.statusName == 'Onboarded'}">
                                                                         <button type="button" class="btn" style="background-color: #6FCF97; color: #F2FCFF">Onboarded</button>
                                                                     </c:when>
                                                                     <c:otherwise>
@@ -250,13 +250,13 @@
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                             </td>
-                                                            <td>${order.rate_plan_name}</td>
+                                                            <td>${order.ratePlan}</td>
 <%--                                                        <td>${order.address}</td>--%>
                                                         <td><button class="btn btn-download"><i class="fa fa-download"></i> Download</button></td>
                                                         <td><button type="button" class="btn btn-status" style="background-color: #000F3C;color: #F2FCFF" id="changeStatus"
-                                                                    data-toggle="modal"  data-id="${order.id}" data-chttickets="${order.chtTicket}"
-                                                                    data-email="${order.email}" data-status="${order.status}" data-customer="${order.customer_name}"
-                                                        data-kcp_name = "${order.kcp_name}" data-kcp_contact = "${order.kcp_contact_num}" data-kcp_email = "${order.kcp_email}">
+                                                                    data-toggle="modal"  data-id="${order.id}" data-chttickets="${order.chtTicketId}"
+                                                                    data-email="${order.customerEmail}" data-status="${order.statusName}" data-customer="${order.customerName}"
+                                                        data-kcp_name = "${order.kcpName}" data-kcp_contact = "${order.kcpContactNumber}" data-kcp_email = "${order.kcpEmail}">
                                                             Change Status
                                                         </button></td>
                                                         </tr>
@@ -509,12 +509,12 @@
                                     <div class="form-group">
                                         <label for="editStatus">Update Status</label>
                                         <select name="editStatus" id="editStatus" class="form-control">
-                                            <option value="0">New Order</option>
-                                            <option value="1">Schedule</option>
-                                            <option value="2">Sim Active</option>
-                                            <option value="3">Installation</option>
-                                            <option value="4">Finalization</option>
-                                            <option value="5">Onboarded</option>
+                                            <option value="New Order">New Order</option>
+                                            <option value="Scheduled">Scheduled</option>
+                                            <option value="Sim Active">Sim Active</option>
+                                            <option value="Installation">Installation</option>
+                                            <option value="Finalization">Finalization</option>
+                                            <option value="Onboarded">Onboarded</option>
                                         </select>
                                     </div>
                                 </div>
@@ -580,12 +580,12 @@
                                     <div class="form-group">
                                         <label for="editStatus">Update Status</label>
                                         <select name="editStatus" id="editStatuss" class="form-control">
-                                            <option value="0">New Order</option>
-                                            <option value="1">Schedule</option>
-                                            <option value="2">Sim Active</option>
-                                            <option value="3">Installation</option>
-                                            <option value="4">Finalization</option>
-                                            <option value="5">Onboarded</option>
+                                            <option value="New Order">New Order</option>
+                                            <option value="Scheduled">Scheduled</option>
+                                            <option value="Sim Active">Sim Active</option>
+                                            <option value="Installation">Installation</option>
+                                            <option value="Finalization">Finalization</option>
+                                            <option value="Onboarded">Onboarded</option>
                                         </select>
                                     </div>
                                 </div>
@@ -653,12 +653,12 @@
                                     <div class="form-group">
                                         <label for="editStatus">Update Status</label>
                                         <select name="updateFinalStatus" id="updateFinalStatus" class="form-control">
-                                            <option value="0">New Order</option>
-                                            <option value="1">Schedule</option>
-                                            <option value="2">Sim Active</option>
-                                            <option value="3">Installation</option>
-                                            <option value="4">Finalization</option>
-                                            <option value="5">Onboarded</option>
+                                            <option value="New Order">New Order</option>
+                                            <option value="Scheduled">Scheduled</option>
+                                            <option value="Sim Active">Sim Active</option>
+                                            <option value="Installation">Installation</option>
+                                            <option value="Finalization">Finalization</option>
+                                            <option value="Onboarded">Onboarded</option>
                                         </select>
                                     </div>
                                 </div>
@@ -985,7 +985,7 @@ $(document).ready(function() {
 
             console.log(chttickets);
 
-            if(status == 1) {
+            if(status == "New Order" || status == "Scheduled" || status == "Sim Active") {
                 $("#editOrderId").val(id);
                 $("#editCht").val(chttickets);
                 $("#editCustomerName").val(customer);
@@ -1018,7 +1018,7 @@ $(document).ready(function() {
                 $("#changeStatusModal").modal("show");
             }
 
-            else if(status == 3) {
+            else if(status == "Installation") {
                 $("#excelOrderId").val(id);
                 $("#chtvalue").val(chttickets);
                 $("#kcp_contact").val(kcp_contact);
@@ -1031,7 +1031,7 @@ $(document).ready(function() {
                 $("#changeFinalStatusModal").modal("show");
             }
 
-            else if(status == 4) {
+            else if(status == "Finalization") {
                 $("#editOrderIds").val(id);
                 $("#editChts").val(chttickets);
                 $("#editCustomerNames").val(customer);

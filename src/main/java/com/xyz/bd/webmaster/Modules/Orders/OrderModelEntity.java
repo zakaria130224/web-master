@@ -324,4 +324,12 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
     @JsonProperty("orderType")
     private String orderType;
 
+    @Column(name = "alternative_contact_num")
+    @JsonProperty("altContactNum")
+    private String altContactNum;
+
+    @Column(name = "vid")
+    @JsonProperty("vid")
+    private String vid;
+
 }
