@@ -226,16 +226,25 @@
                     <input type="text" class="form-control" id="address" placeholder="Select" required>
                   </div>
                 </div>
+
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_type">Product Type <span class="text-danger"> *</span></label>
-                    <select class="form-control" id="product_type" required>
-                      <option value="1">SIM Less</option>
-                      <option value="2">SIM Based</option>
+                    <label for="product_name">Product Name</label>
+                    <select class="form-control" id="product_name" required>
+
                     </select>
                   </div>
                 </div>
-                <div class="col-md-6">
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_type">Product Type</label>
+                    <select class="form-control" id="product_type" disabled>
+
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12" id="vts_sim_block">
                   <div class="form-group">
                     <label for="vts_sim">VTS Sim</label>
                     <input type="text" class="form-control" id="vts_sim" placeholder="Select">
@@ -244,15 +253,8 @@
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="kcp_contact_num">Contact Number <span class="text-danger"> *</span></label>
-                    <input type="text" class="form-control" id="kcp_contact_num" placeholder="Select" required>
-                  </div>
-                </div>
-
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="product_name">Product Name</label>
-                    <input type="text" class="form-control" id="product_name" placeholder="Select">
+                    <label for="customer_contact_number">Contact Number <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="customer_contact_number" placeholder="Select" required>
                   </div>
                 </div>
 
@@ -385,7 +387,7 @@
     );
 
     getOrderData();
-
+    getProductList();
 
   });
 
@@ -424,37 +426,35 @@
       select:true,
       columns: [
         {data: 'id'},
-        {data: 'chtTicket'},
-        {data: 'vts_sim'},
-        {data: 'sim_kit'},
-        {data: 'product_type'},
-        {
-          data: 'product_type',
-          render: function (data, type, full, row) {
-            return "Kite & CO";
-          }
-        },
-
-        {data: 'status',
+        {data: 'chtTicketId'},
+        {data: 'vtsSimNo'},
+        {data: 'simKit'},
+        {data: 'productType'},
+        {data: 'productName',},
+        {data: 'statusName',
           autowidth: true,
           render: function (data, type, full, row) {
-            if (data == 0) {
+            if (data == "New Order") {
               return '<button class="btn btn-b2b-sm btn-info btn-sm btn-disabled">New Order</button>';
-            } else if(data == 1){
+            } else if(data == "Scheduled"){
               return '<button class="btn btn-b2b-sm btn-dark btn-sm btn-disabled">Scheduled</button>';
-            } else if(data == 2){
+            } else if(data == "Sim Active"){
               return '<button class="btn btn-b2b-sm btn-danger btn-sm btn-disabled">Sim Active</button>';
-            } else if(data == 3){
+            } else if(data == "Installation"){
               return '<button class="btn btn-b2b-sm btn-warning btn-sm btn-disabled">Installation</button>';
-            } else if(data == 4){
+            } else if(data == "Finalization"){
               return '<button class="btn btn-b2b-sm btn-primary btn-sm btn-disabled">Finalization</button>';
-            }else{
+            }else if(data == "Onboarded"){
               return '<button class="btn btn-b2b-sm btn-success btn-sm btn-disabled">Onboarded</button>';
+            }else if(data == "Cancelled"){
+              return '<button class="btn btn-b2b-sm btn-success btn-sm btn-disabled">Cancelled</button>';
+            } else{
+              return '';
             }
           }},
 
-        {data: 'pack_name'},
-        {data: 'rate_plan_name'},
+        {data: 'packName'},
+        {data: 'ratePlan'},
         {
           data: 'id',
           render: function (data, type, full, row){
@@ -478,14 +478,17 @@
   } );
 
   function createNewOrder(){
+    $("#createSrNotification").html("");
     $(".loader_body").show();
 
     if($("#create_order_form").parsley().validate()){
 
       let orderInfo = {
-        customer_name: $("#customer_name").val(),
-        kcp_contact_num: $("#kcp_contact_num").val(),
+        customerName: $("#customer_name").val(),
+        customerContactNumber: $("#customer_contact_number").val(),
+        productId: $("#product_name").val(),
         address: $( "#address" ).val(),
+        vtsSim: $( "#vts_sim" ).val(),
       }
 
 
@@ -587,6 +590,53 @@
     }
 
   }
+
+  function getProductList() {
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/product-list",
+      success: function (data) {
+        data.data.forEach(element => {
+
+          $('#product_name').append('<option value="' + element.id + '">' + element.product_name + '</option>');
+        });
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  function getProductDetails(id) {
+    $.ajax({
+      type: 'post',
+      url: base_url + "api/web/utility/product-detail",
+      data: {id: parseInt(id)},
+      success: function (data) {
+        $(".loader_body").hide();
+        if(data.data.has_sim === true){
+          $('#product_type').append('<option value="1">SIM Based</option>');
+          $('#vts_sim_block').show();
+          $('#vts_sim').attr("required", true);
+
+        } else{
+          $('#product_type').append('<option value="2">SIM Less</option>');
+          $('#vts_sim_block').hide();
+          $('#vts_sim').attr("required", false);
+        }
+      },
+      error: function (error) {
+        $(".loader_body").hide();
+        console.log(error);
+      }
+    });
+  }
+
+  $('#product_name').on('change', function() {
+    $(".loader_body").show();
+    let data = $("#product_name").val();
+    getProductDetails(parseInt(data));
+  });
 
 </script>
 

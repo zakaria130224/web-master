@@ -3,6 +3,8 @@ package com.xyz.bd.webmaster.Modules.Orders.B2cGpcOrders;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xyz.bd.webmaster.Config.session.SessionManager;
+import com.xyz.bd.webmaster.Modules.CommonPackages.Products.ProductService;
+import com.xyz.bd.webmaster.Modules.CommonPackages.Products.ProductsModel;
 import com.xyz.bd.webmaster.Modules.Orders.OrderModelEntity;
 import com.xyz.bd.webmaster.Modules.Orders.OrderRepository;
 import com.xyz.bd.webmaster.Modules.VTS.Drivers.DriverService;
@@ -40,6 +42,9 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
     @Autowired
     CommonRepository commonRepository;
 
+    @Autowired
+    ProductService productService;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(B2cGpcServices.class);
 
     @Override
@@ -76,10 +81,24 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
             OrderModelEntity orderModelEntity = new OrderModelEntity();
 
+            ProductsModel productsModel = productService.getProductDetail(order.getProductId());
+
+            if(productsModel.getHas_sim().equals(true)){
+                orderModelEntity.setOrderType("gpc-sim");
+            } else{
+                orderModelEntity.setOrderType("gpc-simless");
+            }
+
             orderModelEntity.setCustomerName(order.getCustomerName());
             orderModelEntity.setAddress(order.getAddress());
             orderModelEntity.setProductId(order.getProductId());
+            orderModelEntity.setProductType(productsModel.getProduct_type());
+            orderModelEntity.setProductName(productsModel.getProduct_name());
+            orderModelEntity.setPackName(productsModel.getPackage_name());
+            orderModelEntity.setDeviceCategory(productsModel.getDevice_category());
+            orderModelEntity.setDeviceSubCategory(productsModel.getDevice_sub_category());
             orderModelEntity.setCustomerContactNumber(order.getCustomerContactNumber());
+            orderModelEntity.setVtsSimNo(order.getVtsSimNo());
             orderModelEntity.setStatusName("New Order");
 
             orderModelEntity.setCreatedBy(SessionManager.getUserLoginName(request));
