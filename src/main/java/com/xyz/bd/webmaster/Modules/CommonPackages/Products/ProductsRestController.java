@@ -31,4 +31,13 @@ public class ProductsRestController {
         return commonRestResponse;
     }
 
+    @PostMapping("/vendor-list")
+    public CommonRestResponse getVendorByProductId(HttpServletRequest request, @RequestParam("id") Long id) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
+        commonRestResponse.setData(productService.getVendorByProductIdJoin(id));
+        return commonRestResponse;
+    }
+
+
+
 }

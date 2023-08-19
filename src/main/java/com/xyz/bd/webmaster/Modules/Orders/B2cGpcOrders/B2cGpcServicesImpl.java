@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class B2cGpcServicesImpl implements B2cGpcServices{
@@ -80,7 +81,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             }.getType());
 
             OrderModelEntity orderModelEntity = new OrderModelEntity();
-
+            Integer random = new Random().nextInt(90000) + 10000;
             ProductsModel productsModel = productService.getProductDetail(order.getProductId());
 
             if(productsModel.getHas_sim().equals(true)){
@@ -100,6 +101,13 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             orderModelEntity.setCustomerContactNumber(order.getCustomerContactNumber());
             orderModelEntity.setVtsSimNo(order.getVtsSimNo());
             orderModelEntity.setStatusName("New Order");
+            orderModelEntity.setVendorId(order.getVendorId());
+            orderModelEntity.setVendorEmail(order.getVendorEmail());
+            orderModelEntity.setVendorName(order.getVendorName());
+            orderModelEntity.setCloudId(Integer.toString(random));
+            orderModelEntity.setSimKit("898801"+ Integer.toString(random) +"38163F");
+            orderModelEntity.setRatePlan(order.getRatePlan());
+
 
             orderModelEntity.setCreatedBy(SessionManager.getUserLoginName(request));
             orderModelEntity.setCreatedAt(Helper.getCurrentDate());

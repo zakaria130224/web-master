@@ -92,7 +92,7 @@
           </div>
           <div class="col-md-6">
             <div class="float-right">
-              <button data-toggle="modal" data-target="#newOrderEntry" class="btn b2b-btn-submit-blue mr-2"> Add New Order</button>
+              <button data-toggle="modal" class="btn b2b-btn-submit-blue mr-2" onclick="openCreateOrderModal()"> Add New Order</button>
             </div>
           </div>
         </div>
@@ -230,7 +230,9 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="product_name">Product Name</label>
+                    <input type="hidden" id="ratePlan">
                     <select class="form-control" id="product_name" required>
+                      <option>Please select product</option>
 
                     </select>
                   </div>
@@ -240,10 +242,20 @@
                   <div class="form-group">
                     <label for="product_type">Product Type</label>
                     <select class="form-control" id="product_type" disabled>
-
+                      <option>Please select</option>
                     </select>
                   </div>
                 </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="vendor_name">Vendor Name</label>
+                    <select class="form-control" id="vendor_name" required>
+                      <option>Please select</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div class="col-md-12" id="vts_sim_block">
                   <div class="form-group">
                     <label for="vts_sim">VTS Sim</label>
@@ -364,6 +376,7 @@
 <script>
   const base_url = $("#domain_url").val() + "/";
   let dataTable;
+  let productData = [];
   $( document ).ready(function() {
     $(".select2").select2();
     //Date range as a button
@@ -387,9 +400,54 @@
     );
 
     getOrderData();
-    getProductList();
-
   });
+
+
+  $('#product_name').on('change', function() {
+    let productId = $('#product_name').val();
+    if (productId != 'Please select product'){
+      $('#vendor_name').html('');
+      $('#product_type').html('');
+      let vendors = [];
+      let product = [];
+      productData.forEach(function (el, i, arr) {
+        //console.log(el);
+        if (el.id == productId) {
+          //console.log("selected::: "+ JSON.stringify(el.vendors));
+          vendors = JSON.stringify(el.vendors);
+          product = el;
+        }
+      });
+      console.log(productData)
+      console.log(vendors)
+      console.log(product)
+
+      JSON.parse(vendors).forEach(function (el, i, arr) {
+        $('#vendor_name').append('<option value="' + el.id + '/' + el.email + '">' + el.name + '</option>');
+      });
+
+      $('#ratePlan').val(product.monthly_charge);
+
+      if(product.has_sim === true){
+        $('#product_type').append('<option value="1">SIM Based</option>');
+        $('#vts_sim_block').show();
+        $('#vts_sim').attr("required", true);
+
+      } else{
+        $('#product_type').append('<option value="2">SIM Less</option>');
+        $('#vts_sim_block').hide();
+        $('#vts_sim').attr("required", false);
+      }
+    }
+  });
+
+
+
+  function openCreateOrderModal(){
+    getProductList();
+    $("#newOrderEntry").modal("show");
+
+  }
 
   function getOrderData() {
     $(".loader_body").show();
@@ -422,11 +480,11 @@
       autoWidth: false,
       responsive: true,
       data: data,
-      order: [[3, 'desc']],
+      order: [[0, 'desc']],
       select:true,
       columns: [
         {data: 'id'},
-        {data: 'chtTicketId'},
+        {data: 'cloudId'},
         {data: 'vtsSimNo'},
         {data: 'simKit'},
         {data: 'productType'},
@@ -488,7 +546,11 @@
         customerContactNumber: $("#customer_contact_number").val(),
         productId: $("#product_name").val(),
         address: $( "#address" ).val(),
-        vtsSim: $( "#vts_sim" ).val(),
+        vtsSimNo: $( "#vts_sim" ).val(),
+        vendorEmail: $( "#vendor_name" ).val().split("/")[1],
+        vendorId: $( "#vendor_name" ).val().split("/")[0],
+        vendorName: $( "#vendor_name" ).text(),
+        ratePlan: $( "#vendor_name" ).val().split("/")[2],
       }
 
 
@@ -592,51 +654,22 @@
   }
 
   function getProductList() {
+    $('#product_name').html("");
     $.ajax({
       type: 'get',
       url: base_url + "api/web/utility/product-list",
       success: function (data) {
+        $('#product_name').append('<option>Please Select</option>')
         data.data.forEach(element => {
-
           $('#product_name').append('<option value="' + element.id + '">' + element.product_name + '</option>');
         });
+        productData = data.data;
       },
       error: function (error) {
         console.log(error);
       }
     });
   }
-
-  function getProductDetails(id) {
-    $.ajax({
-      type: 'post',
-      url: base_url + "api/web/utility/product-detail",
-      data: {id: parseInt(id)},
-      success: function (data) {
-        $(".loader_body").hide();
-        if(data.data.has_sim === true){
-          $('#product_type').append('<option value="1">SIM Based</option>');
-          $('#vts_sim_block').show();
-          $('#vts_sim').attr("required", true);
-
-        } else{
-          $('#product_type').append('<option value="2">SIM Less</option>');
-          $('#vts_sim_block').hide();
-          $('#vts_sim').attr("required", false);
-        }
-      },
-      error: function (error) {
-        $(".loader_body").hide();
-        console.log(error);
-      }
-    });
-  }
-
-  $('#product_name').on('change', function() {
-    $(".loader_body").show();
-    let data = $("#product_name").val();
-    getProductDetails(parseInt(data));
-  });
 
 </script>
 
