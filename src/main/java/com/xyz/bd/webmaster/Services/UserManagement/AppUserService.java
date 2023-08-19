@@ -6,13 +6,17 @@ import com.xyz.bd.webmaster.Models.UserManagement.DTOs.DTOUser;
 import com.xyz.bd.webmaster.Models.UserManagement.DTOs.DTOUserResponsibilityMap;
 import com.xyz.bd.webmaster.Models.UserManagement.DTOs.ReqResponsibility;
 import com.xyz.bd.webmaster.Models.UserManagement.Entities.*;
+import com.xyz.bd.webmaster.Models.common.DTOs.SMS;
 import com.xyz.bd.webmaster.Models.common.ResponseModel.FailedResponse;
 import com.xyz.bd.webmaster.Repositories.UserManagement.*;
+import com.xyz.bd.webmaster.Services.CommonServices.SendSMSService;
+import com.xyz.bd.webmaster.Utility.AppExtension;
 import com.xyz.bd.webmaster.Utility.Constant;
 import com.xyz.bd.webmaster.Models.common.ResponseModel.Response;
 import com.xyz.bd.webmaster.Models.UserManagement.DTOs.DTOResetPassword;
 import com.xyz.bd.webmaster.Repositories.specifier.CustomSpecifier;
 import com.xyz.bd.webmaster.Utility.Helper;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +24,13 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +54,9 @@ public class AppUserService {
 
     @Autowired
     private AppUserPassHistoryRepository appUserPassHistoryRepository;
+
+    @Autowired
+    SendSMSService sendSMSService;
 
     public AppUser getUserByName(String name) {
         return appUserRepository.findFirstByLoginName(name);
@@ -248,5 +258,33 @@ public class AppUserService {
 
     public List<AppUser> getAllUsersList() {
         return (List<AppUser>) appUserRepository.findAll();
+    }
+
+    @Transactional
+    public Boolean saveNewUserNew(AppUser newMdUserModel) {
+
+        //TODO:Change to generate_random_password after fix sms sending issue
+        //String password = HelperMethods.generateRandomPassword(10L);
+        String password="Iot@!123456";
+        newMdUserModel.setLoginName(newMdUserModel.getLoginName());
+        newMdUserModel.setName(newMdUserModel.getName());
+        newMdUserModel.setPhone(newMdUserModel.getPhone());
+        newMdUserModel.setPassword(AppExtension.toMD5(password));
+
+        newMdUserModel=appUserRepository.save(newMdUserModel);
+
+        try{
+            String phoneNo = newMdUserModel.getPhone();
+            String smsBody = "Grameenphone IOT login user account creation successful! Login user: " + newMdUserModel.getLoginName()+ " & Password: "+ password;
+            String operator = "ROBI";
+            SMS sms = new SMS();
+            sms.setText(smsBody);
+            sms.setPhone(phoneNo);
+            sendSMSService.sendSMS(sms);
+        }catch (Exception  e){
+            logger.warn("Failed to send SMS");
+            logger.error(e.getMessage(),e);
+        }
+        return true;
     }
 }

@@ -19,6 +19,8 @@ public class DTOUser {
 
     private String phone;
 
+    private String password;
+
     private boolean active;
 
     private List<DTOUserResponsibilityMap> mapList;

@@ -3,9 +3,11 @@ package com.xyz.bd.webmaster.Modules.Orders.B2cGpcOrders;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xyz.bd.webmaster.Config.session.SessionManager;
+import com.xyz.bd.webmaster.Models.UserManagement.Entities.AppUser;
 import com.xyz.bd.webmaster.Models.common.DTOs.SMS;
 import com.xyz.bd.webmaster.Modules.CommonPackages.Products.ProductService;
 import com.xyz.bd.webmaster.Modules.CommonPackages.Products.ProductsModel;
+import com.xyz.bd.webmaster.Modules.CommonPackages.User.UserService;
 import com.xyz.bd.webmaster.Modules.Orders.OrderModelEntity;
 import com.xyz.bd.webmaster.Modules.Orders.OrderRepository;
 import com.xyz.bd.webmaster.Modules.VTS.Drivers.DriverService;
@@ -13,6 +15,7 @@ import com.xyz.bd.webmaster.Modules.VTS.Drivers.DriversModelEntity;
 import com.xyz.bd.webmaster.Repositories.CommonRepository;
 import com.xyz.bd.webmaster.Services.CommonServices.EmailSenderService;
 import com.xyz.bd.webmaster.Services.CommonServices.SendSMSService;
+import com.xyz.bd.webmaster.Services.UserManagement.AppUserService;
 import com.xyz.bd.webmaster.Utility.CommonRestResponse;
 import com.xyz.bd.webmaster.Utility.Helper;
 import com.xyz.bd.webmaster.Utility.Utility;
@@ -54,6 +57,9 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
     @Autowired
     SendSMSService sendSMSService;
+
+    @Autowired
+    private AppUserService appUserService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(B2cGpcServices.class);
 
@@ -122,10 +128,18 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             orderModelEntity.setCreatedBy(SessionManager.getUserLoginName(request));
             orderModelEntity.setCreatedAt(Helper.getCurrentDate());
 
+            AppUser newMdUserModel = new AppUser();
+            newMdUserModel.setName(order.getCustomerContactNumber());
+            newMdUserModel.setPhone(order.getCustomerContactNumber());
+            newMdUserModel.setCreatedBy(SessionManager.getUserLoginName(request));
+            newMdUserModel.setCreatedAt(Helper.getCurrentDate());
+
+            appUserService.saveNewUserNew(newMdUserModel);
+
 
             orderRepository.save(orderModelEntity);
             if(orderModelEntity.getId() != null){
-                sendEmail(orderModelEntity);
+                sendEmailAndSms(orderModelEntity);
             }
             commonRestResponse.setData(orderModelEntity.getId());
             commonRestResponse.setCode(200);
@@ -160,7 +174,9 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
 
             orderRepository.save(orderModelEntity);
+
             commonRestResponse.setData(orderModelEntity.getId());
+            sendEmailAndSms(orderModelEntity);
             commonRestResponse.setCode(200);
             commonRestResponse.setMessage("Order Status has been Added Successfully");
         }
@@ -175,7 +191,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
         return commonRestResponse;
     }
 
-    public void sendEmail(OrderModelEntity orderData){
+    public void sendEmailAndSms(OrderModelEntity orderData){
         String toEmail = orderData.getVendorEmail();
         String body = "Order data has been updated for order ID: " + orderData.getId() + ". " + "Order Status : "+ orderData.getStatusName();
         String subject = "VTS Order Data Update Notification";
@@ -195,4 +211,6 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
         sms.setText(body);
         sendSMSService.sendSMS(sms);
     }
+
+
 }
