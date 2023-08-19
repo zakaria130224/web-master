@@ -149,7 +149,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
         {
             commonRestResponse.setCode(402);
             commonRestResponse.setData(null);
-            commonRestResponse.setMessage("Order Creation request has been Failed");
+            commonRestResponse.setMessage("Request has been Failed");
             LOGGER.error(ex.toString());
         }
 
@@ -184,7 +184,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
         {
             commonRestResponse.setCode(402);
             commonRestResponse.setData(null);
-            commonRestResponse.setMessage("Order Update Status request has been Failed");
+            commonRestResponse.setMessage("Request has been Failed");
             LOGGER.error(ex.toString());
         }
 
