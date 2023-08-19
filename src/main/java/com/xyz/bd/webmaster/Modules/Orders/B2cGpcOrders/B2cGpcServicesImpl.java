@@ -181,14 +181,14 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
         String subject = "VTS Order Data Update Notification";
         String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com";
 
-        boolean emailSent = emailSenderService.sendEmail(toEmail, body, subject, cc);
+        emailSenderService.sendEmail(toEmail, body, subject, cc);
 
         String customerMail = "jobaidur@grameenphone.com";
         String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
         String subject_kcp = "VTS Order Update Notification";
         String cc_kcp = "ifaz@grameenphone.com";
 
-        boolean emailSent_kcp = emailSenderService.sendEmail(customerMail, body_kcp, subject_kcp, cc_kcp);
+        emailSenderService.sendEmail(customerMail, body_kcp, subject_kcp, cc_kcp);
 
         SMS sms = new SMS();
         sms.setPhone(orderData.getCustomerContactNumber());
