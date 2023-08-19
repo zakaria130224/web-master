@@ -308,13 +308,7 @@
                     <label for="current_status">Current Status </label>
                     <input type="hidden" id="row_id">
                     <select class="form-control" id="current_status" disabled>
-                      <option value="">Please Select</option>
-                      <option value="0">New Order</option>
-                      <option value="1">Scheduled</option>
-                      <option value="2">Sim Active</option>
-                      <option value="3">Installation</option>
-                      <option value="4">Finalization</option>
-                      <option value="5">Onboarded</option>
+
                     </select>
                   </div>
                 </div>
@@ -323,13 +317,6 @@
                   <div class="form-group">
                     <label for="updated_status">Update Status <span class="text-danger"> *</span></label>
                     <select class="form-control" id="updated_status" required>
-                      <option value="">Please Select</option>
-                      <option value="0">New Order</option>
-                      <option value="1">Scheduled</option>
-                      <option value="2">Sim Active</option>
-                      <option value="3">Installation</option>
-                      <option value="4">Finalization</option>
-                      <option value="5">Onboarded</option>
                     </select>
                   </div>
                 </div>
@@ -496,7 +483,7 @@
               return '<button class="btn btn-b2b-sm btn-info btn-sm btn-disabled">New Order</button>';
             } else if(data == "Scheduled"){
               return '<button class="btn btn-b2b-sm btn-dark btn-sm btn-disabled">Scheduled</button>';
-            } else if(data == "Sim Active"){
+            } else if(data == "Sim Activation"){
               return '<button class="btn btn-b2b-sm btn-danger btn-sm btn-disabled">Sim Active</button>';
             } else if(data == "Installation"){
               return '<button class="btn btn-b2b-sm btn-warning btn-sm btn-disabled">Installation</button>';
@@ -547,6 +534,7 @@
         productId: $("#product_name").val(),
         address: $( "#address" ).val(),
         vtsSimNo: $( "#vts_sim" ).val(),
+        statusNameId: 1,
         vendorEmail: $( "#vendor_name" ).val().split("/")[1],
         vendorId: $( "#vendor_name" ).val().split("/")[0],
         vendorName: $( "#vendor_name" ).text(),
@@ -599,6 +587,7 @@
     $("#current_status").val(data.status).change();
     $("#row_id").val(data.id);
     $("#changeStatus").modal("show");
+    getStatusAll(data.statusName, data.statusNameId);
   } );
 
   $('#dataTable tbody').on( 'click', 'button.btn-b2b-sm-download', function () {
@@ -613,7 +602,8 @@
     if($("#update_order_form").parsley().validate()){
 
       let orderStatusData = {
-        status: $("#updated_status").val(),
+        statusName: $('#updated_status').val().split("/")[1],
+        statusNameId: $('#updated_status').val().split("/")[0],
       }
       let id = $("#row_id").val();
 
@@ -669,6 +659,53 @@
         console.log(error);
       }
     });
+  }
+
+  function getStatusAll(statusName, statusNameId) {
+    $(".loader_body").show();
+    $('#product_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/order-status-list",
+      success: function (data) {
+        data.data.forEach(element => {
+          $('#current_status').append('<option value="' + element.gpc_sim + '">' + element.order_name + '</option>');
+        });
+
+        $('#current_status option:contains(' + statusName + ')').each(function () {
+          if ($(this).text() === statusName) {
+            $(this).attr('selected', 'selected');
+            getStatusNext(statusName)
+            return false;
+          }
+          return true;
+        });
+        productData = data.data;
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+
+    function getStatusNext(statusName) {
+      $('#updated_status').html("");
+      $(".loader_body").hide();
+      $.ajax({
+        type: 'post',
+        data: {id: $('#current_status').val()},
+        url: base_url + "api/web/utility/next-order-status",
+        success: function (data) {
+          data.data.forEach(element => {
+            $('#updated_status').append('<option value="' + element.gpc_sim +"/"+ element.order_name+'">' + element.order_name + '</option>');
+          });
+          $('#updated_status').append('<option value="100">Cancelled</option>')
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });
   }
 
 </script>

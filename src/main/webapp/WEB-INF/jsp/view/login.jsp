@@ -18,6 +18,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/pages/index.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/pages/login.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/font-awesome-4/css/font-awesome.min.css">
+
+    <style>
+        body{
+            font-family: "telonor-regular", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+    </style>
+
 </head>
 <body class="hold-transition login-page">
 <!-- /.login-logo -->

@@ -6,10 +6,9 @@ import okhttp3.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/web/utility")
@@ -24,6 +23,13 @@ public class OrderStatusRestController {
     public CommonRestResponse getOrderList() {
         CommonRestResponse commonRestResponse = new CommonRestResponse();
         commonRestResponse.setData(orderStatus.getStatusList());
+        return commonRestResponse;
+    }
+
+    @PostMapping("/next-order-status")
+    public CommonRestResponse getNextOrderList(HttpServletRequest request, @RequestParam("id") Long id) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
+        commonRestResponse.setData(orderStatus.getNextStatusList(id));
         return commonRestResponse;
     }
 

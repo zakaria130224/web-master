@@ -46,7 +46,7 @@ public class LoginController {
 
         model.put("errorMessage", "65565");
         model.put("title", "Login");
-        model.addAttribute("error", "Custom error");
+        model.addAttribute("error", "You have entered an invalid username or password");
         return "login";
     }
 

@@ -8,4 +8,7 @@ import java.util.List;
 public interface OrderStatus {
     public List<OrderStatusModel> getStatusList();
 
+    List<OrderStatusModel> getNextStatusList(Long id);
+
+    Object getStatusListByColumnName(String name);
 }
