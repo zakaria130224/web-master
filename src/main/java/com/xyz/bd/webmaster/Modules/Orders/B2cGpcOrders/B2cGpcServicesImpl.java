@@ -7,11 +7,8 @@ import com.xyz.bd.webmaster.Models.UserManagement.Entities.AppUser;
 import com.xyz.bd.webmaster.Models.common.DTOs.SMS;
 import com.xyz.bd.webmaster.Modules.CommonPackages.Products.ProductService;
 import com.xyz.bd.webmaster.Modules.CommonPackages.Products.ProductsModel;
-import com.xyz.bd.webmaster.Modules.CommonPackages.User.UserService;
 import com.xyz.bd.webmaster.Modules.Orders.OrderModelEntity;
 import com.xyz.bd.webmaster.Modules.Orders.OrderRepository;
-import com.xyz.bd.webmaster.Modules.VTS.Drivers.DriverService;
-import com.xyz.bd.webmaster.Modules.VTS.Drivers.DriversModelEntity;
 import com.xyz.bd.webmaster.Repositories.CommonRepository;
 import com.xyz.bd.webmaster.Services.CommonServices.EmailSenderService;
 import com.xyz.bd.webmaster.Services.CommonServices.SendSMSService;
@@ -20,17 +17,20 @@ import com.xyz.bd.webmaster.Utility.CommonRestResponse;
 import com.xyz.bd.webmaster.Utility.Helper;
 import com.xyz.bd.webmaster.Utility.Utility;
 import com.xyz.bd.webmaster.Utility.dataTable.QueryBuilderService;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -145,7 +145,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             commonRestResponse.setCode(200);
             commonRestResponse.setMessage("Order has been Added Successfully");
         }
-        catch(ArrayIndexOutOfBoundsException ex)
+        catch(ArrayIndexOutOfBoundsException | IOException | TemplateException ex)
         {
             commonRestResponse.setCode(402);
             commonRestResponse.setData(null);
@@ -180,7 +180,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             commonRestResponse.setCode(200);
             commonRestResponse.setMessage("Order Status has been Added Successfully");
         }
-        catch(ArrayIndexOutOfBoundsException ex)
+        catch(ArrayIndexOutOfBoundsException | IOException | TemplateException ex)
         {
             commonRestResponse.setCode(402);
             commonRestResponse.setData(null);
@@ -191,16 +191,24 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
         return commonRestResponse;
     }
 
-    public void sendEmailAndSms(OrderModelEntity orderData){
+    public void sendEmailAndSms(OrderModelEntity orderData) throws IOException, TemplateException {
         String toEmail = orderData.getVendorEmail();
-        String body = "Order data has been updated for order ID: " + orderData.getId() + ". " + "Order Status : "+ orderData.getStatusName();
+        //String body = "Order data has been updated for order ID: " + orderData.getId() + ". " + "Order Status : "+ orderData.getStatusName();
         String subject = "VTS Order Data Update Notification";
         String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com";
+
+
+        Configuration cfg = new Configuration();
+        cfg.setClassForTemplateLoading(this.getClass(), "/templates/");
+        Template freemarkerTemplate = cfg.getTemplate("email-template.ftl");
+        String body = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerTemplate, orderData);
+
 
         emailSenderService.sendEmail(toEmail, body, subject, cc);
 
         String customerMail = "jobaidur@grameenphone.com";
-        String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
+        //String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
+        String body_kcp = body;
         String subject_kcp = "VTS Order Update Notification";
         String cc_kcp = "ifaz@grameenphone.com";
 
