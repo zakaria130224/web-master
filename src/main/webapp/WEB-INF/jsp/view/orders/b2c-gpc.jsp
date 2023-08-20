@@ -8,8 +8,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<spring:eval expression="@environment.getProperty('app.name')" var="appName"/>
-<spring:eval expression="@environment.getProperty('app.domain_url')" var="domain_url"/>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -361,7 +360,7 @@
 
 
 <script>
-  const base_url = $("#domain_url").val() + "/";
+  var base_url = $("#domain_url").val() + "/";
   let dataTable;
   let productData = [];
   $( document ).ready(function() {

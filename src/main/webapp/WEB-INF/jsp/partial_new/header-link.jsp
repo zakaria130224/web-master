@@ -1,5 +1,7 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
-
+<spring:eval expression="@environment.getProperty('app.name')" var="appName"/>
+<spring:eval expression="@environment.getProperty('app.domain_url')" var="domain_url"/>
 <!-- ===============================================-->
 <!--    Favicons-->
 <!-- ===============================================-->
@@ -20,7 +22,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/dist/css/datatable-custom.css" />
 
-<input type="hidden" id="domain_url">
+<input type="hidden" id="domain_url" value="${pageContext.request.contextPath}">
 
 
 

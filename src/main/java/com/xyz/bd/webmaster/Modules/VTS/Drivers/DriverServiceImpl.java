@@ -103,7 +103,7 @@ public class DriverServiceImpl implements DriverService{
         {
             commonRestResponse.setCode(402);
             commonRestResponse.setData(null);
-            commonRestResponse.setMessage("Driver Creation request has been Failed");
+            commonRestResponse.setMessage("Request has been Failed");
             LOGGER.error(ex.toString());
         } catch (ParseException e) {
             throw new RuntimeException(e);
@@ -139,7 +139,7 @@ public class DriverServiceImpl implements DriverService{
         {
             commonRestResponse.setCode(402);
             commonRestResponse.setData(null);
-            commonRestResponse.setMessage("Driver Update request has been Failed");
+            commonRestResponse.setMessage("Request has been Failed");
             LOGGER.error(ex.toString());
         }
 
@@ -171,7 +171,7 @@ public class DriverServiceImpl implements DriverService{
         {
             commonRestResponse.setCode(402);
             commonRestResponse.setData(null);
-            commonRestResponse.setMessage("Driver's license info update request has been Failed");
+            commonRestResponse.setMessage("Request has been Failed");
             LOGGER.error(ex.toString());
         }
 
@@ -203,7 +203,7 @@ public class DriverServiceImpl implements DriverService{
         {
             commonRestResponse.setCode(402);
             commonRestResponse.setData(null);
-            commonRestResponse.setMessage("Driver's Additional info update request has been Failed");
+            commonRestResponse.setMessage("Request has been Failed");
             LOGGER.error(ex.toString());
         }
 
@@ -224,7 +224,7 @@ public class DriverServiceImpl implements DriverService{
         {
             commonRestResponse.setCode(402);
             commonRestResponse.setData(null);
-            commonRestResponse.setMessage("Driver's deleted request has been Failed");
+            commonRestResponse.setMessage("Request has been Failed");
             LOGGER.error(ex.toString());
         }
 
