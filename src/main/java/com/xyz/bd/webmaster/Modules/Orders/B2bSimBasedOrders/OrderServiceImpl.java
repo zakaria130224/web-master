@@ -2,15 +2,27 @@ package com.xyz.bd.webmaster.Modules.Orders.B2bSimBasedOrders;
 
 import com.xyz.bd.webmaster.Modules.CommonPackages.Company.CompanyModelEntity;
 import com.xyz.bd.webmaster.Modules.CommonPackages.Company.CompanyRepository;
+import com.xyz.bd.webmaster.Modules.CommonPackages.Products.ProductService;
+import com.xyz.bd.webmaster.Modules.Orders.B2cGpcOrders.B2cGpcServices;
 import com.xyz.bd.webmaster.Modules.Orders.OrderModelEntity;
 import com.xyz.bd.webmaster.Modules.Orders.OrderRepository;
+import com.xyz.bd.webmaster.Repositories.CommonRepository;
 import com.xyz.bd.webmaster.Services.CommonServices.EmailSenderService;
+import com.xyz.bd.webmaster.Services.CommonServices.SendSMSService;
+import com.xyz.bd.webmaster.Utility.Utility;
+import com.xyz.bd.webmaster.Utility.dataTable.QueryBuilderService;
 import org.apache.poi.ss.usermodel.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -32,6 +44,25 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     private EmailSenderService emailSenderService;
+
+    @Autowired
+    QueryBuilderService queryBuilderService;
+
+    @Autowired
+    private EntityManager entityManager;
+
+    @Autowired
+    CommonRepository commonRepository;
+
+    @Autowired
+    ProductService productService;
+
+    @Autowired
+    SendSMSService sendSMSService;
+
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(B2cGpcServices.class);
+
     @Override
     public List<OrderModelEntity> getAllOrder() {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
@@ -163,7 +194,30 @@ public class OrderServiceImpl implements OrderService{
     }
 
 
+    //New v2 Orders
+    @Override
+    public DataTablesOutput<OrderModelEntity> findAllB2bSimOrderList(HttpServletRequest request, String customQuery, DataTablesInput input) {
+        String whereQuery = queryBuilderService.generateSearchQuery(customQuery, Utility.tbl_order, OrderModelEntity.class);
 
+        String searchQuery = queryBuilderService.selectAllQuery(whereQuery, Utility.tbl_order);
+
+        searchQuery = queryBuilderService.generatePaginationQuery(input.getStart(), input.getLength(), searchQuery);
+
+        String count = queryBuilderService.countQuery("ID", whereQuery, Utility.tbl_order, OrderModelEntity.class);
+
+        int totalData = commonRepository.CommoNumberOfRow(count);
+
+        List<OrderModelEntity> resultList = entityManager.createNativeQuery(searchQuery, OrderModelEntity.class).getResultList();
+
+        DataTablesOutput<OrderModelEntity> tableData = new DataTablesOutput<>();
+
+        tableData.setData(resultList);
+        tableData.setRecordsFiltered(totalData);
+        tableData.setRecordsTotal(totalData);
+        tableData.setDraw(input.getDraw());
+
+        return tableData;
+    }
 
 
 }

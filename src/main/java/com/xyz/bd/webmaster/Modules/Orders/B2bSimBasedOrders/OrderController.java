@@ -313,6 +313,32 @@ public class OrderController {
         }
     }
 
+    @RequestMapping(value = "/b2b-sim-based-v2", method = RequestMethod.GET)
+    public ModelAndView showOrderListPageV2(Model model) {
+
+        List<OrderModelEntity> orders = orderService.getAllOrder();
+
+
+        model.addAttribute("title", "Order List");
+        model.addAttribute("menu", "Order List");
+        model.addAttribute("orders", orders);
+
+//        String[] listOrders = orderService.getAllOrder();
+//        for (String data : listOrders) {
+//            System.out.println("Data: " + data);
+//        }
+
+        for (OrderModelEntity order : orders) {
+            System.out.println("Order ID: " + order.getId());
+            System.out.println("MSISDN: " + order.getChtTicketId());
+            System.out.println("Email: " + order.getCustomerEmail());
+            // Print more properties as needed
+        }
+
+        return new ModelAndView("orders/b2b-sim-based-v2");
+
+    }
+
 
 
 

@@ -18,7 +18,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>VTS - Maintenance</title>
+    <title>Orders - B2B Sim Based</title>
 
     <jsp:include page="../../partial_new/header-link.jsp"></jsp:include>
 
@@ -175,7 +175,7 @@
                                     </div>
 
                                     <div class="row mt-4 mx-3">
-                                        <h6>417 Results Found</h6>
+<%--                                        <h6>417 Results Found</h6>--%>
                                     </div>
 
 
