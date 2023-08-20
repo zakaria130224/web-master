@@ -152,6 +152,8 @@
         <%--row block 1--%>
         <div class="row">
           <div class="col-md-12 col-lg-12 col-sm-12">
+
+            <div id="createSrNotification"></div>
             <div class="card">
               <div class="card-body">
                 <div class="card-head-custom">
@@ -229,7 +231,7 @@
                           <th>Pack/<br>Service</th>
                           <th>SIM Kit</th>
                           <th>Product</th>
-                          <th>Vendor</th>
+                          <th>Support<br> Partner</th>
                           <th>Status</th>
                           <th>Rate Plan</th>
                           <th>Order Excel</th>
@@ -426,21 +428,21 @@
           </button>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal b2b-custom-form" id="dataForm" enctype="multipart/form-data" action="/save-data" method="post">
+          <form class="form-horizontal b2b-custom-form" id="dataForm" >
             <div class="card-body p-0">
               <div class="row">
 
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="chtticket">CHT Ticket Number</label>
-                    <input type="text" class="form-control" name="chtticket" id="chtticket"  placeholder="">
+                    <input type="text" class="form-control" name="chtticket" id="chtticket"  placeholder="" required>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Upload File(.xlxs)</label>
-                    <input type="file" class="form-control" id="upload_file" placeholder="Uploaded file have to be less than 10MB">
+                    <input type="file" class="form-control" id="upload_file" placeholder="Uploaded file have to be less than 10MB" required>
                   </div>
                 </div>
 
@@ -452,7 +454,7 @@
         <div class="modal-footer">
           <button type="submit" class="btn btn-custom-dark-blue float-left mr-2">Close</button>
           <%--                    <button type="submit" class="btn b2b-submit-btn-base btn-outline-danger float-left mr-2">Delete</button>--%>
-          <button type="submit" class="btn btn-custom-dark-blue" id="saveBtn">Add New Order</button>
+          <button type="submit" class="btn btn-custom-dark-blue" id="saveBtn" onclick="createNewOrder()">Add New Order</button>
         </div>
       </div>
     </div>
@@ -813,11 +815,19 @@
       select:true,
       columns: [
         {data: 'id'},
-        {data: 'cloudId'},
+       //  {
+       //    data: 'id',
+       //    render: function(data, type, full, row) {
+       //      return '<a href="#" class="order-details-link" data-order-id="' + data + '">' + data + '</a>';
+       //    }
+       //  },
+        {data: 'chtTicketId'},
+        {data: 'createdAt'},
         {data: 'vtsSimNo'},
+        {data: 'packName'},
         {data: 'simKit'},
         {data: 'productType'},
-        {data: 'productName',},
+        {data: 'supportPartnerName'},
         {data: 'statusName',
           autowidth: true,
           render: function (data, type, full, row) {
@@ -840,7 +850,7 @@
             }
           }},
 
-        {data: 'packName'},
+
         {data: 'ratePlan'},
         {
           data: 'id',
@@ -851,14 +861,103 @@
         {
           data: 'id',
           render: function (data, type, full, row){
-            return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status">Change Status</button>';
+            return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status exclude-click">Change Status</button>';
           }
         }
       ]
     });
 
   }
+  // table ends
 
+  // click event handler for the order details link
+  // $('#dataTable').on('click', '.order-details-link', function(e) {
+  //   e.preventDefault();
+  //   var orderId = $(this).data('order-id');
+  //   console.log(data);
+  //   loadOrderDetails(orderId, data);
+  // });
+  //
+  // function loadOrderDetails(orderId, data) {
+  //   var detailedData = findDetailedDataById(orderId, data);
+  //
+  //   if (detailedData) {
+  //
+  //     $('#status_date').val(detailedData.createdAt);
+  //     $('#cloud_id').val(detailedData.cloudId);
+  //     $('#ticket_id').val(detailedData.chtTicketId);
+  //
+  //
+  //     // Open the modal to display the details
+  //     $('#detailsOrderView').modal('show');
+  //   }
+  // }
+  //
+  // function findDetailedDataById(orderId, data) {
+  //
+  //   for (var i = 0; i < data.length; i++) {
+  //     if (data[i].id === orderId) {
+  //       return data[i];
+  //     }
+  //   }
+  //   // Return null or an empty object if no matching order is found
+  //   return null;
+  // }
+
+
+  function modalClose(){
+    $("#newOrderEntry").modal('hide');
+  }
+
+  // order form submit
+  function createNewOrder() {
+    var contextPath = '<%= request.getContextPath() %>';
+   // console.log(contextPath);
+    $("#createSrNotification").html("");
+    $(".loader_body").show();
+
+    if($("#dataForm").parsley().validate()){
+    var formData = new FormData();
+    formData.append("chtticket", $("#chtticket").val());
+    formData.append("excelFile", $("#upload_file")[0].files[0]);
+
+    $.ajax({
+      url: base_url + "orders/save-data",
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function(response) {
+        //  alert(response);
+       // $('#orderSuccessModal').modal('show');
+        $(".loader_body").hide();
+        if (response) {
+          console.log(response);
+          let custom_msg = "<div class='alert alert-success success-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>Order has been Created Successfully!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+          //$("#notification_bar").show();
+          $("#createSrNotification").html(custom_msg);
+          modalClose();
+          getOrderSimData();
+          $('#dataForm')[0].reset();
+        } else {
+          $(".loader_body").hide();
+          let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Order creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+          $("#createSrNotification").html(custom_msg);
+          $('#dataForm')[0].reset();
+          modalClose()
+        }
+      },
+      error: function(xhr) {
+        alert("Error saving data: " + xhr.responseText);
+      }
+    });
+    } else{
+      $(".loader_body").hide();
+    }
+  }
+  // order form end
+
+ // change status button click
   $('#dataTable tbody').on( 'click', 'button.change-status', function (e) {
     //$("#update_order_form").clear();
     // $('#changeStatusModal')[0].reset();
@@ -868,6 +967,7 @@
     $("#changeStatusModal").modal("show");
   //  getStatusAll(data.statusName, data.statusNameId);
   } );
+  // change status button click end
 
   function openCreateOrderModal(){
    // getProductList();
@@ -875,11 +975,41 @@
 
   }
 
-  $('#dataTable tbody').on( 'click', 'tr', function () {
+  $('#dataTable tbody').on( 'click', 'tr', function (e) {
     console.log(dataTable.row( this ).data());
+    if (!$(e.target).hasClass('exclude-click')) {
+      var rowData = dataTable.row(this).data();
+      if (rowData) {
+        var orderId = rowData.id;
+        loadOrderDetails(orderId, rowData);
+      }
+    }
 
-  } );
+  });
 
+  function loadOrderDetails(orderId, detailedData) {
+    $('#status_date').val(detailedData.createdAt);
+    $('#cloud_id').val(detailedData.id);
+    $('#ticket_id').val(detailedData.chtTicketId);
+    $('#bs_code').val(detailedData.bsCode);
+    $('#company_name').val(detailedData.companyName);
+    $('#vts_sim').val(detailedData.vtsSimNo);
+    $('#sim_kit').val(detailedData.simKit);
+    $('#pack_name').val(detailedData.packName);
+    $('#base_price').val(detailedData.basePrice);
+    $('#mrp').val(detailedData.unitPrice);
+    $('#alt_cont_num').val(detailedData.altContactNum);
+    $('#kcp_name').val(detailedData.kcpName);
+    $('#kcp_contact').val(detailedData.kcpContactNumber);
+    $('#kcp_email').val(detailedData.kcpEmail);
+    $('#support_partner').val(detailedData.supportPartnerName);
+    $('#product_type').val(detailedData.productType);
+    $('#aud_auth_number').val(detailedData.audioListenMsisdn);
+
+    // Populate other fields using detailedData
+
+    $('#detailsOrderView').modal('show');
+  }
 
 </script>
 

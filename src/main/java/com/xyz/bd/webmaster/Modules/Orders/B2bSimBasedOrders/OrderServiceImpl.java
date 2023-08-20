@@ -144,7 +144,7 @@ public class OrderServiceImpl implements OrderService{
                 orderModelEntity.setAltContactNum(altContact);
                 orderModelEntity.setKcpName(kcpName);
                 orderModelEntity.setKcpContactNumber(kcpContact);
-                orderModelEntity.setKamEmail(kcpEmail);
+                orderModelEntity.setKcpEmail(kcpEmail);
                 orderModelEntity.setSupportPartnerName(supportPartner);
                 orderModelEntity.setProductType(productType);
                 orderModelEntity.setAudioListenMsisdn(audNum);
