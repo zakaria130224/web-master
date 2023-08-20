@@ -285,6 +285,117 @@
     </div>
   </div>
 
+  <div class="modal left fade" id="showOrderDetails" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title float-left" id="myModalLabel4">Order Entry</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                  style="height: 20px;width:
+                            20px;border: 1px solid;
+                            display: block;
+                            border-radius: 50%;
+                            padding: 0px;
+                            line-height: 17px;
+                            margin-top: 5px;
+                            margin-right: 5px;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal b2b-custom-form" id="details_order_form">
+            <div class="card-body p-0">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="customer_name">Last Status Change Date</label>
+                    <input type="text" class="form-control" id="d_updated_date" placeholder="Select" disabled>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="customer_name">Cloud ID <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_cloud_id" placeholder="Select" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="customer_name">TRXID <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_trxid" placeholder="Select" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="address">Customer Name <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_customer_name" placeholder="Select" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="address">Address <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_address" placeholder="Select" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="address">Pack/Service <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_pack" placeholder="Select" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_name">Product Name</label>
+                    <select class="form-control" id="d_product_name" required>
+                      
+
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_type">Product Type</label>
+                    <select class="form-control" id="d_product_type" disabled>
+                      
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="vendor_name">Vendor Name</label>
+                    <select class="form-control" id="d_vendor_name" required>
+                      <option>Please select</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="customer_contact_number">Rate Plan <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_rate_plan" placeholder="Select" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="customer_contact_number">Customer Contact <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_customer_contact" placeholder="Select" required>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn b2b-submit-btn-base btn-outline-primary float-left">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal left fade" id="changeStatus" tabindex="" role="dialog" aria-labelledby="changeStatus" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -436,7 +547,6 @@
   function openCreateOrderModal(){
     getProductList();
     $("#newOrderEntry").modal("show");
-
   }
 
   function getOrderData() {
@@ -522,7 +632,8 @@
 
   $('#dataTable tbody').on( 'click', 'tr', function () {
     console.log(dataTable.row( this ).data());
-
+    let tableRowData = dataTable.row( this ).data();
+    $("#showOrderDetails").modal("show");
   } );
 
   function createNewOrder(){
