@@ -9,6 +9,7 @@
 <%--<c:out value="${orders}" />--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <spring:eval expression="@environment.getProperty('app.name')" var="appName"/>
 <spring:eval expression="@environment.getProperty('app.domain_url')" var="domain_url"/>
@@ -73,6 +74,42 @@
       padding-left: 20px;
       background: grey;
     }
+    .severity-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      margin-right: 5px;
+      margin-top: 5px;
+    }
+    .icon-font-size-32{
+      font-size: 32px;
+    }
+    table.dataTable td {
+      vertical-align: middle;
+    }
+    .btn-b2b-sm{
+      border-radius: 6px;
+      padding: 12px 20px 12px 20px;
+      color: #FFF;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .btn-disabled{
+      pointer-events: none;
+    }
+    .btn-b2b-sm-download{
+      background: #FFF;
+      color: #000F3C;
+      border-color: #000F3C;
+    }
+    .btn-b2b-sm-base, .btn-b2b-sm-base:hover{
+      background: #000F3C;
+      color: #FFF;
+      border-color: #000F3C;
+    }
+    .card-head-custom{
+      height: 50px;
+    }
   </style>
 
 </head>
@@ -81,6 +118,7 @@
 
 <div class="wrapper">
   <!-- Navbar -->
+  <jsp:include page="./../../partial_new/loader.jsp"></jsp:include>
   <jsp:include page="../../partial_new/nevbar.jsp"></jsp:include>
   <!-- /.navbar -->
 
@@ -743,7 +781,7 @@
     //   console.log(base_url);
       $.ajax({
         type: 'get',
-        url: base_url + "/api/web/orders/b2b-sim-based/listB2bSimDT",
+        url: base_url + "api/web/orders/b2b-sim-based/listB2bSimDT",
         success: function (data) {
           $(".loader_body").hide();
           initOrderTable(data.data);
@@ -818,6 +856,22 @@
         }
       ]
     });
+
+  }
+
+  $('#dataTable tbody').on( 'click', 'button.change-status', function (e) {
+    //$("#update_order_form").clear();
+    // $('#changeStatusModal')[0].reset();
+    // let data = dataTable.row( $(this).parents('#dataTable tbody tr') ).data();
+    // $("#current_status").val(data.status).change();
+    // $("#row_id").val(data.id);
+    $("#changeStatusModal").modal("show");
+  //  getStatusAll(data.statusName, data.statusNameId);
+  } );
+
+  function openCreateOrderModal(){
+   // getProductList();
+    $("#newOrderEntry").modal("show");
 
   }
 
