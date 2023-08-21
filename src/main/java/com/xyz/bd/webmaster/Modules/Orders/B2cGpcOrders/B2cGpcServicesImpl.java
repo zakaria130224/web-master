@@ -98,6 +98,17 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             OrderModelEntity orderModelEntity = new OrderModelEntity();
             Integer random = new Random().nextInt(90000) + 10000;
             ProductsModel productsModel = productService.getProductDetail(order.getProductId());
+            String orderNameString = "";
+
+            if(order.getOrderType().equals("GPC")){
+                orderNameString = "GPC0B2C";
+            } else if (order.getOrderType().equals("GPS")) {
+                orderNameString = "GPC0B2C";
+            } else if (order.getOrderType().equals("SIM")) {
+                orderNameString = "SIM0B2B";
+            } else if (order.getOrderType().equals("DVB")) {
+                orderNameString = "DVB0B2B";
+            }
 
             if(productsModel.getHas_sim().equals(true)){
                 orderModelEntity.setOrderType("gpc-sim");
@@ -120,7 +131,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             orderModelEntity.setVendorId(order.getVendorId());
             orderModelEntity.setVendorEmail(order.getVendorEmail());
             orderModelEntity.setVendorName(order.getVendorName());
-            orderModelEntity.setCloudId(Integer.toString(random));
+            orderModelEntity.setCloudId(orderNameString+Integer.toString(random));
             orderModelEntity.setSimKit("898801"+ Integer.toString(random) +"38163F");
             orderModelEntity.setRatePlan(order.getRatePlan());
 
@@ -134,7 +145,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             newMdUserModel.setCreatedBy(SessionManager.getUserLoginName(request));
             newMdUserModel.setCreatedAt(Helper.getCurrentDate());
 
-            appUserService.saveNewUserNew(newMdUserModel);
+            //appUserService.saveNewUserNew(newMdUserModel);
 
 
             orderRepository.save(orderModelEntity);
@@ -207,7 +218,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
         emailSenderService.sendEmail(toEmail, body, subject, cc);
 
         String customerMail = "jobaidur@grameenphone.com";
-        //String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
+        // String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
         String body_kcp = body;
         String subject_kcp = "VTS Order Update Notification";
         String cc_kcp = "ifaz@grameenphone.com";
