@@ -263,27 +263,29 @@ public class AppUserService {
     @Transactional
     public Boolean saveNewUserNew(AppUser newMdUserModel) {
 
-        //TODO:Change to generate_random_password after fix sms sending issue
-        //String password = HelperMethods.generateRandomPassword(10L);
-        String password="Iot@!123456";
-        newMdUserModel.setLoginName(newMdUserModel.getLoginName());
-        newMdUserModel.setName(newMdUserModel.getName());
-        newMdUserModel.setPhone(newMdUserModel.getPhone());
-        newMdUserModel.setPassword(AppExtension.toMD5(password));
+        AppUser checkUser = appUserRepository.findFirstByLoginName(newMdUserModel.getLoginName());
+        if(checkUser.equals(null)){
+            String password="Iot@!123456";
+            newMdUserModel.setLoginName(newMdUserModel.getLoginName());
+            newMdUserModel.setName(newMdUserModel.getName());
+            newMdUserModel.setPhone(newMdUserModel.getPhone());
+            newMdUserModel.setPassword(AppExtension.toMD5(password));
 
-        newMdUserModel=appUserRepository.save(newMdUserModel);
+            newMdUserModel=appUserRepository.save(newMdUserModel);
 
-        try{
-            String phoneNo = newMdUserModel.getPhone();
-            String smsBody = "Grameenphone IOT login user account creation successful! Login user: " + newMdUserModel.getLoginName()+ " & Password: "+ password;
-            String operator = "ROBI";
-            SMS sms = new SMS();
-            sms.setText(smsBody);
-            sms.setPhone(phoneNo);
-            sendSMSService.sendSMS(sms);
-        }catch (Exception  e){
-            logger.warn("Failed to send SMS");
-            logger.error(e.getMessage(),e);
+            try{
+                String phoneNo = newMdUserModel.getPhone();
+                String smsBody = "Grameenphone IOT login user account creation successful! Login user: " + newMdUserModel.getLoginName()+ " & Password: "+ password;
+                String operator = "ROBI";
+                SMS sms = new SMS();
+                sms.setText(smsBody);
+                sms.setPhone(phoneNo);
+                sendSMSService.sendSMS(sms);
+            }catch (Exception  e){
+                logger.warn("Failed to send SMS");
+                logger.error(e.getMessage(),e);
+            }
+            return true;
         }
         return true;
     }

@@ -56,8 +56,13 @@
       border-color: #000F3C;
     }
     .card-head-custom{
-      height: 50px;
+      height: auto;
     }
+    table.dataTable td {
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
   </style>
 
 </head>
@@ -82,14 +87,14 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-1">
-          <div class="col-sm-6">
+          <div class="col-md-6 col-sm-12">
             <h5>Order Management (B2C - GPC)</h5>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Cloud </a></li>
               <li class="breadcrumb-item active">Order Management (B2C - GPC)</li>
             </ol>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-12">
             <div class="float-right">
               <button data-toggle="modal" class="btn b2b-btn-submit-blue mr-2" onclick="openCreateOrderModal()"> Add New Order</button>
             </div>
@@ -113,18 +118,24 @@
             <div class="card">
               <div class="card-body">
                 <div class="card-head-custom">
-                  <div class="float-left">
-                    <h3 class="b2b-font-20-500 black-10 float-left pt-2">Order and Installation List</h3>
-                  </div>
 
-                  <div class="float-right mr-5">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="padding-left:30px; padding-right: 30px">
-                        Export
-                      </button>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Export in PDF</a>
-                        <a class="dropdown-item" href="#">Export in Excel</a>
+                  <div class="row">
+                    <div class="col">
+                      <div class="float-left">
+                        <h3 class="b2b-font-20-500 black-10 float-left pt-2">Order and Installation List</h3>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="float-right mr-5">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="padding-left:30px; padding-right: 30px">
+                            Export
+                          </button>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Export in PDF</a>
+                            <a class="dropdown-item" href="#">Export in Excel</a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -193,7 +204,7 @@
   </div>
 
   <div class="modal left fade" id="newOrderEntry" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title float-left" id="myModalLabel3">Order Entry</h4>
@@ -281,8 +292,112 @@
     </div>
   </div>
 
+  <div class="modal left fade" id="showOrderDetails" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title float-left" id="myModalLabel4">Order Entry</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                  style="height: 20px;width:
+                            20px;border: 1px solid;
+                            display: block;
+                            border-radius: 50%;
+                            padding: 0px;
+                            line-height: 17px;
+                            margin-top: 5px;
+                            margin-right: 5px;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal b2b-custom-form" id="details_order_form">
+            <div class="card-body p-0">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="customer_name">Last Status Change Date</label>
+                    <input type="text" class="form-control" id="d_updated_date" placeholder="Select" disabled>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="customer_name">Cloud ID</label>
+                    <input type="text" class="form-control" id="d_cloud_id" placeholder="Select" disabled>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="customer_name">TRXID </label>
+                    <input type="text" class="form-control" id="d_trxid" placeholder="Select" disabled>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="address">Customer Name </label>
+                    <input type="text" class="form-control" id="d_customer_name" placeholder="Select" disabled>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="address">Address </label>
+                    <input type="text" class="form-control" id="d_address" disabled>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="address">Pack/Service</label>
+                    <input type="text" class="form-control" id="d_pack" disabled>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_name">Product Name</label>
+                    <input type="text" class="form-control" id="d_product_name" disabled>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_type">Product Type</label>
+                    <input type="text" class="form-control" id="d_product_type" disabled>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="vendor_name">Vendor Name</label>
+                    <input type="text" class="form-control" id="d_vendor_name" disabled>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="customer_contact_number">Rate Plan </label>
+                    <input type="text" class="form-control" id="d_rate_plan" placeholder="Select" disabled>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="customer_contact_number">Customer Contact </label>
+                    <input type="text" class="form-control" id="d_customer_contact" placeholder="Select" disabled>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn b2b-submit-btn-base btn-outline-primary float-left">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal left fade" id="changeStatus" tabindex="" role="dialog" aria-labelledby="changeStatus" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title float-left" id="myModalLabel2">Update Status</h4>
@@ -432,7 +547,6 @@
   function openCreateOrderModal(){
     getProductList();
     $("#newOrderEntry").modal("show");
-
   }
 
   function getOrderData() {
@@ -464,7 +578,7 @@
       ordering: true,
       info: true,
       autoWidth: false,
-      responsive: true,
+      //responsive: true,
       data: data,
       order: [[0, 'desc']],
       select:true,
@@ -516,8 +630,29 @@
 
   }
 
-  $('#dataTable tbody').on( 'click', 'tr', function () {
+  $('#dataTable tbody').on( 'click', 'tr', function (evt) {
     console.log(dataTable.row( this ).data());
+    let tableRowData = dataTable.row( this ).data();
+    $("#showOrderDetails").modal("show");
+    if ( $(evt.target).is("dataTable tbody tr td:nth-last-child(2)") ) {
+      return;
+    }
+    $('#details_order_form').trigger("reset");
+
+    $('#d_updated_date').val(tableRowData.updatedAt);
+    $('#d_cloud_id').val(tableRowData.cloudId);
+    $('#d_trxid').val(tableRowData.id);
+    $('#d_customer_name').val(tableRowData.customerName);
+    $('#d_address').val(tableRowData.address);
+    $('#d_pack').val(tableRowData.packName);
+    $('#d_product_name').val(tableRowData.productName);
+    $('#d_product_type').val(tableRowData.productType);
+    $('#d_vendor_name').val(tableRowData.vendorName);
+    $('#d_rate_plan').val(tableRowData.ratePlan);
+    $('#d_customer_contact').val(tableRowData.customerContactNumber);
+
+
+
 
   } );
 
@@ -538,6 +673,7 @@
         vendorId: $( "#vendor_name" ).val().split("/")[0],
         vendorName: $( "#vendor_name" ).text(),
         ratePlan: $( "#vendor_name" ).val().split("/")[2],
+        orderType: "GPC"
       }
 
 
@@ -556,7 +692,7 @@
             $('#create_order_form')[0].reset();
           } else {
             $(".loader_body").hide();
-            let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+            let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
             $("#createSrNotification").html(custom_msg);
             $('#create_order_form')[0].reset();
             modalClose()
@@ -564,7 +700,7 @@
         },
         error: function (resultData) {
           $(".loader_body").hide();
-          let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+          let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
           $("#createSrNotification").html(custom_msg);
           modalClose()
           $('#create_order_form')[0].reset();
@@ -581,6 +717,7 @@
 
   $('#dataTable tbody').on( 'click', 'button.change-status', function (e) {
     //$("#update_order_form").clear();
+    e.stopPropagation()
     $('#create_order_form')[0].reset();
     let data = dataTable.row( $(this).parents('#dataTable tbody tr') ).data();
     $("#current_status").val(data.status).change();
@@ -622,7 +759,7 @@
             $('#update_order_form')[0].reset();
           } else {
             $(".loader_body").hide();
-            let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+            let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> "+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
             $("#createSrNotification").html(custom_msg);
             $("#changeStatus").modal("hide");
             $('#update_order_form')[0].reset();
@@ -630,7 +767,7 @@
         },
         error: function (resultData) {
           $(".loader_body").hide();
-          let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+          let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
           $("#createSrNotification").html(custom_msg);
           $("#changeStatus").modal("hide");
           $('#update_order_form')[0].reset();
