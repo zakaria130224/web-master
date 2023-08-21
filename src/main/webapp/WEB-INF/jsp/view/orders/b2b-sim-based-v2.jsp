@@ -483,16 +483,21 @@
             <div class="card-body p-0">
               <div class="row">
                 <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="current_status">Current Status </label>
+                    <input type="hidden" id="row_id">
+                    <select class="form-control" id="current_status" disabled>
+
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
 
                   <div class="form-group">
-                    <label for="editStatus">Update Status</label>
-                    <select name="editStatus" id="editStatus" class="form-control">
-                      <option value="New Order">New Order</option>
-                      <option value="Scheduled">Scheduled</option>
-                      <option value="Sim Active">Sim Active</option>
-                      <option value="Installation">Installation</option>
-                      <option value="Finalization">Finalization</option>
-                      <option value="Onboarded">Onboarded</option>
+                    <label for="editStatus">Update Status<span class="text-danger"> *</span></label>
+                    <select name="editStatus" id="editStatus" class="form-control" required>
+
                     </select>
                   </div>
                 </div>
@@ -500,7 +505,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="editCht">Cht Ticket</label>
-                    <input type="text" class="form-control" name="editCht" id="editCht" placeholder="" readonly>
+                    <input type="text" class="form-control" name="editCht" id="editCht" placeholder="" disabled>
                   </div>
                 </div>
 
@@ -510,19 +515,14 @@
                     <textarea type="text" class="form-control" name="add_note" id="add_note" placeholder="Add Note"></textarea>
                   </div>
                 </div>
-                <%--                                <div class="col-md-12">--%>
-                <%--                                    <div class="form-group">--%>
-                <%--                                        <label for="user_otp">User OTP</label>--%>
-                <%--                                        <input type="password" class="form-control" name="user_otp" id="user_otp" placeholder="Type">--%>
-                <%--                                    </div>--%>
-                <%--                                </div>--%>
+
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <%--                    <button type="submit" class="btn b2b-submit-btn-base btn-outline-primary float-left">close</button>--%>
-          <button type="submit" class="btn btn-custom-grey" id="successmodal">Update</button>
+          <button type="submit" class="btn btn-primary b2b-submit-btn-base" onclick="updateStatus()" id="successmodal">Update</button>
         </div>
       </div>
     </div>
@@ -855,7 +855,7 @@
         {
           data: 'id',
           render: function (data, type, full, row){
-            return '<button class="btn btn-b2b-sm btn-b2b-sm-download btn-sm">Download Excel</button>';
+            return '<button class="btn btn-b2b-sm btn-b2b-sm-download btn-sm exclude-click">Download Excel</button>';
           }
         },
         {
@@ -903,6 +903,53 @@
   //   // Return null or an empty object if no matching order is found
   //   return null;
   // }
+
+  function updateStatus(){
+    $(".loader_body").show();
+
+    if($("#updateForm").parsley().validate()){
+
+      let orderStatusData = {
+        statusName: $('#editStatus').val().split("/")[1],
+        statusNameId: $('#editStatus').val().split("/")[0],
+      }
+      let id = $("#row_id").val();
+
+
+      $.ajax({
+        type: 'POST',
+        url: base_url + "api/web/orders/b2c-gpc/update-status",
+        data: {orderStatusData: JSON.stringify(orderStatusData), id: parseInt(id)},
+        success: function (resultData) {
+          $(".loader_body").hide();
+          if (resultData.code === 200) {
+            let custom_msg = "<div class='alert alert-success success-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+            //$("#notification_bar").show();
+            $("#createSrNotification").html(custom_msg);
+            $("#changeStatusModal").modal("hide");
+            getOrderSimData();
+            $('#updateForm')[0].reset();
+          } else {
+            $(".loader_body").hide();
+            let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+            $("#createSrNotification").html(custom_msg);
+            $("#changeStatusModal").modal("hide");
+            $('#updateForm')[0].reset();
+          }
+        },
+        error: function (resultData) {
+          $(".loader_body").hide();
+          let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+          $("#createSrNotification").html(custom_msg);
+          $("#changeStatus").modal("hide");
+          $('#update_order_form')[0].reset();
+        }
+      });
+    } else{
+      $(".loader_body").hide();
+    }
+
+  }
 
 
   function modalClose(){
@@ -960,12 +1007,13 @@
  // change status button click
   $('#dataTable tbody').on( 'click', 'button.change-status', function (e) {
     //$("#update_order_form").clear();
-    // $('#changeStatusModal')[0].reset();
-    // let data = dataTable.row( $(this).parents('#dataTable tbody tr') ).data();
-    // $("#current_status").val(data.status).change();
-    // $("#row_id").val(data.id);
+    $('#updateForm')[0].reset();
+    let data = dataTable.row( $(this).parents('#dataTable tbody tr') ).data();
+    $("#editCht").val(data.chtTicketId).change();
+    $("#current_status").val(data.statusName).change();
+    $("#row_id").val(data.id);
     $("#changeStatusModal").modal("show");
-  //  getStatusAll(data.statusName, data.statusNameId);
+    getStatusAll(data.statusName, data.statusNameId);
   } );
   // change status button click end
 
@@ -1009,6 +1057,54 @@
     // Populate other fields using detailedData
 
     $('#detailsOrderView').modal('show');
+  }
+
+
+  function getStatusAll(statusName, statusNameId) {
+    $(".loader_body").show();
+  //  $('#product_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/order-status-list",
+      success: function (data) {
+        data.data.forEach(element => {
+          $('#current_status').append('<option value="' + element.b2b_sim + '">' + element.order_name + '</option>');
+        });
+
+        $('#current_status option:contains(' + statusName + ')').each(function () {
+          if ($(this).text() === statusName) {
+            $(this).attr('selected', 'selected');
+            getStatusNext(statusName)
+            return false;
+          }
+          return true;
+        });
+        productData = data.data;
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+
+  function getStatusNext(statusName) {
+    $('#editStatus').html("");
+    $(".loader_body").hide();
+    $.ajax({
+      type: 'post',
+      data: {id: $('#current_status').val()},
+      url: base_url + "api/web/utility/next-order-status-b2b-sim",
+      success: function (data) {
+        data.data.forEach(element => {
+          $('#editStatus').append('<option value="' + element.b2b_sim +"/"+ element.order_name+'">' + element.order_name + '</option>');
+        });
+       // $('#editStatus').append('<option value="100">Cancelled</option>')
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
   }
 
 </script>

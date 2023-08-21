@@ -1,5 +1,9 @@
 package com.xyz.bd.webmaster.Modules.Orders.B2bSimBasedOrders;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.xyz.bd.webmaster.Config.session.SessionManager;
+import com.xyz.bd.webmaster.Models.common.DTOs.SMS;
 import com.xyz.bd.webmaster.Modules.CommonPackages.Company.CompanyModelEntity;
 import com.xyz.bd.webmaster.Modules.CommonPackages.Company.CompanyRepository;
 import com.xyz.bd.webmaster.Modules.CommonPackages.Products.ProductService;
@@ -9,6 +13,8 @@ import com.xyz.bd.webmaster.Modules.Orders.OrderRepository;
 import com.xyz.bd.webmaster.Repositories.CommonRepository;
 import com.xyz.bd.webmaster.Services.CommonServices.EmailSenderService;
 import com.xyz.bd.webmaster.Services.CommonServices.SendSMSService;
+import com.xyz.bd.webmaster.Utility.CommonRestResponse;
+import com.xyz.bd.webmaster.Utility.Helper;
 import com.xyz.bd.webmaster.Utility.Utility;
 import com.xyz.bd.webmaster.Utility.dataTable.QueryBuilderService;
 import org.apache.poi.ss.usermodel.*;
@@ -217,6 +223,62 @@ public class OrderServiceImpl implements OrderService{
         tableData.setDraw(input.getDraw());
 
         return tableData;
+    }
+
+    @Override
+    public CommonRestResponse updateOrderStatus(HttpServletRequest request, String orderStatusData, Long id) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
+        try
+        {
+            OrderModelEntity updateStatus = new Gson().fromJson(orderStatusData, new TypeToken<OrderModelEntity>() {
+            }.getType());
+
+            OrderModelEntity orderModelEntity = orderRepository.getById(id);
+
+            orderModelEntity.setStatusName(updateStatus.getStatusName());
+            orderModelEntity.setStatusNameId(updateStatus.getStatusNameId());
+
+            orderModelEntity.setUpdatedBy(SessionManager.getUserLoginName(request));
+            orderModelEntity.setUpdatedAt(Helper.getCurrentDate());
+
+
+            orderRepository.save(orderModelEntity);
+
+            commonRestResponse.setData(orderModelEntity.getId());
+            sendEmailAndSms(orderModelEntity);
+            commonRestResponse.setCode(200);
+            commonRestResponse.setMessage("Order Status has been Added Successfully");
+        }
+        catch(ArrayIndexOutOfBoundsException ex)
+        {
+            commonRestResponse.setCode(402);
+            commonRestResponse.setData(null);
+            commonRestResponse.setMessage("Request has been Failed");
+            LOGGER.error(ex.toString());
+        }
+
+        return commonRestResponse;
+    }
+
+    public void sendEmailAndSms(OrderModelEntity orderData){
+        String toEmail = orderData.getVendorEmail();
+        String body = "Order data has been updated for order ID: " + orderData.getId() + ". " + "Order Status : "+ orderData.getStatusName();
+        String subject = "VTS Order Data Update Notification";
+        String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com";
+
+        emailSenderService.sendEmail(toEmail, body, subject, cc);
+
+        String customerMail = "jobaidur@grameenphone.com";
+        String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
+        String subject_kcp = "VTS Order Update Notification";
+        String cc_kcp = "ifaz@grameenphone.com";
+
+        emailSenderService.sendEmail(customerMail, body_kcp, subject_kcp, cc_kcp);
+
+        SMS sms = new SMS();
+        sms.setPhone(orderData.getCustomerContactNumber());
+        sms.setText(body);
+        sendSMSService.sendSMS(sms);
     }
 
 

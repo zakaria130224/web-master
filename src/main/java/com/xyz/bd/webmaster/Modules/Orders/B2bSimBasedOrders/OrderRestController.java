@@ -28,4 +28,11 @@ public class OrderRestController {
         return orderService.findAllB2bSimOrderList(request, customQuery, input);
     }
 
+    @RequestMapping(value = "/update-status", method = RequestMethod.POST)
+    public CommonRestResponse updateDriverBasicInfo(HttpServletRequest request,
+                                                    @RequestParam("orderStatusData") String orderStatusData, @RequestParam("id") Long id) {
+        return orderService.updateOrderStatus(request, orderStatusData, id);
+
+    }
+
 }
