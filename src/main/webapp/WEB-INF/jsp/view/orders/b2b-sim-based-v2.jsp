@@ -486,6 +486,10 @@
                   <div class="form-group">
                     <label for="current_status">Current Status </label>
                     <input type="hidden" id="row_id">
+                    <input type="hidden" id="kcp_p_name">
+                    <input type="hidden" id="kcp_p_email">
+                    <input type="hidden" id="kcp_p_contact">
+                    <input type="hidden" id="previous_state">
                     <select class="form-control" id="current_status" disabled>
 
                     </select>
@@ -506,6 +510,13 @@
                   <div class="form-group">
                     <label for="editCht">Cht Ticket</label>
                     <input type="text" class="form-control" name="editCht" id="editCht" placeholder="" disabled>
+                  </div>
+                </div>
+
+                <div class="col-md-12" id="imei_block">
+                  <div class="form-group">
+                    <label for="imei_input">IMEI</label>
+                    <input type="text" class="form-control" id="imei_input" placeholder="Select">
                   </div>
                 </div>
 
@@ -912,13 +923,18 @@
       let orderStatusData = {
         statusName: $('#editStatus').val().split("/")[1],
         statusNameId: $('#editStatus').val().split("/")[0],
+        kcpName: $('#kcp_p_name').val(),
+        kcpEmail: $('#kcp_p_email').val(),
+        kcpContactNumber: $('#kcp_p_contact').val(),
+        previousState: $('#previous_state').val(),
+        imei: $('#imei_input').val()
       }
       let id = $("#row_id").val();
 
 
       $.ajax({
         type: 'POST',
-        url: base_url + "api/web/orders/b2c-gpc/update-status",
+        url: base_url + "api/web/orders/b2b-sim-based/update-status",
         data: {orderStatusData: JSON.stringify(orderStatusData), id: parseInt(id)},
         success: function (resultData) {
           $(".loader_body").hide();
@@ -1010,11 +1026,25 @@
     $('#updateForm')[0].reset();
     let data = dataTable.row( $(this).parents('#dataTable tbody tr') ).data();
     $("#editCht").val(data.chtTicketId).change();
-    $("#current_status").val(data.statusName).change();
+    var curr_status = data.statusName;
+    console.log(curr_status);
     $("#row_id").val(data.id);
+    $("#kcp_p_name").val(data.kcpName);
+    $("#kcp_p_email").val(data.kcpEmail);
+    $("#kcp_p_contact").val(data.kcpContactNumber);
+    $("#previous_state").val(data.statusName);
+
     $("#changeStatusModal").modal("show");
+    if( curr_status == "Installation"){
+      $('#imei_block').show();
+      $('#imei_input').attr("required", true);
+
+    } else{
+      $('#imei_block').hide();
+      $('#imei_input').attr("required", false);
+    }
     getStatusAll(data.statusName, data.statusNameId);
-  } );
+  });
   // change status button click end
 
   function openCreateOrderModal(){

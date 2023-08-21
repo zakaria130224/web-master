@@ -7,6 +7,10 @@ import com.xyz.bd.webmaster.Models.common.DTOs.SMS;
 import com.xyz.bd.webmaster.Modules.CommonPackages.Company.CompanyModelEntity;
 import com.xyz.bd.webmaster.Modules.CommonPackages.Company.CompanyRepository;
 import com.xyz.bd.webmaster.Modules.CommonPackages.Products.ProductService;
+import com.xyz.bd.webmaster.Modules.CommonPackages.TrackerDevice.TrackerDeviceModelEntity;
+import com.xyz.bd.webmaster.Modules.CommonPackages.TrackerDevice.TrackerDeviceService;
+import com.xyz.bd.webmaster.Modules.CommonPackages.User.UserModelEntity;
+import com.xyz.bd.webmaster.Modules.CommonPackages.User.UserService;
 import com.xyz.bd.webmaster.Modules.Orders.B2cGpcOrders.B2cGpcServices;
 import com.xyz.bd.webmaster.Modules.Orders.OrderModelEntity;
 import com.xyz.bd.webmaster.Modules.Orders.OrderRepository;
@@ -49,9 +53,6 @@ public class OrderServiceImpl implements OrderService{
    private CompanyRepository companyRepository;
 
     @Autowired
-    private EmailSenderService emailSenderService;
-
-    @Autowired
     QueryBuilderService queryBuilderService;
 
     @Autowired
@@ -64,7 +65,16 @@ public class OrderServiceImpl implements OrderService{
     ProductService productService;
 
     @Autowired
+    EmailSenderService emailSenderService;
+
+    @Autowired
     SendSMSService sendSMSService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    TrackerDeviceService trackerDeviceService;
 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(B2cGpcServices.class);
@@ -230,8 +240,39 @@ public class OrderServiceImpl implements OrderService{
         CommonRestResponse commonRestResponse = new CommonRestResponse();
         try
         {
+           // System.out.println("orderStatusData: " + orderStatusData);
             OrderModelEntity updateStatus = new Gson().fromJson(orderStatusData, new TypeToken<OrderModelEntity>() {
             }.getType());
+
+            String status_name = updateStatus.getStatusName();
+
+        //    System.out.println("orderStatusData: " + test);
+          if ("Finalization".equals(status_name)){
+                System.out.println("tests success");
+                UserModelEntity existingUser = userService.findByUserName(updateStatus.getKcpContactNumber());
+
+                if (existingUser == null) {
+                    // Create a new user entry in tbl_user
+                    UserModelEntity newUser = new UserModelEntity();
+                    newUser.setUserName(updateStatus.getKcpContactNumber());
+                    newUser.setFullName(updateStatus.getKcpName());
+                    newUser.setMobileNumber(updateStatus.getKcpEmail());
+                    newUser.setIsActive(1);
+                    userService.save(newUser);
+                }
+
+             String existingImei = trackerDeviceService.checkImeiExists(updateStatus.getImei());
+                    System.out.println(existingImei);
+              System.out.println("-------"+updateStatus.getImei());
+                if("false".equals(existingImei)) {
+                    TrackerDeviceModelEntity deviceInfo = new TrackerDeviceModelEntity();
+                    deviceInfo.setUserId(existingUser.getId()); // Set the user ID
+                    deviceInfo.setImei(updateStatus.getImei());
+                    // Set other device info fields as needed
+                    trackerDeviceService.saveDeviceInfo(deviceInfo);
+                }
+
+            }
 
             OrderModelEntity orderModelEntity = orderRepository.getById(id);
 
@@ -245,7 +286,7 @@ public class OrderServiceImpl implements OrderService{
             orderRepository.save(orderModelEntity);
 
             commonRestResponse.setData(orderModelEntity.getId());
-            sendEmailAndSms(orderModelEntity);
+          //  sendEmailAndSms(orderModelEntity);
             commonRestResponse.setCode(200);
             commonRestResponse.setMessage("Order Status has been Added Successfully");
         }
