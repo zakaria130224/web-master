@@ -13,8 +13,8 @@ public interface OrderStatusRepository extends JpaRepository<OrderStatusModel, L
     @Override
     List<OrderStatusModel> findAll();
 
-    @Query("SELECT u FROM OrderStatusModel u WHERE u.gpc_sim IS NOT NULL")
-    List<OrderStatusModel> findNextStatus(@Param("id") Long id);
+    @Query("SELECT u FROM OrderStatusModel u WHERE u.gpc_sim = :id")
+    List<OrderStatusModel> findNextStatus(@Param("id") Integer id);
 
     @Query("SELECT u FROM OrderStatusModel u WHERE u.b2b_sim IS NOT NULL")
     List<OrderStatusModel> findNextStatusB2BSim(@Param("id") Long id);
@@ -22,8 +22,8 @@ public interface OrderStatusRepository extends JpaRepository<OrderStatusModel, L
     @Query("SELECT u.id, u.order_name FROM OrderStatusModel u WHERE u.order_name LIKE '%:?1'")
     OrderStatusModel getByStatusName(String status);
 
-    @Query(value = "SELECT u.* FROM tbl_order_status u WHERE u.gpc_sim = ?1",nativeQuery = true)
-    OrderStatusModel getByIdGpcSim(Long id);
+    @Query("SELECT u FROM OrderStatusModel u WHERE u.gpc_sim = :id")
+    OrderStatusModel getByIdGpcSim(@Param("id") Integer id);
 
     @Query(value = "SELECT u.* FROM tbl_order_status u WHERE u.b2b_sim = ?1",nativeQuery = true)
     OrderStatusModel getByIdB2BSim(Long id);
