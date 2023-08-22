@@ -22,6 +22,7 @@ import com.xyz.bd.webmaster.Utility.Helper;
 import com.xyz.bd.webmaster.Utility.Utility;
 import com.xyz.bd.webmaster.Utility.dataTable.QueryBuilderService;
 import org.apache.poi.ss.usermodel.*;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,14 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -76,6 +79,11 @@ public class OrderServiceImpl implements OrderService{
     @Autowired
     TrackerDeviceService trackerDeviceService;
 
+    @Value("${api.addDeviceUrl}")
+    private String addDeviceUrl;
+
+    @Value("${api.webAuthorizationHeader}")
+    private String webAuthorizationHeader;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(B2cGpcServices.class);
 
@@ -265,9 +273,65 @@ public class OrderServiceImpl implements OrderService{
                     System.out.println(existingImei);
               System.out.println("-------"+updateStatus.getImei());
                 if("false".equals(existingImei)) {
+                    // Send HTTP POST request
+//                    String apiUrl = "https://tteche.grameenphone.com/federal-mw/so/api/web/device/add";
+//                    String authorizationHeader = "Basic aW90d2ViOmdwNzU4MA==";
+
+                    long resultCode = 0;
+                    String resultDesc = "";
+                    try {
+                        URL url = new URL(addDeviceUrl);
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setRequestMethod("POST");
+                        connection.setRequestProperty("Authorization", webAuthorizationHeader);
+                        connection.setRequestProperty("channel", "WEB");
+                        connection.setRequestProperty("Content-Type", "application/json");
+                        connection.setDoOutput(true);
+
+                        String payload = "{\n" +
+                                "    \"imei\": \"" + updateStatus.getImei() + "\",\n" +
+                                "    \"name\": \"Test device\",\n" +
+                                "    \"speedLimit\": 20.6\n" +
+                                "}";
+
+                        try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+                            wr.writeBytes(payload);
+                            wr.flush();
+                        }
+
+                        int responseCode = connection.getResponseCode();
+                        System.out.println("POST Response Code: " + responseCode);
+
+                        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        String inputLine;
+                        StringBuilder response = new StringBuilder();
+
+                        while ((inputLine = in.readLine()) != null) {
+                            response.append(inputLine);
+                        }
+                        in.close();
+
+                        System.out.println("POST Response: " + response.toString());
+
+                        // Parse the API response
+                        JSONObject jsonResponse = new JSONObject(response.toString());
+                        JSONObject responseHeader = jsonResponse.getJSONObject("responseHeader");
+                        resultCode = responseHeader.getLong("resultCode");
+                        resultDesc  = responseHeader.getString("resultDesc");
+
+                        // Use the resultCode as needed
+                        System.out.println("Result Code: " + resultCode);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    //end api call
                     TrackerDeviceModelEntity deviceInfo = new TrackerDeviceModelEntity();
                     deviceInfo.setUserId(existingUser.getId()); // Set the user ID
                     deviceInfo.setImei(updateStatus.getImei());
+                    deviceInfo.setTrackerDeviceId(resultCode);
+                    deviceInfo.setUserEmail(resultDesc);
                     // Set other device info fields as needed
                     trackerDeviceService.saveDeviceInfo(deviceInfo);
                 }
