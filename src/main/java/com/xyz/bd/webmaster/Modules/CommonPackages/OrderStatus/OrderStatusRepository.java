@@ -13,14 +13,14 @@ public interface OrderStatusRepository extends JpaRepository<OrderStatusModel, L
     @Override
     List<OrderStatusModel> findAll();
 
-    @Query("SELECT u FROM OrderStatusModel u WHERE u.gpc_sim IS NOT NULL")
-    List<OrderStatusModel> findNextStatus(@Param("id") Long id);
+    @Query("SELECT u FROM OrderStatusModel u WHERE u.gpc_sim = :id")
+    List<OrderStatusModel> findNextStatus(@Param("id") Integer id);
 
-    @Query("SELECT u.id, u.order_name FROM OrderStatusModel u WHERE u.order_name LIKE '%:?1'")
+    @Query("SELECT u.id, u.order_name FROM OrderStatusModel u WHERE u.order_name LIKE '%:1'")
     OrderStatusModel getByStatusName(String status);
 
-    @Query(value = "SELECT u.* FROM tbl_order_status u WHERE u.gpc_sim = ?1",nativeQuery = true)
-    OrderStatusModel getByIdGpcSim(Long id);
+    @Query("SELECT u FROM OrderStatusModel u WHERE u.gpc_sim = :id")
+    OrderStatusModel getByIdGpcSim(@Param("id") Integer id);
 
     @Query(value = "SELECT * FROM tbl_order_status WHERE gpc_sim=(SELECT gpc_sim+1 FROM tbl_order_status WHERE id=:id) and gpc_sim IS NOT NULL",nativeQuery = true)
     OrderStatusModel getByIdGpcSimDynamic(@Param("id") Long id);

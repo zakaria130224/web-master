@@ -21,8 +21,8 @@ public class OrderStatusImpl implements OrderStatus{
 
     @Override
     public List<OrderStatusModel> getNextStatusList(Long id) {
-        OrderStatusModel orderByName = orderStatusRepository.getByIdGpcSim(id);
-        Long nextId = (long) (orderByName.getGpc_sim() + 1);
+        OrderStatusModel orderByName = orderStatusRepository.getByIdGpcSim(id.intValue());
+        Integer nextId = orderByName.getGpc_sim()+1;
         try {
             List<OrderStatusModel> result = orderStatusRepository.findNextStatus(nextId);
             return result;

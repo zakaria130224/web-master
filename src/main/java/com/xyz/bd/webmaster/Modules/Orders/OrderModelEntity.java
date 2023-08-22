@@ -2,6 +2,7 @@ package com.xyz.bd.webmaster.Modules.Orders;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xyz.bd.webmaster.Models.common.Entities.BaseEntity;
+import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -108,21 +109,25 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
     @JsonProperty("isCalendarDay")
     private boolean isCalendarDay;
 
-    @Column(name = "is_working_day")
-    @JsonProperty("isWorkingDay")
-    private boolean isWorkingDay;
+    @Column(name = "contact_sla_min")
+    @JsonProperty("ContactSlaMin")
+    private Long ContactSlaMin;
 
-    @Column(name = "sla_min")
-    @JsonProperty("slaMin")
-    private Long slaMin;
+    @Column(name = "installation_sla_min")
+    @JsonProperty("installationSlaMin")
+    private Long installationSlaMin;
 
-    @Column(name = "is_sla_exceed")
-    @JsonProperty("isSlaExceed")
-    private boolean isSlaExceed;
+    @Column(name = "is_contact_sla_exceed")
+    @JsonProperty("isContactSlaExceed")
+    private boolean isContactSlaExceed;
 
-    @Column(name = "sla_datetime")
-    @JsonProperty("slaDatetime")
-    private Date slaDatetime;
+    @Column(name = "sla_contact_est_dt")
+    @JsonProperty("slaContactEstDt")
+    private Date slaContactEstDt;
+
+    @Column(name = "sla_installation_est_dt")
+    @JsonProperty("slaInstallationEstDt")
+    private Date slaInstallationEstDt;
 
     @Column(name = "delivary_datetime")
     @JsonProperty("delivaryDatetime")
@@ -144,13 +149,21 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
     @JsonProperty("vendorEmail")
     private String vendorEmail;
 
-    @Column(name = "new_order_dt")
-    @JsonProperty("newOrderDt")
-    private Date newOrderDt;
+    @Column(name = "first_contact_dt")
+    @JsonProperty("firstContactDt")
+    private Date firstContactDt;
 
-    @Column(name = "new_order_note")
-    @JsonProperty("newOrderNote")
-    private String newOrderNote;
+    @Column(name = "first_contact_note")
+    @JsonProperty("firstContactNote")
+    private String firstContactNote;
+
+    @Column(name = "first_contact_by")
+    @JsonProperty("firstContactBy")
+    private String firstContactBy;
+
+    @Column(name = "scheduled_appointed_dt")
+    @JsonProperty("scheduledAppointedDate")
+    private Date scheduledAppointedDate;
 
     @Column(name = "scheduled_dt")
     @JsonProperty("scheduledDt")
