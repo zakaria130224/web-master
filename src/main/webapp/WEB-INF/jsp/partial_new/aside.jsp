@@ -1,4 +1,4 @@
-<%@ page import="com.xyz.bd.webmaster.Models.UserManagement.DTOs.MenuTree" %>
+<%@ page import="com.xyz.bd.webmaster.models.UserManagement.DTOs.MenuTree" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: shafa
@@ -322,6 +322,30 @@
                             </a>
                         </li>
 
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-houzz"></i>
+                        <p>
+                            Inventory
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/inventory/manage" class="nav-link">
+                                <i class="fa fa-circle nav-icon"></i>
+                                <p>Manage</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/inventory/logs" class="nav-link">
+                                <i class="fa fa-circle nav-icon"></i>
+                                <p>Inventory Logs</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

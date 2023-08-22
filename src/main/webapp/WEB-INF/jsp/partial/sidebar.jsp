@@ -1,5 +1,5 @@
-<%@ page import="com.xyz.bd.webmaster.Models.UserManagement.Entities.Menu" %>
-<%@ page import="com.xyz.bd.webmaster.Models.UserManagement.DTOs.MenuTree" %>
+<%@ page import="com.xyz.bd.webmaster.models.UserManagement.Entities.Menu" %>
+<%@ page import="com.xyz.bd.webmaster.models.UserManagement.DTOs.MenuTree" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
