@@ -24,4 +24,6 @@ public interface ProductService {
     DataTablesOutput<ProductsModel> findAllItemList(HttpServletRequest request, String customQuery, DataTablesInput input);
 
     VendorModelEntity findVendorByProductName(String productName);
+
+    ProductsModel getAllProductDataByProductName(String productName);
 }

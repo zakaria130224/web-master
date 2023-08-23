@@ -13,6 +13,7 @@ import com.xyz.bd.webmaster.modules.commonPackages.trackerDevice.TrackerDeviceMo
 import com.xyz.bd.webmaster.modules.commonPackages.trackerDevice.TrackerDeviceService;
 import com.xyz.bd.webmaster.modules.commonPackages.user.UserModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.user.UserService;
+import com.xyz.bd.webmaster.modules.inventory.ProductsModel;
 import com.xyz.bd.webmaster.modules.orders.b2cGpcOrders.B2cGpcServices;
 import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
 import com.xyz.bd.webmaster.modules.orders.OrderRepository;
@@ -48,6 +49,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -169,6 +173,8 @@ public class OrderServiceImpl implements OrderService{
                     companyRepository.save(newCompany);
                 }
 
+                ProductsModel products = productService.getAllProductDataByProductName(productType);
+
                 OrderModelEntity orderModelEntity = new OrderModelEntity();
                 orderModelEntity.setChtTicketId(chtticket);
                 orderModelEntity.setBsCode(bsCode);
@@ -192,6 +198,8 @@ public class OrderServiceImpl implements OrderService{
                 orderModelEntity.setVendorName(vendor.getName());
                 orderModelEntity.setVendorEmail(vendor.getEmail());
                 orderModelEntity.setVendorId(vendor.getId());
+                orderModelEntity.setDeviceCategory(products.getDeviceCategory());
+                orderModelEntity.setDeviceSubCategory(products.getDeviceSubCategory());
 
 
                 orderRepository.save(orderModelEntity);
@@ -270,10 +278,11 @@ public class OrderServiceImpl implements OrderService{
            // System.out.println("orderStatusData: " + orderStatusData);
             OrderModelEntity updateStatus = new Gson().fromJson(orderStatusData, new TypeToken<OrderModelEntity>() {
             }.getType());
-
+            OrderModelEntity orderModelEntity = orderRepository.getById(id);
             String status_name = updateStatus.getStatusName();
 
-        //    System.out.println("orderStatusData: " + test);
+
+            System.out.println("orderStatusData: " + status_name);
           if ("Pack Activation".equals(status_name)){
                 System.out.println("tests success");
                 UserModelEntity existingUser = userService.findByUserName(updateStatus.getKcpContactNumber());
@@ -344,6 +353,8 @@ public class OrderServiceImpl implements OrderService{
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+//                    String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                    OrderModelEntity orders = orderRepository.getOrderById(id);
 
                     //end api call
                     TrackerDeviceModelEntity deviceInfo = new TrackerDeviceModelEntity();
@@ -351,19 +362,43 @@ public class OrderServiceImpl implements OrderService{
                     deviceInfo.setImei(updateStatus.getImei());
                     deviceInfo.setTrackerDeviceId(resultCode);
                     deviceInfo.setUserEmail(resultDesc);
-                    deviceInfo.setCellPhone(updateStatus.getKamContactNumber());
                     deviceInfo.setCustomerName(updateStatus.getKcpName());
                     deviceInfo.setOrderId(id);
+                    deviceInfo.setCompanyId(orders.getCompanyId());
+                    deviceInfo.setCustomerName(orders.getKcpName());
+                    deviceInfo.setCellPhone(orders.getKcpContactNumber());
+                    deviceInfo.setUserEmail(orders.getKcpEmail());
+                    deviceInfo.setVtsSim(orders.getVtsSimNo());
+                    deviceInfo.setDeviceCategory(orders.getDeviceCategory());
+                    deviceInfo.setDeviceSubCategory(orders.getDeviceSubCategory());
+                    deviceInfo.setDataPackName(orders.getPackName());
+                    deviceInfo.setCompanyName(orders.getCompanyName());
+                    deviceInfo.setInstallationDate(Helper.getCurrentDate());
+
                     // Set other device info fields as needed
                     trackerDeviceService.saveDeviceInfo(deviceInfo);
                 }
 
             }
+           else if ("Scheduled".equals(status_name)){
+                orderModelEntity.setScheduledNote(updateStatus.getScheduledNote());
+            }
+          else if ("First Contact".equals(status_name)){
+              SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+              System.out.println("hello");
+              orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
+              orderModelEntity.setFirstContactNote(updateStatus.getFirstContactNote());
+              orderModelEntity.setScheduledAppointedDt(updateStatus.getScheduledAppointedDt());
 
-            OrderModelEntity orderModelEntity = orderRepository.getById(id);
+              orderRepository.save(orderModelEntity);
+          }
+
+
+          //  OrderModelEntity orderModelEntity = orderRepository.getById(id);
 
             orderModelEntity.setStatusName(updateStatus.getStatusName());
             orderModelEntity.setStatusNameId(updateStatus.getStatusNameId());
+
 
             orderModelEntity.setUpdatedBy(SessionManager.getUserLoginName(request));
             orderModelEntity.setUpdatedAt(Helper.getCurrentDate());

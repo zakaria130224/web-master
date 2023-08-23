@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -84,6 +85,11 @@ public class ProductServiceImpl implements ProductService{
 
     public VendorModelEntity findVendorByProductName(String productName) {
         return productRepository.findVendorByProductName(productName);
+    }
+
+    @Override
+    public ProductsModel getAllProductDataByProductName(String productName) {
+        return productRepository.findByProductName(productName);
     }
 
 }

@@ -28,6 +28,8 @@ public interface ProductRepository extends JpaRepository<ProductsModel, Long> {
             nativeQuery = true)
     List<ProductVendorDto> getVendorByProductIdJoin(Long id);
 
-    @Query("SELECT v FROM VendorModelEntity v WHERE v.id = (SELECT p.vendor_id FROM ProductsModel p WHERE p.product_name = :productName)")
+    @Query("SELECT v FROM VendorModelEntity v WHERE v.id = (SELECT p.vendorId FROM ProductsModel p WHERE p.productName = :productName)")
     VendorModelEntity findVendorByProductName(String productName);
+
+    ProductsModel findByProductName(String productName);
 }

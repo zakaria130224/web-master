@@ -67,4 +67,7 @@ public class TrackerDeviceModelEntity extends BaseEntity implements Serializable
 
     @Column(name = "device_add_date")
     private Date deviceAddDate;
+
+    @Column(name = "device_sub_category")
+    private String deviceSubCategory;
 }

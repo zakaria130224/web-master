@@ -519,6 +519,19 @@
                     <input type="text" class="form-control" id="imei_input" placeholder="Select">
                   </div>
                 </div>
+                <div class="col-md-12" id="tracker_device_name">
+                  <div class="form-group">
+                    <label for="tracker_device_name">Device Name</label>
+                    <input type="text" class="form-control" id="device_name" placeholder="Select">
+                  </div>
+                </div>
+
+                <div class="col-md-12" id = "schedule_time">
+                  <div class="form-group">
+                    <label for="schedule">Schedule</label>
+                    <input type="date" class="form-control" name="schedule" id="schedule" placeholder="Add Schedule">
+                  </div>
+                </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
@@ -589,7 +602,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="add_note">Add Note</label>
-                    <textarea type="text" class="form-control" name="add_note" id="add_notes" placeholder="Add Note"></textarea>
+                    <textarea type="text" class="form-control" name="add_notes" id="add_notes" placeholder="Add Note"></textarea>
                   </div>
                 </div>
                 <div class="col-md-12">
@@ -931,7 +944,15 @@
         kcpEmail: $('#kcp_p_email').val(),
         kcpContactNumber: $('#kcp_p_contact').val(),
         previousState: $('#previous_state').val(),
-        imei: $('#imei_input').val()
+        imei: $('#imei_input').val(),
+        scheduledDt: $('#schedule').val(),
+        ScheduledNote:$('#add_note').val(),
+        firstContactNote:$('#add_note').val(),
+        simActivationNote:$('#add_note').val(),
+        installationNote :$('#add_note').val(),
+        finalizationNote :$('#add_note').val(),
+        onboardedNote :$('#add_note').val()
+
       }
       let id = $("#row_id").val();
 
@@ -1039,13 +1060,30 @@
     $("#previous_state").val(data.statusName);
 
     $("#changeStatusModal").modal("show");
-    if( curr_status == "Installation"){
+    if( curr_status == "Installation") {
       $('#imei_block').show();
       $('#imei_input').attr("required", true);
-
-    } else{
+      $('#tracker_device_name').show();
+      $('#tracker_device_name').attr("required", true);
+      $('#schedule_time').hide();
+      $('#schedule_time').attr("required", false);
+    }
+      else if(curr_status == "New Order"){
+      $('#schedule_time').show();
+      $('#schedule_time').attr("required", true);
       $('#imei_block').hide();
       $('#imei_input').attr("required", false);
+      $('#tracker_device_name').hide();
+      $('#tracker_device_name').attr("required", false);
+      }
+
+     else{
+      $('#imei_block').hide();
+      $('#imei_input').attr("required", false);
+      $('#tracker_device_name').hide();
+      $('#tracker_device_name').attr("required", false);
+      $('#schedule_time').hide();
+      $('#schedule_time').attr("required", false);
     }
     getStatusAll(data.statusName, data.statusNameId);
   });
