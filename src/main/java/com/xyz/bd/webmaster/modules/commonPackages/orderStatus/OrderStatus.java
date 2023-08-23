@@ -10,5 +10,7 @@ public interface OrderStatus {
 
     List<OrderStatusModel> getNextStatusList(Long id);
 
+    List<OrderStatusModel> getNextStatusListB2BSim(Long id);
+
     Object getStatusListByColumnName(String name);
 }

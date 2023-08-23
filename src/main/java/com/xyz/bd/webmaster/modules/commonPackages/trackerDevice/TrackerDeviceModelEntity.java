@@ -22,5 +22,11 @@ public class TrackerDeviceModelEntity extends BaseEntity implements Serializable
     @Column(name = "imei")
     private String imei;
 
+    @Column(name = "tracker_device_id")
+    private Long trackerDeviceId;
+
+    @Column(name = "user_email")
+    private String userEmail;
+
 
 }

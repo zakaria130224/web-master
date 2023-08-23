@@ -1,19 +1,44 @@
 package com.xyz.bd.webmaster.modules.orders.b2bSimBasedOrders;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.xyz.bd.webmaster.config.session.SessionManager;
+import com.xyz.bd.webmaster.models.common.DTOs.SMS;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyRepository;
+import com.xyz.bd.webmaster.modules.commonPackages.products.ProductService;
+import com.xyz.bd.webmaster.modules.commonPackages.trackerDevice.TrackerDeviceModelEntity;
+import com.xyz.bd.webmaster.modules.commonPackages.trackerDevice.TrackerDeviceService;
+import com.xyz.bd.webmaster.modules.commonPackages.user.UserModelEntity;
+import com.xyz.bd.webmaster.modules.commonPackages.user.UserService;
+import com.xyz.bd.webmaster.modules.orders.b2cGpcOrders.B2cGpcServices;
 import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
 import com.xyz.bd.webmaster.modules.orders.OrderRepository;
+import com.xyz.bd.webmaster.repositories.CommonRepository;
 import com.xyz.bd.webmaster.services.CommonServices.EmailSenderService;
+import com.xyz.bd.webmaster.services.CommonServices.SendSMSService;
+import com.xyz.bd.webmaster.utility.CommonRestResponse;
+import com.xyz.bd.webmaster.utility.Helper;
+import com.xyz.bd.webmaster.utility.Utility;
+import com.xyz.bd.webmaster.utility.dataTable.QueryBuilderService;
 import org.apache.poi.ss.usermodel.*;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Value;
 
+import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,7 +56,37 @@ public class OrderServiceImpl implements OrderService{
    private CompanyRepository companyRepository;
 
     @Autowired
-    private EmailSenderService emailSenderService;
+    QueryBuilderService queryBuilderService;
+
+    @Autowired
+    private EntityManager entityManager;
+
+    @Autowired
+    CommonRepository commonRepository;
+
+    @Autowired
+    ProductService productService;
+
+    @Autowired
+    EmailSenderService emailSenderService;
+
+    @Autowired
+    SendSMSService sendSMSService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    TrackerDeviceService trackerDeviceService;
+
+    @Value("${api.addDeviceUrl}")
+    private String addDeviceUrl;
+
+    @Value("${api.webAuthorizationHeader}")
+    private String webAuthorizationHeader;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(B2cGpcServices.class);
+
     @Override
     public List<OrderModelEntity> getAllOrder() {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
@@ -113,7 +168,7 @@ public class OrderServiceImpl implements OrderService{
                 orderModelEntity.setAltContactNum(altContact);
                 orderModelEntity.setKcpName(kcpName);
                 orderModelEntity.setKcpContactNumber(kcpContact);
-                orderModelEntity.setKamEmail(kcpEmail);
+                orderModelEntity.setKcpEmail(kcpEmail);
                 orderModelEntity.setSupportPartnerName(supportPartner);
                 orderModelEntity.setProductType(productType);
                 orderModelEntity.setAudioListenMsisdn(audNum);
@@ -163,7 +218,173 @@ public class OrderServiceImpl implements OrderService{
     }
 
 
+    //New v2 Orders
+    @Override
+    public DataTablesOutput<OrderModelEntity> findAllB2bSimOrderList(HttpServletRequest request, String customQuery, DataTablesInput input) {
+        String whereQuery = queryBuilderService.generateSearchQuery(customQuery, Utility.tbl_order, OrderModelEntity.class);
 
+        String searchQuery = queryBuilderService.selectAllQuery(whereQuery, Utility.tbl_order);
+
+        searchQuery = queryBuilderService.generatePaginationQuery(input.getStart(), input.getLength(), searchQuery);
+
+        String count = queryBuilderService.countQuery("ID", whereQuery, Utility.tbl_order, OrderModelEntity.class);
+
+        int totalData = commonRepository.CommoNumberOfRow(count);
+
+        List<OrderModelEntity> resultList = entityManager.createNativeQuery(searchQuery, OrderModelEntity.class).getResultList();
+
+        DataTablesOutput<OrderModelEntity> tableData = new DataTablesOutput<>();
+
+        tableData.setData(resultList);
+        tableData.setRecordsFiltered(totalData);
+        tableData.setRecordsTotal(totalData);
+        tableData.setDraw(input.getDraw());
+
+        return tableData;
+    }
+
+    @Override
+    public CommonRestResponse updateOrderStatus(HttpServletRequest request, String orderStatusData, Long id) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
+        try
+        {
+           // System.out.println("orderStatusData: " + orderStatusData);
+            OrderModelEntity updateStatus = new Gson().fromJson(orderStatusData, new TypeToken<OrderModelEntity>() {
+            }.getType());
+
+            String status_name = updateStatus.getStatusName();
+
+        //    System.out.println("orderStatusData: " + test);
+          if ("Finalization".equals(status_name)){
+                System.out.println("tests success");
+                UserModelEntity existingUser = userService.findByUserName(updateStatus.getKcpContactNumber());
+
+                if (existingUser == null) {
+                    // Create a new user entry in tbl_user
+                    UserModelEntity newUser = new UserModelEntity();
+                    newUser.setUserName(updateStatus.getKcpContactNumber());
+                    newUser.setFullName(updateStatus.getKcpName());
+                    newUser.setMobileNumber(updateStatus.getKcpEmail());
+                    newUser.setIsActive(1);
+                    userService.save(newUser);
+                }
+
+             String existingImei = trackerDeviceService.checkImeiExists(updateStatus.getImei());
+                    System.out.println(existingImei);
+              System.out.println("-------"+updateStatus.getImei());
+                if("false".equals(existingImei)) {
+                    // Send HTTP POST request
+//                    String apiUrl = "https://tteche.grameenphone.com/federal-mw/so/api/web/device/add";
+//                    String authorizationHeader = "Basic aW90d2ViOmdwNzU4MA==";
+
+                    long resultCode = 0;
+                    String resultDesc = "";
+                    try {
+                        URL url = new URL(addDeviceUrl);
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setRequestMethod("POST");
+                        connection.setRequestProperty("Authorization", webAuthorizationHeader);
+                        connection.setRequestProperty("channel", "WEB");
+                        connection.setRequestProperty("Content-Type", "application/json");
+                        connection.setDoOutput(true);
+
+                        String payload = "{\n" +
+                                "    \"imei\": \"" + updateStatus.getImei() + "\",\n" +
+                                "    \"name\": \"Test device\",\n" +
+                                "    \"speedLimit\": 20.6\n" +
+                                "}";
+
+                        try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+                            wr.writeBytes(payload);
+                            wr.flush();
+                        }
+
+                        int responseCode = connection.getResponseCode();
+                        System.out.println("POST Response Code: " + responseCode);
+
+                        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        String inputLine;
+                        StringBuilder response = new StringBuilder();
+
+                        while ((inputLine = in.readLine()) != null) {
+                            response.append(inputLine);
+                        }
+                        in.close();
+
+                        System.out.println("POST Response: " + response.toString());
+
+                        // Parse the API response
+                        JSONObject jsonResponse = new JSONObject(response.toString());
+                        JSONObject responseHeader = jsonResponse.getJSONObject("responseHeader");
+                        resultCode = responseHeader.getLong("resultCode");
+                        resultDesc  = responseHeader.getString("resultDesc");
+
+                        // Use the resultCode as needed
+                        System.out.println("Result Code: " + resultCode);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    //end api call
+                    TrackerDeviceModelEntity deviceInfo = new TrackerDeviceModelEntity();
+                    deviceInfo.setUserId(existingUser.getId()); // Set the user ID
+                    deviceInfo.setImei(updateStatus.getImei());
+                    deviceInfo.setTrackerDeviceId(resultCode);
+                    deviceInfo.setUserEmail(resultDesc);
+                    // Set other device info fields as needed
+                    trackerDeviceService.saveDeviceInfo(deviceInfo);
+                }
+
+            }
+
+            OrderModelEntity orderModelEntity = orderRepository.getById(id);
+
+            orderModelEntity.setStatusName(updateStatus.getStatusName());
+            orderModelEntity.setStatusNameId(updateStatus.getStatusNameId());
+
+            orderModelEntity.setUpdatedBy(SessionManager.getUserLoginName(request));
+            orderModelEntity.setUpdatedAt(Helper.getCurrentDate());
+
+
+            orderRepository.save(orderModelEntity);
+
+            commonRestResponse.setData(orderModelEntity.getId());
+          //  sendEmailAndSms(orderModelEntity);
+            commonRestResponse.setCode(200);
+            commonRestResponse.setMessage("Order Status has been Added Successfully");
+        }
+        catch(ArrayIndexOutOfBoundsException ex)
+        {
+            commonRestResponse.setCode(402);
+            commonRestResponse.setData(null);
+            commonRestResponse.setMessage("Request has been Failed");
+            LOGGER.error(ex.toString());
+        }
+
+        return commonRestResponse;
+    }
+
+    public void sendEmailAndSms(OrderModelEntity orderData){
+        String toEmail = orderData.getVendorEmail();
+        String body = "Order data has been updated for order ID: " + orderData.getId() + ". " + "Order Status : "+ orderData.getStatusName();
+        String subject = "VTS Order Data Update Notification";
+        String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com";
+
+        emailSenderService.sendEmail(toEmail, body, subject, cc);
+
+        String customerMail = "jobaidur@grameenphone.com";
+        String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
+        String subject_kcp = "VTS Order Update Notification";
+        String cc_kcp = "ifaz@grameenphone.com";
+
+        emailSenderService.sendEmail(customerMail, body_kcp, subject_kcp, cc_kcp);
+
+        SMS sms = new SMS();
+        sms.setPhone(orderData.getCustomerContactNumber());
+        sms.setText(body);
+        sendSMSService.sendSMS(sms);
+    }
 
 
 }

@@ -31,4 +31,11 @@ public class OrderStatusRestController {
         return commonRestResponse;
     }
 
+    @PostMapping("/next-order-status-b2b-sim")
+    public CommonRestResponse getNextOrderListB2BSim(HttpServletRequest request, @RequestParam("id") Long id) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
+        commonRestResponse.setData(orderStatus.getNextStatusListB2BSim(id));
+        return commonRestResponse;
+    }
+
 }
