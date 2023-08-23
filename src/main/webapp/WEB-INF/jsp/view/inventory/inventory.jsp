@@ -201,7 +201,7 @@
     <!-- /.content -->
   </div>
 
-  <div class="modal left fade" id="newOrderEntry" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal left fade" id="newProductEntry" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -234,8 +234,8 @@
                     <label for="channel_name">Channel</label>
                     <select class="form-control" id="channel_name" required>
                       <option>Please select channel</option>
-                      <option value="1/B2B">B2B</option>
-                      <option value="2/B2C">B2C</option>
+                      <option value="b2b">B2B</option>
+                      <option value="b2c">B2C</option>
                     </select>
                   </div>
                 </div>
@@ -245,8 +245,8 @@
                     <label for="category_name">Category Name</label>
                     <select class="form-control" id="category_name" required>
                       <option>Please select category</option>
-                      <option value="1/B2B">SIM Bases</option>
-                      <option value="2/B2C">SIM Less</option>
+                      <option value="SIM Bases">SIM Bases</option>
+                      <option value="SIM Less">SIM Less</option>
                     </select>
                   </div>
                 </div>
@@ -291,7 +291,7 @@
     </div>
   </div>
 
-  <div class="modal left fade" id="showOrderDetails" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal left fade" id="showProductDetails" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -324,8 +324,8 @@
                     <label for="channel_name">Channel</label>
                     <select class="form-control" id="d_channel_name" required>
                       <option>Please select channel</option>
-                      <option value="1/B2B">B2B</option>
-                      <option value="2/B2C">B2C</option>
+                      <option value="b2b">B2B</option>
+                      <option value="b2c">B2C</option>
                     </select>
                   </div>
                 </div>
@@ -335,8 +335,8 @@
                     <label for="category_name">Category Name</label>
                     <select class="form-control" id="d_category_name" required>
                       <option>Please select category</option>
-                      <option value="1/B2B">SIM Bases</option>
-                      <option value="2/B2C">SIM Less</option>
+                      <option value="SIM Based">SIM Bases</option>
+                      <option value="SIM Less">SIM Less</option>
                     </select>
                   </div>
                 </div>
@@ -380,7 +380,7 @@
     </div>
   </div>
 
-  <div class="modal left fade" id="changeStatus" tabindex="" role="dialog" aria-labelledby="changeStatus" aria-hidden="true">
+  <div class="modal left fade" id="updateProductItem" tabindex="" role="dialog" aria-labelledby="updateProductItem" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -413,8 +413,8 @@
                     <label for="channel_name">Channel</label>
                     <select class="form-control" id="e_channel_name" required>
                       <option>Please select channel</option>
-                      <option value="1/B2B">B2B</option>
-                      <option value="2/B2C">B2C</option>
+                      <option value="b2b">B2B</option>
+                      <option value="b2c">B2C</option>
                     </select>
                   </div>
                 </div>
@@ -424,8 +424,8 @@
                     <label for="category_name">Category Name</label>
                     <select class="form-control" id="e_category_name" required>
                       <option>Please select category</option>
-                      <option value="1/B2B">SIM Bases</option>
-                      <option value="2/B2C">SIM Less</option>
+                      <option value="SIM Based">SIM Bases</option>
+                      <option value="SIM Less">SIM Less</option>
                     </select>
                   </div>
                 </div>
@@ -563,7 +563,7 @@
 
   function openCreateOrderModal(){
     getProductList();
-    $("#newOrderEntry").modal("show");
+    $("#newProductEntry").modal("show");
   }
 
   function getOrderData() {
@@ -622,28 +622,24 @@
   $('#dataTable tbody').on( 'click', 'tr', function (evt) {
     console.log(dataTable.row( this ).data());
     let tableRowData = dataTable.row( this ).data();
-    $("#showOrderDetails").modal("show");
+    $("#showProductDetails").modal("show");
     if ( $(evt.target).is("dataTable tbody tr td:nth-last-child(2)") ) {
       return;
     }
     $('#details_order_form').trigger("reset");
 
-    $('#d_updated_date').val(tableRowData.updatedAt);
-    $('#d_cloud_id').val(tableRowData.cloudId);
-    $('#d_trxid').val(tableRowData.id);
-    $('#d_customer_name').val(tableRowData.customerName);
-    $('#d_address').val(tableRowData.address);
-    $('#d_pack').val(tableRowData.packName);
-    $('#d_product_name').val(tableRowData.productName);
-    $('#d_product_type').val(tableRowData.productType);
-    $('#d_vendor_name').val(tableRowData.vendorName);
-    $('#d_rate_plan').val(tableRowData.ratePlan);
-    $('#d_customer_contact').val(tableRowData.customerContactNumber);
-
-
-
-
+    $('#d_item_code').val(tableRowData.itemCode);
+    $('#d_subscription').val(tableRowData.monthlyCharge);
+    $('#d_product_price').val(tableRowData.totalCharge);
+    $('#d_quantity').val(tableRowData.quantity);
+    $('#d_description').val(tableRowData.description);
+    $('#d_channel_name option[value="'+tableRowData.channel+'"]').prop("selected",true).trigger("change");
+    $('#d_category_name option[value="'+tableRowData.deviceCategory+'"]').prop("selected",true).trigger("change");
+    //$('#d_channel_name option[value='+tableRowData.channel+']').attr("selected", "selected").change();;
   } );
+
+  $('#d_channel_name option[value="B2B"]').prop("selected",true).trigger("change");
+
 
   function createNewOrder(){
     $("#createSrNotification").html("");
@@ -701,7 +697,7 @@
   }
 
   function modalClose(){
-    $("#newOrderEntry").modal('hide');
+    $("#newProductEntry").modal('hide');
   }
 
   $('#dataTable tbody').on( 'click', 'button.change-status', function (e) {
@@ -711,7 +707,7 @@
     let data = dataTable.row( $(this).parents('#dataTable tbody tr') ).data();
     $("#current_status").val(data.status).change();
     $("#row_id").val(data.id);
-    $("#changeStatus").modal("show");
+    $("#updateProductItem").modal("show");
     getStatusAll(data.statusName, data.statusNameId);
   } );
 
@@ -743,14 +739,14 @@
             let custom_msg = "<div class='alert alert-success success-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
             //$("#notification_bar").show();
             $("#createSrNotification").html(custom_msg);
-            $("#changeStatus").modal("hide");
+            $("#updateProductItem").modal("hide");
             getOrderData();
             $('#update_order_form')[0].reset();
           } else {
             $(".loader_body").hide();
             let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> "+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
             $("#createSrNotification").html(custom_msg);
-            $("#changeStatus").modal("hide");
+            $("#updateProductItem").modal("hide");
             $('#update_order_form')[0].reset();
           }
         },
@@ -758,7 +754,7 @@
           $(".loader_body").hide();
           let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
           $("#createSrNotification").html(custom_msg);
-          $("#changeStatus").modal("hide");
+          $("#updateProductItem").modal("hide");
           $('#update_order_form')[0].reset();
         }
       });
