@@ -6,6 +6,8 @@ import com.xyz.bd.webmaster.config.session.SessionManager;
 import com.xyz.bd.webmaster.models.common.DTOs.SMS;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyRepository;
+import com.xyz.bd.webmaster.modules.commonPackages.models.VendorModelEntity;
+import com.xyz.bd.webmaster.modules.inventory.ProductRepository;
 import com.xyz.bd.webmaster.modules.inventory.ProductService;
 import com.xyz.bd.webmaster.modules.commonPackages.trackerDevice.TrackerDeviceModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.trackerDevice.TrackerDeviceService;
@@ -79,6 +81,10 @@ public class OrderServiceImpl implements OrderService{
     @Autowired
     TrackerDeviceService trackerDeviceService;
 
+    @Autowired
+    ProductRepository productRepository;
+
+
     @Value("${api.addDeviceUrl}")
     private String addDeviceUrl;
 
@@ -140,6 +146,15 @@ public class OrderServiceImpl implements OrderService{
                 String productType = dataFormatter.formatCellValue(row.getCell(14));
                 String audNum = dataFormatter.formatCellValue(row.getCell(15));
 
+                VendorModelEntity vendor = productService.findVendorByProductName(productType);
+
+                if (vendor != null) {
+                    System.out.println("Vendor Name: " + vendor.getName());
+                    System.out.println("Vendor Email: " + vendor.getEmail());
+
+                    // Perform any actions with the vendor details here
+                }
+
                 System.out.println(bsCode);
                 System.out.println(companyName);
 
@@ -173,6 +188,10 @@ public class OrderServiceImpl implements OrderService{
                 orderModelEntity.setProductType(productType);
                 orderModelEntity.setAudioListenMsisdn(audNum);
                 orderModelEntity.setStatusName("New Order");
+                orderModelEntity.setCompanyId(existingCompany.getId());
+                orderModelEntity.setVendorName(vendor.getName());
+                orderModelEntity.setVendorEmail(vendor.getEmail());
+                orderModelEntity.setVendorId(vendor.getId());
 
 
                 orderRepository.save(orderModelEntity);
@@ -255,7 +274,7 @@ public class OrderServiceImpl implements OrderService{
             String status_name = updateStatus.getStatusName();
 
         //    System.out.println("orderStatusData: " + test);
-          if ("Finalization".equals(status_name)){
+          if ("Pack Activation".equals(status_name)){
                 System.out.println("tests success");
                 UserModelEntity existingUser = userService.findByUserName(updateStatus.getKcpContactNumber());
 

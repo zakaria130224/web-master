@@ -33,8 +33,8 @@ public class OrderStatusImpl implements OrderStatus{
 
     @Override
     public List<OrderStatusModel> getNextStatusListB2BSim(Long id) {
-        OrderStatusModel orderByName = orderStatusRepository.getByIdB2BSim(id);
-        Long nextId = (long) (orderByName.getB2b_sim() + 1);
+        OrderStatusModel orderByName = orderStatusRepository.getByIdB2BSim(id.intValue());
+        Integer nextId = orderByName.getB2b_sim() + 1;
         try {
             List<OrderStatusModel> result = orderStatusRepository.findNextStatusB2BSim(nextId);
             return result;

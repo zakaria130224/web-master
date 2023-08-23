@@ -40,4 +40,8 @@ public class ProductServiceImpl implements ProductService{
         list.forEach(l -> System.out.println(l));
         return list;
     }
+
+    public VendorModelEntity findVendorByProductName(String productName) {
+        return productRepository.findVendorByProductName(productName);
+    }
 }

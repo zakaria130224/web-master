@@ -1,6 +1,7 @@
 package com.xyz.bd.webmaster.modules.inventory;
 
 import com.xyz.bd.webmaster.modules.commonPackages.models.ProductVendorDto;
+import com.xyz.bd.webmaster.modules.commonPackages.models.VendorModelEntity;
 import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,4 +27,7 @@ public interface ProductRepository extends JpaRepository<ProductsModel, Long> {
             "WHERE pvm.product_id = 2 ",
             nativeQuery = true)
     List<ProductVendorDto> getVendorByProductIdJoin(Long id);
+
+    @Query("SELECT v FROM VendorModelEntity v WHERE v.id = (SELECT p.vendor_id FROM ProductsModel p WHERE p.product_name = :productName)")
+    VendorModelEntity findVendorByProductName(String productName);
 }

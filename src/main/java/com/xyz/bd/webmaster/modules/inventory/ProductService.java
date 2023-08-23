@@ -16,4 +16,6 @@ public interface ProductService {
     VendorModelEntity getVendorByProductId(Long id);
 
     public List<ProductVendorDto> getVendorByProductIdJoin(Long id);
+
+    VendorModelEntity findVendorByProductName(String productName);
 }

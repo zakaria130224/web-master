@@ -58,7 +58,7 @@ public class OrderController {
             // Print more properties as needed
         }
 
-        return new ModelAndView("orders/b2b-sim-based");
+        return new ModelAndView("orders/b2b-sim-based-v2");
 
     }
 

@@ -844,12 +844,16 @@
           render: function (data, type, full, row) {
             if (data == "New Order") {
               return '<button class="btn btn-b2b-sm btn-info btn-sm btn-disabled">New Order</button>';
+            } else if(data == "First Contact"){
+              return '<button class="btn btn-b2b-sm btn-primary btn-sm btn-disabled">First Contact</button>';
             } else if(data == "Scheduled"){
               return '<button class="btn btn-b2b-sm btn-dark btn-sm btn-disabled">Scheduled</button>';
             } else if(data == "Sim Activation"){
               return '<button class="btn btn-b2b-sm btn-danger btn-sm btn-disabled">Sim Active</button>';
             } else if(data == "Installation"){
               return '<button class="btn btn-b2b-sm btn-warning btn-sm btn-disabled">Installation</button>';
+            }else if(data == "Pack Activation"){
+              return '<button class="btn btn-b2b-sm btn-dark btn-sm btn-disabled">Pack Activation</button>';
             } else if(data == "Finalization"){
               return '<button class="btn btn-b2b-sm btn-primary btn-sm btn-disabled">Finalization</button>';
             }else if(data == "Onboarded"){
@@ -1129,7 +1133,7 @@
         data.data.forEach(element => {
           $('#editStatus').append('<option value="' + element.b2b_sim +"/"+ element.order_name+'">' + element.order_name + '</option>');
         });
-       // $('#editStatus').append('<option value="100">Cancelled</option>')
+        $('#editStatus').append('<option value="100">Cancelled</option>')
       },
       error: function (error) {
         console.log(error);
