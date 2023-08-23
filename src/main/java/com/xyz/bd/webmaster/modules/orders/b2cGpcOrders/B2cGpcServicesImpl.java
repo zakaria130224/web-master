@@ -110,7 +110,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
                 orderNameString = "DVB0B2B";
             }
 
-            if(productsModel.getHas_sim().equals(true)){
+            if(productsModel.getHasSim().equals(true)){
                 orderModelEntity.setOrderType("gpc-sim");
             } else{
                 orderModelEntity.setOrderType("gpc-simless");
@@ -119,11 +119,11 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             orderModelEntity.setCustomerName(order.getCustomerName());
             orderModelEntity.setAddress(order.getAddress());
             orderModelEntity.setProductId(order.getProductId());
-            orderModelEntity.setProductType(productsModel.getProduct_type());
-            orderModelEntity.setProductName(productsModel.getProduct_name());
-            orderModelEntity.setPackName(productsModel.getPackage_name());
-            orderModelEntity.setDeviceCategory(productsModel.getDevice_category());
-            orderModelEntity.setDeviceSubCategory(productsModel.getDevice_sub_category());
+            orderModelEntity.setProductType(productsModel.getProductType());
+            orderModelEntity.setProductName(productsModel.getProductName());
+            orderModelEntity.setPackName(productsModel.getPackageName());
+            orderModelEntity.setDeviceCategory(productsModel.getDeviceCategory());
+            orderModelEntity.setDeviceSubCategory(productsModel.getDeviceSubCategory());
             orderModelEntity.setCustomerContactNumber(order.getCustomerContactNumber());
             orderModelEntity.setVtsSimNo(order.getVtsSimNo());
             orderModelEntity.setStatusName("New Order");

@@ -335,7 +335,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="${pageContext.request.contextPath}/inventory/manage" class="nav-link">
+                            <a href="${pageContext.request.contextPath}/inventory/management" class="nav-link">
                                 <i class="fa fa-circle nav-icon"></i>
                                 <p>Manage</p>
                             </a>
