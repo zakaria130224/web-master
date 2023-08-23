@@ -70,11 +70,11 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
 
     @Column(name = "base_price")
     @JsonProperty("basePrice")
-    private double basePrice;
+    private Double basePrice;
 
     @Column(name = "unit_price")
     @JsonProperty("unitPrice")
-    private double unitPrice;
+    private Double unitPrice;
 
     @Column(name = "address")
     @JsonProperty("address")
@@ -90,7 +90,7 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
 
     @Column(name = "status_name_id")
     @JsonProperty("statusNameId")
-    private Number statusNameId;
+    private Integer statusNameId;
 
     @Column(name = "cloud_id")
     @JsonProperty("cloudId")
@@ -106,19 +106,23 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
 
     @Column(name = "is_calendar_day")
     @JsonProperty("isCalendarDay")
-    private boolean isCalendarDay;
+    private Boolean isCalendarDay;
 
     @Column(name = "contact_sla_min")
-    @JsonProperty("ContactSlaMin")
-    private Long ContactSlaMin;
+    @JsonProperty("contactSlaMin")
+    private Integer contactSlaMin;
 
     @Column(name = "installation_sla_min")
     @JsonProperty("installationSlaMin")
-    private Long installationSlaMin;
+    private Integer installationSlaMin;
 
     @Column(name = "is_contact_sla_exceed")
     @JsonProperty("isContactSlaExceed")
-    private boolean isContactSlaExceed;
+    private Boolean isContactSlaExceed;
+
+    @Column(name = "is_installation_sla_exceed")
+    @JsonProperty("isInstallationSlaExceed")
+    private Boolean isInstallationSlaExceed;
 
     @Column(name = "sla_contact_est_dt")
     @JsonProperty("slaContactEstDt")
@@ -160,13 +164,13 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
     @JsonProperty("firstContactBy")
     private String firstContactBy;
 
-    @Column(name = "scheduled_appointed_dt")
-    @JsonProperty("scheduledAppointedDate")
-    private Date scheduledAppointedDate;
-
     @Column(name = "scheduled_dt")
     @JsonProperty("scheduledDt")
     private Date scheduledDt;
+
+    @Column(name = "scheduled_appointed_dt")
+    @JsonProperty("scheduledAppointedDt")
+    private Date scheduledAppointedDt;
 
     @Column(name = "scheduled_note")
     @JsonProperty("scheduledNote")
@@ -238,7 +242,7 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
 
     @Column(name = "otp_verified")
     @JsonProperty("otpVerified")
-    private boolean otpVerified;
+    private Boolean otpVerified;
 
     @Column(name = "kcp_contact_number")
     @JsonProperty("kcpContactNumber")
@@ -306,7 +310,7 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
 
     @Column(name = "gpshop_delivery_charge")
     @JsonProperty("gpshopDeliveryCharge")
-    private double gpshopDeliveryCharge;
+    private Double gpshopDeliveryCharge;
 
     @Column(name = "city")
     @JsonProperty("city")
@@ -341,8 +345,8 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
     private String orderType;
 
     @Column(name = "alternative_contact_num")
-    @JsonProperty("altContactNum")
-    private String altContactNum;
+    @JsonProperty("alternativeContactNum")
+    private String alternativeContactNum;
 
     @Column(name = "vid")
     @JsonProperty("vid")
