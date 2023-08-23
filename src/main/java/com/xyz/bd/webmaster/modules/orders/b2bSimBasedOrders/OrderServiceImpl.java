@@ -351,6 +351,9 @@ public class OrderServiceImpl implements OrderService{
                     deviceInfo.setImei(updateStatus.getImei());
                     deviceInfo.setTrackerDeviceId(resultCode);
                     deviceInfo.setUserEmail(resultDesc);
+                    deviceInfo.setCellPhone(updateStatus.getKamContactNumber());
+                    deviceInfo.setCustomerName(updateStatus.getKcpName());
+                    deviceInfo.setOrderId(id);
                     // Set other device info fields as needed
                     trackerDeviceService.saveDeviceInfo(deviceInfo);
                 }
