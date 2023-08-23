@@ -1,4 +1,4 @@
-package com.xyz.bd.webmaster.modules.commonPackages.products;
+package com.xyz.bd.webmaster.modules.inventory;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

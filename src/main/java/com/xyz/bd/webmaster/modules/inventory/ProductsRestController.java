@@ -1,4 +1,4 @@
-package com.xyz.bd.webmaster.modules.commonPackages.products;
+package com.xyz.bd.webmaster.modules.inventory;
 
 import com.xyz.bd.webmaster.utility.CommonRestResponse;
 import org.slf4j.Logger;

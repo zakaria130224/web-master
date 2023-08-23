@@ -1,4 +1,4 @@
-package com.xyz.bd.webmaster.modules.commonPackages.products;
+package com.xyz.bd.webmaster.modules.inventory;
 
 import com.xyz.bd.webmaster.modules.commonPackages.models.ProductVendorDto;
 import io.lettuce.core.dynamic.annotation.Param;

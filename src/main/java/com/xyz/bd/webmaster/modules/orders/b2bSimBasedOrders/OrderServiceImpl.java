@@ -6,7 +6,7 @@ import com.xyz.bd.webmaster.config.session.SessionManager;
 import com.xyz.bd.webmaster.models.common.DTOs.SMS;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyRepository;
-import com.xyz.bd.webmaster.modules.commonPackages.products.ProductService;
+import com.xyz.bd.webmaster.modules.inventory.ProductService;
 import com.xyz.bd.webmaster.modules.commonPackages.trackerDevice.TrackerDeviceModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.trackerDevice.TrackerDeviceService;
 import com.xyz.bd.webmaster.modules.commonPackages.user.UserModelEntity;

@@ -1,4 +1,4 @@
-package com.xyz.bd.webmaster.modules.commonPackages.products;
+package com.xyz.bd.webmaster.modules.inventory;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.xyz.bd.webmaster.models.common.Entities.BaseEntity;
