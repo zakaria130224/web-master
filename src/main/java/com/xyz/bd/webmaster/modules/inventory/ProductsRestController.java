@@ -1,12 +1,18 @@
 package com.xyz.bd.webmaster.modules.inventory;
 
+import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
 import com.xyz.bd.webmaster.utility.CommonRestResponse;
+import com.xyz.bd.webmaster.utility.Utility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/web/utility")
@@ -37,6 +43,9 @@ public class ProductsRestController {
         return commonRestResponse;
     }
 
-
+    @RequestMapping(value = "/product/listDT", method = RequestMethod.GET)
+    public DataTablesOutput<ProductsModel> findAllItemList(@Valid DataTablesInput input, HttpServletRequest request, @RequestParam(value = "customQuery",required = false) String customQuery) {
+        return productService.findAllItemList(request, customQuery, input);
+    }
 
 }

@@ -88,15 +88,15 @@
       <div class="container-fluid">
         <div class="row mb-1">
           <div class="col-md-6 col-sm-12">
-            <h5>Order Management (B2C - GPC)</h5>
+            <h5>Inventory Management</h5>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Cloud </a></li>
-              <li class="breadcrumb-item active">Order Management (B2C - GPC)</li>
+              <li class="breadcrumb-item active">Manage</li>
             </ol>
           </div>
           <div class="col-md-6 col-sm-12">
             <div class="float-right">
-              <button data-toggle="modal" class="btn b2b-btn-submit-blue mr-2" onclick="openCreateOrderModal()"> Add New Order</button>
+              <button data-toggle="modal" class="btn b2b-btn-submit-blue mr-2" onclick="openCreateOrderModal()"> Add New Entry</button>
             </div>
           </div>
         </div>
@@ -122,7 +122,7 @@
                   <div class="row">
                     <div class="col">
                       <div class="float-left">
-                        <h3 class="b2b-font-20-500 black-10 float-left pt-2">Order and Installation List</h3>
+                        <h3 class="b2b-font-20-500 black-10 float-left pt-2">Inventory Management</h3>
                       </div>
                     </div>
                     <div class="col">
@@ -168,16 +168,14 @@
                       <div class="table-responsive">
                         <table class="table" id="dataTable">
                           <thead class="b2b-custom-boder">
-                          <th>TRXID</th>
-                          <th>Cloud ID</th>
-                          <th>VTS Sim</th>
-                          <th>SIM KIT</th>
-                          <th>Pack/Service</th>
-                          <th>Vendor</th>
-                          <th>Status</th>
-                          <th>Product</th>
-                          <th>Rate Plan</th>
-                          <th>Order Excel</th>
+                          <th>Item Code</th>
+                          <th>Channel</th>
+                          <th>Subscription</th>
+                          <th>Product Price</th>
+                          <th>Quantity</th>
+                          <th>Entry date</th>
+                          <th>Modify date</th>
+                          <th>Remarks</th>
                           <th>Action</th>
                           </thead>
                           <tbody>
@@ -203,11 +201,11 @@
     <!-- /.content -->
   </div>
 
-  <div class="modal left fade" id="newOrderEntry" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal left fade" id="newProductEntry" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title float-left" id="myModalLabel3">Order Entry</h4>
+          <h4 class="modal-title float-left" id="myModalLabel3">Add New Inventory</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                   style="height: 20px;width:
                             20px;border: 1px solid;
@@ -226,57 +224,58 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="customer_name">Customer name <span class="text-danger"> *</span></label>
-                    <input type="text" class="form-control" id="customer_name" placeholder="Select" required>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="address">Address <span class="text-danger"> *</span></label>
-                    <input type="text" class="form-control" id="address" placeholder="Select" required>
+                    <label for="item_code">Item Code <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="item_code" placeholder="Select" required>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_name">Product Name</label>
-                    <input type="hidden" id="ratePlan">
-                    <select class="form-control" id="product_name" required>
-                      <option>Please select product</option>
-
+                    <label for="channel_name">Channel</label>
+                    <select class="form-control" id="channel_name" required>
+                      <option>Please select channel</option>
+                      <option value="b2b">B2B</option>
+                      <option value="b2c">B2C</option>
                     </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_type">Product Type</label>
-                    <select class="form-control" id="product_type" disabled>
-                      <option>Please select</option>
+                    <label for="category_name">Category Name</label>
+                    <select class="form-control" id="category_name" required>
+                      <option>Please select category</option>
+                      <option value="SIM Bases">SIM Bases</option>
+                      <option value="SIM Less">SIM Less</option>
                     </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="vendor_name">Vendor Name</label>
-                    <select class="form-control" id="vendor_name" required>
-                      <option>Please select</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="col-md-12" id="vts_sim_block">
-                  <div class="form-group">
-                    <label for="vts_sim">VTS Sim</label>
-                    <input type="text" class="form-control" id="vts_sim" placeholder="Select">
+                    <label for="subscription">Subscription(BDT/Monthly) <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="subscription" placeholder="Select" required>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="customer_contact_number">Contact Number <span class="text-danger"> *</span></label>
-                    <input type="text" class="form-control" id="customer_contact_number" placeholder="Select" required>
+                    <label for="product_price">Product Price(BDT) <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="product_price" placeholder="Select" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_price">Quantity <span class="text-danger"> *</span></label>
+                    <input type="number" class="form-control" id="quantity" placeholder="Please write here" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_price">Description <span class="text-danger"> *</span></label>
+                    <textarea type="text" class="form-control" id="description" placeholder="Please write here"></textarea>
                   </div>
                 </div>
 
@@ -286,13 +285,13 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn b2b-submit-btn-base btn-outline-primary float-left">close</button>
-          <button type="submit" class="btn btn-primary b2b-submit-btn-base" onclick="createNewOrder()">Add Entry</button>
+          <button type="submit" class="btn btn-primary b2b-submit-btn-base" onclick="createNewOrder()">Add Inventory</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="modal left fade" id="showOrderDetails" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal left fade" id="showProductDetails" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -315,73 +314,58 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="customer_name">Last Status Change Date</label>
-                    <input type="text" class="form-control" id="d_updated_date" placeholder="Select" disabled>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="customer_name">Cloud ID</label>
-                    <input type="text" class="form-control" id="d_cloud_id" placeholder="Select" disabled>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="customer_name">TRXID </label>
-                    <input type="text" class="form-control" id="d_trxid" placeholder="Select" disabled>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="address">Customer Name </label>
-                    <input type="text" class="form-control" id="d_customer_name" placeholder="Select" disabled>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="address">Address </label>
-                    <input type="text" class="form-control" id="d_address" disabled>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="address">Pack/Service</label>
-                    <input type="text" class="form-control" id="d_pack" disabled>
+                    <label for="item_code">Item Code <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_item_code" placeholder="Select" required>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_name">Product Name</label>
-                    <input type="text" class="form-control" id="d_product_name" disabled>
+                    <label for="channel_name">Channel</label>
+                    <select class="form-control" id="d_channel_name" required>
+                      <option>Please select channel</option>
+                      <option value="b2b">B2B</option>
+                      <option value="b2c">B2C</option>
+                    </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_type">Product Type</label>
-                    <input type="text" class="form-control" id="d_product_type" disabled>
+                    <label for="category_name">Category Name</label>
+                    <select class="form-control" id="d_category_name" required>
+                      <option>Please select category</option>
+                      <option value="SIM Based">SIM Bases</option>
+                      <option value="SIM Less">SIM Less</option>
+                    </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="vendor_name">Vendor Name</label>
-                    <input type="text" class="form-control" id="d_vendor_name" disabled>
+                    <label for="subscription">Subscription(BDT/Monthly) <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_subscription" placeholder="Select" required>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="customer_contact_number">Rate Plan </label>
-                    <input type="text" class="form-control" id="d_rate_plan" placeholder="Select" disabled>
+                    <label for="product_price">Product Price(BDT) <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_product_price" placeholder="Select" required>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="customer_contact_number">Customer Contact </label>
-                    <input type="text" class="form-control" id="d_customer_contact" placeholder="Select" disabled>
+                    <label for="product_price">Quantity <span class="text-danger"> *</span></label>
+                    <input type="number" class="form-control" id="d_quantity" placeholder="Please write here" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_price">Description <span class="text-danger"> *</span></label>
+                    <textarea type="text" class="form-control" id="d_description" placeholder="Please write here"></textarea>
                   </div>
                 </div>
 
@@ -396,11 +380,11 @@
     </div>
   </div>
 
-  <div class="modal left fade" id="changeStatus" tabindex="" role="dialog" aria-labelledby="changeStatus" aria-hidden="true">
+  <div class="modal left fade" id="updateProductItem" tabindex="" role="dialog" aria-labelledby="updateProductItem" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title float-left" id="myModalLabel2">Update Status</h4>
+          <h4 class="modal-title float-left" id="myModalLabel2">Edit Inventory</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                   style="height: 20px;width:
                             20px;border: 1px solid;
@@ -419,28 +403,61 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="current_status">Current Status </label>
-                    <input type="hidden" id="row_id">
-                    <select class="form-control" id="current_status" disabled>
+                    <label for="item_code">Item Code <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="e_item_code" placeholder="Select" required>
+                  </div>
+                </div>
 
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="channel_name">Channel</label>
+                    <select class="form-control" id="e_channel_name" required>
+                      <option>Please select channel</option>
+                      <option value="b2b">B2B</option>
+                      <option value="b2c">B2C</option>
                     </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="updated_status">Update Status <span class="text-danger"> *</span></label>
-                    <select class="form-control" id="updated_status" required>
+                    <label for="category_name">Category Name</label>
+                    <select class="form-control" id="e_category_name" required>
+                      <option>Please select category</option>
+                      <option value="SIM Based">SIM Bases</option>
+                      <option value="SIM Less">SIM Less</option>
                     </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="note">Add Note (Optional)</label>
-                    <textarea type="text" class="form-control" id="note" placeholder="Select"></textarea>
+                    <label for="subscription">Subscription(BDT/Monthly) <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="e_subscription" placeholder="Select" required>
                   </div>
                 </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_price">Product Price(BDT) <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="e_product_price" placeholder="Select" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_price">Quantity <span class="text-danger"> *</span></label>
+                    <input type="number" class="form-control" id="e_quantity" placeholder="Please write here" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_price">Description <span class="text-danger"> *</span></label>
+                    <textarea type="text" class="form-control" id="e_description" placeholder="Please write here"></textarea>
+                  </div>
+                </div>
+
               </div>
             </div>
           </form>
@@ -546,7 +563,7 @@
 
   function openCreateOrderModal(){
     getProductList();
-    $("#newOrderEntry").modal("show");
+    $("#newProductEntry").modal("show");
   }
 
   function getOrderData() {
@@ -554,7 +571,7 @@
 
     $.ajax({
       type: 'get',
-      url: base_url + "api/web/orders/b2c-gpc/listDT",
+      url: base_url + "api/web/utility/product/listDT",
       success: function (data) {
         $(".loader_body").hide();
         initOrderTable(data.data);
@@ -583,46 +600,18 @@
       order: [[0, 'desc']],
       select:true,
       columns: [
-        {data: 'id'},
-        {data: 'cloudId'},
-        {data: 'vtsSimNo'},
-        {data: 'simKit'},
-        {data: 'productType'},
-        {data: 'productName',},
-        {data: 'statusName',
-          autowidth: true,
-          render: function (data, type, full, row) {
-            if (data == "New Order") {
-              return '<button class="btn btn-b2b-sm btn-info btn-sm btn-disabled">New Order</button>';
-            } else if(data == "Scheduled"){
-              return '<button class="btn btn-b2b-sm btn-dark btn-sm btn-disabled">Scheduled</button>';
-            } else if(data == "Sim Activation"){
-              return '<button class="btn btn-b2b-sm btn-danger btn-sm btn-disabled">Sim Active</button>';
-            } else if(data == "Installation"){
-              return '<button class="btn btn-b2b-sm btn-warning btn-sm btn-disabled">Installation</button>';
-            } else if(data == "Finalization"){
-              return '<button class="btn btn-b2b-sm btn-primary btn-sm btn-disabled">Finalization</button>';
-            }else if(data == "Onboarded"){
-              return '<button class="btn btn-b2b-sm btn-success btn-sm btn-disabled">Onboarded</button>';
-            }else if(data == "Cancelled"){
-              return '<button class="btn btn-b2b-sm btn-success btn-sm btn-disabled">Cancelled</button>';
-            } else{
-              return '';
-            }
-          }},
-
-        {data: 'packName'},
-        {data: 'ratePlan'},
+        {data: 'itemCode'},
+        {data: 'channel'},
+        {data: 'monthlyCharge'},
+        {data: 'totalCharge'},
+        {data: 'quantity'},
+        {data: 'createdAt'},
+        {data: 'updatedAt'},
+        {data: 'deviceCategory'},
         {
           data: 'id',
           render: function (data, type, full, row){
-            return '<button class="btn btn-b2b-sm btn-b2b-sm-download btn-sm">Download Excel</button>';
-          }
-        },
-        {
-          data: 'id',
-          render: function (data, type, full, row){
-            return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status">Change Status</button>';
+            return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status">Edit</button>';
           }
         }
       ]
@@ -633,28 +622,24 @@
   $('#dataTable tbody').on( 'click', 'tr', function (evt) {
     console.log(dataTable.row( this ).data());
     let tableRowData = dataTable.row( this ).data();
-    $("#showOrderDetails").modal("show");
+    $("#showProductDetails").modal("show");
     if ( $(evt.target).is("dataTable tbody tr td:nth-last-child(2)") ) {
       return;
     }
     $('#details_order_form').trigger("reset");
 
-    $('#d_updated_date').val(tableRowData.updatedAt);
-    $('#d_cloud_id').val(tableRowData.cloudId);
-    $('#d_trxid').val(tableRowData.id);
-    $('#d_customer_name').val(tableRowData.customerName);
-    $('#d_address').val(tableRowData.address);
-    $('#d_pack').val(tableRowData.packName);
-    $('#d_product_name').val(tableRowData.productName);
-    $('#d_product_type').val(tableRowData.productType);
-    $('#d_vendor_name').val(tableRowData.vendorName);
-    $('#d_rate_plan').val(tableRowData.ratePlan);
-    $('#d_customer_contact').val(tableRowData.customerContactNumber);
-
-
-
-
+    $('#d_item_code').val(tableRowData.itemCode);
+    $('#d_subscription').val(tableRowData.monthlyCharge);
+    $('#d_product_price').val(tableRowData.totalCharge);
+    $('#d_quantity').val(tableRowData.quantity);
+    $('#d_description').val(tableRowData.description);
+    $('#d_channel_name option[value="'+tableRowData.channel+'"]').prop("selected",true).trigger("change");
+    $('#d_category_name option[value="'+tableRowData.deviceCategory+'"]').prop("selected",true).trigger("change");
+    //$('#d_channel_name option[value='+tableRowData.channel+']').attr("selected", "selected").change();;
   } );
+
+  $('#d_channel_name option[value="B2B"]').prop("selected",true).trigger("change");
+
 
   function createNewOrder(){
     $("#createSrNotification").html("");
@@ -712,7 +697,7 @@
   }
 
   function modalClose(){
-    $("#newOrderEntry").modal('hide');
+    $("#newProductEntry").modal('hide');
   }
 
   $('#dataTable tbody').on( 'click', 'button.change-status', function (e) {
@@ -722,7 +707,7 @@
     let data = dataTable.row( $(this).parents('#dataTable tbody tr') ).data();
     $("#current_status").val(data.status).change();
     $("#row_id").val(data.id);
-    $("#changeStatus").modal("show");
+    $("#updateProductItem").modal("show");
     getStatusAll(data.statusName, data.statusNameId);
   } );
 
@@ -754,14 +739,14 @@
             let custom_msg = "<div class='alert alert-success success-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
             //$("#notification_bar").show();
             $("#createSrNotification").html(custom_msg);
-            $("#changeStatus").modal("hide");
+            $("#updateProductItem").modal("hide");
             getOrderData();
             $('#update_order_form')[0].reset();
           } else {
             $(".loader_body").hide();
             let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> "+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
             $("#createSrNotification").html(custom_msg);
-            $("#changeStatus").modal("hide");
+            $("#updateProductItem").modal("hide");
             $('#update_order_form')[0].reset();
           }
         },
@@ -769,7 +754,7 @@
           $(".loader_body").hide();
           let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
           $("#createSrNotification").html(custom_msg);
-          $("#changeStatus").modal("hide");
+          $("#updateProductItem").modal("hide");
           $('#update_order_form')[0].reset();
         }
       });
