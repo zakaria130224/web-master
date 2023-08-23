@@ -20,8 +20,8 @@
     <jsp:include page="./../../partial_new/header-link-dash.jsp"></jsp:include>
 
     <style>
-        .tabs_bar .active {
-            background: #d9ebf8;
+        .tabs_bar.active {
+            background: #E5E7EB;
         }
     </style>
 
@@ -48,14 +48,9 @@
                             <span class="mt-5">VTS</span>
                         </div>
                     </div>
-                    <div class="col-sm-3 col-md-2 col-lg-1">
+                    <div class="col-sm-3 col-md-2 col-lg-2">
                         <div class="tabs_bar">
-                            <span class="mt-5">OBD</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-md-2 col-lg-1">
-                        <div class="tabs_bar">
-                            <span class="mt-5">Product2</span>
+                            <span class="mt-5">Gas Sniffer</span>
                         </div>
                     </div>
                 </div>
@@ -275,13 +270,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GA-347788</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">103.90 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">32</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -289,13 +284,14 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GA-345434</h5>
                                             <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">12</h3>
+
                                         </div>
                                     </div>
                                 </div>
@@ -303,13 +299,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GA-554433</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">34.33 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">09</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -317,13 +313,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO LA-123443</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">49.99 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">20</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -331,13 +327,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GH-989098</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">55.93 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">28</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -345,13 +341,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO KA-334455</h5>
                                             <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">25</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -359,13 +355,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GA-347788</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">103.90 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">32</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -373,13 +369,14 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GA-345434</h5>
                                             <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">12</h3>
+
                                         </div>
                                     </div>
                                 </div>
@@ -387,13 +384,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GA-554433</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">34.33 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">09</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -401,13 +398,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO LA-123443</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">49.99 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">20</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -415,13 +412,27 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GH-989098</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">55.93 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">28</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO KA-334455</h5>
                                             <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">25</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -526,13 +537,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GA-347788</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">103.90 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">32</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -540,13 +551,14 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GA-345434</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">12</h3>
+
                                         </div>
                                     </div>
                                 </div>
@@ -554,13 +566,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GA-554433</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">34.33 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">09</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -568,13 +580,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO LA-123443</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">49.99 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">20</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -582,13 +594,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GH-989098</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">55.93 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">28</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -596,13 +608,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO KA-334455</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">25</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -610,13 +622,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GA-347788</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">103.90 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">32</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -624,13 +636,14 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GA-345434</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">12</h3>
+
                                         </div>
                                     </div>
                                 </div>
@@ -638,13 +651,13 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GA-554433</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">34.33 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">09</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -652,13 +665,41 @@
                                     <div class="col-lg-9 col-md-9 pl-2">
                                         <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
                                         <div class="b2b-list-block">
-                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">Light Demo</h5>
-                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 km travelled</p>
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO LA-123443</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">49.99 Fuel Consumed</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="align-items-center justify-content-center">
-                                            <h3 class="b2b-grid-number-large">24</h3>
+                                            <h3 class="b2b-grid-number-large">20</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO GH-989098</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">55.93 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">28</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-9 col-md-9 pl-2">
+                                        <div class="float-left mr-2" style="border-radius: 8px; height: 40px; width: 40px; background: #E1F0FF"></div>
+                                        <div class="b2b-list-block">
+                                            <h5 class="card-title black-30 font-16 b2b-font-weight-600">DHAKA METRO KA-334455</h5>
+                                            <p class="card-text black-50 font-12 b2b-font-weight-700">72.33 Fuel Consumed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="align-items-center justify-content-center">
+                                            <h3 class="b2b-grid-number-large">25</h3>
                                         </div>
                                     </div>
                                 </div>
