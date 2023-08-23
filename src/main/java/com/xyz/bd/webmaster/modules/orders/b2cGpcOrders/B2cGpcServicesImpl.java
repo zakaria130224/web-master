@@ -127,7 +127,8 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             orderModelEntity.setCustomerContactNumber(order.getCustomerContactNumber());
             orderModelEntity.setVtsSimNo(order.getVtsSimNo());
             orderModelEntity.setStatusName("New Order");
-            orderModelEntity.setStatusNameId(order.getStatusNameId());
+            orderModelEntity.setStatusNameId(1);
+
             orderModelEntity.setVendorId(order.getVendorId());
             orderModelEntity.setVendorEmail(order.getVendorEmail());
             orderModelEntity.setVendorName(order.getVendorName());
@@ -176,6 +177,8 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             }.getType());
 
             OrderModelEntity orderModelEntity = orderRepository.getById(id);
+
+
 
             orderModelEntity.setStatusName(updateStatus.getStatusName());
             orderModelEntity.setStatusNameId(updateStatus.getStatusNameId());

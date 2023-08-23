@@ -90,7 +90,7 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
 
     @Column(name = "status_name_id")
     @JsonProperty("statusNameId")
-    private String statusNameId;
+    private Number statusNameId;
 
     @Column(name = "cloud_id")
     @JsonProperty("cloudId")
