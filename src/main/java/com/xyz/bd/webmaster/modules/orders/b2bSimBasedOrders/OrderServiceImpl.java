@@ -165,7 +165,7 @@ public class OrderServiceImpl implements OrderService{
                 orderModelEntity.setVid(vid);
                 orderModelEntity.setRatePlan(ratePlan);
                 orderModelEntity.setUnitPrice(Double.parseDouble(mrp));
-                orderModelEntity.setAltContactNum(altContact);
+                orderModelEntity.setAlternativeContactNum(altContact);
                 orderModelEntity.setKcpName(kcpName);
                 orderModelEntity.setKcpContactNumber(kcpContact);
                 orderModelEntity.setKcpEmail(kcpEmail);
