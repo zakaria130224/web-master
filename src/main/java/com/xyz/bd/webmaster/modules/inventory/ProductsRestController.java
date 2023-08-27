@@ -48,4 +48,23 @@ public class ProductsRestController {
         return productService.findAllItemList(request, customQuery, input);
     }
 
+    @RequestMapping(value = "/product/save", method = RequestMethod.POST)
+    public CommonRestResponse addNewProduct(HttpServletRequest request,
+                                           @RequestParam("productInfo") String productInfo) {
+        return productService.addNewProduct(request, productInfo);
+
+    }
+
+    @RequestMapping(value = "/product/update", method = RequestMethod.POST)
+    public CommonRestResponse updateNewProduct(HttpServletRequest request,
+                                           @RequestParam("productInfo") String productInfo, @RequestParam("id") Long id) {
+        return productService.updateNewProduct(request, productInfo, id);
+
+    }
+
+    @RequestMapping(value = "/vendor-list", method = RequestMethod.GET)
+    public CommonRestResponse getVendorList(HttpServletRequest request) {
+        return productService.getVendorList();
+    }
+
 }

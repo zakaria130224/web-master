@@ -35,6 +35,5 @@ public class OrdersRestController {
     public CommonRestResponse updateDriverBasicInfo(HttpServletRequest request,
                                                     @RequestParam("orderStatusData") String orderStatusData, @RequestParam("id") Long id) {
         return b2cGpcServices.updateOrderStatus(request, orderStatusData, id);
-
     }
 }

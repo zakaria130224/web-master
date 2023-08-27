@@ -96,7 +96,7 @@
           </div>
           <div class="col-md-6 col-sm-12">
             <div class="float-right">
-              <button data-toggle="modal" class="btn b2b-btn-submit-blue mr-2" onclick="openCreateOrderModal()"> Add New Entry</button>
+              <button data-toggle="modal" class="btn b2b-btn-submit-blue mr-2" onclick="openCreateProductModal()"> Add New Entry</button>
             </div>
           </div>
         </div>
@@ -169,6 +169,7 @@
                         <table class="table" id="dataTable">
                           <thead class="b2b-custom-boder">
                           <th>Item Code</th>
+                          <th>Product Name</th>
                           <th>Channel</th>
                           <th>Subscription</th>
                           <th>Product Price</th>
@@ -219,13 +220,20 @@
           </button>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal b2b-custom-form" id="create_order_form">
+          <form class="form-horizontal b2b-custom-form" id="create_intentory_form">
             <div class="card-body p-0">
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="item_code">Item Code <span class="text-danger"> *</span></label>
-                    <input type="text" class="form-control" id="item_code" placeholder="Select" required>
+                    <input type="text" class="form-control" id="item_code" placeholder="Write here" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_name">Product Name <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="product_name" placeholder="Write here" required>
                   </div>
                 </div>
 
@@ -242,26 +250,60 @@
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="category_name">Category Name</label>
-                    <select class="form-control" id="category_name" required>
+                    <label for="sim_status">SIM Status</label>
+                    <select class="form-control" id="sim_status" required>
                       <option>Please select category</option>
-                      <option value="SIM Bases">SIM Bases</option>
-                      <option value="SIM Less">SIM Less</option>
+                      <option value="1">SIM Bases</option>
+                      <option value="2">SIM Less</option>
                     </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
+                    <label for="category_name">Category Name</label>
+                    <select class="form-control" id="category_name" required>
+
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="vendor_name">Vendor Name</label>
+                    <select class="form-control" id="vendor_name" required>
+
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="category_sub_name">Sub Category Name</label>
+                    <select class="form-control" id="category_sub_name" required>
+
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="package_name">Package Name <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="package_name" placeholder="Select" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
                     <label for="subscription">Subscription(BDT/Monthly) <span class="text-danger"> *</span></label>
-                    <input type="text" class="form-control" id="subscription" placeholder="Select" required>
+                    <input type="number" class="form-control" id="subscription" placeholder="Select" required>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="product_price">Product Price(BDT) <span class="text-danger"> *</span></label>
-                    <input type="text" class="form-control" id="product_price" placeholder="Select" required>
+                    <input type="number" class="form-control" id="product_price" placeholder="Select" required>
                   </div>
                 </div>
 
@@ -276,6 +318,13 @@
                   <div class="form-group">
                     <label for="product_price">Description <span class="text-danger"> *</span></label>
                     <textarea type="text" class="form-control" id="description" placeholder="Please write here"></textarea>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_price">Remarks <span class="text-danger"> *</span></label>
+                    <textarea type="text" class="form-control" id="remarks" placeholder="Please write here"></textarea>
                   </div>
                 </div>
 
@@ -309,19 +358,26 @@
           </button>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal b2b-custom-form" id="details_order_form">
+          <form class="form-horizontal b2b-custom-form" id="details_inventory_form">
             <div class="card-body p-0">
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="item_code">Item Code <span class="text-danger"> *</span></label>
-                    <input type="text" class="form-control" id="d_item_code" placeholder="Select" required>
+                    <label for="d_item_code">Item Code <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_item_code" placeholder="Write here" required>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="channel_name">Channel</label>
+                    <label for="d_product_name">Product Name <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_product_name" placeholder="Write here" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="d_channel_name">Channel</label>
                     <select class="form-control" id="d_channel_name" required>
                       <option>Please select channel</option>
                       <option value="b2b">B2B</option>
@@ -332,8 +388,8 @@
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="category_name">Category Name</label>
-                    <select class="form-control" id="d_category_name" required>
+                    <label for="d_sim_status">SIM Status</label>
+                    <select class="form-control" id="d_sim_status" required>
                       <option>Please select category</option>
                       <option value="SIM Based">SIM Bases</option>
                       <option value="SIM Less">SIM Less</option>
@@ -343,29 +399,70 @@
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="subscription">Subscription(BDT/Monthly) <span class="text-danger"> *</span></label>
-                    <input type="text" class="form-control" id="d_subscription" placeholder="Select" required>
+                    <label for="d_category_name">Category Name</label>
+                    <select class="form-control" id="d_category_name" required>
+
+                    </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_price">Product Price(BDT) <span class="text-danger"> *</span></label>
-                    <input type="text" class="form-control" id="d_product_price" placeholder="Select" required>
+                    <label for="d_vendor_name">Vendor Name</label>
+                    <select class="form-control" id="d_vendor_name" required>
+
+                    </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_price">Quantity <span class="text-danger"> *</span></label>
+                    <label for="d_category_sub_name">Sub Category Name</label>
+                    <select class="form-control" id="d_category_sub_name" required>
+
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="d_package_name">Package Name <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_package_name" placeholder="Select" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="d_subscription">Subscription(BDT/Monthly) <span class="text-danger"> *</span></label>
+                    <input type="number" class="form-control" id="d_subscription" placeholder="Select" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="d_product_price">Product Price(BDT) <span class="text-danger"> *</span></label>
+                    <input type="number" class="form-control" id="d_product_price" placeholder="Select" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="d_quantity">Quantity <span class="text-danger"> *</span></label>
                     <input type="number" class="form-control" id="d_quantity" placeholder="Please write here" required>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_price">Description <span class="text-danger"> *</span></label>
+                    <label for="d_description">Description <span class="text-danger"> *</span></label>
                     <textarea type="text" class="form-control" id="d_description" placeholder="Please write here"></textarea>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="d_remarks">Remarks <span class="text-danger"> *</span></label>
+                    <textarea type="text" class="form-control" id="d_remarks" placeholder="Please write here"></textarea>
                   </div>
                 </div>
 
@@ -517,56 +614,19 @@
             }
     );
 
-    getOrderData();
-  });
-
-
-  $('#product_name').on('change', function() {
-    let productId = $('#product_name').val();
-    if (productId != 'Please select product'){
-      $('#vendor_name').html('');
-      $('#product_type').html('');
-      let vendors = [];
-      let product = [];
-      productData.forEach(function (el, i, arr) {
-        //console.log(el);
-        if (el.id == productId) {
-          //console.log("selected::: "+ JSON.stringify(el.vendors));
-          vendors = JSON.stringify(el.vendors);
-          product = el;
-        }
-      });
-      console.log(productData)
-      console.log(vendors)
-      console.log(product)
-
-      JSON.parse(vendors).forEach(function (el, i, arr) {
-        $('#vendor_name').append('<option value="' + el.id + '/' + el.email + '">' + el.name + '</option>');
-      });
-
-      $('#ratePlan').val(product.monthly_charge);
-
-      if(product.has_sim === true){
-        $('#product_type').append('<option value="1">SIM Based</option>');
-        $('#vts_sim_block').show();
-        $('#vts_sim').attr("required", true);
-
-      } else{
-        $('#product_type').append('<option value="2">SIM Less</option>');
-        $('#vts_sim_block').hide();
-        $('#vts_sim').attr("required", false);
-      }
-    }
+    getProductData();
   });
 
 
 
-  function openCreateOrderModal(){
-    getProductList();
+  function openCreateProductModal(){
+    $('#create_intentory_form').parsley().reset();
+    $(".loader_body").show();
+    getProductCategoryList("C", null);
     $("#newProductEntry").modal("show");
   }
 
-  function getOrderData() {
+  function getProductData() {
     $(".loader_body").show();
 
     $.ajax({
@@ -578,6 +638,18 @@
       },
       error: function (error) {
         $(".loader_body").hide();
+      }
+    });
+  }
+
+  function getVendorData() {
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/vendor-list",
+      success: function (data) {
+        initOrderTable(data.data);
+      },
+      error: function (error) {
       }
     });
   }
@@ -601,12 +673,29 @@
       select:true,
       columns: [
         {data: 'itemCode'},
+        {data: 'productName'},
         {data: 'channel'},
         {data: 'monthlyCharge'},
         {data: 'totalCharge'},
         {data: 'quantity'},
-        {data: 'createdAt'},
-        {data: 'updatedAt'},
+        {
+          data: 'createdAt',
+          render: function (data, type, full, row) {
+            let date_str = new Date(data);
+            return type === 'sort' ? data:date_str.toLocaleString();
+          }
+        },
+        {
+          data: 'updatedAt',
+          render: function (data, type, full, row) {
+            if(data == null){
+              return "";
+            } else{
+              let date_str = new Date(data);
+              return type === 'sort' ? data:date_str.toLocaleString();
+            }
+          }
+        },
         {data: 'deviceCategory'},
         {
           data: 'id',
@@ -616,56 +705,73 @@
         }
       ]
     });
-
   }
 
   $('#dataTable tbody').on( 'click', 'tr', function (evt) {
+    $('#details_inventory_form').trigger("reset");
     console.log(dataTable.row( this ).data());
     let tableRowData = dataTable.row( this ).data();
     $("#showProductDetails").modal("show");
     if ( $(evt.target).is("dataTable tbody tr td:nth-last-child(2)") ) {
       return;
     }
-    $('#details_order_form').trigger("reset");
-
+    getProductCategoryList("D", tableRowData);
+    getVendorDetails(tableRowData.vendorId);
     $('#d_item_code').val(tableRowData.itemCode);
+    $('#d_product_name').val(tableRowData.productName);
+    $('#d_package_name').val(tableRowData.packageName);
     $('#d_subscription').val(tableRowData.monthlyCharge);
     $('#d_product_price').val(tableRowData.totalCharge);
     $('#d_quantity').val(tableRowData.quantity);
     $('#d_description').val(tableRowData.description);
-    $('#d_channel_name option[value="'+tableRowData.channel+'"]').prop("selected",true).trigger("change");
-    $('#d_category_name option[value="'+tableRowData.deviceCategory+'"]').prop("selected",true).trigger("change");
-    //$('#d_channel_name option[value='+tableRowData.channel+']').attr("selected", "selected").change();;
-  } );
+    $('#d_remarks').val(tableRowData.remarks);
 
-  $('#d_channel_name option[value="B2B"]').prop("selected",true).trigger("change");
+    $('#d_channel_name option[value="'+tableRowData.channel+'"]').prop("selected",true).trigger("change");
+    if(tableRowData.hasSim){
+      console.log("entered");
+      $('#d_sim_status option[value="SIM Based"]').prop("selected",true).trigger("change");
+    } else if(!tableRowData.hasSim){
+      $('#d_sim_status option[value="SIM Less"]').prop("selected",true).trigger("change");
+    }
+
+  } );
 
 
   function createNewOrder(){
     $("#createSrNotification").html("");
     $(".loader_body").show();
 
-    if($("#create_order_form").parsley().validate()){
+    if($("#create_intentory_form").parsley().validate()){
 
-      let orderInfo = {
-        customerName: $("#customer_name").val(),
-        customerContactNumber: $("#customer_contact_number").val(),
-        productId: $("#product_name").val(),
-        address: $( "#address" ).val(),
-        vtsSimNo: $( "#vts_sim" ).val(),
-        statusNameId: 1,
-        vendorEmail: $( "#vendor_name" ).val().split("/")[1],
-        vendorId: $( "#vendor_name" ).val().split("/")[0],
-        vendorName: $( "#vendor_name" ).text(),
-        ratePlan: $( "#vendor_name" ).val().split("/")[2],
-        orderType: "GPC"
+      let productInfo = {
+        itemCode: $("#item_code").val(),
+        productName: $("#product_name").val(),
+        productType: $("#category_name").val().split("/")[1],
+        channel: $( "#channel_name" ).val(),
+        deviceCategory: $("#category_name").val().split("/")[1],
+        deviceSubCategory: $("#category_sub_name").val().split("/")[1],
+        packageName: $( "#package_name" ).val(),
+        monthlyCharge: parseInt($("#subscription").val()),
+        totalCharge: parseInt($("#product_price").val()),
+        quantity: parseInt($("#quantity").val()),
+        hasSim: true,
+        vendorId: $("#vendor_name").val().split("/")[0],
+        status: true,
+        remarks: $("#remarks").val(),
+        description: $("#description").val()
+      }
+
+      if($("#sim_status").val() === 1){
+        productInfo.hasSim = true;
+      } else if($("#sim_status").val() === 2){
+        productInfo.hasSim = false;
       }
 
 
       $.ajax({
         type: 'POST',
-        url: base_url + "api/web/orders/b2c-gpc/save",
-        data: {orderInfo: JSON.stringify(orderInfo)},
+        url: base_url + "api/web/utility/product/save",
+        data: {productInfo: JSON.stringify(productInfo)},
         success: function (resultData) {
           $(".loader_body").hide();
           if (resultData.code === 200) {
@@ -673,13 +779,13 @@
             //$("#notification_bar").show();
             $("#createSrNotification").html(custom_msg);
             modalClose();
-            getOrderData();
-            $('#create_order_form')[0].reset();
+            getProductData();
+            $('#create_intentory_form')[0].reset();
           } else {
             $(".loader_body").hide();
             let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
             $("#createSrNotification").html(custom_msg);
-            $('#create_order_form')[0].reset();
+            $('#create_intentory_form')[0].reset();
             modalClose()
           }
         },
@@ -688,7 +794,7 @@
           let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
           $("#createSrNotification").html(custom_msg);
           modalClose()
-          $('#create_order_form')[0].reset();
+          $('#create_intentory_form')[0].reset();
         }
       });
     } else{
@@ -703,7 +809,7 @@
   $('#dataTable tbody').on( 'click', 'button.change-status', function (e) {
     //$("#update_order_form").clear();
     e.stopPropagation()
-    $('#create_order_form')[0].reset();
+    $('#create_intentory_form')[0].reset();
     let data = dataTable.row( $(this).parents('#dataTable tbody tr') ).data();
     $("#current_status").val(data.status).change();
     $("#row_id").val(data.id);
@@ -740,7 +846,7 @@
             //$("#notification_bar").show();
             $("#createSrNotification").html(custom_msg);
             $("#updateProductItem").modal("hide");
-            getOrderData();
+            getProductData();
             $('#update_order_form')[0].reset();
           } else {
             $(".loader_body").hide();
@@ -764,67 +870,144 @@
 
   }
 
-  function getProductList() {
-    $('#product_name').html("");
+  function getProductCategoryList(type, val) {
+    if(type === "C"){
+      $('#category_name').html("");
+      $.ajax({
+        type: 'get',
+        url: base_url + "api/web/utility/lov-data?type_data=product_type",
+        success: function (data) {
+          $('#category_name').append('<option>Please Select</option>')
+          data.data.forEach(element => {
+            $('#category_name').append('<option value="' + element.id + '/' + element.name + '">' + element.name + '</option>');
+          });
+          $(".loader_body").hide();
+        },
+        error: function (error) {
+          console.log(error);
+          $(".loader_body").hide();
+        }
+      });
+    } else if(type === "D"){
+      $('#d_category_name').html("");
+      $.ajax({
+        type: 'get',
+        url: base_url + "api/web/utility/lov-data?type_data=product_type",
+        success: function (data) {
+          $('#d_category_name').append('<option>Please Select</option>')
+          data.data.forEach(element => {
+            $('#d_category_name').append('<option value="' + element.id + '/' + element.name + '"' + ((val.deviceCategory === element.name) ? 'selected' : '') + '>' + element.name + '</option>');
+          });
+          getSubProductListDetails($("#d_category_name").val().split("/")[0], val.deviceSubCategory);
+        },
+        error: function (error) {
+          console.log(error);
+          $(".loader_body").hide();
+        }
+      });
+    } else if(type === "U"){
+      $('#d_category_name').html("");
+      $.ajax({
+        type: 'get',
+        url: base_url + "api/web/utility/lov-data?type_data=product_type",
+        success: function (data) {
+          $('#u_category_name').append('<option>Please Select</option>')
+          data.data.forEach(element => {
+            $('#u_category_name').append('<option value="' + element.id + '/' + element.name + '"' + ((val.deviceCategory === element.name) ? 'selected' : '') + '>' + element.name + '</option>');
+          });
+          $(".loader_body").hide();
+        },
+        error: function (error) {
+          console.log(error);
+          $(".loader_body").hide();
+        }
+      });
+  } else{
+      return true;
+    }
+  }
+
+  function getVendorList() {
+    $('#vendor_name').html("");
     $.ajax({
       type: 'get',
-      url: base_url + "api/web/utility/product-list",
+      url: base_url + "api/web/utility/vendor-list",
       success: function (data) {
-        $('#product_name').append('<option>Please Select</option>')
+        $('#vendor_name').append('<option>Please Select</option>')
         data.data.forEach(element => {
-          $('#product_name').append('<option value="' + element.id + '">' + element.product_name + '</option>');
+          $('#vendor_name').append('<option value="' + element.id + '/' + element.name + '">' + element.name + '</option>');
         });
-        productData = data.data;
+        $(".loader_body").hide();
       },
       error: function (error) {
         console.log(error);
+        $(".loader_body").hide();
       }
     });
   }
 
-  function getStatusAll(statusName, statusNameId) {
+  function getVendorDetails(value) {
+    console.log("getVendorDetails::"+ value);
+    $('#d_vendor_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/vendor-list",
+      success: function (data) {
+        $('#d_vendor_name').append('<option>Please Select</option>')
+        data.data.forEach(element => {
+          $('#d_vendor_name').append('<option value="' + element.id + '/' + element.name + '" ' + ((value === element.id) ? 'selected' : '') + '>' + element.name + '</option>');
+        });
+        $(".loader_body").hide();
+      },
+      error: function (error) {
+        console.log(error);
+        $(".loader_body").hide();
+      }
+    });
+  }
+
+  $("#category_name").on('change', function (){
     $(".loader_body").show();
-    $('#product_name').html("");
+    let productTypeId = $("#category_name").val().split("/")[0];
+    getSubProductList(productTypeId);
+    getVendorList();
+  })
+
+  function getSubProductList(id) {
+    $('#category_sub_name').html("");
     $.ajax({
       type: 'get',
-      url: base_url + "api/web/utility/order-status-list",
+      url: base_url + "api/web/utility/lov-data-child?parent_id="+id,
       success: function (data) {
+        $('#category_sub_name').append('<option>Please Select</option>')
         data.data.forEach(element => {
-          $('#current_status').append('<option value="' + element.gpc_sim + '">' + element.order_name + '</option>');
+          $('#category_sub_name').append('<option value="' + element.id + '/' + element.name + '">' + element.name + '</option>');
         });
-
-        $('#current_status option:contains(' + statusName + ')').each(function () {
-          if ($(this).text() === statusName) {
-            $(this).attr('selected', 'selected');
-            getStatusNext(statusName)
-            return false;
-          }
-          return true;
-        });
-        productData = data.data;
+        $(".loader_body").hide();
       },
       error: function (error) {
         console.log(error);
+        $(".loader_body").hide();
       }
     });
   }
 
-
-  function getStatusNext(statusName) {
-    $('#updated_status').html("");
-    $(".loader_body").hide();
+  function getSubProductListDetails(id, value) {
+    $(".loader_body").show();
+    $('#d_category_sub_name').html("");
     $.ajax({
-      type: 'post',
-      data: {id: $('#current_status').val()},
-      url: base_url + "api/web/utility/next-order-status",
+      type: 'get',
+      url: base_url + "api/web/utility/lov-data-child?parent_id="+id,
       success: function (data) {
+        $('#d_category_sub_name').append('<option>Please Select</option>')
         data.data.forEach(element => {
-          $('#updated_status').append('<option value="' + element.gpc_sim +"/"+ element.order_name+'">' + element.order_name + '</option>');
+          $('#d_category_sub_name').append('<option value="' + element.id + '/' + element.name + '"' + ((value === element.name) ? 'selected' : '') + '>' + element.name + '</option>');
         });
-        $('#updated_status').append('<option value="100">Cancelled</option>')
+        $(".loader_body").hide();
       },
       error: function (error) {
         console.log(error);
+        $(".loader_body").hide();
       }
     });
   }
