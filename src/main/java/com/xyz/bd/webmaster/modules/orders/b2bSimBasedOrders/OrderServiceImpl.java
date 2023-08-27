@@ -45,7 +45,11 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -384,13 +388,59 @@ public class OrderServiceImpl implements OrderService{
                 orderModelEntity.setScheduledNote(updateStatus.getScheduledNote());
             }
           else if ("First Contact".equals(status_name)){
-              SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-              System.out.println("hello");
-              orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
-              orderModelEntity.setFirstContactNote(updateStatus.getFirstContactNote());
-              orderModelEntity.setScheduledAppointedDt(updateStatus.getScheduledAppointedDt());
+            try{
+                System.out.println("------------------");
+                System.out.println("orderStatusData: " + status_name);
 
-              orderRepository.save(orderModelEntity);
+                try {
+                    String inputDateStr = String.valueOf(updateStatus.getScheduledDt()); // No need to convert it to String
+                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+                    Date parsedDate = inputFormat.parse(inputDateStr);
+
+                    orderModelEntity.setScheduledDt(parsedDate);
+                    orderRepository.save(orderModelEntity);
+                    System.out.println("Converted Date: " + parsedDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+            //working code
+//                String Datis = String.valueOf(updateStatus.getScheduledDt());
+//                System.out.println(Datis);
+//                String inputDateStr = Datis;
+//                SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+//                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//
+//                try {
+//                    Date parsedDate = inputFormat.parse(inputDateStr);
+//                    String formattedDateStr = outputFormat.format(parsedDate);
+//                    System.out.println("Formatted Date: " + formattedDateStr);
+//
+//
+//
+//                    Date convertedDate = outputFormat.parse(formattedDateStr);
+//                    orderModelEntity.setScheduledDt(convertedDate);
+//                    orderRepository.save(orderModelEntity);
+//                    System.out.println("Converted Date: " + outputFormat.format(convertedDate));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+
+                //working
+
+                orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
+                orderModelEntity.setFirstContactNote(updateStatus.getFirstContactNote());
+
+
+                orderRepository.save(orderModelEntity);
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+                // Handle exceptions
+            }
+
+
+
           }
 
 

@@ -529,7 +529,7 @@
                 <div class="col-md-12" id = "schedule_time">
                   <div class="form-group">
                     <label for="schedule">Schedule</label>
-                    <input type="date" class="form-control" name="schedule" id="schedule" placeholder="Add Schedule">
+                    <input type="datetime-local" class="form-control" name="schedule" id="schedule" placeholder="Add Schedule">
                   </div>
                 </div>
 
