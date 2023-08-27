@@ -3,6 +3,7 @@ package com.xyz.bd.webmaster.modules.inventory;
 import com.xyz.bd.webmaster.modules.commonPackages.models.ProductVendorDto;
 import com.xyz.bd.webmaster.modules.commonPackages.models.VendorModelEntity;
 import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
+import com.xyz.bd.webmaster.utility.CommonRestResponse;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Service;
@@ -26,4 +27,10 @@ public interface ProductService {
     VendorModelEntity findVendorByProductName(String productName);
 
     ProductsModel getAllProductDataByProductName(String productName);
+
+    CommonRestResponse addNewProduct(HttpServletRequest request, String productInfo);
+
+    CommonRestResponse updateNewProduct(HttpServletRequest request, String productInfo, Long id);
+
+    CommonRestResponse getVendorList();
 }
