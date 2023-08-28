@@ -529,7 +529,7 @@
                 <div class="col-md-12" id = "schedule_time">
                   <div class="form-group">
                     <label for="schedule">Schedule</label>
-                    <input type="datetime-local" class="form-control" name="schedule" id="schedule" placeholder="Add Schedule">
+                    <input type="date" class="form-control" name="schedule" id="schedule" placeholder="Add Schedule">
                   </div>
                 </div>
 
@@ -935,6 +935,22 @@
   function updateStatus(){
     $(".loader_body").show();
 
+    var schedule_date = $('#schedule').val();
+
+  //   let datetimeLocalValue = $('#schedule').val();
+  //
+  //   let inputDate = new Date(datetimeLocalValue);
+  // //  let formattedDate = inputDate.toISOString().slice(0, 19).replace('T', ' ');
+  //   let formattedDate =
+  //           inputDate.getFullYear() + '-' +
+  //           ('0' + (inputDate.getMonth() + 1)).slice(-2) + '-' +
+  //           ('0' + inputDate.getDate()).slice(-2) + ' ' +
+  //           ('0' + inputDate.getHours()).slice(-2) + ':' +
+  //           ('0' + inputDate.getMinutes()).slice(-2) + ':' +
+  //           ('0' + inputDate.getSeconds()).slice(-2);
+  //
+  //   console.log(formattedDate);
+
     if($("#updateForm").parsley().validate()){
 
       let orderStatusData = {
@@ -962,6 +978,7 @@
         url: base_url + "api/web/orders/b2b-sim-based/update-status",
         data: {orderStatusData: JSON.stringify(orderStatusData), id: parseInt(id)},
         success: function (resultData) {
+          console.log(resultData);
           $(".loader_body").hide();
           if (resultData.code === 200) {
             let custom_msg = "<div class='alert alert-success success-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span>"+resultData.message+"<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
@@ -972,13 +989,14 @@
             $('#updateForm')[0].reset();
           } else {
             $(".loader_body").hide();
-            let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
+            let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Order Update request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
             $("#createSrNotification").html(custom_msg);
             $("#changeStatusModal").modal("hide");
             $('#updateForm')[0].reset();
           }
         },
         error: function (resultData) {
+          console.log(resultData);
           $(".loader_body").hide();
           let custom_msg = "<div class='alert alert-danger alert-wth-icon alert-dismissible fade show' role='alert'><span class='alert-icon-wrap'></span> Driver creation request has been failed!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'><span class='alert-icon-wrap'><i class='fa fa-times-circle'></i></span></span></button></div>";
           $("#createSrNotification").html(custom_msg);

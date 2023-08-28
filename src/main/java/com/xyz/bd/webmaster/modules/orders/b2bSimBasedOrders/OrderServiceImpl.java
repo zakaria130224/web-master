@@ -391,58 +391,62 @@ public class OrderServiceImpl implements OrderService{
             try{
                 System.out.println("------------------");
                 System.out.println("orderStatusData: " + status_name);
+                System.out.println("orderStatusData: " + orderStatusData);
 
-                try {
-                    String inputDateStr = String.valueOf(updateStatus.getScheduledDt()); // No need to convert it to String
-                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-                    Date parsedDate = inputFormat.parse(inputDateStr);
-
-                    orderModelEntity.setScheduledDt(parsedDate);
-                    orderRepository.save(orderModelEntity);
-                    System.out.println("Converted Date: " + parsedDate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-            //working code
-//                String Datis = String.valueOf(updateStatus.getScheduledDt());
-//                System.out.println(Datis);
-//                String inputDateStr = Datis;
-//                SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-//                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+             //   System.out.println("orderStatusData: " + updateStatus.getScheduledDt());
 //
+//                java.util.Date temp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+//                        .parse(String.valueOf(updateStatus.getScheduledDt()));
+//                System.out.println(temp);
+
 //                try {
+//                    String inputDateStr = String.valueOf(updateStatus.getScheduledDt()); // No need to convert it to String
+//                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 //                    Date parsedDate = inputFormat.parse(inputDateStr);
-//                    String formattedDateStr = outputFormat.format(parsedDate);
-//                    System.out.println("Formatted Date: " + formattedDateStr);
 //
-//
-//
-//                    Date convertedDate = outputFormat.parse(formattedDateStr);
-//                    orderModelEntity.setScheduledDt(convertedDate);
+//                    orderModelEntity.setScheduledDt(parsedDate);
 //                    orderRepository.save(orderModelEntity);
-//                    System.out.println("Converted Date: " + outputFormat.format(convertedDate));
+//                    System.out.println("Converted Date: " + parsedDate);
 //                } catch (ParseException e) {
 //                    e.printStackTrace();
 //                }
 
+            //working code
+                String Datis = String.valueOf(updateStatus.getScheduledDt());
+                System.out.println(Datis);
+                String inputDateStr = Datis;
+                SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                try {
+                    Date parsedDate = inputFormat.parse(inputDateStr);
+                    String formattedDateStr = outputFormat.format(parsedDate);
+                    System.out.println("Formatted Date: " + formattedDateStr);
+
+
+
+                    Date convertedDate = outputFormat.parse(formattedDateStr);
+                    orderModelEntity.setScheduledDt(convertedDate);
+                    orderModelEntity.setStatusName(updateStatus.getStatusName());
+                    orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
+                    orderModelEntity.setFirstContactNote(updateStatus.getFirstContactNote());
+                    orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));
+                    orderRepository.save(orderModelEntity);
+                    System.out.println("Converted Date: " + outputFormat.format(convertedDate));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 //working
 
-                orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
-                orderModelEntity.setFirstContactNote(updateStatus.getFirstContactNote());
-
-
-                orderRepository.save(orderModelEntity);
+              //  orderRepository.save(orderModelEntity);
             }
             catch (Exception e) {
                 System.out.println(e.getMessage());
                 // Handle exceptions
             }
 
-
-
           }
-
 
           //  OrderModelEntity orderModelEntity = orderRepository.getById(id);
 
