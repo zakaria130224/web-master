@@ -5,6 +5,8 @@ import com.google.gson.reflect.TypeToken;
 import com.xyz.bd.webmaster.config.session.SessionManager;
 import com.xyz.bd.webmaster.models.UserManagement.Entities.AppUser;
 import com.xyz.bd.webmaster.models.common.DTOs.SMS;
+import com.xyz.bd.webmaster.modules.actionLogs.ActionLogService;
+import com.xyz.bd.webmaster.modules.actionLogs.ActionLogsModel;
 import com.xyz.bd.webmaster.modules.inventory.ProductService;
 import com.xyz.bd.webmaster.modules.inventory.ProductsModel;
 import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
@@ -59,6 +61,9 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
     SendSMSService sendSMSService;
 
     @Autowired
+    ActionLogService actionLogService;
+
+    @Autowired
     private AppUserService appUserService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(B2cGpcServices.class);
@@ -96,6 +101,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             }.getType());
 
             OrderModelEntity orderModelEntity = new OrderModelEntity();
+            ActionLogsModel actionLogsModel = new ActionLogsModel();
             Integer random = new Random().nextInt(90000) + 10000;
             ProductsModel productsModel = productService.getProductDetail(order.getProductId());
             String orderNameString = "";
@@ -148,6 +154,17 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
             //appUserService.saveNewUserNew(newMdUserModel);
 
+            actionLogsModel.setAction_type_name(Utility.create_order_gps);
+            actionLogsModel.setF_id(1L);
+            actionLogsModel.setF_table(Utility.tbl_order);
+            actionLogsModel.setUser_id(SessionManager.getUserID(request));
+            actionLogsModel.setOld_data("");
+            actionLogsModel.setNew_data(orderInfo);
+            actionLogsModel.setNote("Order Creation b2C GPC");
+            actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
+            actionLogsModel.setCreatedAt(Helper.getCurrentDate());
+
+            actionLogService.SaveLogsData(actionLogsModel);
 
             orderRepository.save(orderModelEntity);
             if(orderModelEntity.getId() != null){

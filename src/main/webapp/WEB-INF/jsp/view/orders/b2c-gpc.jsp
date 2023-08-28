@@ -665,7 +665,7 @@
       let orderInfo = {
         customerName: $("#customer_name").val(),
         customerContactNumber: $("#customer_contact_number").val(),
-        productId: $("#product_name").val(),
+        productId: $("#product_name").val().split("/")[0],
         address: $( "#address" ).val(),
         vtsSimNo: $( "#vts_sim" ).val(),
         statusNameId: 1,
@@ -787,15 +787,36 @@
       success: function (data) {
         $('#product_name').append('<option>Please Select</option>')
         data.data.forEach(element => {
-          $('#product_name').append('<option value="' + element.id + '">' + element.product_name + '</option>');
+          $('#product_name').append('<option value="' + element.id + "/" + element.vendorId +'">' + element.productName + '</option>');
         });
         productData = data.data;
+        getVendorDetails($('#product_name').val().split("/")[1])
       },
       error: function (error) {
         console.log(error);
       }
     });
   }
+
+
+  function getVendorDetails(value) {
+    console.log("getVendorDetails::"+ value);
+    $('#d_vendor_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/vendor-list",
+      success: function (data) {
+        $('#d_vendor_name').append('<option>Please Select</option>')
+        data.data.forEach(element => {
+          $('#d_vendor_name').append('<option value="' + element.id + '/' + element.name + '" ' + ((value === element.id) ? 'selected' : '') + '>' + element.name + '</option>');
+        });
+        $(".loader_body").hide();
+      },
+      error: function (error) {
+        console.log(error);
+        $(".loader_body").hide();
+      }
+    });
 
   function getStatusAll(statusName, statusNameId) {
     $(".loader_body").show();
