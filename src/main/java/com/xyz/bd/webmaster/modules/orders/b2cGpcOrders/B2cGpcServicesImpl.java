@@ -7,6 +7,7 @@ import com.xyz.bd.webmaster.models.UserManagement.Entities.AppUser;
 import com.xyz.bd.webmaster.models.common.DTOs.SMS;
 import com.xyz.bd.webmaster.modules.actionLogs.ActionLogService;
 import com.xyz.bd.webmaster.modules.actionLogs.ActionLogsModel;
+import com.xyz.bd.webmaster.modules.inventory.ProductRepository;
 import com.xyz.bd.webmaster.modules.inventory.ProductService;
 import com.xyz.bd.webmaster.modules.inventory.ProductsModel;
 import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
@@ -65,6 +66,9 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
     @Autowired
     private AppUserService appUserService;
+
+    @Autowired
+    ProductRepository productRepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(B2cGpcServices.class);
 
@@ -134,13 +138,14 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             orderModelEntity.setVtsSimNo(order.getVtsSimNo());
             orderModelEntity.setStatusName("New Order");
             orderModelEntity.setStatusNameId(1);
+            orderModelEntity.setUnitPrice(productsModel.getTotalCharge());
 
             orderModelEntity.setVendorId(order.getVendorId());
             orderModelEntity.setVendorEmail(order.getVendorEmail());
             orderModelEntity.setVendorName(order.getVendorName());
             orderModelEntity.setCloudId(orderNameString+Integer.toString(random));
             orderModelEntity.setSimKit("898801"+ Integer.toString(random) +"38163F");
-            orderModelEntity.setRatePlan(order.getRatePlan());
+            orderModelEntity.setRatePlan(productsModel.getPackageName());
 
 
             orderModelEntity.setCreatedBy(SessionManager.getUserLoginName(request));
@@ -155,11 +160,14 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             //appUserService.saveNewUserNew(newMdUserModel);
 
             actionLogsModel.setAction_type_name(Utility.create_order_gps);
+            actionLogsModel.setAction_type_id(1L);
+            actionLogsModel.setEvent_date(Helper.getCurrentDate());
             actionLogsModel.setF_id(1L);
             actionLogsModel.setF_table(Utility.tbl_order);
             actionLogsModel.setUser_id(SessionManager.getUserID(request));
             actionLogsModel.setOld_data("");
             actionLogsModel.setNew_data(orderInfo);
+            actionLogsModel.setMsisdn(order.getCustomerContactNumber());
             actionLogsModel.setNote("Order Creation b2C GPC");
             actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
             actionLogsModel.setCreatedAt(Helper.getCurrentDate());
@@ -168,7 +176,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
             orderRepository.save(orderModelEntity);
             if(orderModelEntity.getId() != null){
-                sendEmailAndSms(orderModelEntity);
+                sendMailAndSms(orderModelEntity);
             }
             commonRestResponse.setData(orderModelEntity.getId());
             commonRestResponse.setCode(200);
@@ -195,8 +203,6 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
             OrderModelEntity orderModelEntity = orderRepository.getById(id);
 
-
-
             orderModelEntity.setStatusName(updateStatus.getStatusName());
             orderModelEntity.setStatusNameId(updateStatus.getStatusNameId());
 
@@ -207,7 +213,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             orderRepository.save(orderModelEntity);
 
             commonRestResponse.setData(orderModelEntity.getId());
-            sendEmailAndSms(orderModelEntity);
+            statusCheck(orderModelEntity);
             commonRestResponse.setCode(200);
             commonRestResponse.setMessage("Order Status has been Added Successfully");
         }
@@ -222,33 +228,100 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
         return commonRestResponse;
     }
 
-    public void sendEmailAndSms(OrderModelEntity orderData) throws IOException, TemplateException {
-        String toEmail = orderData.getVendorEmail();
-        //String body = "Order data has been updated for order ID: " + orderData.getId() + ". " + "Order Status : "+ orderData.getStatusName();
-        String subject = "VTS Order Data Update Notification";
-        String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com";
+    public boolean statusCheck(OrderModelEntity order) throws TemplateException, IOException {
+        OrderModelEntity data = order;
+        if(order.getStatusName().equals("New Order")){
+            if(inventoryManage(1, order.getProductId())){
+                boolean notificationStatus = sendMailAndSms(data);
+                if(notificationStatus){
+                    return true;
+                } else return false;
+            } else return false;
 
+        } else if (order.getStatusName().equals("Scheduled")) {
+            if(inventoryManage(1, order.getProductId())){
+                boolean notificationStatus = sendMailAndSms(data);
+                if(notificationStatus){
+                    return true;
+                } else return false;
+            } else return false;
+        } else if (order.getStatusName().equals("Sim Activation")) {
+            boolean notificationStatus = sendMailAndSms(data);
+            if(notificationStatus){
+                return true;
+            } else return false;
+        } else if (order.getStatusName().equals("Installation")) {
+            boolean notificationStatus = sendMailAndSms(data);
+            if(notificationStatus){
+                return true;
+            } else return false;
+        } else if (order.getStatusName().equals("Onboarded")) {
+            boolean notificationStatus = sendMailAndSms(data);
+            if(notificationStatus){
+                return true;
+            } else return false;
+        } else if (order.getStatusName().equals("Cancelled")) {
+            if(inventoryManage(-1, order.getProductId())){
+                boolean notificationStatus = sendMailAndSms(data);
+                if(notificationStatus){
+                    return true;
+                } else return false;
+            } else return false;
+        } else if (order.getStatusName().equals("First Contact")) {
+            boolean notificationStatus = sendMailAndSms(data);
+            if(notificationStatus){
+                return true;
+            } else return false;
+        } else if (order.getStatusName().equals("Pack Activation")) {
+            boolean notificationStatus = sendMailAndSms(data);
+            if(notificationStatus){
+                return true;
+            } else return false;
+        }
+        return false;
+    }
 
-        Configuration cfg = new Configuration();
-        cfg.setClassForTemplateLoading(this.getClass(), "/templates/");
-        Template freemarkerTemplate = cfg.getTemplate("email-template.ftl");
-        String body = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerTemplate, orderData);
+    public boolean sendMailAndSms(OrderModelEntity orderData) throws IOException, TemplateException{
+        boolean status = false;
+        try{
+            String toEmail = orderData.getVendorEmail();
+            //String body = "Order data has been updated for order ID: " + orderData.getId() + ". " + "Order Status : "+ orderData.getStatusName();
+            String subject = "VTS Order Data Update Notification";
+            String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com";
 
+            Configuration cfg = new Configuration();
+            cfg.setClassForTemplateLoading(this.getClass(), "/templates/");
+            Template freemarkerTemplate = cfg.getTemplate("email-template.ftl");
+            String body = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerTemplate, orderData);
 
-        emailSenderService.sendEmail(toEmail, body, subject, cc);
+            emailSenderService.sendEmail(toEmail, body, subject, cc);
 
-        String customerMail = "jobaidur@grameenphone.com";
-        // String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
-        String body_kcp = body;
-        String subject_kcp = "VTS Order Update Notification";
-        String cc_kcp = "ifaz@grameenphone.com";
+            String customerMail = "jobaidur@grameenphone.com";
+            // String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
+            String body_kcp = body;
+            String subject_kcp = "VTS Order Update Notification";
+            String cc_kcp = "ifaz@grameenphone.com";
+            emailSenderService.sendEmail(customerMail, body_kcp, subject_kcp, cc_kcp);
 
-        emailSenderService.sendEmail(customerMail, body_kcp, subject_kcp, cc_kcp);
+            SMS sms = new SMS();
+            sms.setPhone("88"+orderData.getCustomerContactNumber());
+            sms.setText(body);
+            sendSMSService.sendSMS(sms);
+            return true;
+        } catch (IOException | TemplateException ex){
+            return false;
+        }
+    }
 
-        SMS sms = new SMS();
-        sms.setPhone(orderData.getCustomerContactNumber());
-        sms.setText(body);
-        sendSMSService.sendSMS(sms);
+    public boolean inventoryManage(Integer quantity, Long productId){
+        try {
+            ProductsModel productsModel = productRepository.getById(productId);
+            productsModel.setQuantity(productsModel.getQuantity() - quantity);
+            productRepository.save(productsModel);
+            return true;
+        } catch(Exception ex){
+            return false;
+        }
     }
 
 

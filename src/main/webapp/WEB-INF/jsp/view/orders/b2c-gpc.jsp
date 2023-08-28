@@ -260,7 +260,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="vendor_name">Vendor Name</label>
-                    <select class="form-control" id="vendor_name" required>
+                    <select class="form-control" id="vendor_name" disabled>
                       <option>Please select</option>
                     </select>
                   </div>
@@ -315,72 +315,72 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="customer_name">Last Status Change Date</label>
+                    <label for="d_updated_date">Last Status Change Date</label>
                     <input type="text" class="form-control" id="d_updated_date" placeholder="Select" disabled>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="customer_name">Cloud ID</label>
+                    <label for="d_cloud_id">Cloud ID</label>
                     <input type="text" class="form-control" id="d_cloud_id" placeholder="Select" disabled>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="customer_name">TRXID </label>
+                    <label for="d_trxid">TRXID </label>
                     <input type="text" class="form-control" id="d_trxid" placeholder="Select" disabled>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="address">Customer Name </label>
+                    <label for="d_customer_name">Customer Name </label>
                     <input type="text" class="form-control" id="d_customer_name" placeholder="Select" disabled>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="address">Address </label>
+                    <label for="d_address">Address </label>
                     <input type="text" class="form-control" id="d_address" disabled>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="address">Pack/Service</label>
+                    <label for="d_pack">Pack/Service</label>
                     <input type="text" class="form-control" id="d_pack" disabled>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_name">Product Name</label>
+                    <label for="d_product_name">Product Name</label>
                     <input type="text" class="form-control" id="d_product_name" disabled>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_type">Product Type</label>
+                    <label for="d_product_type">Product Type</label>
                     <input type="text" class="form-control" id="d_product_type" disabled>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="vendor_name">Vendor Name</label>
+                    <label for="d_vendor_name">Vendor Name</label>
                     <input type="text" class="form-control" id="d_vendor_name" disabled>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="customer_contact_number">Rate Plan </label>
+                    <label for="d_rate_plan">Rate Plan </label>
                     <input type="text" class="form-control" id="d_rate_plan" placeholder="Select" disabled>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="customer_contact_number">Customer Contact </label>
+                    <label for="d_customer_contact">Customer Contact </label>
                     <input type="text" class="form-control" id="d_customer_contact" placeholder="Select" disabled>
                   </div>
                 </div>
@@ -505,29 +505,14 @@
 
 
   $('#product_name').on('change', function() {
-    let productId = $('#product_name').val();
+    let productId = $('#product_name').val().split("/")[0];
     if (productId != 'Please select product'){
       $('#vendor_name').html('');
       $('#product_type').html('');
       let vendors = [];
       let product = [];
-      productData.forEach(function (el, i, arr) {
-        //console.log(el);
-        if (el.id == productId) {
-          //console.log("selected::: "+ JSON.stringify(el.vendors));
-          vendors = JSON.stringify(el.vendors);
-          product = el;
-        }
-      });
-      console.log(productData)
-      console.log(vendors)
-      console.log(product)
 
-      JSON.parse(vendors).forEach(function (el, i, arr) {
-        $('#vendor_name').append('<option value="' + el.id + '/' + el.email + '">' + el.name + '</option>');
-      });
-
-      $('#ratePlan').val(product.monthly_charge);
+      getVendorListUpdate($('#product_name').val().split("/")[1])
 
       if(product.has_sim === true){
         $('#product_type').append('<option value="1">SIM Based</option>');
@@ -541,6 +526,27 @@
       }
     }
   });
+
+  function getVendorListUpdate(value) {
+    console.log("getVendorDetails::"+ value);
+    $('#vendor_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/vendor-list",
+      success: function (data) {
+        $('#vendor_name').append('<option>Please Select</option>')
+        data.data.forEach(element => {
+          console.log((value === element.id));
+          $('#vendor_name').append('<option value="' + element.id + '/' + element.name + "/" + element.email+'" ' + ((value == element.id) ? 'selected' : 'none') + '>' + element.name + '</option>');
+        });
+        $(".loader_body").hide();
+      },
+      error: function (error) {
+        console.log(error);
+        $(".loader_body").hide();
+      }
+    });
+  }
 
 
 
@@ -603,9 +609,13 @@
             } else if(data == "Finalization"){
               return '<button class="btn btn-b2b-sm btn-primary btn-sm btn-disabled">Finalization</button>';
             }else if(data == "Onboarded"){
-              return '<button class="btn btn-b2b-sm btn-success btn-sm btn-disabled">Onboarded</button>';
+              return '<button class="btn btn-b2b-sm btn-dark btn-sm btn-disabled">Onboarded</button>';
+            }else if(data == "First Contact"){
+              return '<button class="btn btn-b2b-sm btn-warning btn-sm btn-disabled">First Contact</button>';
             }else if(data == "Cancelled"){
-              return '<button class="btn btn-b2b-sm btn-success btn-sm btn-disabled">Cancelled</button>';
+              return '<button class="btn btn-b2b-sm btn-danger btn-sm btn-disabled">Cancelled</button>';
+            } else if(data == "Pack Activation"){
+              return '<button class="btn btn-b2b-sm btn-success btn-sm btn-disabled">Pack Activation</button>';
             } else{
               return '';
             }
@@ -665,12 +675,12 @@
       let orderInfo = {
         customerName: $("#customer_name").val(),
         customerContactNumber: $("#customer_contact_number").val(),
-        productId: $("#product_name").val().split("/")[0],
+        productId: parseInt($("#product_name").val().split("/")[0]),
         address: $( "#address" ).val(),
         vtsSimNo: $( "#vts_sim" ).val(),
         statusNameId: 1,
         vendorEmail: $( "#vendor_name" ).val().split("/")[1],
-        vendorId: $( "#vendor_name" ).val().split("/")[0],
+        vendorId: parseInt($( "#vendor_name" ).val().split("/")[0]),
         vendorName: $( "#vendor_name" ).text(),
         ratePlan: $( "#vendor_name" ).val().split("/")[2],
         orderType: "GPC"
@@ -730,6 +740,52 @@
     let data = dataTable.row( $(this).parents('tr') ).data();
     alert( data[0] +"'Download: "+ data[ 5 ] );
   } );
+
+  function getStatusAll(statusName, statusNameId) {
+    $(".loader_body").show();
+    //  $('#product_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/order-status-list",
+      success: function (data) {
+        data.data.forEach(element => {
+          $('#current_status').append('<option value="' + element.b2b_sim + '">' + element.order_name + '</option>');
+        });
+
+        $('#current_status option:contains(' + statusName + ')').each(function () {
+          if ($(this).text() === statusName) {
+            $(this).attr('selected', 'selected');
+            getStatusNext();
+            return false;
+          }
+          return true;
+        });
+        productData = data.data;
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  function getStatusNext() {
+    $('#updated_status').html("");
+    $(".loader_body").hide();
+    $.ajax({
+      type: 'post',
+      data: {id: $('#current_status').val()},
+      url: base_url + "api/web/utility/next-order-status",
+      success: function (data) {
+        data.data.forEach(element => {
+          $('#updated_status').append('<option value="' + element.b2b_sim +"/"+ element.order_name+'">' + element.order_name + '</option>');
+        });
+        $('#updated_status').append('<option value="100/Cancelled">Cancelled</option>')
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
 
 
   function updateStatus(){
@@ -800,7 +856,7 @@
 
 
   function getVendorDetails(value) {
-    console.log("getVendorDetails::"+ value);
+    console.log("getVendorDetails::" + value);
     $('#d_vendor_name').html("");
     $.ajax({
       type: 'get',
@@ -818,32 +874,34 @@
       }
     });
 
-  function getStatusAll(statusName, statusNameId) {
-    $(".loader_body").show();
-    $('#product_name').html("");
-    $.ajax({
-      type: 'get',
-      url: base_url + "api/web/utility/order-status-list",
-      success: function (data) {
-        data.data.forEach(element => {
-          $('#current_status').append('<option value="' + element.gpc_sim + '">' + element.order_name + '</option>');
-        });
 
-        $('#current_status option:contains(' + statusName + ')').each(function () {
-          if ($(this).text() === statusName) {
-            $(this).attr('selected', 'selected');
-            getStatusNext(statusName)
-            return false;
-          }
-          return true;
-        });
-        productData = data.data;
-      },
-      error: function (error) {
-        console.log(error);
-      }
-    });
-  }
+
+    function getStatusAll(statusName, statusNameId) {
+      $(".loader_body").show();
+      $('#product_name').html("");
+      $.ajax({
+        type: 'get',
+        url: base_url + "api/web/utility/order-status-list",
+        success: function (data) {
+          data.data.forEach(element => {
+            $('#current_status').append('<option value="' + element.gpc_sim + '">' + element.order_name + '</option>');
+          });
+
+          $('#current_status option:contains(' + statusName + ')').each(function () {
+            if ($(this).text() === statusName) {
+              $(this).attr('selected', 'selected');
+              getStatusNext(statusName)
+              return false;
+            }
+            return true;
+          });
+          productData = data.data;
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });
+    }
 
 
     function getStatusNext(statusName) {
@@ -855,14 +913,15 @@
         url: base_url + "api/web/utility/next-order-status",
         success: function (data) {
           data.data.forEach(element => {
-            $('#updated_status').append('<option value="' + element.gpc_sim +"/"+ element.order_name+'">' + element.order_name + '</option>');
+            $('#updated_status').append('<option value="' + element.gpc_sim + "/" + element.order_name + '">' + element.order_name + '</option>');
           });
-          $('#updated_status').append('<option value="100">Cancelled</option>')
+          $('#updated_status').append('<option value="100/Cancelled">Cancelled</option>')
         },
         error: function (error) {
           console.log(error);
         }
       });
+    }
   }
 
 </script>

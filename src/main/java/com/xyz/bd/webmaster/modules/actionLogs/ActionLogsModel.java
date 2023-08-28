@@ -17,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Table(name = "tbl_action_logs")
 public class ActionLogsModel extends BaseEntity {
-    private Timestamp event_date;
+    private Date event_date;
     private Long f_id;
     private String f_table;
     private Long user_id;
