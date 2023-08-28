@@ -935,7 +935,7 @@
   function updateStatus(){
     $(".loader_body").show();
 
-    var schedule_date = $('#schedule').val();
+    var previous_state = $('#previous_state').val();
 
   //   let datetimeLocalValue = $('#schedule').val();
   //
@@ -951,8 +951,14 @@
   //
   //   console.log(formattedDate);
 
-    if($("#updateForm").parsley().validate()){
+    if(previous_state == "New Order"){
+      var schedule_val = $('#schedule').val();
+    }
+    else{
+      var schedule_val = "2023-08-30";
+    }
 
+    if($("#updateForm").parsley().validate()){
       let orderStatusData = {
         statusName: $('#editStatus').val().split("/")[1],
         statusNameId: $('#editStatus').val().split("/")[0],
@@ -961,13 +967,14 @@
         kcpContactNumber: $('#kcp_p_contact').val(),
         previousState: $('#previous_state').val(),
         imei: $('#imei_input').val(),
-        scheduledDt: $('#schedule').val(),
-        ScheduledNote:$('#add_note').val(),
+        scheduledDt: schedule_val,
+        scheduledNote:$('#add_note').val(),
         firstContactNote:$('#add_note').val(),
         simActivationNote:$('#add_note').val(),
         installationNote :$('#add_note').val(),
         finalizationNote :$('#add_note').val(),
-        onboardedNote :$('#add_note').val()
+        onboardedNote :$('#add_note').val(),
+        cancelledNote :$('#add_note').val()
 
       }
       let id = $("#row_id").val();
@@ -1078,7 +1085,7 @@
     $("#previous_state").val(data.statusName);
 
     $("#changeStatusModal").modal("show");
-    if( curr_status == "Installation") {
+    if( curr_status == "Sim Activation") {
       $('#imei_block').show();
       $('#imei_input').attr("required", true);
       $('#tracker_device_name').show();

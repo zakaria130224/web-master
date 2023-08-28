@@ -287,7 +287,7 @@ public class OrderServiceImpl implements OrderService{
 
 
             System.out.println("orderStatusData: " + status_name);
-          if ("Pack Activation".equals(status_name)){
+          if ("Installation".equals(status_name)){
                 System.out.println("tests success");
                 UserModelEntity existingUser = userService.findByUserName(updateStatus.getKcpContactNumber());
 
@@ -381,12 +381,34 @@ public class OrderServiceImpl implements OrderService{
 
                     // Set other device info fields as needed
                     trackerDeviceService.saveDeviceInfo(deviceInfo);
+
+                    orderModelEntity.setInstallationNote(updateStatus.getInstallationNote());
+                    orderModelEntity.setInstallationDt(Helper.getCurrentDate());
+                    orderModelEntity.setInstallationBy(SessionManager.getUserLoginName(request));
                 }
 
             }
            else if ("Scheduled".equals(status_name)){
                 orderModelEntity.setScheduledNote(updateStatus.getScheduledNote());
+              orderModelEntity.setScheduledAppointedDt(Helper.getCurrentDate());
+              orderModelEntity.setScheduledBy(SessionManager.getUserLoginName(request));
             }
+          else if ("Onboarded".equals(status_name)){
+              orderModelEntity.setOnboardedNote(updateStatus.getOnboardedNote());
+              orderModelEntity.setOnboardedDt(Helper.getCurrentDate());
+              orderModelEntity.setOnboardedBy(SessionManager.getUserLoginName(request));
+          }
+
+          else if ("Cancelled".equals(status_name)){
+              orderModelEntity.setCancelledNote(updateStatus.getCancelledNote());
+              orderModelEntity.setCancelledDt(Helper.getCurrentDate());
+              orderModelEntity.setCancelledBy(SessionManager.getUserLoginName(request));
+          }
+          else if ("Finalization".equals(status_name)){
+              orderModelEntity.setFinalizationNote(updateStatus.getFinalizationNote());
+              orderModelEntity.setFinalizationDt(Helper.getCurrentDate());
+              orderModelEntity.setFinalizationBy(SessionManager.getUserLoginName(request));
+          }
           else if ("First Contact".equals(status_name)){
             try{
                 System.out.println("------------------");
@@ -427,7 +449,7 @@ public class OrderServiceImpl implements OrderService{
 
                     Date convertedDate = outputFormat.parse(formattedDateStr);
                     orderModelEntity.setScheduledDt(convertedDate);
-                    orderModelEntity.setStatusName(updateStatus.getStatusName());
+                 //   orderModelEntity.setStatusName(updateStatus.getStatusName());
                     orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
                     orderModelEntity.setFirstContactNote(updateStatus.getFirstContactNote());
                     orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));
@@ -448,6 +470,12 @@ public class OrderServiceImpl implements OrderService{
 
           }
 
+          else if ("Sim Activation".equals(status_name)){
+              orderModelEntity.setSimActivationNote(updateStatus.getSimActivationNote());
+              orderModelEntity.setSimActivationDt(Helper.getCurrentDate());
+              orderModelEntity.setSimActivationBy(SessionManager.getUserLoginName(request));
+          }
+
           //  OrderModelEntity orderModelEntity = orderRepository.getById(id);
 
             orderModelEntity.setStatusName(updateStatus.getStatusName());
@@ -461,7 +489,7 @@ public class OrderServiceImpl implements OrderService{
             orderRepository.save(orderModelEntity);
 
             commonRestResponse.setData(orderModelEntity.getId());
-          //  sendEmailAndSms(orderModelEntity);
+            sendEmailAndSms(orderModelEntity);
             commonRestResponse.setCode(200);
             commonRestResponse.setMessage("Order Status has been Added Successfully");
         }
@@ -480,7 +508,7 @@ public class OrderServiceImpl implements OrderService{
         String toEmail = orderData.getVendorEmail();
         String body = "Order data has been updated for order ID: " + orderData.getId() + ". " + "Order Status : "+ orderData.getStatusName();
         String subject = "VTS Order Data Update Notification";
-        String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com";
+        String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com,mahmud.md@gramneenphone.com";
 
         emailSenderService.sendEmail(toEmail, body, subject, cc);
 
