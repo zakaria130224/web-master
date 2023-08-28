@@ -177,6 +177,7 @@ public class ProductServiceImpl implements ProductService{
             productsModel.setHasSim(product.getHasSim());
             productsModel.setVendorId(product.getVendorId());
             productsModel.setRemarks(product.getRemarks());
+            productsModel.setDescription(product.getDescription());
 
             productsModel.setUpdatedBy(SessionManager.getUserLoginName(request));
             productsModel.setUpdatedAt(Helper.getCurrentDate());

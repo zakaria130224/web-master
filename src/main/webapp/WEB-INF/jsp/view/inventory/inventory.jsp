@@ -334,7 +334,7 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn b2b-submit-btn-base btn-outline-primary float-left">close</button>
-          <button type="submit" class="btn btn-primary b2b-submit-btn-base" onclick="createNewOrder()">Add Inventory</button>
+          <button type="submit" class="btn btn-primary b2b-submit-btn-base" onclick="createNewOrder()">Add Product</button>
         </div>
       </div>
     </div>
@@ -481,7 +481,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title float-left" id="myModalLabel2">Edit Inventory</h4>
+          <h4 class="modal-title float-left" id="myModalLabel2">Edit Product Item</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                   style="height: 20px;width:
                             20px;border: 1px solid;
@@ -496,19 +496,27 @@
         </div>
         <div class="modal-body">
           <form class="form-horizontal b2b-custom-form" id="update_order_form">
+            <input type="hidden" id="u_row_id">
             <div class="card-body p-0">
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="item_code">Item Code <span class="text-danger"> *</span></label>
-                    <input type="text" class="form-control" id="e_item_code" placeholder="Select" required>
+                    <label for="u_item_code">Item Code <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="u_item_code" placeholder="Write here" required>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="channel_name">Channel</label>
-                    <select class="form-control" id="e_channel_name" required>
+                    <label for="u_product_name">Product Name <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="u_product_name" placeholder="Write here" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="u_channel_name">Channel</label>
+                    <select class="form-control" id="u_channel_name" required>
                       <option>Please select channel</option>
                       <option value="b2b">B2B</option>
                       <option value="b2c">B2C</option>
@@ -518,40 +526,81 @@
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="category_name">Category Name</label>
-                    <select class="form-control" id="e_category_name" required>
+                    <label for="u_sim_status">SIM Status</label>
+                    <select class="form-control" id="u_sim_status" required>
                       <option>Please select category</option>
-                      <option value="SIM Based">SIM Bases</option>
-                      <option value="SIM Less">SIM Less</option>
+                      <option value="1">SIM Bases</option>
+                      <option value="2">SIM Less</option>
                     </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="subscription">Subscription(BDT/Monthly) <span class="text-danger"> *</span></label>
-                    <input type="text" class="form-control" id="e_subscription" placeholder="Select" required>
+                    <label for="u_category_name">Category Name</label>
+                    <select class="form-control" id="u_category_name" required>
+
+                    </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_price">Product Price(BDT) <span class="text-danger"> *</span></label>
-                    <input type="text" class="form-control" id="e_product_price" placeholder="Select" required>
+                    <label for="u_vendor_name">Vendor Name</label>
+                    <select class="form-control" id="u_vendor_name" required>
+
+                    </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_price">Quantity <span class="text-danger"> *</span></label>
-                    <input type="number" class="form-control" id="e_quantity" placeholder="Please write here" required>
+                    <label for="u_category_sub_name">Sub Category Name</label>
+                    <select class="form-control" id="u_category_sub_name" required>
+
+                    </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_price">Description <span class="text-danger"> *</span></label>
-                    <textarea type="text" class="form-control" id="e_description" placeholder="Please write here"></textarea>
+                    <label for="u_package_name">Package Name <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="u_package_name" placeholder="Select" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="u_subscription">Subscription(BDT/Monthly) <span class="text-danger"> *</span></label>
+                    <input type="number" class="form-control" id="u_subscription" placeholder="Select" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="u_product_price">Product Price(BDT) <span class="text-danger"> *</span></label>
+                    <input type="number" class="form-control" id="u_product_price" placeholder="Select" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="u_quantity">Quantity <span class="text-danger"> *</span></label>
+                    <input type="number" class="form-control" id="u_quantity" placeholder="Please write here" required>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="u_description">Description <span class="text-danger"> *</span></label>
+                    <textarea type="text" class="form-control" id="u_description" placeholder="Please write here"></textarea>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="u_remarks">Remarks <span class="text-danger"> *</span></label>
+                    <textarea type="text" class="form-control" id="u_remarks" placeholder="Please write here"></textarea>
                   </div>
                 </div>
 
@@ -560,7 +609,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary b2b-submit-btn-base" onclick="updateStatus()">Update</button>
+          <button type="submit" class="btn btn-primary b2b-submit-btn-base" onclick="updateInventoryProduct()">Update</button>
         </div>
       </div>
     </div>
@@ -806,15 +855,38 @@
     $("#newProductEntry").modal('hide');
   }
 
+
+  /* open edit product modal */
   $('#dataTable tbody').on( 'click', 'button.change-status', function (e) {
     //$("#update_order_form").clear();
+    $(".loader_body").show();
     e.stopPropagation()
     $('#create_intentory_form')[0].reset();
     let data = dataTable.row( $(this).parents('#dataTable tbody tr') ).data();
     $("#current_status").val(data.status).change();
-    $("#row_id").val(data.id);
     $("#updateProductItem").modal("show");
-    getStatusAll(data.statusName, data.statusNameId);
+
+
+    $('#u_row_id').val(data.id);
+    $('#u_item_code').val(data.itemCode);
+    $('#u_product_name').val(data.productName);
+    $('#u_package_name').val(data.packageName);
+    $('#u_subscription').val(data.monthlyCharge);
+    $('#u_product_price').val(data.totalCharge);
+    $('#u_quantity').val(data.quantity);
+    $('#u_description').val(data.description);
+    $('#u_remarks').val(data.remarks);
+
+    $('#u_channel_name option[value="'+data.channel+'"]').prop("selected",true).trigger("change");
+    if(data.hasSim){
+      console.log("entered");
+      $('#u_sim_status option[value="SIM Based"]').prop("selected",true).trigger("change");
+    } else if(!tableRowData.hasSim){
+      $('#u_sim_status option[value="SIM Less"]').prop("selected",true).trigger("change");
+    }
+
+    getProductCategoryList("U", data);
+
   } );
 
   $('#dataTable tbody').on( 'click', 'button.btn-b2b-sm-download', function () {
@@ -823,22 +895,38 @@
   } );
 
 
-  function updateStatus(){
+  function updateInventoryProduct(){
     $(".loader_body").show();
-
     if($("#update_order_form").parsley().validate()){
-
-      let orderStatusData = {
-        statusName: $('#updated_status').val().split("/")[1],
-        statusNameId: $('#updated_status').val().split("/")[0],
+      let productInfo = {
+        itemCode: $("#u_item_code").val(),
+        productName: $("#u_product_name").val(),
+        productType: $("#u_category_name").val().split("/")[1],
+        channel: $( "#u_channel_name" ).val(),
+        deviceCategory: $("#u_category_name").val().split("/")[1],
+        deviceSubCategory: $("#u_category_sub_name").val().split("/")[1],
+        packageName: $( "#u_package_name" ).val(),
+        monthlyCharge: parseInt($("#u_subscription").val()),
+        totalCharge: parseInt($("#u_product_price").val()),
+        quantity: parseInt($("#u_quantity").val()),
+        hasSim: true,
+        vendorId: $("#u_vendor_name").val().split("/")[0],
+        status: true,
+        remarks: $("#u_remarks").val(),
+        description: $("#u_description").val()
       }
-      let id = $("#row_id").val();
 
+      if($("#u_sim_status").val() === 1){
+        productInfo.hasSim = true;
+      } else if($("#u_sim_status").val() === 2){
+        productInfo.hasSim = false;
+      }
+      let id = $("#u_row_id").val();
 
       $.ajax({
         type: 'POST',
-        url: base_url + "api/web/orders/b2c-gpc/update-status",
-        data: {orderStatusData: JSON.stringify(orderStatusData), id: parseInt(id)},
+        url: base_url + "api/web/utility/product/update",
+        data: {productInfo: JSON.stringify(productInfo), id: parseInt(id)},
         success: function (resultData) {
           $(".loader_body").hide();
           if (resultData.code === 200) {
@@ -906,6 +994,7 @@
         }
       });
     } else if(type === "U"){
+      console.log("Updated::"+ val);
       $('#d_category_name').html("");
       $.ajax({
         type: 'get',
@@ -915,6 +1004,16 @@
           data.data.forEach(element => {
             $('#u_category_name').append('<option value="' + element.id + '/' + element.name + '"' + ((val.deviceCategory === element.name) ? 'selected' : '') + '>' + element.name + '</option>');
           });
+
+          let productTypeId = $("#u_category_name").val().split("/")[0];
+          if(productTypeId === ""){
+
+          } else{
+            console.log("productTypeId::"+ productTypeId);
+            getSubProductListUpdate(productTypeId, val.deviceSubCategory);
+            getVendorListUpdate(val.vendorId)
+          }
+
           $(".loader_body").hide();
         },
         error: function (error) {
@@ -946,6 +1045,25 @@
     });
   }
 
+  function getVendorListUpdate() {
+    $('#u_vendor_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/vendor-list",
+      success: function (data) {
+        $('#u_vendor_name').append('<option>Please Select</option>')
+        data.data.forEach(element => {
+          $('#u_vendor_name').append('<option value="' + element.id + '/' + element.name + '">' + element.name + '</option>');
+        });
+        $(".u_vendor_name").hide();
+      },
+      error: function (error) {
+        console.log(error);
+        $(".loader_body").hide();
+      }
+    });
+  }
+
   function getVendorDetails(value) {
     console.log("getVendorDetails::"+ value);
     $('#d_vendor_name').html("");
@@ -966,11 +1084,35 @@
     });
   }
 
+  function getVendorListUpdate(value) {
+    console.log("getVendorDetails::"+ value);
+    $('#u_vendor_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/vendor-list",
+      success: function (data) {
+        $('#u_vendor_name').append('<option>Please Select</option>')
+        data.data.forEach(element => {
+          $('#u_vendor_name').append('<option value="' + element.id + '/' + element.name + '" ' + ((value === element.id) ? 'selected' : '') + '>' + element.name + '</option>');
+        });
+        $(".loader_body").hide();
+      },
+      error: function (error) {
+        console.log(error);
+        $(".loader_body").hide();
+      }
+    });
+  }
+
   $("#category_name").on('change', function (){
     $(".loader_body").show();
     let productTypeId = $("#category_name").val().split("/")[0];
     getSubProductList(productTypeId);
     getVendorList();
+  })
+
+  $("#u_category_name").on('change', function (){
+    $(".loader_body").show();
   })
 
   function getSubProductList(id) {
@@ -982,6 +1124,25 @@
         $('#category_sub_name').append('<option>Please Select</option>')
         data.data.forEach(element => {
           $('#category_sub_name').append('<option value="' + element.id + '/' + element.name + '">' + element.name + '</option>');
+        });
+        $(".loader_body").hide();
+      },
+      error: function (error) {
+        console.log(error);
+        $(".loader_body").hide();
+      }
+    });
+  }
+
+  function getSubProductListUpdate(id, value) {
+    $('#u_category_sub_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/lov-data-child?parent_id="+id,
+      success: function (data) {
+        $('#u_category_sub_name').append('<option>Please Select</option>')
+        data.data.forEach(element => {
+          $('#u_category_sub_name').append('<option value="' + element.id + '/' + element.name + '"' + ((value === element.name) ? 'selected' : '') + '>' + element.name + '</option>');
         });
         $(".loader_body").hide();
       },
