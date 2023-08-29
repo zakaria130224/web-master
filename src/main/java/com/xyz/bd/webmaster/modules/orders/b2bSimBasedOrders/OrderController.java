@@ -336,6 +336,20 @@ public class OrderController {
 
     }
 
+    @RequestMapping(value = "/b2b-device-only", method = RequestMethod.GET)
+    public ModelAndView showOrderListPageDevice(Model model) {
+
+     //   List<OrderModelEntity> orders = orderService.getAllOrder();
+
+
+        model.addAttribute("title", "Order List Device");
+        model.addAttribute("menu", "Order List Deice");
+     //   model.addAttribute("orders", orders);
+
+        return new ModelAndView("orders/b2b-device-only");
+
+    }
+
 
 
 

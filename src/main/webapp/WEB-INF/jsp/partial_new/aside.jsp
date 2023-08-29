@@ -309,7 +309,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="${pageContext.request.contextPath}/orders/b2b" class="nav-link">
+                            <a href="${pageContext.request.contextPath}/orders/b2b-device-only" class="nav-link">
                                 <i class="fa fa-circle nav-icon"></i>
                                 <p>B2B Device only</p>
                             </a>

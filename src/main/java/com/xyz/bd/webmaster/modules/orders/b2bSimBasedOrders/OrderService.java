@@ -4,12 +4,13 @@ import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
 import com.xyz.bd.webmaster.utility.CommonRestResponse;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-
+@Service
 public interface OrderService {
     //DataTablesOutput<OrderModelEntity> findAllOrderList();
     List<OrderModelEntity> getAllOrder();

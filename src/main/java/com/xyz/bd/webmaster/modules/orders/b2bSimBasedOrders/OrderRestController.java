@@ -1,6 +1,8 @@
 package com.xyz.bd.webmaster.modules.orders.b2bSimBasedOrders;
 
+
 import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
+import com.xyz.bd.webmaster.modules.orders.b2bDeviceOnly.B2bDeviceServices;
 import com.xyz.bd.webmaster.utility.CommonRestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
@@ -19,6 +21,9 @@ public class OrderRestController {
     @Autowired
     OrderService orderService;
 
+    @Autowired
+    B2bDeviceServices deviceServices;
+
 
     @RequestMapping(value = "/listB2bSimDT", method = RequestMethod.GET)
     public DataTablesOutput<OrderModelEntity> getB2bSimOrdersDT(@Valid DataTablesInput input, HttpServletRequest request, @RequestParam(value = "customQuery",required = false) String customQuery) {
@@ -30,5 +35,10 @@ public class OrderRestController {
                                                     @RequestParam("orderStatusData") String orderStatusData, @RequestParam("id") Long id) {
         return orderService.updateOrderStatus(request, orderStatusData, id);
 
+    }
+
+    @RequestMapping(value = "/listB2bDeviceDT", method = RequestMethod.GET)
+    public DataTablesOutput<OrderModelEntity> getB2bDeviceOrdersDT(@Valid DataTablesInput input, HttpServletRequest request, @RequestParam(value = "customQuery",required = false) String customQuery) {
+        return deviceServices.findAllB2bDeviceOrderList(request, customQuery, input);
     }
 }
