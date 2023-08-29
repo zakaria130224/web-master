@@ -479,6 +479,7 @@
   var base_url = $("#domain_url").val() + "/";
   let dataTable;
   let productData = [];
+  let userCustomSearchModel = "";
   $( document ).ready(function() {
     $(".select2").select2();
     //Date range as a button
@@ -573,9 +574,18 @@
         $(".loader_body").hide();
       }
     });*/
+
+    dataTable.destroy();
+    /*let customSearch = {
+      order_type: "gpc_sim"
+    };*/
+    let customSearch = null;
+    userCustomSearchModel = JSON.stringify(customSearch)
+    console.log("srCustomSearchModel::"+userCustomSearchModel);
+    initOrderTable(userCustomSearchModel);
   }
 
-  function initOrderTable(searchText , searchCol_) {
+  function initOrderTable(searchQuery) {
     "use strict";
     if ($.fn.dataTable.isDataTable('#dataTable')) {
       $('#dataTable').DataTable().clear();
@@ -592,10 +602,9 @@
       order: [[0, 'desc']],
       ajax: {
         url: base_url + "api/web/orders/b2c-gpc/listDT",
-        data: function (d) {
-          d.searchText = searchText;
-          d.searchCol = searchCol_;
-        }
+        /*data: function (d) {
+          d.customQuery = searchQuery;
+        }*/
       },
       select:true,
       columns: [
