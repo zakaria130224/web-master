@@ -121,9 +121,9 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             }
 
             if(productsModel.getHasSim().equals(true)){
-                orderModelEntity.setOrderType("gpc-sim");
+                orderModelEntity.setOrderType("gpc_sim");
             } else{
-                orderModelEntity.setOrderType("gpc-simless");
+                orderModelEntity.setOrderType("gpc_simless");
             }
 
             orderModelEntity.setCustomerName(order.getCustomerName());
@@ -176,7 +176,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
             orderRepository.save(orderModelEntity);
             if(orderModelEntity.getId() != null){
-                sendMailAndSms(orderModelEntity);
+                statusCheck(orderModelEntity);
             }
             commonRestResponse.setData(orderModelEntity.getId());
             commonRestResponse.setCode(200);
@@ -316,7 +316,8 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
     public boolean inventoryManage(Integer quantity, Long productId){
         try {
             ProductsModel productsModel = productRepository.getById(productId);
-            productsModel.setQuantity(productsModel.getQuantity() - quantity);
+            Integer newQuantity = productsModel.getQuantity() - quantity;
+            productsModel.setQuantity(newQuantity);
             productRepository.save(productsModel);
             return true;
         } catch(Exception ex){

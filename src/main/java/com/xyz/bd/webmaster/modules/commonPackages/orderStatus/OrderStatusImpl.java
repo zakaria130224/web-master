@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,11 +20,54 @@ public class OrderStatusImpl implements OrderStatus{
     }
 
     @Override
-    public List<OrderStatusModel> getNextStatusList(Long id) {
+    public List<OrderStatusModel> getNextStatusList(Long id, String columnName) {
         OrderStatusModel orderByName = orderStatusRepository.getByIdGpcSim(id.intValue());
         Integer nextId = orderByName.getGpc_sim()+1;
+        List<OrderStatusModel> result = new ArrayList<OrderStatusModel>();
         try {
-            List<OrderStatusModel> result = orderStatusRepository.findNextStatus(nextId);
+            if(columnName.equals("gpc_sim")){
+                if(id<7){
+                    result = orderStatusRepository.findNextStatus(nextId);
+                } else{
+                    result = null;
+                }
+                return result;
+            } else if (columnName.equals("gpc_simless")) {
+                if(id<5){
+                    result = orderStatusRepository.findNextStatusSimLess(nextId);
+                } else{
+                    result = null;
+                }
+                return result;
+            } else if (columnName.equals("gpshop_sim")) {
+                if(id<8){
+                    result = orderStatusRepository.findNextStatusGpShopSim(nextId);
+                } else{
+                    result = null;
+                }
+                return result;
+            } else if (columnName.equals("gpshop_simless")) {
+                if(id<5){
+                    result = orderStatusRepository.findNextStatusGpShopSimLess(nextId);
+                } else{
+                    result = null;
+                }
+                return result;
+            } else if (columnName.equals("b2b_sim")) {
+                if(id<8){
+                    result = orderStatusRepository.findNextStatusB2bSim(nextId);
+                } else{
+                    result = null;
+                }
+                return result;
+            } else if (columnName.equals("b2b_simless")) {
+                if(id<5){
+                    result = orderStatusRepository.findNextStatusB2bSimLess(nextId);
+                } else{
+                    result = null;
+                }
+                return result;
+            }
             return result;
         } catch (DataAccessException e) {
             return null;

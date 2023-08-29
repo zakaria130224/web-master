@@ -173,6 +173,7 @@
                           <th>VTS Sim</th>
                           <th>SIM KIT</th>
                           <th>Pack/Service</th>
+                          <th>Type</th>
                           <th>Vendor</th>
                           <th>Status</th>
                           <th>Product</th>
@@ -506,6 +507,8 @@
 
   $('#product_name').on('change', function() {
     let productId = $('#product_name').val().split("/")[0];
+    let productSimStatus = $('#product_name').val().split("/")[2];
+
     if (productId != 'Please select product'){
       $('#vendor_name').html('');
       $('#product_type').html('');
@@ -514,7 +517,7 @@
 
       getVendorListUpdate($('#product_name').val().split("/")[1])
 
-      if(product.has_sim === true){
+      if(productSimStatus === "true"){
         $('#product_type').append('<option value="1">SIM Based</option>');
         $('#vts_sim_block').show();
         $('#vts_sim').attr("required", true);
@@ -557,8 +560,9 @@
 
   function getOrderData() {
     $(".loader_body").show();
+    initOrderTable("gpc_sim" , "orderType")
 
-    $.ajax({
+    /*$.ajax({
       type: 'get',
       url: base_url + "api/web/orders/b2c-gpc/listDT",
       success: function (data) {
@@ -568,10 +572,10 @@
       error: function (error) {
         $(".loader_body").hide();
       }
-    });
+    });*/
   }
 
-  function initOrderTable(data) {
+  function initOrderTable(searchText , searchCol_) {
     "use strict";
     if ($.fn.dataTable.isDataTable('#dataTable')) {
       $('#dataTable').DataTable().clear();
@@ -585,8 +589,14 @@
       info: true,
       autoWidth: false,
       //responsive: true,
-      data: data,
       order: [[0, 'desc']],
+      ajax: {
+        url: base_url + "api/web/orders/b2c-gpc/listDT",
+        data: function (d) {
+          d.searchText = searchText;
+          d.searchCol = searchCol_;
+        }
+      },
       select:true,
       columns: [
         {data: 'id'},
@@ -594,6 +604,7 @@
         {data: 'vtsSimNo'},
         {data: 'simKit'},
         {data: 'productType'},
+        {data: 'orderType'},
         {data: 'productName',},
         {data: 'statusName',
           autowidth: true,
@@ -609,11 +620,11 @@
             } else if(data == "Finalization"){
               return '<button class="btn btn-b2b-sm btn-primary btn-sm btn-disabled">Finalization</button>';
             }else if(data == "Onboarded"){
-              return '<button class="btn btn-b2b-sm btn-dark btn-sm btn-disabled">Onboarded</button>';
+              return '<button class="btn btn-b2b-sm btn-dark btn-sm btn-disabled" disabled>Onboarded</button>';
             }else if(data == "First Contact"){
               return '<button class="btn btn-b2b-sm btn-warning btn-sm btn-disabled">First Contact</button>';
             }else if(data == "Cancelled"){
-              return '<button class="btn btn-b2b-sm btn-danger btn-sm btn-disabled">Cancelled</button>';
+              return '<button class="btn btn-b2b-sm btn-danger btn-sm btn-disabled" dis>Cancelled</button>';
             } else if(data == "Pack Activation"){
               return '<button class="btn btn-b2b-sm btn-success btn-sm btn-disabled">Pack Activation</button>';
             } else{
@@ -630,14 +641,19 @@
           }
         },
         {
-          data: 'id',
+          data: 'statusName',
           render: function (data, type, full, row){
-            return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status">Change Status</button>';
+            if(data === "Cancelled" || data === "Onboarded"){
+              return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status" disabled>Change Status</button>';
+            } else{
+              return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status" >Change Status</button>';
+            }
+
           }
         }
       ]
     });
-
+    $(".loader_body").hide();
   }
 
   $('#dataTable tbody').on( 'click', 'tr', function (evt) {
@@ -733,7 +749,8 @@
     $("#current_status").val(data.status).change();
     $("#row_id").val(data.id);
     $("#changeStatus").modal("show");
-    getStatusAll(data.statusName, data.statusNameId);
+    console.log(data.statusName + "-" +data.statusNameId + "-" +data.orderType);
+    getStatusB2c(data.statusName, data.statusNameId, data.orderType);
   } );
 
   $('#dataTable tbody').on( 'click', 'button.btn-b2b-sm-download', function () {
@@ -741,7 +758,7 @@
     alert( data[0] +"'Download: "+ data[ 5 ] );
   } );
 
-  function getStatusAll(statusName, statusNameId) {
+  /*function getStatusB2c(statusName, statusNameId) {
     $(".loader_body").show();
     //  $('#product_name').html("");
     $.ajax({
@@ -766,9 +783,9 @@
         console.log(error);
       }
     });
-  }
+  }*/
 
-  function getStatusNext() {
+  /*function getStatusNext() {
     $('#updated_status').html("");
     $(".loader_body").hide();
     $.ajax({
@@ -785,7 +802,7 @@
         console.log(error);
       }
     });
-  }
+  }*/
 
 
   function updateStatus(){
@@ -843,7 +860,7 @@
       success: function (data) {
         $('#product_name').append('<option>Please Select</option>')
         data.data.forEach(element => {
-          $('#product_name').append('<option value="' + element.id + "/" + element.vendorId +'">' + element.productName + '</option>');
+          $('#product_name').append('<option value="' + element.id + "/" + element.vendorId +"/" + element.hasSim +'">' + element.productName + '</option>');
         });
         productData = data.data;
         getVendorDetails($('#product_name').val().split("/")[1])
@@ -873,55 +890,61 @@
         $(".loader_body").hide();
       }
     });
+  }
 
-
-
-    function getStatusAll(statusName, statusNameId) {
-      $(".loader_body").show();
-      $('#product_name').html("");
-      $.ajax({
-        type: 'get',
-        url: base_url + "api/web/utility/order-status-list",
-        success: function (data) {
+  function getStatusB2c(statusName, statusNameId, orderType) {
+    $(".loader_body").show();
+    $('#current_status').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/order-status-list",
+      success: function (data) {
+        if(orderType === "gpc_sim"){
+          console.log("gpc_sim");
           data.data.forEach(element => {
             $('#current_status').append('<option value="' + element.gpc_sim + '">' + element.order_name + '</option>');
           });
-
-          $('#current_status option:contains(' + statusName + ')').each(function () {
-            if ($(this).text() === statusName) {
-              $(this).attr('selected', 'selected');
-              getStatusNext(statusName)
-              return false;
-            }
-            return true;
-          });
-          productData = data.data;
-        },
-        error: function (error) {
-          console.log(error);
-        }
-      });
-    }
-
-
-    function getStatusNext(statusName) {
-      $('#updated_status').html("");
-      $(".loader_body").hide();
-      $.ajax({
-        type: 'post',
-        data: {id: $('#current_status').val()},
-        url: base_url + "api/web/utility/next-order-status",
-        success: function (data) {
+        } else if(orderType === "gpc_simless"){
+          console.log("gpc_simless");
           data.data.forEach(element => {
-            $('#updated_status').append('<option value="' + element.gpc_sim + "/" + element.order_name + '">' + element.order_name + '</option>');
+            $('#current_status').append('<option value="' + element.gpc_simless + '">' + element.order_name + '</option>');
           });
-          $('#updated_status').append('<option value="100/Cancelled">Cancelled</option>')
-        },
-        error: function (error) {
-          console.log(error);
         }
-      });
-    }
+
+        $('#current_status option:contains(' + statusName + ')').each(function () {
+          if ($(this).text() === statusName) {
+            $(this).attr('selected', 'selected');
+            getStatusNext(statusName, orderType)
+            return false;
+          }
+          return true;
+        });
+        productData = data.data;
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+
+  function getStatusNext(statusName, orderType) {
+    $('#updated_status').html("");
+    $(".loader_body").hide();
+    $.ajax({
+      type: 'post',
+      data: {id: $('#current_status').val(), columnName: orderType},
+      url: base_url + "api/web/utility/next-order-status",
+      success: function (data) {
+        data.data.forEach(element => {
+          $('#updated_status').append('<option value="' + element.gpc_sim + "/" + element.order_name + '">' + element.order_name + '</option>');
+        });
+        $('#updated_status').append('<option value="100/Cancelled">Cancelled</option>')
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
   }
 
 </script>

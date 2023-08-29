@@ -16,6 +16,21 @@ public interface OrderStatusRepository extends JpaRepository<OrderStatusModel, L
     @Query("SELECT u FROM OrderStatusModel u WHERE u.gpc_sim = :id")
     List<OrderStatusModel> findNextStatus(@Param("id") Integer id);
 
+    @Query("SELECT u FROM OrderStatusModel u WHERE u.gpc_simless = :id")
+    List<OrderStatusModel> findNextStatusSimLess(@Param("id") Integer id);
+
+    @Query("SELECT u FROM OrderStatusModel u WHERE u.gpshop_sim = :id")
+    List<OrderStatusModel> findNextStatusGpShopSim(@Param("id") Integer id);
+
+    @Query("SELECT u FROM OrderStatusModel u WHERE u.gpshop_simless = :id")
+    List<OrderStatusModel> findNextStatusGpShopSimLess(@Param("id") Integer id);
+
+    @Query("SELECT u FROM OrderStatusModel u WHERE u.b2b_sim = :id")
+    List<OrderStatusModel> findNextStatusB2bSim(@Param("id") Integer id);
+
+    @Query("SELECT u FROM OrderStatusModel u WHERE u.b2b_simless = :id")
+    List<OrderStatusModel> findNextStatusB2bSimLess(@Param("id") Integer id);
+
     @Query("SELECT u FROM OrderStatusModel u WHERE u.b2b_sim = :id")
     List<OrderStatusModel> findNextStatusB2BSim(@Param("id") Integer id);
 

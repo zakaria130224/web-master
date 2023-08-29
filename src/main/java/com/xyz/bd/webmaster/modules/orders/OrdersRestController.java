@@ -21,7 +21,7 @@ public class OrdersRestController {
     B2cGpcServices b2cGpcServices;
 
     @RequestMapping(value = "/listDT", method = RequestMethod.GET)
-    public DataTablesOutput<OrderModelEntity> getB2cGpcOrdersDT(@Valid DataTablesInput input, HttpServletRequest request, @RequestParam(value = "customQuery",required = false) String customQuery) {
+    public DataTablesOutput<OrderModelEntity> getB2cGpcOrdersDT(@Valid DataTablesInput input, HttpServletRequest request, @RequestParam(value = "customQuery", required = false) String customQuery) {
         return b2cGpcServices.findAllB2cOrdersList(request, customQuery, input);
     }
 
