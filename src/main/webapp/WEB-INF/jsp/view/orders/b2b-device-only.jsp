@@ -1025,7 +1025,7 @@
             formData.append("excelFile", $("#upload_file")[0].files[0]);
 
             $.ajax({
-                url: base_url + "orders/save-data",
+                url: base_url + "orders/save-data-device",
                 type: "POST",
                 data: formData,
                 contentType: false,

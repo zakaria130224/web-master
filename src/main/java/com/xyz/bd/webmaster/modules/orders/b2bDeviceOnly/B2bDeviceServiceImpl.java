@@ -1,10 +1,13 @@
 package com.xyz.bd.webmaster.modules.orders.b2bDeviceOnly;
 
+import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyRepository;
+import com.xyz.bd.webmaster.modules.commonPackages.models.VendorModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.trackerDevice.TrackerDeviceService;
 import com.xyz.bd.webmaster.modules.commonPackages.user.UserService;
 import com.xyz.bd.webmaster.modules.inventory.ProductRepository;
 import com.xyz.bd.webmaster.modules.inventory.ProductService;
+import com.xyz.bd.webmaster.modules.inventory.ProductsModel;
 import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
 import com.xyz.bd.webmaster.modules.orders.OrderRepository;
 import com.xyz.bd.webmaster.repositories.CommonRepository;
@@ -12,13 +15,23 @@ import com.xyz.bd.webmaster.services.CommonServices.EmailSenderService;
 import com.xyz.bd.webmaster.services.CommonServices.SendSMSService;
 import com.xyz.bd.webmaster.utility.Utility;
 import com.xyz.bd.webmaster.utility.dataTable.QueryBuilderService;
+import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -77,6 +90,103 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
         tableData.setDraw(input.getDraw());
 
         return tableData;
+    }
+
+    @Override
+    @Transactional
+    public void saveData(String chtticket, MultipartFile excelFile) {
+        try {
+            //save excel
+            String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+
+            // Define the upload directory
+            String uploadDirectory = "./upload";
+
+            // Generate the filename using the timestamp and original filename
+            String filename = timestamp + "_" + excelFile.getOriginalFilename();
+
+            // Create the path for the file
+            Path filePath = Paths.get(uploadDirectory, filename);
+
+            // Save the uploaded Excel file to the specified path
+            Files.copy(excelFile.getInputStream(), filePath);
+            //save excel
+
+            byte[] excelBytes = excelFile.getBytes();
+            InputStream inputStream = new ByteArrayInputStream(excelBytes);
+
+            Workbook workbook = WorkbookFactory.create(inputStream);
+            Sheet sheet = workbook.getSheetAt(0);
+            DataFormatter dataFormatter = new DataFormatter();
+
+
+            // Skip the first row (header row) by starting the loop from index 1
+            for (int rowIndex = 1; rowIndex < sheet.getPhysicalNumberOfRows(); rowIndex++) {
+                Row row = sheet.getRow(rowIndex);
+                String quantityCellValue = dataFormatter.formatCellValue(row.getCell(2));
+                int productQuantity = 0;
+                productQuantity = Integer.parseInt(quantityCellValue);
+                for (int i = 0; i < productQuantity; i++) {
+                String bsCode = dataFormatter.formatCellValue(row.getCell(0));
+                String companyName = dataFormatter.formatCellValue(row.getCell(1));
+                String kcpName = dataFormatter.formatCellValue(row.getCell(6));
+                String kcpContact = dataFormatter.formatCellValue(row.getCell(7));
+                String kcpEmail = dataFormatter.formatCellValue(row.getCell(8));
+                String supportPartner = dataFormatter.formatCellValue(row.getCell(9));
+                String productType = dataFormatter.formatCellValue(row.getCell(10));
+
+                VendorModelEntity vendor = productService.findVendorByProductName(productType);
+
+                if (vendor != null) {
+                    System.out.println("Vendor Name: " + vendor.getName());
+                    System.out.println("Vendor Email: " + vendor.getEmail());
+
+                    // Perform any actions with the vendor details here
+                }
+
+                System.out.println(bsCode);
+                System.out.println(companyName);
+
+//                CompanyModelEntity existingCompany = companyRepository.findByCompanyNameAndBsCode(companyName, bsCode);
+//
+//                if (existingCompany == null) {
+//                    // Create a new company entry in tbl_company
+//                    CompanyModelEntity newCompany = new CompanyModelEntity();
+//                    newCompany.setCompanyName(companyName);
+//                    newCompany.setBsCode(bsCode);
+//                    // ... (set other properties)
+//                    companyRepository.save(newCompany);
+//                }
+
+                ProductsModel products = productService.getAllProductDataByProductName(productType);
+
+                OrderModelEntity orderModelEntity = new OrderModelEntity();
+                orderModelEntity.setChtTicketId(chtticket);
+                orderModelEntity.setBsCode(bsCode);
+                orderModelEntity.setCompanyName(companyName);
+                orderModelEntity.setKcpName(kcpName);
+                orderModelEntity.setKcpContactNumber(kcpContact);
+                orderModelEntity.setKcpEmail(kcpEmail);
+                orderModelEntity.setSupportPartnerName(supportPartner);
+                orderModelEntity.setProductType(productType);
+                orderModelEntity.setStatusName("New Order");
+                orderModelEntity.setOrderType("b2b_device");
+             //   orderModelEntity.setCompanyId(existingCompany.getId());
+                orderModelEntity.setVendorName(vendor.getName());
+                orderModelEntity.setVendorEmail(vendor.getEmail());
+                orderModelEntity.setVendorId(vendor.getId());
+                orderModelEntity.setDeviceCategory(products.getDeviceCategory());
+                orderModelEntity.setDeviceSubCategory(products.getDeviceSubCategory());
+
+
+                orderRepository.save(orderModelEntity);
+            }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            // Handle exceptions
+        }
     }
 
 

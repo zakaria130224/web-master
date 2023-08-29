@@ -5,6 +5,7 @@ import com.xyz.bd.webmaster.modules.commonPackages.trackerDevice.TrackerDeviceSe
 import com.xyz.bd.webmaster.modules.commonPackages.user.UserModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.user.UserService;
 import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
+import com.xyz.bd.webmaster.modules.orders.b2bDeviceOnly.B2bDeviceServices;
 import com.xyz.bd.webmaster.services.CommonServices.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,9 @@ public class OrderController {
 
    @Autowired
     TrackerDeviceService trackerDeviceService;
+
+    @Autowired
+    private B2bDeviceServices deviceServices;
 
     @RequestMapping(value = "/b2b-sim-based", method = RequestMethod.GET)
     public ModelAndView showOrderListPage(Model model) {
@@ -350,7 +354,13 @@ public class OrderController {
 
     }
 
-
+    @PostMapping("/save-data-device")
+    @ResponseBody
+    public String saveDataDevice(@RequestParam("chtticket") String chtticket,
+                           @RequestParam("excelFile") MultipartFile excelFile) {
+        deviceServices.saveData(chtticket, excelFile);
+        return "Data saved successfully!";
+    }
 
 
 }
