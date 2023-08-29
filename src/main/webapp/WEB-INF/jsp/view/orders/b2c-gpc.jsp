@@ -750,7 +750,7 @@
             }else if(data == "First Contact"){
               return '<button class="btn btn-b2b-sm btn-warning btn-sm btn-disabled">First Contact</button>';
             }else if(data == "Cancelled"){
-              return '<button class="btn btn-b2b-sm btn-danger btn-sm btn-disabled" dis>Cancelled</button>';
+              return '<button class="btn btn-b2b-sm btn-danger btn-sm btn-disabled" disabled>Cancelled</button>';
             } else if(data == "Pack Activation"){
               return '<button class="btn btn-b2b-sm btn-success btn-sm btn-disabled">Pack Activation</button>';
             } else{
