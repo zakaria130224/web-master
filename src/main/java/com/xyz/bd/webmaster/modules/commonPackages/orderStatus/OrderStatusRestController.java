@@ -25,9 +25,9 @@ public class OrderStatusRestController {
     }
 
     @PostMapping("/next-order-status")
-    public CommonRestResponse getNextOrderList(HttpServletRequest request, @RequestParam("id") Long id) {
+    public CommonRestResponse getNextOrderList(HttpServletRequest request, @RequestParam("id") Long id, @RequestParam("columnName") String columnName) {
         CommonRestResponse commonRestResponse = new CommonRestResponse();
-        commonRestResponse.setData(orderStatus.getNextStatusList(id));
+        commonRestResponse.setData(orderStatus.getNextStatusList(id, columnName));
         return commonRestResponse;
     }
 

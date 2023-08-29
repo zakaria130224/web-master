@@ -8,7 +8,7 @@ import java.util.List;
 public interface OrderStatus {
     public List<OrderStatusModel> getStatusList();
 
-    List<OrderStatusModel> getNextStatusList(Long id);
+    List<OrderStatusModel> getNextStatusList(Long id, String columnName);
 
     List<OrderStatusModel> getNextStatusListB2BSim(Long id);
 
