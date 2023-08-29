@@ -22,7 +22,19 @@ public class CustomQueryUtil {
 
     public static DataTypeEnum getDataTypeEnum(String fieldName, Class<?> className) throws NoSuchFieldException {
         try {
-            return DataTypeEnum.valueOf(className.getDeclaredField(fieldName).getType().getSimpleName().toUpperCase());
+            switch (fieldName){
+                case "id":
+                    return DataTypeEnum.LONG;
+                case "createdAt":
+                case "updatedAt":
+                    return DataTypeEnum.TIMESTAMP;
+                case "createdBy":
+                case "updatedBy":
+                    return DataTypeEnum.STRING;
+                default:
+                    return DataTypeEnum.valueOf(className.getDeclaredField(fieldName).getType().getSimpleName());
+            }
+
         } catch (IllegalArgumentException e) {
             return DataTypeEnum.STRING;
         } catch (NoSuchFieldException e) {
@@ -58,7 +70,7 @@ public class CustomQueryUtil {
             }
             case TIMESTAMP: {
                 String[] strings = parseDate(fieldValue);
-                return QUERY_AND_KEYWORD + fieldName+" BETWEEN TO_TIMESTAMP('"+strings[0]+"','mm-dd-yyyy') AND TO_TIMESTAMP('"+strings[1]+"','mm-dd-yyyy')+1";
+                return QUERY_AND_KEYWORD + fieldName+" >= '"+strings[0]+"' AND "+ fieldName + " <= DATE_ADD( '" +strings[1]+"' ,INTERVAL 1 DAY)";
             }
             default:
                 return "";
