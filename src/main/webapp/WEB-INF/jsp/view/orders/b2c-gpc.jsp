@@ -173,6 +173,7 @@
                           <th>VTS Sim</th>
                           <th>SIM KIT</th>
                           <th>Pack/Service</th>
+                          <th>Type</th>
                           <th>Vendor</th>
                           <th>Status</th>
                           <th>Product</th>
@@ -559,8 +560,9 @@
 
   function getOrderData() {
     $(".loader_body").show();
+    initOrderTable("gpc_sim" , "orderType")
 
-    $.ajax({
+    /*$.ajax({
       type: 'get',
       url: base_url + "api/web/orders/b2c-gpc/listDT",
       success: function (data) {
@@ -570,10 +572,10 @@
       error: function (error) {
         $(".loader_body").hide();
       }
-    });
+    });*/
   }
 
-  function initOrderTable(data) {
+  function initOrderTable(searchText , searchCol_) {
     "use strict";
     if ($.fn.dataTable.isDataTable('#dataTable')) {
       $('#dataTable').DataTable().clear();
@@ -587,8 +589,14 @@
       info: true,
       autoWidth: false,
       //responsive: true,
-      data: data,
       order: [[0, 'desc']],
+      ajax: {
+        url: base_url + "api/web/orders/b2c-gpc/listDT",
+        data: function (d) {
+          d.searchText = searchText;
+          d.searchCol = searchCol_;
+        }
+      },
       select:true,
       columns: [
         {data: 'id'},
@@ -596,6 +604,7 @@
         {data: 'vtsSimNo'},
         {data: 'simKit'},
         {data: 'productType'},
+        {data: 'orderType'},
         {data: 'productName',},
         {data: 'statusName',
           autowidth: true,
@@ -644,7 +653,7 @@
         }
       ]
     });
-
+    $(".loader_body").hide();
   }
 
   $('#dataTable tbody').on( 'click', 'tr', function (evt) {
