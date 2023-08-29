@@ -185,10 +185,10 @@
                     </div>
 
                     <div class="form-group float-left mr-2">
-                      <button class="btn-b2b-sm-base" onclick="getOrderData()">Search</button>
+                      <button class="btn-b2b-sm-base" onclick="getCustomOrderData()">Search</button>
                     </div>
                     <div class="form-group float-left mr-2">
-                      <button class="btn-b2b-sm-base" onclick="resetData()">Reset</button>
+                      <button class="btn-b2b-sm-base" onclick="getOrderData()">Reset</button>
                     </div>
                   </div>
 
@@ -552,7 +552,61 @@
     });
 
     getOrderData();
+    getProductListSearch();
+    getVendorListSearch();
+    getStatusListSearch()
   });
+
+  function getProductListSearch() {
+    $('#product_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/product-list",
+      success: function (data) {
+        $('#search_product_input').append('<option value="">Product</option>')
+        data.data.forEach(element => {
+          $('#search_product_input').append('<option value="' + element.id +'">' + element.productName + '</option>');
+        });
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  function getVendorListSearch() {
+    $('#product_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/vendor-list",
+      success: function (data) {
+        $('#search_vendor_input').append('<option value="">Vendor</option>')
+        data.data.forEach(element => {
+          $('#search_vendor_input').append('<option value="' + element.id +'">' + element.name + '</option>');
+        });
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  function getStatusListSearch() {
+    $('#product_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/order-status-list",
+      success: function (data) {
+        $('#search_status_input').append('<option value="">Status</option>')
+        data.data.forEach(element => {
+          $('#search_status_input').append('<option value="' + element.id +'">' + element.order_name + '</option>');
+        });
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
 
 
   $('#product_name').on('change', function() {
@@ -608,12 +662,35 @@
     $("#newOrderEntry").modal("show");
   }
 
-  function getOrderData() {
+  function getCustomOrderData() {
     $(".loader_body").show();
     initOrderTable("gpc_sim" , "orderType")
     dataTable.destroy();
     let customSearch = {
+
+      product_id: $("#search_product_input option:selected").val() == "" ? "" : $("#search_product_input option:selected").val(),
+      vendor_id: $("#search_vendor_input option:selected").val() == "" ? "" : $("#search_vendor_input option:selected").val(),
+      status_name_id: $("#search_status_input option:selected").val() == "" ? "" : $("#search_status_input option:selected").val(),
       created_at: $("#date_range").val(),
+      order_type: {
+        operator: "like",
+        value: $("#order_type").val()
+      }
+    };
+    //let customSearch = null;
+    userCustomSearchModel = JSON.stringify(customSearch)
+    console.log("srCustomSearchModel::"+userCustomSearchModel);
+    initOrderTable(userCustomSearchModel);
+  }
+
+  function getOrderData() {
+    $(".loader_body").show();
+    $('#search_product_input').val("").trigger('change');
+    $('#search_vendor_input').val("").trigger('change');
+    $('#search_status_input').val("").trigger('change');
+    initOrderTable("gpc_sim" , "orderType")
+    dataTable.destroy();
+    let customSearch = {
       order_type: {
         operator: "like",
         value: $("#order_type").val()
