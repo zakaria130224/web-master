@@ -390,7 +390,7 @@ public class OrderServiceImpl implements OrderService{
             }
            else if ("Scheduled".equals(status_name)){
                 orderModelEntity.setScheduledNote(updateStatus.getScheduledNote());
-              orderModelEntity.setScheduledAppointedDt(Helper.getCurrentDate());
+              //orderModelEntity.setScheduledAppointedDt(Helper.getCurrentDate());
               orderModelEntity.setScheduledBy(SessionManager.getUserLoginName(request));
             }
           else if ("Onboarded".equals(status_name)){

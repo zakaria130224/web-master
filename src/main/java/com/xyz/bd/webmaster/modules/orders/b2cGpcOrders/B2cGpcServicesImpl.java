@@ -1,12 +1,15 @@
 package com.xyz.bd.webmaster.modules.orders.b2cGpcOrders;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.xyz.bd.webmaster.config.session.SessionManager;
 import com.xyz.bd.webmaster.models.UserManagement.Entities.AppUser;
 import com.xyz.bd.webmaster.models.common.DTOs.SMS;
 import com.xyz.bd.webmaster.modules.actionLogs.ActionLogService;
 import com.xyz.bd.webmaster.modules.actionLogs.ActionLogsModel;
+import com.xyz.bd.webmaster.modules.commonPackages.trackerDevice.TrackerDeviceModelEntity;
+import com.xyz.bd.webmaster.modules.commonPackages.trackerDevice.TrackerDeviceRepository;
 import com.xyz.bd.webmaster.modules.inventory.ProductRepository;
 import com.xyz.bd.webmaster.modules.inventory.ProductService;
 import com.xyz.bd.webmaster.modules.inventory.ProductsModel;
@@ -34,6 +37,7 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -69,6 +73,9 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    TrackerDeviceRepository trackerDeviceRepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(B2cGpcServices.class);
 
@@ -159,6 +166,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
             //appUserService.saveNewUserNew(newMdUserModel);
 
+
             actionLogsModel.setAction_type_name(Utility.create_order_gps);
             actionLogsModel.setAction_type_id(1L);
             actionLogsModel.setEvent_date(Helper.getCurrentDate());
@@ -201,13 +209,79 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             OrderModelEntity updateStatus = new Gson().fromJson(orderStatusData, new TypeToken<OrderModelEntity>() {
             }.getType());
 
+
+
             OrderModelEntity orderModelEntity = orderRepository.getById(id);
+            TrackerDeviceModelEntity trackerDeviceModelEntity = new TrackerDeviceModelEntity();
 
             orderModelEntity.setStatusName(updateStatus.getStatusName());
             orderModelEntity.setStatusNameId(updateStatus.getStatusNameId());
 
+            switch(updateStatus.getStatusName()){
+                case "First Contact" :
+                    //Date scheduledDate = new Date(updateStatus.getScheduledAppointedDt().getTime());
+                    orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
+                    orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));
+                    orderModelEntity.setFirstContactNote(updateStatus.getScheduledNote());
+                    //orderModelEntity.setScheduledAppointedDt(scheduledDate);
+                    break;
+
+                case "Scheduled" :
+                    orderModelEntity.setScheduledDt(Helper.getCurrentDate());
+                    orderModelEntity.setScheduledBy(SessionManager.getUserLoginName(request));
+                    orderModelEntity.setScheduledNote(updateStatus.getScheduledNote());
+                    break;
+                case "Sim Activation" :
+                    orderModelEntity.setSimActivationDt(Helper.getCurrentDate());
+                    orderModelEntity.setSimActivationBy(SessionManager.getUserLoginName(request));
+                    orderModelEntity.setSimActivationNote(updateStatus.getScheduledNote());
+                    break;
+                case "Installation" :
+                    orderModelEntity.setInstallationDt(Helper.getCurrentDate());
+                    orderModelEntity.setInstallationBy(SessionManager.getUserLoginName(request));
+                    orderModelEntity.setInstallationNote(updateStatus.getScheduledNote());
+
+                    orderModelEntity.setImei(updateStatus.getImei());
+                    orderModelEntity.setDeviceName(updateStatus.getDeviceName());
+
+
+
+                    break;
+                case "Onboarded" :
+                    orderModelEntity.setOnboardedDt(Helper.getCurrentDate());
+                    orderModelEntity.setCancelledBy(SessionManager.getUserLoginName(request));
+                    orderModelEntity.setCancelledNote(updateStatus.getScheduledNote());
+                    break;
+                case "Cancelled" :
+                    orderModelEntity.setCancelledDt(Helper.getCurrentDate());
+                    orderModelEntity.setOnboardedBy(SessionManager.getUserLoginName(request));
+                    orderModelEntity.setOnboardedNote(updateStatus.getScheduledNote());
+                    break;
+                default:
+                    break;
+            }
+
             orderModelEntity.setUpdatedBy(SessionManager.getUserLoginName(request));
             orderModelEntity.setUpdatedAt(Helper.getCurrentDate());
+
+            ActionLogsModel actionLogsModel = new ActionLogsModel();
+
+            actionLogsModel.setAction_type_name(Utility.create_order_gps);
+            actionLogsModel.setAction_type_id(1L);
+            actionLogsModel.setEvent_date(Helper.getCurrentDate());
+            actionLogsModel.setF_id(1L);
+            actionLogsModel.setF_table(Utility.tbl_order);
+            actionLogsModel.setUser_id(SessionManager.getUserID(request));
+
+            //Old data need to be modified to json string
+            actionLogsModel.setOld_data(orderModelEntity.toString());
+            actionLogsModel.setNew_data(orderStatusData);
+            actionLogsModel.setNote("Order Creation b2C GPC");
+            actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
+            actionLogsModel.setCreatedAt(Helper.getCurrentDate());
+
+            actionLogService.SaveLogsData(actionLogsModel);
+
 
 
             orderRepository.save(orderModelEntity);
@@ -230,55 +304,37 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
     public boolean statusCheck(OrderModelEntity order) throws TemplateException, IOException {
         OrderModelEntity data = order;
-        if(order.getStatusName().equals("New Order")){
-            if(inventoryManage(1, order.getProductId())){
-                boolean notificationStatus = sendMailAndSms(data);
+        boolean notificationStatus;
+        switch(order.getStatusName())
+        {
+            case "New Order" :
+                if(inventoryManage(1, order.getProductId())){
+                    notificationStatus = sendMailAndSms(data);
+                    if(notificationStatus){
+                        return true;
+                    } else return false;
+                } else return false;
+            case "Scheduled" :
+            case "Sim Activation" :
+            case "Installation" :
+            case "Onboarded" :
+            case "First Contact" :
+            case "Pack Activation" :
+                notificationStatus = sendMailAndSms(data);
                 if(notificationStatus){
                     return true;
                 } else return false;
-            } else return false;
+            case "Cancelled" :
+                if(inventoryManage(-1, order.getProductId())){
+                    notificationStatus = sendMailAndSms(data);
+                    if(notificationStatus){
+                        return true;
+                    } else return false;
+                } else return false;
 
-        } else if (order.getStatusName().equals("Scheduled")) {
-            if(inventoryManage(1, order.getProductId())){
-                boolean notificationStatus = sendMailAndSms(data);
-                if(notificationStatus){
-                    return true;
-                } else return false;
-            } else return false;
-        } else if (order.getStatusName().equals("Sim Activation")) {
-            boolean notificationStatus = sendMailAndSms(data);
-            if(notificationStatus){
-                return true;
-            } else return false;
-        } else if (order.getStatusName().equals("Installation")) {
-            boolean notificationStatus = sendMailAndSms(data);
-            if(notificationStatus){
-                return true;
-            } else return false;
-        } else if (order.getStatusName().equals("Onboarded")) {
-            boolean notificationStatus = sendMailAndSms(data);
-            if(notificationStatus){
-                return true;
-            } else return false;
-        } else if (order.getStatusName().equals("Cancelled")) {
-            if(inventoryManage(-1, order.getProductId())){
-                boolean notificationStatus = sendMailAndSms(data);
-                if(notificationStatus){
-                    return true;
-                } else return false;
-            } else return false;
-        } else if (order.getStatusName().equals("First Contact")) {
-            boolean notificationStatus = sendMailAndSms(data);
-            if(notificationStatus){
-                return true;
-            } else return false;
-        } else if (order.getStatusName().equals("Pack Activation")) {
-            boolean notificationStatus = sendMailAndSms(data);
-            if(notificationStatus){
-                return true;
-            } else return false;
+            default:
+                return false;
         }
-        return false;
     }
 
     public boolean sendMailAndSms(OrderModelEntity orderData) throws IOException, TemplateException{

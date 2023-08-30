@@ -66,8 +66,44 @@
       background: #000F3C;
       color: #FFF;
       border-color: #000F3C;
+      height: 40px;
+      padding: 7px 20px 7px 20px;
       border-radius: 8px;
-      padding: 3px 10px;
+    }
+
+    .btn-b2b-sm-base-36, .btn-b2b-sm-base-36:hover {
+      background: #000F3C;
+      color: #FFF;
+      border-color: #000F3C;
+      height: 36px;
+      padding: 7px 20px 7px 20px;
+      border-radius: 8px;
+    }
+
+    .select2-container--default.select2-container--disabled .select2-selection--single {
+      background-color: #918F92;
+      cursor: default;
+      height: 40px;
+      padding: 8px 10px;
+    }
+
+    .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--single {
+      border-color: #918F92;
+      height: 40px;
+    }
+    .select2-container--default .select2-selection--single {
+      border-radius: 8px;
+      height: 40px;
+    }
+    .bh-40{
+      height: 40px;
+    }
+    .btn-b2b-sm {
+      border-radius: 8px;
+      padding: 8px 20px 8px 20px;
+    }
+    #schedule_div, #first_contact_div{
+      display: none;
     }
 
   </style>
@@ -152,53 +188,53 @@
 
                 <div class="row">
 
-                  <div class="col-sm-12 col-md-8 col-lg-8">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
                     <!-- select -->
-                    <div class="form-group float-left mr-2">
+                    <div class="form-group float-left mr-2 mb-2">
                       <select class="form-control select2" id="order_type" disabled>
                         <option value="gpc_">B2C GPC</option>
                       </select>
                     </div>
-                    <div class="form-group float-left mr-2">
+                    <div class="form-group float-left mr-2 mb-2">
                       <div class="input-group">
-                        <button type="button" class="btn btn-default pull-right btn-rounded" id="date_range">
+                        <button type="button" class="btn btn-default pull-right btn-rounded bh-40" id="date_range" style="border-radius: 8px">
                           <span>Date Range</span>
                           <i class="fa fa-calendar"></i>
                         </button>
                       </div>
                     </div>
-                    <div class="form-group float-left mr-2">
+                    <div class="form-group float-left mr-2 mb-2">
                       <select class="form-control select2" id="search_status_input">
 
                       </select>
                     </div>
-                    <div class="form-group float-left mr-2">
+                    <div class="form-group float-left mr-2 mb-2">
                       <select class="form-control select2" id="search_vendor_input">
 
                       </select>
                     </div>
 
-                    <div class="form-group float-left mr-2">
+                    <div class="form-group float-left mr-2 mb-2">
                       <select class="form-control select2" id="search_product_input">
 
                       </select>
                     </div>
 
-                    <div class="form-group float-left mr-2">
-                      <button class="btn-b2b-sm-base" onclick="getCustomOrderData()">Search</button>
+                    <div class="form-group float-left mr-2 mb-2">
+                      <button class="btn btn-b2b-sm-base" onclick="getCustomOrderData()" style="border-radius: 8px">Search</button>
                     </div>
-                    <div class="form-group float-left mr-2">
-                      <button class="btn-b2b-sm-base" onclick="getOrderData()">Reset</button>
+                    <div class="form-group float-left mr-2 mb-2">
+                      <button class="btn btn-b2b-sm-base" onclick="getOrderData()" style="border-radius: 8px">Reset</button>
                     </div>
                   </div>
 
-                  <div class="col-md-4 col-lg-4 col-sm-12 float-right">
+                  <%--<div class="col-md-4 col-lg-4 col-sm-12 float-right">
                     <!-- Actual search box -->
                     <div class="form-group has-search">
                       <span class="fa fa-search form-control-feedback"></span>
                       <input type="text" class="form-control" placeholder="Search">
                     </div>
-                  </div>
+                  </div>--%>
 
 
                   <div class="col-md-12 mt-2 mb-2">
@@ -474,6 +510,27 @@
                   </div>
                 </div>
 
+                <div class="col-md-12" id="schedule_div">
+                  <div class="form-group">
+                    <label for="device_name">Device Name <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="device_name">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="imei_number">Imei <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="imei_number">
+                  </div>
+                </div>
+
+                <div class="col-md-12" id="first_contact_div">
+                  <div class="form-group">
+                    <label for="scheduled_time">Scheduled Date <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="scheduled_time">
+                  </div>
+                </div>
+
+
+
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="note">Add Note (Optional)</label>
@@ -511,7 +568,8 @@
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/moment/min/moment.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/daterangepicker-master/daterangepicker.css">
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/b2b/plugins/datetime-picker/css/bootstrap-datetimepicker.min.css">
+<script src="${pageContext.request.contextPath}/assets/b2b/plugins/datetime-picker/js/bootstrap-datetimepicker.min.js"></script>
 
 <script>
   var base_url = $("#domain_url").val() + "/";
@@ -522,6 +580,20 @@
 
   }
   $( document ).ready(function() {
+    $("#scheduled_time").datetimepicker({
+      icons: {
+        time: 'fa fa-clock-o',
+        date: 'fa fa-calendar',
+        up: 'fa fa-chevron-up',
+        down: 'fa fa-chevron-down',
+        previous: 'fa fa-chevron-left',
+        next: 'fa fa-chevron-right',
+        today: 'fa fa-crosshairs',
+        clear: 'fa fa-trash-o',
+        close: 'fa fa-times'
+      },
+      format: "YYYY-MM-DD HH:MM:SS"
+    });
     $(".select2").select2();
     //Date range as a button
     $('#date_range').daterangepicker(
@@ -616,8 +688,6 @@
     if (productId != 'Please select product'){
       $('#vendor_name').html('');
       $('#product_type').html('');
-      let vendors = [];
-      let product = [];
 
       getVendorListUpdate($('#product_name').val().split("/")[1])
 
@@ -770,9 +840,9 @@
           data: 'statusName',
           render: function (data, type, full, row){
             if(data === "Cancelled" || data === "Onboarded"){
-              return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status" disabled>Change Status</button>';
+              return '<button class="btn btn-b2b-sm btn-sm btn-b2b-sm-base change-status" disabled>Change Status</button>';
             } else{
-              return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status" >Change Status</button>';
+              return '<button class="btn btn-b2b-sm btn-sm btn-b2b-sm-base change-status" >Change Status</button>';
             }
 
           }
@@ -802,10 +872,6 @@
     $('#d_vendor_name').val(tableRowData.vendorName);
     $('#d_rate_plan').val(tableRowData.ratePlan);
     $('#d_customer_contact').val(tableRowData.customerContactNumber);
-
-
-
-
   } );
 
   function createNewOrder(){
@@ -877,58 +943,41 @@
     $("#changeStatus").modal("show");
     console.log(data.statusName + "-" +data.statusNameId + "-" +data.orderType);
     getStatusB2c(data.statusName, data.statusNameId, data.orderType);
+
   } );
+
+  function initiateRelatedFieldData(){
+    let updatedStatus = $("#updated_status option:selected").val().split("/")[1];
+    switch (updatedStatus){
+      case "First Contact" :
+        $("#first_contact_div").show();
+        $("#scheduled_time").attr("required", true);
+        $("#schedule_div").hide();
+        $("#device_name").attr("required", false);
+        $("#imei_number").attr("required", false);
+        break
+
+      case "Installation" :
+        $("#schedule_div").show();
+        $("#device_name").attr("required", true);
+        $("#imei_number").attr("required", true);
+        $("#first_contact_div").hide();
+        $("#scheduled_time").attr("required", false);
+        break
+
+      default:
+        $("#schedule_div").hide();
+        $("#device_name").attr("required", false);
+        $("#imei_number").attr("required", false);
+        $("#first_contact_div").hide();
+        $("#scheduled_time").attr("required", false);
+    }
+  }
 
   $('#dataTable tbody').on( 'click', 'button.btn-b2b-sm-download', function () {
     let data = dataTable.row( $(this).parents('tr') ).data();
     alert( data[0] +"'Download: "+ data[ 5 ] );
   } );
-
-  /*function getStatusB2c(statusName, statusNameId) {
-    $(".loader_body").show();
-    //  $('#product_name').html("");
-    $.ajax({
-      type: 'get',
-      url: base_url + "api/web/utility/order-status-list",
-      success: function (data) {
-        data.data.forEach(element => {
-          $('#current_status').append('<option value="' + element.b2b_sim + '">' + element.order_name + '</option>');
-        });
-
-        $('#current_status option:contains(' + statusName + ')').each(function () {
-          if ($(this).text() === statusName) {
-            $(this).attr('selected', 'selected');
-            getStatusNext();
-            return false;
-          }
-          return true;
-        });
-        productData = data.data;
-      },
-      error: function (error) {
-        console.log(error);
-      }
-    });
-  }*/
-
-  /*function getStatusNext() {
-    $('#updated_status').html("");
-    $(".loader_body").hide();
-    $.ajax({
-      type: 'post',
-      data: {id: $('#current_status').val()},
-      url: base_url + "api/web/utility/next-order-status",
-      success: function (data) {
-        data.data.forEach(element => {
-          $('#updated_status').append('<option value="' + element.b2b_sim +"/"+ element.order_name+'">' + element.order_name + '</option>');
-        });
-        $('#updated_status').append('<option value="100/Cancelled">Cancelled</option>')
-      },
-      error: function (error) {
-        console.log(error);
-      }
-    });
-  }*/
 
 
   function updateStatus(){
@@ -938,7 +987,11 @@
 
       let orderStatusData = {
         statusName: $('#updated_status').val().split("/")[1],
-        statusNameId: $('#updated_status').val().split("/")[0],
+        statusNameId: parseInt($('#updated_status').val().split("/")[0]),
+        deviceName: $('#device_name').val(),
+        imei: $('#imei_number').val(),
+        //scheduledAppointedDt: $('#scheduled_time').val(),
+        scheduledNote: $('#add_note').val()
       }
       let id = $("#row_id").val();
 
@@ -1046,13 +1099,13 @@
           return true;
         });
         productData = data.data;
+        //initiateRelatedFieldData();
       },
       error: function (error) {
         console.log(error);
       }
-    });
+    })
   }
-
 
   function getStatusNext(statusName, orderType) {
     $('#updated_status').html("");
@@ -1066,12 +1119,17 @@
           $('#updated_status').append('<option value="' + element.gpc_sim + "/" + element.order_name + '">' + element.order_name + '</option>');
         });
         $('#updated_status').append('<option value="100/Cancelled">Cancelled</option>')
+        initiateRelatedFieldData();
       },
       error: function (error) {
         console.log(error);
       }
     });
   }
+
+  $("#updated_status").on("change", function (){
+    initiateRelatedFieldData();
+  })
 
 </script>
 
