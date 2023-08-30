@@ -876,10 +876,21 @@
                         return '<button class="btn btn-b2b-sm btn-b2b-sm-download btn-sm exclude-click">Download Excel</button>';
                     }
                 },
+                // {
+                //     data: 'id',
+                //     render: function (data, type, full, row){
+                //         return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status exclude-click">Change Status</button>';
+                //     }
+                // }
                 {
-                    data: 'id',
+                    data: 'statusName',
                     render: function (data, type, full, row){
-                        return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status exclude-click">Change Status</button>';
+                        if(data === "Cancelled" || data === "Onboarded"){
+                            return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status exclude-click" disabled>Change Status</button>';
+                        } else{
+                            return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status exclude-click" >Change Status</button>';
+                        }
+
                     }
                 }
             ]
@@ -1100,7 +1111,7 @@
             $('#schedule_time').hide();
             $('#schedule_time').attr("required", false);
         }
-        getStatusAll(data.statusName, data.statusNameId);
+        getStatusAll(data.statusName, data.statusNameId, data.orderType);
     });
     // change status button click end
 
@@ -1147,21 +1158,24 @@
     }
 
 
-    function getStatusAll(statusName, statusNameId) {
+    function getStatusAll(statusName, statusNameId, orderType) {
         $(".loader_body").show();
-        //  $('#product_name').html("");
+        $('#current_status').html("");
         $.ajax({
             type: 'get',
             url: base_url + "api/web/utility/order-status-list",
             success: function (data) {
-                data.data.forEach(element => {
-                    $('#current_status').append('<option value="' + element.b2b_sim + '">' + element.order_name + '</option>');
-                });
+               if(orderType === "b2b_simless"){
+                    console.log("b2b_simless");
+                    data.data.forEach(element => {
+                        $('#current_status').append('<option value="' + element.b2b_simless + '">' + element.order_name + '</option>');
+                    });
+                }
 
                 $('#current_status option:contains(' + statusName + ')').each(function () {
                     if ($(this).text() === statusName) {
                         $(this).attr('selected', 'selected');
-                        getStatusNext(statusName)
+                        getStatusNext(statusName, orderType)
                         return false;
                     }
                     return true;
@@ -1175,18 +1189,18 @@
     }
 
 
-    function getStatusNext(statusName) {
+    function getStatusNext(statusName, orderType) {
         $('#editStatus').html("");
         $(".loader_body").hide();
         $.ajax({
             type: 'post',
-            data: {id: $('#current_status').val()},
-            url: base_url + "api/web/utility/next-order-status-b2b-sim",
+            data: {id: $('#current_status').val(), columnName: orderType},
+            url: base_url + "api/web/utility/next-order-status",
             success: function (data) {
                 data.data.forEach(element => {
-                    $('#editStatus').append('<option value="' + element.b2b_sim +"/"+ element.order_name+'">' + element.order_name + '</option>');
+                    $('#editStatus').append('<option value="' + element.b2b_simless + "/" + element.order_name + '">' + element.order_name + '</option>');
                 });
-                $('#editStatus').append('<option value="100">Cancelled</option>')
+                $('#editStatus').append('<option value="100/Cancelled">Cancelled</option>')
             },
             error: function (error) {
                 console.log(error);

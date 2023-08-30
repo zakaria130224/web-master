@@ -10,6 +10,8 @@ import com.xyz.bd.webmaster.modules.inventory.ProductService;
 import com.xyz.bd.webmaster.modules.inventory.ProductsModel;
 import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
 import com.xyz.bd.webmaster.modules.orders.OrderRepository;
+import com.xyz.bd.webmaster.modules.orders.b2cGpcOrders.B2cGpcServices;
+import com.xyz.bd.webmaster.modules.orders.b2cGpcOrders.B2cGpcServicesImpl;
 import com.xyz.bd.webmaster.repositories.CommonRepository;
 import com.xyz.bd.webmaster.services.CommonServices.EmailSenderService;
 import com.xyz.bd.webmaster.services.CommonServices.SendSMSService;
@@ -67,6 +69,9 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    B2cGpcServicesImpl b2cGpcServices;
 
     @Override
     public DataTablesOutput<OrderModelEntity> findAllB2bDeviceOrderList(HttpServletRequest request, String customQuery, DataTablesInput input) {
@@ -147,16 +152,16 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
                 System.out.println(bsCode);
                 System.out.println(companyName);
 
-//                CompanyModelEntity existingCompany = companyRepository.findByCompanyNameAndBsCode(companyName, bsCode);
-//
-//                if (existingCompany == null) {
-//                    // Create a new company entry in tbl_company
-//                    CompanyModelEntity newCompany = new CompanyModelEntity();
-//                    newCompany.setCompanyName(companyName);
-//                    newCompany.setBsCode(bsCode);
-//                    // ... (set other properties)
-//                    companyRepository.save(newCompany);
-//                }
+                CompanyModelEntity existingCompany = companyRepository.findByCompanyNameAndBsCode(companyName, bsCode);
+
+                if (existingCompany == null) {
+                    // Create a new company entry in tbl_company
+                    CompanyModelEntity newCompany = new CompanyModelEntity();
+                    newCompany.setCompanyName(companyName);
+                    newCompany.setBsCode(bsCode);
+
+                    companyRepository.save(newCompany);
+                }
 
                 ProductsModel products = productService.getAllProductDataByProductName(productType);
 
@@ -170,8 +175,8 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
                 orderModelEntity.setSupportPartnerName(supportPartner);
                 orderModelEntity.setProductType(productType);
                 orderModelEntity.setStatusName("New Order");
-                orderModelEntity.setOrderType("b2b_device");
-             //   orderModelEntity.setCompanyId(existingCompany.getId());
+                orderModelEntity.setOrderType("b2b_simless");
+                orderModelEntity.setCompanyId(existingCompany.getId());
                 orderModelEntity.setVendorName(vendor.getName());
                 orderModelEntity.setVendorEmail(vendor.getEmail());
                 orderModelEntity.setVendorId(vendor.getId());
@@ -180,6 +185,9 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
 
 
                 orderRepository.save(orderModelEntity);
+//                    if(orderModelEntity.getId() != null){
+//                        b2cGpcServices.statusCheck(orderModelEntity);
+//                    }
             }
             }
 
