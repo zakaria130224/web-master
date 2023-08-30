@@ -209,15 +209,23 @@ public class OrderServiceImpl implements OrderService{
                 orderModelEntity.setProductType(productType);
                 orderModelEntity.setAudioListenMsisdn(audNum);
                 orderModelEntity.setStatusName("New Order");
+                orderModelEntity.setOrderType("b2b_simbased");
                 orderModelEntity.setCompanyId(existingCompany.getId());
                 orderModelEntity.setVendorName(vendor.getName());
                 orderModelEntity.setVendorEmail(vendor.getEmail());
                 orderModelEntity.setVendorId(vendor.getId());
                 orderModelEntity.setDeviceCategory(products.getDeviceCategory());
                 orderModelEntity.setDeviceSubCategory(products.getDeviceSubCategory());
+                orderModelEntity.setProductId(products.getId());
+                orderModelEntity.setProductName(products.getProductName());
+                orderModelEntity.setStatusNameId(1);
+                orderModelEntity.setProductType(products.getProductType());
 
 
                 orderRepository.save(orderModelEntity);
+                if(orderModelEntity.getId() != null){
+                    b2cGpcServices.statusCheck(orderModelEntity);
+                }
             }
 
         } catch (Exception e) {
