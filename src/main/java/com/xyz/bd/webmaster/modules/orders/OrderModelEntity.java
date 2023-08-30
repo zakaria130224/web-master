@@ -352,4 +352,8 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
     @JsonProperty("vid")
     private String vid;
 
+    @Column(name = "device_name")
+    @JsonProperty("deviceName")
+    private String deviceName;
+
 }
