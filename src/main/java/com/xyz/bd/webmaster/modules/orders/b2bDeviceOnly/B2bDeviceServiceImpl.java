@@ -1,5 +1,6 @@
 package com.xyz.bd.webmaster.modules.orders.b2bDeviceOnly;
 
+import com.xyz.bd.webmaster.modules.actionLogs.ActionLogsModel;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyRepository;
 import com.xyz.bd.webmaster.modules.commonPackages.models.VendorModelEntity;
@@ -98,7 +99,6 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
     }
 
     @Override
-    @Transactional
     public void saveData(String chtticket, MultipartFile excelFile) {
         try {
             //save excel
@@ -172,6 +172,8 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
                 orderModelEntity.setKcpName(kcpName);
                 orderModelEntity.setKcpContactNumber(kcpContact);
                 orderModelEntity.setKcpEmail(kcpEmail);
+                orderModelEntity.setCustomerName(kcpName);
+                orderModelEntity.setCustomerContactNumber(kcpContact);
                 orderModelEntity.setSupportPartnerName(supportPartner);
                 orderModelEntity.setProductType(productType);
                 orderModelEntity.setStatusName("New Order");
@@ -182,12 +184,18 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
                 orderModelEntity.setVendorId(vendor.getId());
                 orderModelEntity.setDeviceCategory(products.getDeviceCategory());
                 orderModelEntity.setDeviceSubCategory(products.getDeviceSubCategory());
+                orderModelEntity.setProductId(products.getId());
+                orderModelEntity.setProductName(products.getProductName());
+                orderModelEntity.setStatusNameId(1);
+                orderModelEntity.setProductType(products.getProductType());
 
 
                 orderRepository.save(orderModelEntity);
-//                    if(orderModelEntity.getId() != null){
-//                        b2cGpcServices.statusCheck(orderModelEntity);
-//                    }
+                    if(orderModelEntity.getId() != null){
+                        b2cGpcServices.statusCheck(orderModelEntity);
+                    }
+
+                    ActionLogsModel actionLogsModel = new ActionLogsModel();
             }
             }
 

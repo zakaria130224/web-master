@@ -106,10 +106,15 @@
             background: #000F3C;
             color: #FFF;
             border-color: #000F3C;
+            border-radius: 8px;
+            padding: 3px 10px;
         }
         .card-head-custom{
             height: 50px;
         }
+
+
+
     </style>
 
 </head>
@@ -173,36 +178,40 @@
                                     <div class="col-sm-12 col-md-8 col-lg-8">
                                         <!-- select -->
                                         <div class="form-group float-left mr-2">
-                                            <select class="form-control select2">
-                                                <option>All Order</option>
+                                            <select class="form-control select2" id="order_type" disabled>
+                                                <option value="b2b_">B2B Simless</option>
                                             </select>
                                         </div>
-
                                         <div class="form-group float-left mr-2">
                                             <div class="input-group">
-                                                <button type="button" class="btn btn-default pull-right btn-rounded" id="daterange-btn">
-                                                        <span>
-                                                          Today
-                                                        </span>
+                                                <button type="button" class="btn btn-default pull-right btn-rounded" id="date_range">
+                                                    <span>Date Range</span>
                                                     <i class="fa fa-calendar"></i>
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="form-group float-left mr-2">
-                                            <select class="form-control select2">
-                                                <option>Order Status</option>
+                                            <select class="form-control select2" id="search_status_input">
+
                                             </select>
                                         </div>
                                         <div class="form-group float-left mr-2">
-                                            <select class="form-control select2">
-                                                <option>Vendor</option>
+                                            <select class="form-control select2" id="search_vendor_input">
+
                                             </select>
                                         </div>
 
                                         <div class="form-group float-left mr-2">
-                                            <select class="form-control select2">
-                                                <option>Product</option>
+                                            <select class="form-control select2" id="search_product_input">
+
                                             </select>
+                                        </div>
+
+                                        <div class="form-group float-left mr-2">
+                                            <button class="btn-b2b-sm-base" onclick="getCustomOrderData()">Search</button>
+                                        </div>
+                                        <div class="form-group float-left mr-2">
+                                            <button class="btn-b2b-sm-base" onclick="getOrderSimData()">Reset</button>
                                         </div>
                                     </div>
 
@@ -214,9 +223,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="row mt-4 mx-3">
-                                        <%--                                        <h6>417 Results Found</h6>--%>
-                                    </div>
 
 
                                     <div class="col-md-12 mt-2 mb-2">
@@ -310,43 +316,43 @@
                                         <input type="text" name="company_name" id= "company_name" class="form-control" placeholder="Company Name">
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="vts_sim">VTS Mobile Number</label>
-                                        <input type="number" name="vts_sim" id= "vts_sim" class="form-control" placeholder="VTS SIM">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="sim_kit">SIM Kit</label>
-                                        <input type="text" name="sim_kit" id= "sim_kit" class="form-control" placeholder="SIM Kit">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="pack_name">Pack Name</label>
-                                        <input type="text" name="pack_name" id= "pack_name" class="form-control" placeholder="Pack Name">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="base_price">Base Price (excluding VAT,SD,SC)</label>
-                                        <input type="text" name="base_price" id= "base_price" class="form-control" placeholder="Base price">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="mrp">MRP</label>
-                                        <input type="text" name="mrp" id= "mrp" class="form-control" placeholder="MRP">
-                                    </div>
-                                </div>
+<%--                                <div class="col-md-12">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="vts_sim">VTS Mobile Number</label>--%>
+<%--                                        <input type="number" name="vts_sim" id= "vts_sim" class="form-control" placeholder="VTS SIM">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="col-md-12">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="sim_kit">SIM Kit</label>--%>
+<%--                                        <input type="text" name="sim_kit" id= "sim_kit" class="form-control" placeholder="SIM Kit">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="col-md-12">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="pack_name">Pack Name</label>--%>
+<%--                                        <input type="text" name="pack_name" id= "pack_name" class="form-control" placeholder="Pack Name">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="col-md-12">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="base_price">Base Price (excluding VAT,SD,SC)</label>--%>
+<%--                                        <input type="text" name="base_price" id= "base_price" class="form-control" placeholder="Base price">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="col-md-12">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="mrp">MRP</label>--%>
+<%--                                        <input type="text" name="mrp" id= "mrp" class="form-control" placeholder="MRP">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="alt_cont_num">Alternative Contact No.</label>
-                                        <input type="text" name="alt_cont_num" id= "alt_cont_num" class="form-control" placeholder="Alt. Contact Number">
-                                    </div>
-                                </div>
+<%--                                <div class="col-md-12">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="alt_cont_num">Alternative Contact No.</label>--%>
+<%--                                        <input type="text" name="alt_cont_num" id= "alt_cont_num" class="form-control" placeholder="Alt. Contact Number">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
 
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -383,12 +389,12 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="aud_auth_number">Audio Listen in Authorized Number</label>
-                                        <input type="text" name="aud_auth_number" id= "aud_auth_number" class="form-control" placeholder="Audio Listen in Authorized Number">
-                                    </div>
-                                </div>
+<%--                                <div class="col-md-12">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="aud_auth_number">Audio Listen in Authorized Number</label>--%>
+<%--                                        <input type="text" name="aud_auth_number" id= "aud_auth_number" class="form-control" placeholder="Audio Listen in Authorized Number">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
 
                             </div>
                         </div>
@@ -729,12 +735,7 @@
     <div class="modal fade" id="orderSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <%--                <div class="modal-header">--%>
-                <%--                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>--%>
-                <%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
-                <%--                        <span aria-hidden="true">&times;</span>--%>
-                <%--                    </button>--%>
-                <%--                </div>--%>
+
                 <div class="modal-body text-center" >
                     <p style="font-size: 20px;">New Order Added Successfully.</p>
                     <%--                   <p style="font-size: 14px;">"Kite N Co" is emailed.</p>--%>
@@ -769,11 +770,15 @@
     const base_url = $("#domain_url").val() + "/";
     let dataTable;
     let productData = [];
+    let userCustomSearchModel = "";
+    function searchDataTable(){
+
+    }
     //document ready function starts
     $( document ).ready(function() {
         $(".select2").select2();
         //Date range as a button
-        $('#daterange-btn').daterangepicker(
+        $('#date_range').daterangepicker(
             {
                 ranges   : {
                     'Today'       : [moment(), moment()],
@@ -788,35 +793,137 @@
                 opens: 'right'
             },
             function (start, end) {
-                $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                $('#date_range span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
             }
         );
 
+        $('#date_range').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
+        });
+
+        $('#date_range').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
+
         getOrderSimData();
+        getProductListSearch();
+        getVendorListSearch();
+        getStatusListSearch()
 
     });
     //document ready function closed
 
-    //order data get
-    function getOrderSimData() {
-        $(".loader_body").show();
-        //   console.log(base_url);
+    function getProductListSearch() {
+     //   $('#product_name').html("");
         $.ajax({
             type: 'get',
-            url: base_url + "api/web/orders/b2b-sim-based/listB2bDeviceDT",
+            url: base_url + "api/web/utility/product-list",
             success: function (data) {
-                $(".loader_body").hide();
-                initOrderTable(data.data);
+                $('#search_product_input').append('<option value="">Product</option>')
+                data.data.forEach(element => {
+                    $('#search_product_input').append('<option value="' + element.id +'">' + element.productName + '</option>');
+                });
             },
             error: function (error) {
-                $(".loader_body").hide();
+                console.log(error);
             }
         });
     }
+
+    function getVendorListSearch() {
+      //  $('#product_name').html("");
+        $.ajax({
+            type: 'get',
+            url: base_url + "api/web/utility/vendor-list",
+            success: function (data) {
+                $('#search_vendor_input').append('<option value="">Vendor</option>')
+                data.data.forEach(element => {
+                    $('#search_vendor_input').append('<option value="' + element.id +'">' + element.name + '</option>');
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function getStatusListSearch() {
+    //    $('#product_name').html("");
+        $.ajax({
+            type: 'get',
+            url: base_url + "api/web/utility/order-status-list",
+            success: function (data) {
+                $('#search_status_input').append('<option value="">Status</option>')
+                data.data.forEach(element => {
+                    $('#search_status_input').append('<option value="' + element.id +'">' + element.order_name + '</option>');
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    //order data get
+    // function getOrderSimData() {
+    //     $(".loader_body").show();
+    //     //   console.log(base_url);
+    //     $.ajax({
+    //         type: 'get',
+    //         url: base_url + "api/web/orders/b2b-sim-based/listB2bDeviceDT",
+    //         success: function (data) {
+    //             $(".loader_body").hide();
+    //             initOrderTable(data.data);
+    //         },
+    //         error: function (error) {
+    //             $(".loader_body").hide();
+    //         }
+    //     });
+    // }
     //order data closed
 
+    function getCustomOrderData() {
+        $(".loader_body").show();
+        initOrderTable("b2b_simless" , "orderType")
+        dataTable.destroy();
+        let customSearch = {
+
+            product_id: $("#search_product_input option:selected").val() == "" ? "" : $("#search_product_input option:selected").val(),
+            vendor_id: $("#search_vendor_input option:selected").val() == "" ? "" : $("#search_vendor_input option:selected").val(),
+            status_name_id: $("#search_status_input option:selected").val() == "" ? "" : $("#search_status_input option:selected").val(),
+            created_at: $("#date_range").val(),
+            order_type: {
+                operator: "like",
+                value: $("#order_type").val()
+            }
+        };
+        //let customSearch = null;
+        userCustomSearchModel = JSON.stringify(customSearch)
+        console.log("srCustomSearchModel::"+userCustomSearchModel);
+        initOrderTable(userCustomSearchModel);
+    }
+
+    function getOrderSimData() {
+        $(".loader_body").show();
+        $('#search_product_input').val("").trigger('change');
+        $('#search_vendor_input').val("").trigger('change');
+        $('#search_status_input').val("").trigger('change');
+        initOrderTable("b2b_simless" , "orderType")
+        dataTable.destroy();
+        let customSearch = {
+            order_type: {
+                operator: "like",
+                value: $("#order_type").val()
+            }
+        };
+
+        userCustomSearchModel = JSON.stringify(customSearch);
+        console.log("srCustomSearchModel::"+userCustomSearchModel);
+        initOrderTable(userCustomSearchModel);
+    }
+
     //init table
-    function initOrderTable(data) {
+    function initOrderTable(searchQuery) {
         "use strict";
         if ($.fn.dataTable.isDataTable('#dataTable')) {
             $('#dataTable').DataTable().clear();
@@ -830,19 +937,30 @@
             info: true,
             autoWidth: false,
             responsive: true,
-            data: data,
+            //data: data,
             order: [[0, 'desc']],
+            ajax: {
+                url: base_url + "api/web/orders/b2b-sim-based/listB2bDeviceDT",
+                data: function (d) {
+                    d.customQuery = searchQuery;
+                }
+            },
             select:true,
             columns: [
                 {data: 'id'},
-                //  {
-                //    data: 'id',
-                //    render: function(data, type, full, row) {
-                //      return '<a href="#" class="order-details-link" data-order-id="' + data + '">' + data + '</a>';
-                //    }
-                //  },
                 {data: 'chtTicketId'},
-                {data: 'createdAt'},
+                {data: 'createdAt',
+                    render: function(data) {
+                        var createdAtDate = new Date(data);
+                        var formattedDate = createdAtDate.getFullYear() + '-' +
+                            ('0' + (createdAtDate.getMonth() + 1)).slice(-2) + '-' +
+                            ('0' + createdAtDate.getDate()).slice(-2) + ' ' +
+                            ('0' + createdAtDate.getHours()).slice(-2) + ':' +
+                            ('0' + createdAtDate.getMinutes()).slice(-2) + ':' +
+                            ('0' + createdAtDate.getSeconds()).slice(-2);
+                        return formattedDate;
+                    }
+                },
                 {data: 'productType'},
                 {data: 'supportPartnerName'},
                 {data: 'statusName',
@@ -895,7 +1013,7 @@
                 }
             ]
         });
-
+        $(".loader_body").hide();
     }
     // table ends
 

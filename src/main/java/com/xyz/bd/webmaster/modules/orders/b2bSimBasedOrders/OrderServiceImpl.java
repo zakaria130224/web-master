@@ -382,6 +382,7 @@ public class OrderServiceImpl implements OrderService{
                     // Set other device info fields as needed
                     trackerDeviceService.saveDeviceInfo(deviceInfo);
 
+                    orderModelEntity.setUserId(existingUser.getId());
                     orderModelEntity.setInstallationNote(updateStatus.getInstallationNote());
                     orderModelEntity.setInstallationDt(Helper.getCurrentDate());
                     orderModelEntity.setInstallationBy(SessionManager.getUserLoginName(request));
