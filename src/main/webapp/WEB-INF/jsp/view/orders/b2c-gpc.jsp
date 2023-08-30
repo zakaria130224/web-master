@@ -62,6 +62,13 @@
       white-space: nowrap;
       vertical-align: middle;
     }
+    .btn-b2b-sm-base, .btn-b2b-sm-base:hover {
+      background: #000F3C;
+      color: #FFF;
+      border-color: #000F3C;
+      border-radius: 8px;
+      padding: 3px 10px;
+    }
 
   </style>
 
@@ -148,9 +155,40 @@
                   <div class="col-sm-12 col-md-8 col-lg-8">
                     <!-- select -->
                     <div class="form-group float-left mr-2">
-                      <select class="form-control select2">
-                        <option>Select Resources</option>
+                      <select class="form-control select2" id="order_type" disabled>
+                        <option value="gpc_">B2C GPC</option>
                       </select>
+                    </div>
+                    <div class="form-group float-left mr-2">
+                      <div class="input-group">
+                        <button type="button" class="btn btn-default pull-right btn-rounded" id="date_range">
+                          <span>Date Range</span>
+                          <i class="fa fa-calendar"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="form-group float-left mr-2">
+                      <select class="form-control select2" id="search_status_input">
+
+                      </select>
+                    </div>
+                    <div class="form-group float-left mr-2">
+                      <select class="form-control select2" id="search_vendor_input">
+
+                      </select>
+                    </div>
+
+                    <div class="form-group float-left mr-2">
+                      <select class="form-control select2" id="search_product_input">
+
+                      </select>
+                    </div>
+
+                    <div class="form-group float-left mr-2">
+                      <button class="btn-b2b-sm-base" onclick="getCustomOrderData()">Search</button>
+                    </div>
+                    <div class="form-group float-left mr-2">
+                      <button class="btn-b2b-sm-base" onclick="getOrderData()">Reset</button>
                     </div>
                   </div>
 
@@ -480,10 +518,13 @@
   let dataTable;
   let productData = [];
   let userCustomSearchModel = "";
+  function searchDataTable(){
+
+  }
   $( document ).ready(function() {
     $(".select2").select2();
     //Date range as a button
-    $('#daterange-btn').daterangepicker(
+    $('#date_range').daterangepicker(
             {
               ranges   : {
                 'Today'       : [moment(), moment()],
@@ -498,12 +539,74 @@
               opens: 'right'
             },
             function (start, end) {
-              $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+              $('#date_range span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
             }
     );
 
+    $('#date_range').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
+    });
+
+    $('#date_range').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+    });
+
     getOrderData();
+    getProductListSearch();
+    getVendorListSearch();
+    getStatusListSearch()
   });
+
+  function getProductListSearch() {
+    $('#product_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/product-list",
+      success: function (data) {
+        $('#search_product_input').append('<option value="">Product</option>')
+        data.data.forEach(element => {
+          $('#search_product_input').append('<option value="' + element.id +'">' + element.productName + '</option>');
+        });
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  function getVendorListSearch() {
+    $('#product_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/vendor-list",
+      success: function (data) {
+        $('#search_vendor_input').append('<option value="">Vendor</option>')
+        data.data.forEach(element => {
+          $('#search_vendor_input').append('<option value="' + element.id +'">' + element.name + '</option>');
+        });
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  function getStatusListSearch() {
+    $('#product_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/order-status-list",
+      success: function (data) {
+        $('#search_status_input').append('<option value="">Status</option>')
+        data.data.forEach(element => {
+          $('#search_status_input').append('<option value="' + element.id +'">' + element.order_name + '</option>');
+        });
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
 
 
   $('#product_name').on('change', function() {
@@ -559,27 +662,41 @@
     $("#newOrderEntry").modal("show");
   }
 
-  function getOrderData() {
+  function getCustomOrderData() {
     $(".loader_body").show();
     initOrderTable("gpc_sim" , "orderType")
-
-    /*$.ajax({
-      type: 'get',
-      url: base_url + "api/web/orders/b2c-gpc/listDT",
-      success: function (data) {
-        $(".loader_body").hide();
-        initOrderTable(data.data);
-      },
-      error: function (error) {
-        $(".loader_body").hide();
-      }
-    });*/
-
     dataTable.destroy();
-    /*let customSearch = {
-      order_type: "gpc_sim"
-    };*/
-    let customSearch = null;
+    let customSearch = {
+
+      product_id: $("#search_product_input option:selected").val() == "" ? "" : $("#search_product_input option:selected").val(),
+      vendor_id: $("#search_vendor_input option:selected").val() == "" ? "" : $("#search_vendor_input option:selected").val(),
+      status_name_id: $("#search_status_input option:selected").val() == "" ? "" : $("#search_status_input option:selected").val(),
+      created_at: $("#date_range").val(),
+      order_type: {
+        operator: "like",
+        value: $("#order_type").val()
+      }
+    };
+    //let customSearch = null;
+    userCustomSearchModel = JSON.stringify(customSearch)
+    console.log("srCustomSearchModel::"+userCustomSearchModel);
+    initOrderTable(userCustomSearchModel);
+  }
+
+  function getOrderData() {
+    $(".loader_body").show();
+    $('#search_product_input').val("").trigger('change');
+    $('#search_vendor_input').val("").trigger('change');
+    $('#search_status_input').val("").trigger('change');
+    initOrderTable("gpc_sim" , "orderType")
+    dataTable.destroy();
+    let customSearch = {
+      order_type: {
+        operator: "like",
+        value: $("#order_type").val()
+      }
+    };
+    //let customSearch = null;
     userCustomSearchModel = JSON.stringify(customSearch)
     console.log("srCustomSearchModel::"+userCustomSearchModel);
     initOrderTable(userCustomSearchModel);
@@ -602,9 +719,9 @@
       order: [[0, 'desc']],
       ajax: {
         url: base_url + "api/web/orders/b2c-gpc/listDT",
-        /*data: function (d) {
+        data: function (d) {
           d.customQuery = searchQuery;
-        }*/
+        }
       },
       select:true,
       columns: [
@@ -633,7 +750,7 @@
             }else if(data == "First Contact"){
               return '<button class="btn btn-b2b-sm btn-warning btn-sm btn-disabled">First Contact</button>';
             }else if(data == "Cancelled"){
-              return '<button class="btn btn-b2b-sm btn-danger btn-sm btn-disabled" dis>Cancelled</button>';
+              return '<button class="btn btn-b2b-sm btn-danger btn-sm btn-disabled" disabled>Cancelled</button>';
             } else if(data == "Pack Activation"){
               return '<button class="btn btn-b2b-sm btn-success btn-sm btn-disabled">Pack Activation</button>';
             } else{

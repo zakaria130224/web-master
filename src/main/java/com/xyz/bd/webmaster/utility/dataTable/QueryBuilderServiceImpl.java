@@ -1,6 +1,7 @@
 package com.xyz.bd.webmaster.utility.dataTable;
 
 
+import org.apache.commons.lang3.text.WordUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,20 +36,26 @@ public class QueryBuilderServiceImpl implements QueryBuilderService{
 
         JSONObject jsonObject = new JSONObject(customQuery);
 
-        jsonObject.keySet().stream().forEach(key -> {
+        for (String key : jsonObject.keySet()) {
+            System.out.println(jsonObject.get(key));
 
             if (!ObjectUtils.isEmpty(jsonObject.get(key))) {
                 DataTypeEnum fieldType = null;
 
                 try {
-                    fieldType = CustomQueryUtil.getDataTypeEnum(key.toUpperCase(), className);
-                    queryBuilder.append(CustomQueryUtil.appendAndCondition(key.toUpperCase(),jsonObject.get(key).toString(),fieldType));
+                    String keyName = WordUtils.capitalize(key, '_').replaceAll("_", "");
+                    char arrayString[] = keyName.toCharArray();
+                    arrayString[0] = Character.toLowerCase(arrayString[0]);
+                    keyName = new String(arrayString);
 
+                    fieldType = CustomQueryUtil.getDataTypeEnum(keyName, className);
+                    queryBuilder.append(CustomQueryUtil.appendAndCondition(key, jsonObject.get(key).toString(), fieldType));
+                    //queryBuilder.append(CustomQueryUtil.appendAndCondition("order_type", "gpc_sim", fieldType));
                 } catch (NoSuchFieldException e) {
                     LOGGER.info(e.getMessage(), e);
                 }
             }
-        });
+        }
         return queryBuilder.toString();
     }
 
