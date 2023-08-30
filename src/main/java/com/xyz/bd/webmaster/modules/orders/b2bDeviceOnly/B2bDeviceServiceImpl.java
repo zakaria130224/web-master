@@ -1,5 +1,7 @@
 package com.xyz.bd.webmaster.modules.orders.b2bDeviceOnly;
 
+import com.xyz.bd.webmaster.config.session.SessionManager;
+import com.xyz.bd.webmaster.modules.actionLogs.ActionLogService;
 import com.xyz.bd.webmaster.modules.actionLogs.ActionLogsModel;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyRepository;
@@ -16,6 +18,7 @@ import com.xyz.bd.webmaster.modules.orders.b2cGpcOrders.B2cGpcServicesImpl;
 import com.xyz.bd.webmaster.repositories.CommonRepository;
 import com.xyz.bd.webmaster.services.CommonServices.EmailSenderService;
 import com.xyz.bd.webmaster.services.CommonServices.SendSMSService;
+import com.xyz.bd.webmaster.utility.Helper;
 import com.xyz.bd.webmaster.utility.Utility;
 import com.xyz.bd.webmaster.utility.dataTable.QueryBuilderService;
 import org.apache.poi.ss.usermodel.*;
@@ -73,6 +76,11 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
 
     @Autowired
     B2cGpcServicesImpl b2cGpcServices;
+
+    @Autowired
+    ActionLogService actionLogService;
+
+    private HttpServletRequest requests;
 
     @Override
     public DataTablesOutput<OrderModelEntity> findAllB2bDeviceOrderList(HttpServletRequest request, String customQuery, DataTablesInput input) {
@@ -195,7 +203,21 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
                         b2cGpcServices.statusCheck(orderModelEntity);
                     }
 
-                    ActionLogsModel actionLogsModel = new ActionLogsModel();
+//                    ActionLogsModel actionLogsModel = new ActionLogsModel();
+//                    actionLogsModel.setAction_type_name(Utility.create_order_gps);
+//                    actionLogsModel.setAction_type_id(1L);
+//                    actionLogsModel.setEvent_date(Helper.getCurrentDate());
+//                    actionLogsModel.setF_id(1L);
+//                    actionLogsModel.setF_table(Utility.tbl_order);
+//                    actionLogsModel.setUser_id(1321L);
+//                    actionLogsModel.setOld_data("");
+//                    actionLogsModel.setNew_data("");
+//                    actionLogsModel.setMsisdn(orderModelEntity.getKamContactNumber());
+//                    actionLogsModel.setNote("Order Creation b2b simless");
+//                    actionLogsModel.setCreatedBy("zakaria.ahmaad");
+//                    actionLogsModel.setCreatedAt(Helper.getCurrentDate());
+//
+//                    actionLogService.SaveLogsData(actionLogsModel);
             }
             }
 

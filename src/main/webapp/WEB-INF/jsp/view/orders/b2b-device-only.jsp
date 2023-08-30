@@ -486,12 +486,13 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="current_status">Current Status </label>
                                         <input type="hidden" id="row_id">
                                         <input type="hidden" id="kcp_p_name">
                                         <input type="hidden" id="kcp_p_email">
                                         <input type="hidden" id="kcp_p_contact">
                                         <input type="hidden" id="previous_state">
+                                        <label for="current_status">Current Status </label>
+
                                         <select class="form-control" id="current_status" disabled>
 
                                         </select>
@@ -1069,8 +1070,9 @@
         //           ('0' + inputDate.getSeconds()).slice(-2);
         //
         //   console.log(formattedDate);
+        let updatedStatus = $("#editStatus option:selected").val().split("/")[1];
 
-        if(previous_state == "New Order"){
+        if(previous_state == "New Order" && updatedStatus == "First Contact"){
             var schedule_val = $('#schedule').val();
         }
         else{
@@ -1135,6 +1137,41 @@
         }
 
     }
+
+    function initiateRelatedFieldData(){
+        let updatedStatus = $("#editStatus option:selected").val().split("/")[1];
+        switch (updatedStatus){
+            case "Cancelled" :
+                $('#imei_block').hide();
+                $('#imei_input').attr("required", false);
+                $('#tracker_device_name').hide();
+                $('#tracker_device_name').attr("required", false);
+                $('#schedule_time').hide();
+                $('#schedule_time').attr("required", false);
+                break
+
+            // case "Installation" :
+            //     $("#schedule_div").show();
+            //     $("#device_name").attr("required", true);
+            //     $("#imei_number").attr("required", true);
+            //     $("#first_contact_div").hide();
+            //     $("#scheduled_time").attr("required", false);
+            //     break
+
+            default:
+                $('#imei_block').hide();
+                $('#imei_input').attr("required", false);
+                $('#tracker_device_name').hide();
+                $('#tracker_device_name').attr("required", false);
+                $('#schedule_time').hide();
+                $('#schedule_time').attr("required", false);
+        }
+    }
+
+    $("#editStatus").on("change", function (){
+        initiateRelatedFieldData();
+    })
+
 
 
     function modalClose(){

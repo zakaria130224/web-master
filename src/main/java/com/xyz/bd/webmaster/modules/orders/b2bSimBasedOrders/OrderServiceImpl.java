@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xyz.bd.webmaster.config.session.SessionManager;
 import com.xyz.bd.webmaster.models.common.DTOs.SMS;
+import com.xyz.bd.webmaster.modules.actionLogs.ActionLogService;
+import com.xyz.bd.webmaster.modules.actionLogs.ActionLogsModel;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyRepository;
 import com.xyz.bd.webmaster.modules.commonPackages.models.VendorModelEntity;
@@ -17,6 +19,7 @@ import com.xyz.bd.webmaster.modules.inventory.ProductsModel;
 import com.xyz.bd.webmaster.modules.orders.b2cGpcOrders.B2cGpcServices;
 import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
 import com.xyz.bd.webmaster.modules.orders.OrderRepository;
+import com.xyz.bd.webmaster.modules.orders.b2cGpcOrders.B2cGpcServicesImpl;
 import com.xyz.bd.webmaster.repositories.CommonRepository;
 import com.xyz.bd.webmaster.services.CommonServices.EmailSenderService;
 import com.xyz.bd.webmaster.services.CommonServices.SendSMSService;
@@ -24,6 +27,7 @@ import com.xyz.bd.webmaster.utility.CommonRestResponse;
 import com.xyz.bd.webmaster.utility.Helper;
 import com.xyz.bd.webmaster.utility.Utility;
 import com.xyz.bd.webmaster.utility.dataTable.QueryBuilderService;
+import freemarker.template.TemplateException;
 import org.apache.poi.ss.usermodel.*;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -91,6 +95,13 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    B2cGpcServicesImpl b2cGpcServices;
+
+    @Autowired
+    ActionLogService actionLogService;
+
 
 
     @Value("${api.addDeviceUrl}")
@@ -477,6 +488,18 @@ public class OrderServiceImpl implements OrderService{
               orderModelEntity.setSimActivationBy(SessionManager.getUserLoginName(request));
           }
 
+          else if ("Sim Activation".equals(status_name)){
+              orderModelEntity.setSimActivationNote(updateStatus.getSimActivationNote());
+              orderModelEntity.setSimActivationDt(Helper.getCurrentDate());
+              orderModelEntity.setSimActivationBy(SessionManager.getUserLoginName(request));
+          }
+
+          else if ("Cancelled".equals(status_name)){
+              orderModelEntity.setSimActivationNote(updateStatus.getSimActivationNote());
+              orderModelEntity.setCancelledDt(Helper.getCurrentDate());
+              orderModelEntity.setCancelledBy(SessionManager.getUserLoginName(request));
+          }
+
           //  OrderModelEntity orderModelEntity = orderRepository.getById(id);
 
             orderModelEntity.setStatusName(updateStatus.getStatusName());
@@ -486,15 +509,34 @@ public class OrderServiceImpl implements OrderService{
             orderModelEntity.setUpdatedBy(SessionManager.getUserLoginName(request));
             orderModelEntity.setUpdatedAt(Helper.getCurrentDate());
 
+//            ActionLogsModel actionLogsModel = new ActionLogsModel();
+//
+//            actionLogsModel.setAction_type_name(Utility.create_order_gps);
+//            actionLogsModel.setAction_type_id(1L);
+//            actionLogsModel.setEvent_date(Helper.getCurrentDate());
+//            actionLogsModel.setF_id(1L);
+//            actionLogsModel.setF_table(Utility.tbl_order);
+//            actionLogsModel.setUser_id(SessionManager.getUserID(request));
+//
+//            //Old data need to be modified to json string
+//            actionLogsModel.setOld_data(orderModelEntity.toString());
+//            actionLogsModel.setNew_data(orderStatusData);
+//            actionLogsModel.setNote("Order Update");
+//            actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
+//            actionLogsModel.setCreatedAt(Helper.getCurrentDate());
+//
+//            actionLogService.SaveLogsData(actionLogsModel);
+
 
             orderRepository.save(orderModelEntity);
 
             commonRestResponse.setData(orderModelEntity.getId());
+            b2cGpcServices.statusCheck(orderModelEntity);
             sendEmailAndSms(orderModelEntity);
             commonRestResponse.setCode(200);
             commonRestResponse.setMessage("Order Status has been Added Successfully");
         }
-        catch(ArrayIndexOutOfBoundsException ex)
+        catch(ArrayIndexOutOfBoundsException | IOException | TemplateException ex)
         {
             commonRestResponse.setCode(402);
             commonRestResponse.setData(null);
