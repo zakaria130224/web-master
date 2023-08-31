@@ -218,7 +218,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="${pageContext.request.contextPath}/reports/report-fuel-used" class="nav-link">
+                            <a href="${pageContext.request.contextPath}/vts/fuel-log" class="nav-link">
                                 <i class="fa fa-circle nav-icon"></i>
                                 <p>Fuel Used Report</p>
                             </a>
@@ -265,7 +265,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="${pageContext.request.contextPath}/reports/report-tips" class="nav-link">
+                            <a href="${pageContext.request.contextPath}/vts/trip-list" class="nav-link">
                                 <i class="fa fa-circle nav-icon"></i>
                                 <p>Trips Reports</p>
                             </a>

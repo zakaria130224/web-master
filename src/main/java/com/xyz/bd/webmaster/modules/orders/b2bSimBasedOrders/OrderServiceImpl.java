@@ -427,6 +427,7 @@ public class OrderServiceImpl implements OrderService{
                     orderModelEntity.setInstallationDt(Helper.getCurrentDate());
                     orderModelEntity.setInstallationBy(SessionManager.getUserLoginName(request));
                     orderModelEntity.setImei(orderModelEntity.getImei());
+                    orderModelEntity.setDeviceName(orderModelEntity.getDeviceName());
 
                 }
 

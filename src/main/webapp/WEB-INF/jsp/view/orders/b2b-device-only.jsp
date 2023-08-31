@@ -179,7 +179,7 @@
                                         <!-- select -->
                                         <div class="form-group float-left mr-2">
                                             <select class="form-control select2" id="order_type" disabled>
-                                                <option value="b2b_simless">B2B Simless</option>
+                                                <option value="b2b_simless">B2B Device</option>
                                             </select>
                                         </div>
                                         <div class="form-group float-left mr-2">
