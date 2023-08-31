@@ -15,5 +15,5 @@ public interface B2cGpcServices {
 
     CommonRestResponse addNewOrder(HttpServletRequest request, String orderInfo);
 
-    CommonRestResponse updateOrderStatus(HttpServletRequest request, String orderStatusData, Long id);
+    CommonRestResponse updateOrderStatus(HttpServletRequest request, String orderStatusData, Long id, String dateTime);
 }

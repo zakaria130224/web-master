@@ -990,16 +990,16 @@
         statusNameId: parseInt($('#updated_status').val().split("/")[0]),
         deviceName: $('#device_name').val(),
         imei: $('#imei_number').val(),
-        //scheduledAppointedDt: $('#scheduled_time').val(),
         scheduledNote: $('#add_note').val()
       }
       let id = $("#row_id").val();
+      let scheduled_time = $('#scheduled_time').val();
 
 
       $.ajax({
         type: 'POST',
         url: base_url + "api/web/orders/b2c-gpc/update-status",
-        data: {orderStatusData: JSON.stringify(orderStatusData), id: parseInt(id)},
+        data: {orderStatusData: JSON.stringify(orderStatusData), id: parseInt(id), scheduled_time: scheduled_time},
         success: function (resultData) {
           $(".loader_body").hide();
           if (resultData.code === 200) {

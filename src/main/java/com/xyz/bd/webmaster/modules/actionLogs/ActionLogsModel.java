@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -18,8 +17,8 @@ import java.util.Date;
 @Table(name = "tbl_action_logs")
 public class ActionLogsModel extends BaseEntity {
     private Date event_date;
-    private Long f_id;
-    private String f_table;
+    private Long foreign_id;
+    private String foreign_table;
     private Long user_id;
     private String msisdn;
     private Long action_type_id;
