@@ -1,7 +1,6 @@
 package com.xyz.bd.webmaster.modules.orders.b2cGpcOrders;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.xyz.bd.webmaster.config.session.SessionManager;
 import com.xyz.bd.webmaster.models.UserManagement.Entities.AppUser;
@@ -37,6 +36,8 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -170,8 +171,8 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             actionLogsModel.setAction_type_name(Utility.create_order_gps);
             actionLogsModel.setAction_type_id(1L);
             actionLogsModel.setEvent_date(Helper.getCurrentDate());
-            actionLogsModel.setF_id(1L);
-            actionLogsModel.setF_table(Utility.tbl_order);
+            actionLogsModel.setForeign_id(1L);
+            actionLogsModel.setForeign_table(Utility.tbl_order);
             actionLogsModel.setUser_id(SessionManager.getUserID(request));
             actionLogsModel.setOld_data("");
             actionLogsModel.setNew_data(orderInfo);
@@ -202,13 +203,12 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
     }
 
     @Override
-    public CommonRestResponse updateOrderStatus(HttpServletRequest request, String orderStatusData, Long id) {
+    public CommonRestResponse updateOrderStatus(HttpServletRequest request, String orderStatusData, Long id, String dateTime) {
         CommonRestResponse commonRestResponse = new CommonRestResponse();
         try
         {
             OrderModelEntity updateStatus = new Gson().fromJson(orderStatusData, new TypeToken<OrderModelEntity>() {
             }.getType());
-
 
 
             OrderModelEntity orderModelEntity = orderRepository.getById(id);
@@ -224,6 +224,14 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
                     orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));
                     orderModelEntity.setFirstContactNote(updateStatus.getScheduledNote());
                     //orderModelEntity.setScheduledAppointedDt(scheduledDate);
+                    try {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                        Date parsedDate = dateFormat.parse(dateTime);
+                        Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+                        orderModelEntity.setScheduledAppointedDt(timestamp);
+                    } catch(Exception e) { //this generic but you can control another types of exception
+                        // look the origin of excption
+                    }
                     break;
 
                 case "Scheduled" :
@@ -240,7 +248,6 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
                     orderModelEntity.setInstallationDt(Helper.getCurrentDate());
                     orderModelEntity.setInstallationBy(SessionManager.getUserLoginName(request));
                     orderModelEntity.setInstallationNote(updateStatus.getScheduledNote());
-
                     orderModelEntity.setImei(updateStatus.getImei());
                     orderModelEntity.setDeviceName(updateStatus.getDeviceName());
 
@@ -267,16 +274,16 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             ActionLogsModel actionLogsModel = new ActionLogsModel();
 
             actionLogsModel.setAction_type_name(Utility.create_order_gps);
-            actionLogsModel.setAction_type_id(1L);
+            actionLogsModel.setAction_type_id(2L);
             actionLogsModel.setEvent_date(Helper.getCurrentDate());
-            actionLogsModel.setF_id(1L);
-            actionLogsModel.setF_table(Utility.tbl_order);
+            actionLogsModel.setForeign_id(2L);
+            actionLogsModel.setForeign_table(Utility.tbl_order);
             actionLogsModel.setUser_id(SessionManager.getUserID(request));
 
             //Old data need to be modified to json string
-            actionLogsModel.setOld_data(orderModelEntity.toString());
+            actionLogsModel.setOld_data("");
             actionLogsModel.setNew_data(orderStatusData);
-            actionLogsModel.setNote("Order Creation b2C GPC");
+            actionLogsModel.setNote("Order status update - B2C GPC");
             actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
             actionLogsModel.setCreatedAt(Helper.getCurrentDate());
 
@@ -316,7 +323,6 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
                 } else return false;
             case "Scheduled" :
             case "Sim Activation" :
-            case "Installation" :
             case "Onboarded" :
             case "First Contact" :
             case "Pack Activation" :
@@ -330,6 +336,32 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
                     if(notificationStatus){
                         return true;
                     } else return false;
+                } else return false;
+
+            case "Installation" :
+                if(order.getOrderType().equals("gpc_sim")){
+                    TrackerDeviceModelEntity deviceInfo = new TrackerDeviceModelEntity();
+                    //deviceInfo.setUserId(existingUser.getId()); // Set the user ID
+                    deviceInfo.setImei(order.getImei());
+                    //deviceInfo.setTrackerDeviceId(resultCode);
+                    //deviceInfo.setUserEmail(resultDesc);
+                    deviceInfo.setCustomerName(order.getKcpName());
+                    deviceInfo.setOrderId(order.getId());
+                    deviceInfo.setCompanyId(order.getCompanyId());
+                    deviceInfo.setCustomerName(order.getKcpName());
+                    deviceInfo.setCellPhone(order.getKcpContactNumber());
+                    deviceInfo.setUserEmail(order.getKcpEmail());
+                    deviceInfo.setVtsSim(order.getVtsSimNo());
+                    deviceInfo.setDeviceCategory(order.getDeviceCategory());
+                    deviceInfo.setDeviceSubCategory(order.getDeviceSubCategory());
+                    deviceInfo.setDataPackName(order.getPackName());
+                    deviceInfo.setCompanyName(order.getCompanyName());
+                    deviceInfo.setInstallationDate(Helper.getCurrentDate());
+                    trackerDeviceRepository.save(deviceInfo);
+                }
+                notificationStatus = sendMailAndSms(data);
+                if(notificationStatus){
+                    return true;
                 } else return false;
 
             default:
