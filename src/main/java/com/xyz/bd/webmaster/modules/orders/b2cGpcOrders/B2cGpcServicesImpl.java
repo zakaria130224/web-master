@@ -375,7 +375,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             String toEmail = orderData.getVendorEmail();
             //String body = "Order data has been updated for order ID: " + orderData.getId() + ". " + "Order Status : "+ orderData.getStatusName();
             String subject = "VTS Order Data Update Notification";
-            String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com";
+            String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com,kalyanmoy@grameenphone.com";
 
             Configuration cfg = new Configuration();
             cfg.setClassForTemplateLoading(this.getClass(), "/templates/");
