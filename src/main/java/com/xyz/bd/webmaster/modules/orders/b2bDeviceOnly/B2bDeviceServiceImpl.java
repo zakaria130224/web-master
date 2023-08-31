@@ -1,5 +1,7 @@
 package com.xyz.bd.webmaster.modules.orders.b2bDeviceOnly;
 
+import com.xyz.bd.webmaster.config.session.SessionManager;
+import com.xyz.bd.webmaster.modules.actionLogs.ActionLogService;
 import com.xyz.bd.webmaster.modules.actionLogs.ActionLogsModel;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyRepository;
@@ -16,10 +18,12 @@ import com.xyz.bd.webmaster.modules.orders.b2cGpcOrders.B2cGpcServicesImpl;
 import com.xyz.bd.webmaster.repositories.CommonRepository;
 import com.xyz.bd.webmaster.services.CommonServices.EmailSenderService;
 import com.xyz.bd.webmaster.services.CommonServices.SendSMSService;
+import com.xyz.bd.webmaster.utility.Helper;
 import com.xyz.bd.webmaster.utility.Utility;
 import com.xyz.bd.webmaster.utility.dataTable.QueryBuilderService;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Service;
@@ -74,6 +78,14 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
     @Autowired
     B2cGpcServicesImpl b2cGpcServices;
 
+    @Autowired
+    ActionLogService actionLogService;
+
+    private HttpServletRequest requests;
+
+    @Value("${file.upload.dir}")
+    private String uploadDirectoryPath;
+
     @Override
     public DataTablesOutput<OrderModelEntity> findAllB2bDeviceOrderList(HttpServletRequest request, String customQuery, DataTablesInput input) {
         String whereQuery = queryBuilderService.generateSearchQuery(customQuery, Utility.tbl_order, OrderModelEntity.class);
@@ -105,17 +117,31 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
             String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
             // Define the upload directory
-            String uploadDirectory = "./upload";
+//            String uploadDirectory = "./upload";
+//
+//            // Generate the filename using the timestamp and original filename
+//            String filename = timestamp + "_" + excelFile.getOriginalFilename();
+//
+//            // Create the path for the file
+//            Path filePath = Paths.get(uploadDirectory, filename);
+//
+//            // Save the uploaded Excel file to the specified path
+//            Files.copy(excelFile.getInputStream(), filePath);
+            //save excel
 
-            // Generate the filename using the timestamp and original filename
+            //new excel save
+            //new excel
             String filename = timestamp + "_" + excelFile.getOriginalFilename();
 
             // Create the path for the file
-            Path filePath = Paths.get(uploadDirectory, filename);
+            Path filePath = Paths.get(uploadDirectoryPath, filename);
+
+            // Create the directory if it doesn't exist
+            Files.createDirectories(filePath.getParent());
 
             // Save the uploaded Excel file to the specified path
             Files.copy(excelFile.getInputStream(), filePath);
-            //save excel
+            //new excel save
 
             byte[] excelBytes = excelFile.getBytes();
             InputStream inputStream = new ByteArrayInputStream(excelBytes);
@@ -195,7 +221,21 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
                         b2cGpcServices.statusCheck(orderModelEntity);
                     }
 
-                    ActionLogsModel actionLogsModel = new ActionLogsModel();
+//                    ActionLogsModel actionLogsModel = new ActionLogsModel();
+//                    actionLogsModel.setAction_type_name(Utility.create_order_gps);
+//                    actionLogsModel.setAction_type_id(1L);
+//                    actionLogsModel.setEvent_date(Helper.getCurrentDate());
+//                    actionLogsModel.setF_id(1L);
+//                    actionLogsModel.setF_table(Utility.tbl_order);
+//                    actionLogsModel.setUser_id(1321L);
+//                    actionLogsModel.setOld_data("");
+//                    actionLogsModel.setNew_data("");
+//                    actionLogsModel.setMsisdn(orderModelEntity.getKamContactNumber());
+//                    actionLogsModel.setNote("Order Creation b2b simless");
+//                    actionLogsModel.setCreatedBy("zakaria.ahmaad");
+//                    actionLogsModel.setCreatedAt(Helper.getCurrentDate());
+//
+//                    actionLogService.SaveLogsData(actionLogsModel);
             }
             }
 

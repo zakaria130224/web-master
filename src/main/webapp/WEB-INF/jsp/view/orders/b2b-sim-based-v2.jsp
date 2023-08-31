@@ -91,7 +91,7 @@
       border-radius: 6px;
       padding: 12px 20px 12px 20px;
       color: #FFF;
-      font-size: 15px;
+      font-size: 11px;
       font-weight: 600;
     }
     .btn-disabled{
@@ -102,13 +102,21 @@
       color: #000F3C;
       border-color: #000F3C;
     }
-    .btn-b2b-sm-base, .btn-b2b-sm-base:hover{
+    /*.btn-b2b-sm-base, .btn-b2b-sm-base:hover{*/
+    /*  background: #000F3C;*/
+    /*  color: #FFF;*/
+    /*  border-color: #000F3C;*/
+    /*}*/
+    .card-head-custom{
+      height: 50px;
+    }
+    .btn-b2b-sm-base, .btn-b2b-sm-base:hover {
       background: #000F3C;
       color: #FFF;
       border-color: #000F3C;
-    }
-    .card-head-custom{
-      height: 50px;
+      height: 40px;
+      padding: 7px 20px 7px 20px;
+      border-radius: 8px;
     }
   </style>
 
@@ -173,37 +181,43 @@
                   <div class="col-sm-12 col-md-8 col-lg-8">
                     <!-- select -->
                     <div class="form-group float-left mr-2">
-                      <select class="form-control select2">
-                        <option>All Order</option>
+                      <select class="form-control select2" id="order_type" disabled>
+                        <option value="b2b_simbased">B2B SimBased</option>
                       </select>
                     </div>
 
                     <div class="form-group float-left mr-2">
                       <div class="input-group">
-                        <button type="button" class="btn btn-default pull-right btn-rounded" id="daterange-btn">
-                                                        <span>
-                                                          Today
-                                                        </span>
+                        <button type="button" class="btn btn-default pull-right btn-rounded" id="date_range">
+                          <span>Date Range</span>
                           <i class="fa fa-calendar"></i>
                         </button>
                       </div>
                     </div>
                     <div class="form-group float-left mr-2">
-                      <select class="form-control select2">
-                        <option>Order Status</option>
+                      <select class="form-control select2" id="search_status_input">
+
                       </select>
                     </div>
                     <div class="form-group float-left mr-2">
-                      <select class="form-control select2">
-                        <option>Vendor</option>
+                      <select class="form-control select2" id="search_vendor_input">
+
                       </select>
                     </div>
 
                     <div class="form-group float-left mr-2">
-                      <select class="form-control select2">
-                        <option>Product</option>
+                      <select class="form-control select2" id="search_product_input">
+
                       </select>
                     </div>
+
+                    <div class="form-group float-left mr-2">
+                      <button class="btn-b2b-sm-base" onclick="getCustomOrderData()">Search</button>
+                    </div>
+                    <div class="form-group float-left mr-2">
+                      <button class="btn-b2b-sm-base" onclick="getOrderSimData()">Reset</button>
+                    </div>
+
                   </div>
 
                   <div class="col-md-4 col-lg-4 col-sm-12 float-right">
@@ -431,6 +445,13 @@
           <form class="form-horizontal b2b-custom-form" id="dataForm" >
             <div class="card-body p-0">
               <div class="row">
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                  <a href="${pageContext.request.contextPath}/assets/custom/b2b_sim_based_template.xlsx" id="templateLink"></a>
+                  <button style="float: right" type="button" class="btn btn-custom-dark-blue" id="downloadTemplate">Download Template</button>
+                </div>
+                </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
@@ -773,11 +794,15 @@
   const base_url = $("#domain_url").val() + "/";
   let dataTable;
   let productData = [];
+  let userCustomSearchModel = "";
+  function searchDataTable(){
+
+  }
   //document ready function starts
   $( document ).ready(function() {
     $(".select2").select2();
     //Date range as a button
-    $('#daterange-btn').daterangepicker(
+    $('#date_range').daterangepicker(
             {
               ranges   : {
                 'Today'       : [moment(), moment()],
@@ -792,35 +817,128 @@
               opens: 'right'
             },
             function (start, end) {
-              $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+              $('#date_range span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
             }
     );
 
+    $('#date_range').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
+    });
+
+    $('#date_range').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+    });
+
+    $('#downloadTemplate').click(function() {
+      // Simulate a click on the hidden link to trigger the download
+      $('#templateLink')[0].click();
+    });
+
     getOrderSimData();
+    getProductListSearch();
+    getVendorListSearch();
+    getStatusListSearch()
+
+
 
   });
   //document ready function closed
 
+  function getProductListSearch() {
+    //   $('#product_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/product-list",
+      success: function (data) {
+        $('#search_product_input').append('<option value="">Product</option>')
+        data.data.forEach(element => {
+          $('#search_product_input').append('<option value="' + element.id +'">' + element.productName + '</option>');
+        });
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  function getVendorListSearch() {
+    //  $('#product_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/vendor-list",
+      success: function (data) {
+        $('#search_vendor_input').append('<option value="">Vendor</option>')
+        data.data.forEach(element => {
+          $('#search_vendor_input').append('<option value="' + element.id +'">' + element.name + '</option>');
+        });
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  function getStatusListSearch() {
+    //    $('#product_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/order-status-list",
+      success: function (data) {
+        $('#search_status_input').append('<option value="">Status</option>')
+        data.data.forEach(element => {
+          $('#search_status_input').append('<option value="' + element.id +'">' + element.order_name + '</option>');
+        });
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  function getCustomOrderData() {
+    $(".loader_body").show();
+    initOrderTable("b2b_simbased" , "orderType")
+    dataTable.destroy();
+    let customSearch = {
+
+      product_id: $("#search_product_input option:selected").val() == "" ? "" : $("#search_product_input option:selected").val(),
+      vendor_id: $("#search_vendor_input option:selected").val() == "" ? "" : $("#search_vendor_input option:selected").val(),
+      status_name_id: $("#search_status_input option:selected").val() == "" ? "" : $("#search_status_input option:selected").val(),
+      created_at: $("#date_range").val(),
+      order_type: {
+        operator: "like",
+        value: $("#order_type").val()
+      }
+    };
+    //let customSearch = null;
+    userCustomSearchModel = JSON.stringify(customSearch)
+    console.log("srCustomSearchModel::"+userCustomSearchModel);
+    initOrderTable(userCustomSearchModel);
+  }
+
   //order data get
     function getOrderSimData() {
       $(".loader_body").show();
-    //   console.log(base_url);
-      $.ajax({
-        type: 'get',
-        url: base_url + "api/web/orders/b2b-sim-based/listB2bSimDT",
-        success: function (data) {
-          $(".loader_body").hide();
-          initOrderTable(data.data);
-        },
-        error: function (error) {
-          $(".loader_body").hide();
+      $('#search_product_input').val("").trigger('change');
+      $('#search_vendor_input').val("").trigger('change');
+      $('#search_status_input').val("").trigger('change');
+      initOrderTable("b2b_simbased" , "orderType")
+      dataTable.destroy();
+      let customSearch = {
+        order_type: {
+          operator: "like",
+          value: $("#order_type").val()
         }
-      });
+      };
+
+      userCustomSearchModel = JSON.stringify(customSearch);
+      console.log("srCustomSearchModel::"+userCustomSearchModel);
+      initOrderTable(userCustomSearchModel);
     }
   //order data closed
 
   //init table
-  function initOrderTable(data) {
+  function initOrderTable(searchQuery) {
     "use strict";
     if ($.fn.dataTable.isDataTable('#dataTable')) {
       $('#dataTable').DataTable().clear();
@@ -834,8 +952,14 @@
       info: true,
       autoWidth: false,
       responsive: true,
-      data: data,
+     // data: data,
       order: [[0, 'desc']],
+      ajax: {
+        url: base_url + "api/web/orders/b2b-sim-based/listB2bSimDT",
+        data: function (d) {
+          d.customQuery = searchQuery;
+        }
+      },
       select:true,
       columns: [
         {data: 'id'},
@@ -846,7 +970,18 @@
        //    }
        //  },
         {data: 'chtTicketId'},
-        {data: 'createdAt'},
+        {data: 'createdAt',
+          render: function(data) {
+            var createdAtDate = new Date(data);
+            var formattedDate = createdAtDate.getFullYear() + '-' +
+                    ('0' + (createdAtDate.getMonth() + 1)).slice(-2) + '-' +
+                    ('0' + createdAtDate.getDate()).slice(-2) + ' ' +
+                    ('0' + createdAtDate.getHours()).slice(-2) + ':' +
+                    ('0' + createdAtDate.getMinutes()).slice(-2) + ':' +
+                    ('0' + createdAtDate.getSeconds()).slice(-2);
+            return formattedDate;
+          }
+          },
         {data: 'vtsSimNo'},
         {data: 'packName'},
         {data: 'simKit'},
@@ -886,15 +1021,26 @@
             return '<button class="btn btn-b2b-sm btn-b2b-sm-download btn-sm exclude-click">Download Excel</button>';
           }
         },
+        // {
+        //   data: 'id',
+        //   render: function (data, type, full, row){
+        //     return '<button class="btn btn-b2b-sm btn-sm btn-b2b-sm-base change-status exclude-click">Change Status</button>';
+        //   }
+        // }
         {
-          data: 'id',
+          data: 'statusName',
           render: function (data, type, full, row){
-            return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status exclude-click">Change Status</button>';
+            if(data === "Cancelled" || data === "Onboarded"){
+              return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status exclude-click" disabled>Change Status</button>';
+            } else{
+              return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status exclude-click" >Change Status</button>';
+            }
+
           }
         }
       ]
     });
-
+    $(".loader_body").hide();
   }
   // table ends
 
@@ -950,8 +1096,9 @@
   //           ('0' + inputDate.getSeconds()).slice(-2);
   //
   //   console.log(formattedDate);
+    let updatedStatus = $("#editStatus option:selected").val().split("/")[1];
 
-    if(previous_state == "New Order"){
+    if(previous_state == "New Order" && updatedStatus == "First Contact"){
       var schedule_val = $('#schedule').val();
     }
     else{
@@ -1016,6 +1163,40 @@
     }
 
   }
+
+  function initiateRelatedFieldData(){
+    let updatedStatus = $("#editStatus option:selected").val().split("/")[1];
+    switch (updatedStatus){
+      case "Cancelled" :
+        $('#imei_block').hide();
+        $('#imei_input').attr("required", false);
+        $('#tracker_device_name').hide();
+        $('#tracker_device_name').attr("required", false);
+        $('#schedule_time').hide();
+        $('#schedule_time').attr("required", false);
+        break
+
+            // case "Installation" :
+            //     $("#schedule_div").show();
+            //     $("#device_name").attr("required", true);
+            //     $("#imei_number").attr("required", true);
+            //     $("#first_contact_div").hide();
+            //     $("#scheduled_time").attr("required", false);
+            //     break
+
+      default:
+        $('#imei_block').hide();
+        $('#imei_input').attr("required", false);
+        $('#tracker_device_name').hide();
+        $('#tracker_device_name').attr("required", false);
+        $('#schedule_time').hide();
+        $('#schedule_time').attr("required", false);
+    }
+  }
+
+  $("#editStatus").on("change", function (){
+    initiateRelatedFieldData();
+  })
 
 
   function modalClose(){
@@ -1196,7 +1377,7 @@
         data.data.forEach(element => {
           $('#editStatus').append('<option value="' + element.b2b_sim +"/"+ element.order_name+'">' + element.order_name + '</option>');
         });
-        $('#editStatus').append('<option value="100">Cancelled</option>')
+        $('#editStatus').append('<option value="100/Cancelled">Cancelled</option>')
       },
       error: function (error) {
         console.log(error);

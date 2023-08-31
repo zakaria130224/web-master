@@ -179,7 +179,7 @@
                                         <!-- select -->
                                         <div class="form-group float-left mr-2">
                                             <select class="form-control select2" id="order_type" disabled>
-                                                <option value="b2b_">B2B Simless</option>
+                                                <option value="b2b_simless">B2B Simless</option>
                                             </select>
                                         </div>
                                         <div class="form-group float-left mr-2">
@@ -436,6 +436,13 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <a href="${pageContext.request.contextPath}/assets/custom/b2b_sim_less_template.xlsx" id="templateLink"></a>
+                                        <button style="float: right" type="button" class="btn btn-custom-dark-blue" id="downloadTemplate">Download Template</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
                                         <label for="chtticket">CHT Ticket Number</label>
                                         <input type="text" class="form-control" name="chtticket" id="chtticket"  placeholder="" required>
                                     </div>
@@ -486,12 +493,13 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="current_status">Current Status </label>
                                         <input type="hidden" id="row_id">
                                         <input type="hidden" id="kcp_p_name">
                                         <input type="hidden" id="kcp_p_email">
                                         <input type="hidden" id="kcp_p_contact">
                                         <input type="hidden" id="previous_state">
+                                        <label for="current_status">Current Status </label>
+
                                         <select class="form-control" id="current_status" disabled>
 
                                         </select>
@@ -805,6 +813,11 @@
             $(this).val('');
         });
 
+        $('#downloadTemplate').click(function() {
+            // Simulate a click on the hidden link to trigger the download
+            $('#templateLink')[0].click();
+        });
+
         getOrderSimData();
         getProductListSearch();
         getVendorListSearch();
@@ -1069,8 +1082,9 @@
         //           ('0' + inputDate.getSeconds()).slice(-2);
         //
         //   console.log(formattedDate);
+        let updatedStatus = $("#editStatus option:selected").val().split("/")[1];
 
-        if(previous_state == "New Order"){
+        if(previous_state == "New Order" && updatedStatus == "First Contact"){
             var schedule_val = $('#schedule').val();
         }
         else{
@@ -1135,6 +1149,41 @@
         }
 
     }
+
+    function initiateRelatedFieldData(){
+        let updatedStatus = $("#editStatus option:selected").val().split("/")[1];
+        switch (updatedStatus){
+            case "Cancelled" :
+                $('#imei_block').hide();
+                $('#imei_input').attr("required", false);
+                $('#tracker_device_name').hide();
+                $('#tracker_device_name').attr("required", false);
+                $('#schedule_time').hide();
+                $('#schedule_time').attr("required", false);
+                break
+
+            // case "Installation" :
+            //     $("#schedule_div").show();
+            //     $("#device_name").attr("required", true);
+            //     $("#imei_number").attr("required", true);
+            //     $("#first_contact_div").hide();
+            //     $("#scheduled_time").attr("required", false);
+            //     break
+
+            default:
+                $('#imei_block').hide();
+                $('#imei_input').attr("required", false);
+                $('#tracker_device_name').hide();
+                $('#tracker_device_name').attr("required", false);
+                $('#schedule_time').hide();
+                $('#schedule_time').attr("required", false);
+        }
+    }
+
+    $("#editStatus").on("change", function (){
+        initiateRelatedFieldData();
+    })
+
 
 
     function modalClose(){
