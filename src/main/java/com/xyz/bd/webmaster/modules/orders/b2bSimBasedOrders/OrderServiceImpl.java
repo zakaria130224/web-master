@@ -110,6 +110,9 @@ public class OrderServiceImpl implements OrderService{
     @Value("${api.webAuthorizationHeader}")
     private String webAuthorizationHeader;
 
+    @Value("${file.upload.dir}")
+    private String uploadDirectoryPath;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(B2cGpcServices.class);
 
     @Override
@@ -126,17 +129,30 @@ public class OrderServiceImpl implements OrderService{
             String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
             // Define the upload directory
-            String uploadDirectory = "./upload";
-
-            // Generate the filename using the timestamp and original filename
+//            String uploadDirectory = "./upload";
+//
+//            // Generate the filename using the timestamp and original filename
+//            String filename = timestamp + "_" + excelFile.getOriginalFilename();
+//
+//            // Create the path for the file
+//            Path filePath = Paths.get(uploadDirectory, filename);
+//
+//            // Save the uploaded Excel file to the specified path
+//            Files.copy(excelFile.getInputStream(), filePath);
+            //save excel
+             //new excel
             String filename = timestamp + "_" + excelFile.getOriginalFilename();
 
             // Create the path for the file
-            Path filePath = Paths.get(uploadDirectory, filename);
+            Path filePath = Paths.get(uploadDirectoryPath, filename);
+
+            // Create the directory if it doesn't exist
+            Files.createDirectories(filePath.getParent());
 
             // Save the uploaded Excel file to the specified path
             Files.copy(excelFile.getInputStream(), filePath);
-            //save excel
+            //new
+
 
             byte[] excelBytes = excelFile.getBytes();
             InputStream inputStream = new ByteArrayInputStream(excelBytes);
@@ -227,6 +243,7 @@ public class OrderServiceImpl implements OrderService{
                     b2cGpcServices.statusCheck(orderModelEntity);
                 }
             }
+
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

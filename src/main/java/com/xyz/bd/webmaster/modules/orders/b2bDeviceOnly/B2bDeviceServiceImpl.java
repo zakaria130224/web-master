@@ -23,6 +23,7 @@ import com.xyz.bd.webmaster.utility.Utility;
 import com.xyz.bd.webmaster.utility.dataTable.QueryBuilderService;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.stereotype.Service;
@@ -82,6 +83,9 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
 
     private HttpServletRequest requests;
 
+    @Value("${file.upload.dir}")
+    private String uploadDirectoryPath;
+
     @Override
     public DataTablesOutput<OrderModelEntity> findAllB2bDeviceOrderList(HttpServletRequest request, String customQuery, DataTablesInput input) {
         String whereQuery = queryBuilderService.generateSearchQuery(customQuery, Utility.tbl_order, OrderModelEntity.class);
@@ -113,17 +117,31 @@ public class B2bDeviceServiceImpl implements B2bDeviceServices{
             String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
             // Define the upload directory
-            String uploadDirectory = "./upload";
+//            String uploadDirectory = "./upload";
+//
+//            // Generate the filename using the timestamp and original filename
+//            String filename = timestamp + "_" + excelFile.getOriginalFilename();
+//
+//            // Create the path for the file
+//            Path filePath = Paths.get(uploadDirectory, filename);
+//
+//            // Save the uploaded Excel file to the specified path
+//            Files.copy(excelFile.getInputStream(), filePath);
+            //save excel
 
-            // Generate the filename using the timestamp and original filename
+            //new excel save
+            //new excel
             String filename = timestamp + "_" + excelFile.getOriginalFilename();
 
             // Create the path for the file
-            Path filePath = Paths.get(uploadDirectory, filename);
+            Path filePath = Paths.get(uploadDirectoryPath, filename);
+
+            // Create the directory if it doesn't exist
+            Files.createDirectories(filePath.getParent());
 
             // Save the uploaded Excel file to the specified path
             Files.copy(excelFile.getInputStream(), filePath);
-            //save excel
+            //new excel save
 
             byte[] excelBytes = excelFile.getBytes();
             InputStream inputStream = new ByteArrayInputStream(excelBytes);

@@ -436,6 +436,13 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <a href="${pageContext.request.contextPath}/assets/custom/b2b_sim_less_template.xlsx" id="templateLink"></a>
+                                        <button style="float: right" type="button" class="btn btn-custom-dark-blue" id="downloadTemplate">Download Template</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
                                         <label for="chtticket">CHT Ticket Number</label>
                                         <input type="text" class="form-control" name="chtticket" id="chtticket"  placeholder="" required>
                                     </div>
@@ -804,6 +811,11 @@
 
         $('#date_range').on('cancel.daterangepicker', function(ev, picker) {
             $(this).val('');
+        });
+
+        $('#downloadTemplate').click(function() {
+            // Simulate a click on the hidden link to trigger the download
+            $('#templateLink')[0].click();
         });
 
         getOrderSimData();
