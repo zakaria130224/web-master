@@ -383,8 +383,8 @@ public class OrderServiceImpl implements OrderService{
 
                         // Parse the API response
                         JSONObject jsonResponse = new JSONObject(response.toString());
-                        JSONObject responseHeader = jsonResponse.getJSONObject("responseHeader");
-                        resultCode = responseHeader.getLong("resultCode");
+                        JSONObject responseHeader = jsonResponse.getJSONObject("data");
+                        resultCode = responseHeader.getLong("id");
                         resultDesc  = responseHeader.getString("resultDesc");
 
                         // Use the resultCode as needed
@@ -401,7 +401,7 @@ public class OrderServiceImpl implements OrderService{
                     deviceInfo.setUserId(existingUser.getId()); // Set the user ID
                     deviceInfo.setImei(updateStatus.getImei());
                     deviceInfo.setTrackerDeviceId(resultCode);
-                    deviceInfo.setUserEmail(resultDesc);
+                    deviceInfo.setUserEmail(orders.getKcpEmail());
                     deviceInfo.setCustomerName(updateStatus.getKcpName());
                     deviceInfo.setOrderId(id);
                     deviceInfo.setCompanyId(orders.getCompanyId());
