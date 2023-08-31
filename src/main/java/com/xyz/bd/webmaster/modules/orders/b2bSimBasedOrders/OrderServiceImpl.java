@@ -385,7 +385,7 @@ public class OrderServiceImpl implements OrderService{
                         JSONObject jsonResponse = new JSONObject(response.toString());
                         JSONObject responseHeader = jsonResponse.getJSONObject("data");
                         resultCode = responseHeader.getLong("id");
-                        resultDesc  = responseHeader.getString("resultDesc");
+                      //  resultDesc  = responseHeader.getString("resultDesc");
 
                         // Use the resultCode as needed
                         System.out.println("Result Code: " + resultCode);
