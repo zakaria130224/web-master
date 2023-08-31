@@ -1118,7 +1118,7 @@
         finalizationNote :$('#add_note').val(),
         onboardedNote :$('#add_note').val(),
         cancelledNote :$('#add_note').val(),
-        deviceName : $('#device_name').val()
+        deviceName : device_name
 
       }
       let id = $("#row_id").val();
