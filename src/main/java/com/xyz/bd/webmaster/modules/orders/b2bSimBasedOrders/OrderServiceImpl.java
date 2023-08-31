@@ -236,6 +236,9 @@ public class OrderServiceImpl implements OrderService{
                 orderModelEntity.setProductName(products.getProductName());
                 orderModelEntity.setStatusNameId(1);
                 orderModelEntity.setProductType(products.getProductType());
+                orderModelEntity.setCustomerName(kcpName);
+                orderModelEntity.setCustomerContactNumber(kcpContact);
+                orderModelEntity.setCustomerEmail(kcpEmail);
 
 
                 orderRepository.save(orderModelEntity);
@@ -414,6 +417,7 @@ public class OrderServiceImpl implements OrderService{
                     deviceInfo.setDataPackName(orders.getPackName());
                     deviceInfo.setCompanyName(orders.getCompanyName());
                     deviceInfo.setInstallationDate(Helper.getCurrentDate());
+                    deviceInfo.setDeviceName(orders.getDeviceName());
 
                     // Set other device info fields as needed
                     trackerDeviceService.saveDeviceInfo(deviceInfo);
@@ -422,6 +426,8 @@ public class OrderServiceImpl implements OrderService{
                     orderModelEntity.setInstallationNote(updateStatus.getInstallationNote());
                     orderModelEntity.setInstallationDt(Helper.getCurrentDate());
                     orderModelEntity.setInstallationBy(SessionManager.getUserLoginName(request));
+                    orderModelEntity.setImei(orderModelEntity.getImei());
+
                 }
 
             }

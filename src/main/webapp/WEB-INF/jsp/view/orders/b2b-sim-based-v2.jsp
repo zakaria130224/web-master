@@ -1083,19 +1083,7 @@
 
     var previous_state = $('#previous_state').val();
 
-  //   let datetimeLocalValue = $('#schedule').val();
-  //
-  //   let inputDate = new Date(datetimeLocalValue);
-  // //  let formattedDate = inputDate.toISOString().slice(0, 19).replace('T', ' ');
-  //   let formattedDate =
-  //           inputDate.getFullYear() + '-' +
-  //           ('0' + (inputDate.getMonth() + 1)).slice(-2) + '-' +
-  //           ('0' + inputDate.getDate()).slice(-2) + ' ' +
-  //           ('0' + inputDate.getHours()).slice(-2) + ':' +
-  //           ('0' + inputDate.getMinutes()).slice(-2) + ':' +
-  //           ('0' + inputDate.getSeconds()).slice(-2);
-  //
-  //   console.log(formattedDate);
+
     let updatedStatus = $("#editStatus option:selected").val().split("/")[1];
 
     if(previous_state == "New Order" && updatedStatus == "First Contact"){
@@ -1104,6 +1092,14 @@
     else{
       var schedule_val = "2023-08-30";
     }
+
+    if(previous_state == "Sim Activation" && updatedStatus == "Installation"){
+      var device_name = $('#device_name').val();
+    }
+    else{
+      var device_name = "";
+    }
+
 
     if($("#updateForm").parsley().validate()){
       let orderStatusData = {
@@ -1121,7 +1117,8 @@
         installationNote :$('#add_note').val(),
         finalizationNote :$('#add_note').val(),
         onboardedNote :$('#add_note').val(),
-        cancelledNote :$('#add_note').val()
+        cancelledNote :$('#add_note').val(),
+        deviceName : $('#device_name').val()
 
       }
       let id = $("#row_id").val();
