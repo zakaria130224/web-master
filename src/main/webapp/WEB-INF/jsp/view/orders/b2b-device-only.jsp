@@ -539,7 +539,7 @@
                                 <div class="col-md-12" id = "schedule_time">
                                     <div class="form-group">
                                         <label for="schedule">Schedule</label>
-                                        <input type="date" class="form-control" name="schedule" id="schedule" placeholder="Add Schedule">
+                                        <input type="datetime-local" class="form-control" name="schedule" id="schedule" placeholder="Add Schedule">
                                     </div>
                                 </div>
 
@@ -1069,19 +1069,19 @@
 
         var previous_state = $('#previous_state').val();
 
-        //   let datetimeLocalValue = $('#schedule').val();
-        //
-        //   let inputDate = new Date(datetimeLocalValue);
-        // //  let formattedDate = inputDate.toISOString().slice(0, 19).replace('T', ' ');
-        //   let formattedDate =
-        //           inputDate.getFullYear() + '-' +
-        //           ('0' + (inputDate.getMonth() + 1)).slice(-2) + '-' +
-        //           ('0' + inputDate.getDate()).slice(-2) + ' ' +
-        //           ('0' + inputDate.getHours()).slice(-2) + ':' +
-        //           ('0' + inputDate.getMinutes()).slice(-2) + ':' +
-        //           ('0' + inputDate.getSeconds()).slice(-2);
-        //
-        //   console.log(formattedDate);
+          let datetimeLocalValue = $('#schedule').val();
+
+          let inputDate = new Date(datetimeLocalValue);
+        //  let formattedDate = inputDate.toISOString().slice(0, 19).replace('T', ' ');
+          let formattedDate =
+                  inputDate.getFullYear() + '-' +
+                  ('0' + (inputDate.getMonth() + 1)).slice(-2) + '-' +
+                  ('0' + inputDate.getDate()).slice(-2) + ' ' +
+                  ('0' + inputDate.getHours()).slice(-2) + ':' +
+                  ('0' + inputDate.getMinutes()).slice(-2) + ':' +
+                  ('0' + inputDate.getSeconds()).slice(-2);
+
+          console.log(formattedDate);
         let updatedStatus = $("#editStatus option:selected").val().split("/")[1];
 
         if(previous_state == "New Order" && updatedStatus == "First Contact"){
@@ -1100,7 +1100,7 @@
                 kcpContactNumber: $('#kcp_p_contact').val(),
                 previousState: $('#previous_state').val(),
                 imei: $('#imei_input').val(),
-                scheduledDt: schedule_val,
+             //   scheduledDt: schedule_val,
                 scheduledNote:$('#add_note').val(),
                 firstContactNote:$('#add_note').val(),
                 simActivationNote:$('#add_note').val(),
@@ -1116,7 +1116,7 @@
             $.ajax({
                 type: 'POST',
                 url: base_url + "api/web/orders/b2b-sim-based/update-status",
-                data: {orderStatusData: JSON.stringify(orderStatusData), id: parseInt(id)},
+                data: {orderStatusData: JSON.stringify(orderStatusData), id: parseInt(id), scheduled_time: formattedDate},
                 success: function (resultData) {
                     console.log(resultData);
                     $(".loader_body").hide();

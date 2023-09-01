@@ -32,8 +32,8 @@ public class OrderRestController {
 
     @RequestMapping(value = "/update-status", method = RequestMethod.POST)
     public CommonRestResponse updateDriverBasicInfo(HttpServletRequest request,
-                                                    @RequestParam("orderStatusData") String orderStatusData, @RequestParam("id") Long id) {
-        return orderService.updateOrderStatus(request, orderStatusData, id);
+                                                    @RequestParam("orderStatusData") String orderStatusData, @RequestParam("id") Long id, @RequestParam("scheduled_time") String scheduled_time) {
+        return orderService.updateOrderStatus(request, orderStatusData, id, scheduled_time);
 
     }
 

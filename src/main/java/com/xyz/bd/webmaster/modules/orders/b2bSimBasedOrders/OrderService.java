@@ -26,7 +26,7 @@ public interface OrderService {
 
     DataTablesOutput<OrderModelEntity> findAllB2bSimOrderList(HttpServletRequest request, String customQuery, DataTablesInput input);
 
-    CommonRestResponse updateOrderStatus(HttpServletRequest request, String orderStatusData, Long id);
+    CommonRestResponse updateOrderStatus(HttpServletRequest request, String orderStatusData, Long id, String dateTime);
 
 }
 
