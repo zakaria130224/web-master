@@ -110,7 +110,7 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
 
     @Column(name = "contact_sla_min")
     @JsonProperty("contactSlaMin")
-    private Integer contactSlaMin;
+    private Long contactSlaMin;
 
     @Column(name = "installation_sla_min")
     @JsonProperty("installationSlaMin")

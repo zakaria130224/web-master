@@ -28,5 +28,6 @@ public interface OrderService {
 
     CommonRestResponse updateOrderStatus(HttpServletRequest request, String orderStatusData, Long id, String dateTime);
 
+    long calculateTimeDifference(String createdAt, String scheduledAt);
 }
 

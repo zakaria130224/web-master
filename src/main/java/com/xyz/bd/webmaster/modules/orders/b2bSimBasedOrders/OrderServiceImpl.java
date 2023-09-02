@@ -60,6 +60,7 @@ import java.util.Optional;
 import java.text.SimpleDateFormat;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -467,6 +468,27 @@ public class OrderServiceImpl implements OrderService{
                     orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
                     orderModelEntity.setFirstContactNote(updateStatus.getFirstContactNote());
                     orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));
+
+//                    String firstCall = "2023-08-11 15:30:00";
+//                    String orderDate = "2023-08-12 15:30:00";
+
+                    SimpleDateFormat dateFormats = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                    // Get the current date and time
+                    Date currentDate = new Date();
+
+                    // Format the current date and time into the desired output format
+                    String formattedDatess = dateFormats.format(currentDate);
+
+                    String firstCall = formattedDatess;
+                    String createDate = String.valueOf(orderModelEntity.getCreatedAt());
+                    System.out.println(firstCall);
+                    System.out.println(createDate);
+
+                    long hoursDifference = calculateTimeDifference(createDate, firstCall);
+                    orderModelEntity.setContactSlaMin(hoursDifference);
+
+                    System.out.println("Time Difference (hours): " + hoursDifference);
                     orderRepository.save(orderModelEntity);
                 } catch(Exception e) { //this generic but you can control another types of exception
                     // look the origin of excption
@@ -509,11 +531,11 @@ public class OrderServiceImpl implements OrderService{
 
           }
 
-          else if ("Sim Activation".equals(status_name)){
-              orderModelEntity.setSimActivationNote(updateStatus.getSimActivationNote());
-              orderModelEntity.setSimActivationDt(Helper.getCurrentDate());
-              orderModelEntity.setSimActivationBy(SessionManager.getUserLoginName(request));
-          }
+//          else if ("Sim Activation".equals(status_name)){
+//              orderModelEntity.setSimActivationNote(updateStatus.getSimActivationNote());
+//              orderModelEntity.setSimActivationDt(Helper.getCurrentDate());
+//              orderModelEntity.setSimActivationBy(SessionManager.getUserLoginName(request));
+//          }
 
           else if ("Sim Activation".equals(status_name)){
               orderModelEntity.setSimActivationNote(updateStatus.getSimActivationNote());
@@ -593,6 +615,27 @@ public class OrderServiceImpl implements OrderService{
         sms.setPhone(orderData.getCustomerContactNumber());
         sms.setText(body);
         sendSMSService.sendSMS(sms);
+    }
+
+    public long calculateTimeDifference(String createdAt, String firstcallDt) {
+        try {
+            // Define date format
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            // Parse createdAt and scheduledAt strings to Date objects
+            Date createdAtDate = dateFormat.parse(createdAt);
+            System.out.println(createdAtDate);
+            Date scheduledAtDate = dateFormat.parse(firstcallDt);
+
+            // Calculate the time difference in milliseconds
+            long timeDifferenceMillis = scheduledAtDate.getTime() - createdAtDate.getTime();
+
+            // Convert milliseconds to hours
+            return TimeUnit.MILLISECONDS.toHours(timeDifferenceMillis);
+        } catch (Exception e) {
+            // Handle parsing or other exceptions here
+            throw new RuntimeException("Error calculating time difference: " + e.getMessage());
+        }
     }
 
 
