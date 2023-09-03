@@ -454,7 +454,7 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <a href="${pageContext.request.contextPath}/assets/custom/b2c_order_template.xlsx" id="templateLink"></a>
+                                        <a href="${pageContext.request.contextPath}/assets/custom/b2c_gpshop.xlsx" id="templateLink"></a>
                                         <button style="float: right" type="button" class="btn btn-custom-dark-blue" id="downloadTemplate">Download Template</button>
                                     </div>
                                 </div>
@@ -534,12 +534,12 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="editCht">Cht Ticket</label>
-                                        <input type="text" class="form-control" name="editCht" id="editCht" placeholder="" disabled>
-                                    </div>
-                                </div>
+<%--                                <div class="col-md-12">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="editCht">Cht Ticket</label>--%>
+<%--                                        <input type="text" class="form-control" name="editCht" id="editCht" placeholder="" disabled>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
 
                                 <div class="col-md-12" id="imei_block">
                                     <div class="form-group">
@@ -620,12 +620,12 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="editCht">Cht Ticket</label>
-                                        <input type="text" class="form-control" name="editCht" id="editChts" placeholder="" readonly>
-                                    </div>
-                                </div>
+<%--                                <div class="col-md-12">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="editCht">Cht Ticket</label>--%>
+<%--                                        <input type="text" class="form-control" name="editCht" id="editChts" placeholder="" readonly>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
 
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -1133,7 +1133,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: base_url + "api/web/orders/b2b-sim-based/update-status",
+                url: base_url + "api/web/orders/b2b-sim-based/update-status-gpshop",
                 data: {orderStatusData: JSON.stringify(orderStatusData), id: parseInt(id), scheduled_time: formattedDate},
                 success: function (resultData) {
                     console.log(resultData);

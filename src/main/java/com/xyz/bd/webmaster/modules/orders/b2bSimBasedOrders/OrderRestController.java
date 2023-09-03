@@ -50,4 +50,11 @@ public class OrderRestController {
     public DataTablesOutput<OrderModelEntity> getB2cGpShopOrdersDT(@Valid DataTablesInput input, HttpServletRequest request, @RequestParam(value = "customQuery",required = false) String customQuery) {
         return b2cGpShopServices.findAllB2cGpShopOrderList(request, customQuery, input);
     }
+
+    @RequestMapping(value = "/update-status-gpshop", method = RequestMethod.POST)
+    public CommonRestResponse updateGpShopInfo(HttpServletRequest request,
+                                                    @RequestParam("orderStatusData") String orderStatusData, @RequestParam("id") Long id, @RequestParam("scheduled_time") String scheduled_time) {
+        return b2cGpShopServices.updateOrderStatus(request, orderStatusData, id, scheduled_time);
+
+    }
 }
