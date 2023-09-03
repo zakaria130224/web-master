@@ -1094,7 +1094,7 @@
         if($("#updateForm").parsley().validate()){
             let orderStatusData = {
                 statusName: $('#editStatus').val().split("/")[1],
-                statusNameId: $('#editStatus').val().split("/")[0],
+                statusNameId: $('#editStatus').val().split("/")[2],
                 kcpName: $('#kcp_p_name').val(),
                 kcpEmail: $('#kcp_p_email').val(),
                 kcpContactNumber: $('#kcp_p_contact').val(),
@@ -1365,7 +1365,7 @@
             url: base_url + "api/web/utility/next-order-status",
             success: function (data) {
                 data.data.forEach(element => {
-                    $('#editStatus').append('<option value="' + element.b2b_simless + "/" + element.order_name + '">' + element.order_name + '</option>');
+                    $('#editStatus').append('<option value="' + element.b2b_simless + "/" + element.order_name + "/" + element.id +'">' + element.order_name + '</option>');
                 });
                 $('#editStatus').append('<option value="100/Cancelled">Cancelled</option>')
             },
