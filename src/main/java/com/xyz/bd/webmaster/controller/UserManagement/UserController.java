@@ -72,8 +72,8 @@ public class UserController {
 
 
     @RequestMapping(value = "/DtData", method = RequestMethod.GET)
-    public DataTablesOutput<AppUser> DTMenu(@Valid DataTablesInput input, HttpServletRequest request) {
-        return appUserService.DTData(input, request);
+    public DataTablesOutput<AppUser> DTMenu(@Valid DataTablesInput input) {
+        return appUserService.DTData(input);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
