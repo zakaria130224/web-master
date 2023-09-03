@@ -459,12 +459,12 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="chtticket">CHT Ticket Number</label>
-                                        <input type="text" class="form-control" name="chtticket" id="chtticket"  placeholder="" required>
-                                    </div>
-                                </div>
+<%--                                <div class="col-md-12">--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label for="chtticket">CHT Ticket Number</label>--%>
+<%--                                        <input type="text" class="form-control" name="chtticket" id="chtticket"  placeholder="" required>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
 
                                 <div class="col-md-12">
                                     <div class="form-group">

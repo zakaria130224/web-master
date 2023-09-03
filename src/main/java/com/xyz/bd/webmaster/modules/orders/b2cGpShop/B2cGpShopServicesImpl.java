@@ -3,6 +3,7 @@ package com.xyz.bd.webmaster.modules.orders.b2cGpShop;
 
 import com.xyz.bd.webmaster.config.session.SessionManager;
 import com.xyz.bd.webmaster.modules.actionLogs.ActionLogService;
+import com.xyz.bd.webmaster.modules.actionLogs.ActionLogsModel;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyRepository;
 import com.xyz.bd.webmaster.modules.commonPackages.models.VendorModelEntity;
@@ -17,6 +18,7 @@ import com.xyz.bd.webmaster.modules.orders.b2cGpcOrders.B2cGpcServicesImpl;
 import com.xyz.bd.webmaster.repositories.CommonRepository;
 import com.xyz.bd.webmaster.services.CommonServices.EmailSenderService;
 import com.xyz.bd.webmaster.services.CommonServices.SendSMSService;
+import com.xyz.bd.webmaster.utility.Helper;
 import com.xyz.bd.webmaster.utility.Utility;
 import com.xyz.bd.webmaster.utility.dataTable.QueryBuilderService;
 import org.apache.poi.ss.usermodel.*;
@@ -141,72 +143,75 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
 
             // Skip the first row (header row) by starting the loop from index 1
             for (int rowIndex = 1; rowIndex < sheet.getPhysicalNumberOfRows(); rowIndex++) {
+                System.out.println("test1");
                 Row row = sheet.getRow(rowIndex);
-                String transaction = dataFormatter.formatCellValue(row.getCell(0));
-                String reqDate = dataFormatter.formatCellValue(row.getCell(1));
-                String reqTime = dataFormatter.formatCellValue(row.getCell(2));
-                String customerName = dataFormatter.formatCellValue(row.getCell(3));
-                String cusMsisdn = dataFormatter.formatCellValue(row.getCell(4));
-                String cusAddress = dataFormatter.formatCellValue(row.getCell(5));
-                String cusCity = dataFormatter.formatCellValue(row.getCell(6));
-                String cusArea = dataFormatter.formatCellValue(row.getCell(7));
-                String cusThana = dataFormatter.formatCellValue(row.getCell(8));
-                String productType = dataFormatter.formatCellValue(row.getCell(9));
-                String productName = dataFormatter.formatCellValue(row.getCell(10));
-                String productQty = dataFormatter.formatCellValue(row.getCell(11));
-                String mrp = dataFormatter.formatCellValue(row.getCell(12));
-                String deliveryType = dataFormatter.formatCellValue(row.getCell(13));
-                String deliveryCharge = dataFormatter.formatCellValue(row.getCell(14));
+                String quantityCellValues = dataFormatter.formatCellValue(row.getCell(11));
+                System.out.println(quantityCellValues);
+                System.out.println("tests2");
+                System.out.println(dataFormatter.formatCellValue(row.getCell(4)));
+                int productQuantity = 0;
+                productQuantity = Integer.parseInt(quantityCellValues);
+                System.out.println(productQuantity);
+                for (int i = 0; i < productQuantity; i++) {
+                    String transaction = dataFormatter.formatCellValue(row.getCell(0));
+                    String reqDate = dataFormatter.formatCellValue(row.getCell(1));
+                    String reqTime = dataFormatter.formatCellValue(row.getCell(2));
+                    String customerName = dataFormatter.formatCellValue(row.getCell(3));
+                    String cusMsisdn = dataFormatter.formatCellValue(row.getCell(4));
+                    String cusAddress = dataFormatter.formatCellValue(row.getCell(5));
+                    String cusCity = dataFormatter.formatCellValue(row.getCell(6));
+                    String cusArea = dataFormatter.formatCellValue(row.getCell(7));
+                    String cusThana = dataFormatter.formatCellValue(row.getCell(8));
+                    String productType = dataFormatter.formatCellValue(row.getCell(9));
+                    String productName = dataFormatter.formatCellValue(row.getCell(10));
+                //    String productQty = dataFormatter.formatCellValue(row.getCell(11));
+                    String mrp = dataFormatter.formatCellValue(row.getCell(12));
+                    String deliveryType = dataFormatter.formatCellValue(row.getCell(13));
+                    String deliveryCharge = dataFormatter.formatCellValue(row.getCell(14));
 
-              //  String audNum = dataFormatter.formatCellValue(row.getCell(15));
+                    //  String audNum = dataFormatter.formatCellValue(row.getCell(15));
 
-                VendorModelEntity vendor = productService.findVendorByProductName(productName);
+                    VendorModelEntity vendor = productService.findVendorByProductName(productName);
 
-                if (vendor != null) {
-                    System.out.println("Vendor Name: " + vendor.getName());
-                    System.out.println("Vendor Email: " + vendor.getEmail());
+                    if (vendor != null) {
+                        System.out.println("Vendor Name: " + vendor.getName());
+                        System.out.println("Vendor Email: " + vendor.getEmail());
 
-                    // Perform any actions with the vendor details here
-                }
+                        // Perform any actions with the vendor details here
+                    }
 
-//                System.out.println(bsCode);
-//                System.out.println(companyName);
-//
-//                CompanyModelEntity existingCompany = companyRepository.findByCompanyNameAndBsCode(companyName, bsCode);
-//
-//                if (existingCompany == null) {
-//                    // Create a new company entry in tbl_company
-//                    CompanyModelEntity newCompany = new CompanyModelEntity();
-//                    newCompany.setCompanyName(companyName);
-//                    newCompany.setBsCode(bsCode);
-//                    // ... (set other properties)
-//                    companyRepository.save(newCompany);
-//                }
 
-                ProductsModel products = productService.getAllProductDataByProductName(productType);
+                    ProductsModel products = productService.getAllProductDataByProductName(productName);
 
-                OrderModelEntity orderModelEntity = new OrderModelEntity();
-              //  orderModelEntity.setChtTicketId(chtticket);
-                orderModelEntity.setGpshopTransactionId(transaction);
-                orderModelEntity.setCustomerName(customerName);
-                orderModelEntity.setCustomerContactNumber(cusMsisdn);
-                orderModelEntity.setAddress(cusAddress);
-                orderModelEntity.setCity(cusCity);
-                orderModelEntity.setDistrict(cusArea);
-                orderModelEntity.setThana(cusThana);
-                orderModelEntity.setProductType(productType);
-                orderModelEntity.setProductName(productName);
-                orderModelEntity.setQuantity(Long.valueOf(productQty));
-                orderModelEntity.setUnitPrice(Double.valueOf(mrp));
-                orderModelEntity.setGpShopDeliveryType(deliveryType);
-                orderModelEntity.setGpshopDeliveryCharge(Double.valueOf(deliveryCharge));
-//                orderModelEntity.setKcpContactNumber(kcpContact);
-//                orderModelEntity.setKcpEmail(kcpEmail);
-//                orderModelEntity.setSupportPartnerName(supportPartner);
-//                orderModelEntity.setProductType(productType);
-//                orderModelEntity.setAudioListenMsisdn(audNum);
-                orderModelEntity.setStatusName("New Order");
-                orderModelEntity.setOrderType("b2b_simbased");
+                    Boolean sim_info = products.getHasSim();
+
+                    OrderModelEntity orderModelEntity = new OrderModelEntity();
+                    orderModelEntity.setGpshopTransactionId(transaction);
+                    orderModelEntity.setCustomerName(customerName);
+                    orderModelEntity.setCustomerContactNumber(cusMsisdn);
+                    orderModelEntity.setAddress(cusAddress);
+                    orderModelEntity.setCity(cusCity);
+                    orderModelEntity.setDistrict(cusArea);
+                    orderModelEntity.setThana(cusThana);
+                    orderModelEntity.setProductType(productType);
+                    orderModelEntity.setGpshopProductType(productType);
+                    orderModelEntity.setProductName(productName);
+                    orderModelEntity.setGpshopProductName(productName);
+                    orderModelEntity.setProductId(products.getId());
+                    orderModelEntity.setUnitPrice(Double.valueOf(mrp));
+                    orderModelEntity.setGpShopDeliveryType(deliveryType);
+                    orderModelEntity.setGpshopDeliveryCharge(Double.valueOf(deliveryCharge));
+                    orderModelEntity.setStatusName("New Order");
+                    orderModelEntity.setStatusNameId(1);
+                    orderModelEntity.setVendorName(vendor.getName());
+                    orderModelEntity.setVendorEmail(vendor.getEmail());
+                    orderModelEntity.setVendorId(vendor.getId());
+                    if (sim_info == true) {
+                        orderModelEntity.setOrderType("gpshop_sim");
+                    } else {
+                        orderModelEntity.setOrderType("gpshop_simless");
+                    }
+
 //                orderModelEntity.setCompanyId(existingCompany.getId());
 //                orderModelEntity.setVendorName(vendor.getName());
 //                orderModelEntity.setVendorEmail(vendor.getEmail());
@@ -220,14 +225,29 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
 //                orderModelEntity.setCustomerName(kcpName);
 //                orderModelEntity.setCustomerContactNumber(kcpContact);
 //                orderModelEntity.setCustomerEmail(kcpEmail);
+                    ActionLogsModel actionLogsModel = new ActionLogsModel();
+                    actionLogsModel.setAction_type_name(Utility.create_order_gps);
+                    actionLogsModel.setAction_type_id(1L);
+                    actionLogsModel.setEvent_date(Helper.getCurrentDate());
+                    actionLogsModel.setForeign_id(1L);
+                    actionLogsModel.setForeign_table(Utility.tbl_order);
+                    actionLogsModel.setUser_id(SessionManager.getUserID(request));
+                    actionLogsModel.setOld_data("");
+                    actionLogsModel.setNew_data(String.valueOf(orderModelEntity));
+                    actionLogsModel.setMsisdn(orderModelEntity.getCustomerContactNumber());
+                    actionLogsModel.setNote("Order Creation b2C GPC");
+                    actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
+                    actionLogsModel.setCreatedAt(Helper.getCurrentDate());
+
+                    actionLogService.SaveLogsData(actionLogsModel);
 
 
-                orderRepository.save(orderModelEntity);
-                if(orderModelEntity.getId() != null){
-                    b2cGpcServices.statusCheck(orderModelEntity);
+                    orderRepository.save(orderModelEntity);
+                    if (orderModelEntity.getId() != null) {
+                        b2cGpcServices.statusCheck(orderModelEntity);
+                    }
                 }
             }
-
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
