@@ -6,6 +6,7 @@ import com.xyz.bd.webmaster.models.UserManagement.DTOs.DTOUserSession;
 import com.xyz.bd.webmaster.models.UserManagement.Entities.AppUser;
 import com.xyz.bd.webmaster.repositories.UserManagement.AppUserRepository;
 import com.xyz.bd.webmaster.services.UserManagement.MenuService;
+import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,7 @@ public class LoginHandler implements AuthenticationSuccessHandler {
 
     @Autowired
     private MenuService menuService;
-//    @Autowired
-//    private OtpHandlerService otpHandlerService;
+
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
@@ -50,20 +50,26 @@ public class LoginHandler implements AuthenticationSuccessHandler {
                     .email(appUser.getEmail())
                     .phone(appUser.getPhone())
                     .active(appUser.isActive())
+                    .userType(appUser.getUserType())
+                    .systemadmin(appUser.isSystemAdmin())
+                    .b2badmin(appUser.isB2bAdmin())
+                    .b2cadmin(appUser.isB2cAdmin())
+                    .vendor(appUser.isVendor())
                     .build();
             if (dtoUserSession != null) {
-//                MDUserModel mdUserModel = usersList.get(0);
-//                logger.info("Login User: " + authentication.getDetails().toString());
-//                SessionManager.initSession(httpServletRequest, mdUserModel, new ArrayList<MenuModelItemRedis>());
-//                CommonRestResponse commonRestResponse = otpHandlerService.sendFirstOtp(mdUserModel.getWORK_PHONE(), 1, httpServletRequest);
-//                if (commonRestResponse.getCode() == 200) {
-//                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, ConstantGlobal.DEFAULT_OTP);
-//                } else {
-//                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, ConstantGlobal.DEFAULT_OTP_ERROR);
-//                }
                 SessionManager.initSession(httpServletRequest, dtoUserSession, menuService.getPermittedSideMenusByUserId(appUser.getId()), menuService.getPermittedMenusByUserId(appUser.getId()));
 
-                redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/dashboard");
+
+
+                if(dtoUserSession.isSystemadmin()){
+                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/dashboard-admin");
+                } else if(dtoUserSession.isB2badmin() || dtoUserSession.isB2cadmin()){
+                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/dashboard");
+                } else if(dtoUserSession.isVendor()){
+                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/dashboard-vendor");
+                } else{
+                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/home");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

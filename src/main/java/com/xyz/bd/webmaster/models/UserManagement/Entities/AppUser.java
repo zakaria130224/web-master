@@ -15,72 +15,56 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "sf_md_user")
+@Table(name = "tbl_user")
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @DynamicUpdate
 public class AppUser extends BaseEntity implements Serializable {
 
-    @Column(name = "NAME")
+    @Column(name = "full_username")
     private String name;
 
-    @Column(name = "LOGIN_NAME")
+    @Column(name = "username")
     private String loginName;
 
-    @Column(name = "EMAIL")
+    @Column(name = "user_email")
     private String email;
 
-    @Column(name = "PHONE")
+    @Column(name = "mobile_number")
     private String phone;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "USER_GROUP_ID")
-    private long userGroupId;
 
-    @Column(name = "USER_GROUP_NAME")
-    private String userGroupName;
-
-    @Column(name = "ACTIVE")
+    @Column(name = "is_active")
     private boolean active;
 
-    @Column(name = "IS_LOCK")
+    @Column(name = "is_lock")
     private boolean isLock;
 
-    @Column(name = "EAPPROVAL_ID")
-    private String eapprovalId;
+    @Column(name = "is_b2b_admin")
+    private boolean isB2bAdmin;
 
-    @Column(name = "CAN_LOGIN")
-    private boolean canLogin;
+    @Column(name = "is_b2c_admin")
+    private boolean isB2cAdmin;
 
-    @Column(name = "IS_NEW")
-    private boolean isNew;
+    @Column(name = "is_system_admin")
+    private boolean isSystemAdmin;
 
-    @Column(name = "LAST_PASS_CNG_TIME")
-    private Date lastPassCngTime;
+    @Column(name = "is_vendor")
+    private boolean isVendor;
 
-    @Column(name = "SESSION_ID")
-    private String sessionId;
+    @Column(name = "company_id")
+    private Long companyId;
 
-    @Column(name = "DESIGNATION_ID")
-    private Integer designationId;
+    @Column(name = "company_name")
+    private String companyName;
 
-    @Column(name = "DEPARTMENT_ID")
-    private Integer departmentId;
+    @Column(name = "user_type")
+    private String userType;
 
-    @Column(name = "REGION_ID")
-    private Integer regionId;
-
-    @Column(name = "AREA_ID")
-    private Integer areaId;
-
-    @Column(name = "EXPIRED_DT")
-    private Date expiredDt;
-
-    @Column(name = "LOCKED_DT")
-    private Date lockedDt;
 
     @OneToMany
     @JoinColumn(name = "USER_ID", insertable = false, updatable = false)

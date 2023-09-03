@@ -32,7 +32,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             String username = authentication.getName();
             String password = authentication.getCredentials().toString();
 
-            if (username.matches("^[a-zA-Z0-9._-]+$") && password.matches("^[^'\"= ]+$")) {
+            if (!username.matches("^[a-zA-Z0-9._@-]+$") || !password.matches("^[^'\"= ]+$")) {
+                throw new BadCredentialsException("Please enter a valid input!");
+            } else {
                 if (username.trim().isEmpty() || password.trim().isEmpty()) {
                     throw new BadCredentialsException("Credentials can't be empty!");
                 }
@@ -42,38 +44,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
                 AppUser appUser = appUserRepository.findFirstByLoginName(username);
                 if (appUser != null && appUser.getPassword().equalsIgnoreCase(AppExtension.toMD5(password))) {
-//                    if(appUser.isLock())
-//                    {
-//                        throw new BadCredentialsException("User has been blocked. Please contact with Administrator!");
-//                    }else if (appUser.getPassword().equalsIgnoreCase(AppExtension.toMD5(password))) {
-//                        //password Valid
-//                        if (usersList.get(0).getEXPIRED_DT() != null && usersList.get(0).getEXPIRED_DT().getTime() < System.currentTimeMillis()) {
-//                            throw new BadCredentialsException("Password has been expired. Please change password to proceed.");
-//                        }
-//                        usersList.get(0).setFAILED_ATTEMPT(0);
-//                        usersList.get(0).setLAST_LOGGED_IN(new Timestamp(System.currentTimeMillis()));
-//                        usersDAO.updateLoginStatus(usersList.get(0));
-//                        grantedAuthorities.add(new SimpleGrantedAuthority(usersList.get(0).getID().toString()));
-//                        return new UsernamePasswordAuthenticationToken(username, password, grantedAuthorities);
-//                    }else {
-//                        //login failed
-//                        if (usersList.get(0).getFAILED_ATTEMPT() == null) {
-//                            usersList.get(0).setFAILED_ATTEMPT(1);
-//                        } else {
-//                            usersList.get(0).setFAILED_ATTEMPT(usersList.get(0).getFAILED_ATTEMPT() + 1);
-//                        }
-//                        usersDAO.updateLoginStatus(usersList.get(0));
-//                        throw new BadCredentialsException("Invalid Credentials. Please try with valid domain credential!");
-//                    }
-
                     grantedAuthorities.add(new SimpleGrantedAuthority(appUser.getId().toString()));
                     return new UsernamePasswordAuthenticationToken(username, password, grantedAuthorities);
                 } else {
 
                     throw new BadCredentialsException("Invalid Credentials. Please contact with Administrator!");
                 }
-            } else {
-                throw new BadCredentialsException("Please enter a valid input!");
             }
         } catch (Exception e) {
             e.printStackTrace();
