@@ -567,6 +567,13 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/complain-management" class="nav-link">
+                                <i class="nav-icon fa fa-life-ring"></i>
+                                <p>Concern Center</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/vts/support" class="nav-link">
                                 <i class="nav-icon fa fa-phone-square"></i>
                                 <p>Support</p>
@@ -775,6 +782,13 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/complain-management" class="nav-link">
+                                <i class="nav-icon fa fa-life-ring"></i>
+                                <p>Concern Center</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/vts/support" class="nav-link">
                                 <i class="nav-icon fa fa-phone-square"></i>
                                 <p>Support</p>
@@ -865,7 +879,7 @@
 
                         <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/complain-management" class="nav-link">
-                                <i class="nav-icon fa fa-phone-square"></i>
+                                <i class="nav-icon fa fa-life-ring"></i>
                                 <p>Concern Center</p>
                             </a>
                         </li>
