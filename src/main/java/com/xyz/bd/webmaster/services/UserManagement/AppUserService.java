@@ -61,76 +61,65 @@ public class AppUserService {
         return appUserRepository.findFirstByLoginNameAndPassword(name, password);
     }
 
-    public Response resetPassword(DTOResetPassword req) {
-        try {
-            if (req != null) {
-                //check user
+    public Response resetPassword(DTOResetPassword req) throws Exception {
+        if (req == null) {
+            return new Response(Constant.generalFailed, null);
+        } else {
+            //check user
 
-                AppUser appUser = appUserRepository.findFirstByLoginName(req.getUserName());
+            AppUser appUser = appUserRepository.findFirstByLoginName(req.getUserName());
 
-                if (appUser != null) {
-                    //Current Pass hash
-                    String curPassHash = passwordSecurity.encrypt(req.getOldPassword());
-                    // checking current password
-                    if (req.getOldPassword().isEmpty()) {
-                        return new Response(Constant.generalFailed, "Current Password is required.");
-                    } else if (req.getNewPassword().isEmpty()) {
-                        return new Response(Constant.generalFailed, "New Password is required.");
-//                    } else if ($confirm_password == '') {
-//                        $this->error_message = 'Confirm Password is required.';
-//                        return false;
-                    } else if (!curPassHash.equals(appUser.getPassword())) {
-                        return new Response(Constant.generalFailed, "Current Password does not match.");
-//                    } else if ($new_password != $confirm_password) {
-//                        $this->error_message = 'New Password and Confirm Password does not match.';
-//                        return false;
-                    } else if (req.getNewPassword().length() < 14) {
-                        return new Response(Constant.generalFailed, "Password must have at least 14 (fourteen) characters.");
-                    } else if (isNewPassRepeated(req.getCurrentUserName(), req.getNewPassword())) {
-                        return new Response(Constant.generalFailed, "You can not use same password that you used previously.");
-                    } else {
-                        if (!req.getNewPassword().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!@#$&*]).{14,20}$")) {
-                            return new Response(Constant.generalFailed, "Please input valid password as per policy");
-                        }
-
-                        if (req.getResetType().equals(Constant.resetTypeForce)) {
-                            appUser.setNew(true);
-                            appUser.setLock(false);
-                        } else
-                            appUser.setNew(false);
-
-                        // add password history
-                        AppUserPasswordHistory userPasswordHistory = AppUserPasswordHistory.builder()
-                                .userId(appUser.getId())
-                                .userName(appUser.getLoginName())
-                                .userPassword(passwordSecurity.encrypt(req.getNewPassword()))
-                                .changeType(req.getResetType())
-                                .changeReason(req.getResetType())
-                                .oldPassword(appUser.getPassword())
-                                .updatedBy(req.getCurrentUserName())
-                                .build();
-                        appUserPassHistoryRepository.save(userPasswordHistory);
-
-                        appUser.setPassword(passwordSecurity.encrypt(req.getNewPassword()));
-                        appUser.setLastPassCngTime(new Date());
-                        appUser.setLock(false);
-                        appUser.setUpdatedAt(new Date());
-
-                        appUserRepository.save(appUser);
-
-
-                        return new Response(Constant.generalSuccess);
-
+            if (appUser != null) {
+                //Current Pass hash
+                String curPassHash = passwordSecurity.encrypt(req.getOldPassword());
+                // checking current password
+                if (req.getOldPassword().isEmpty()) {
+                    return new Response(Constant.generalFailed, "Current Password is required.");
+                } else if (req.getNewPassword().isEmpty()) {
+                    return new Response(Constant.generalFailed, "New Password is required.");
+                } else if (!curPassHash.equals(appUser.getPassword())) {
+                    return new Response(Constant.generalFailed, "Current Password does not match.");
+                } else if (req.getNewPassword().length() < 14) {
+                    return new Response(Constant.generalFailed, "Password must have at least 14 (fourteen) characters.");
+                } else if (isNewPassRepeated(req.getCurrentUserName(), req.getNewPassword())) {
+                    return new Response(Constant.generalFailed, "You can not use same password that you used previously.");
+                } else {
+                    if (!req.getNewPassword().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[!@#$&*]).{14,20}$")) {
+                        return new Response(Constant.generalFailed, "Please input valid password as per policy");
                     }
 
-                } else {
-                    return new Response(Constant.generalFailed, "User not found!");
+                    /*if (req.getResetType().equals(Constant.resetTypeForce)) {
+                        appUser.setNew(true);
+                        appUser.setLock(false);
+                    } else
+                        appUser.setNew(false);*/
+
+                    // add password history
+                    AppUserPasswordHistory userPasswordHistory = AppUserPasswordHistory.builder()
+                            .userId(appUser.getId())
+                            .userName(appUser.getLoginName())
+                            .userPassword(passwordSecurity.encrypt(req.getNewPassword()))
+                            .changeType(req.getResetType())
+                            .changeReason(req.getResetType())
+                            .oldPassword(appUser.getPassword())
+                            .updatedBy(req.getCurrentUserName())
+                            .build();
+                    appUserPassHistoryRepository.save(userPasswordHistory);
+
+                    appUser.setPassword(passwordSecurity.encrypt(req.getNewPassword()));
+                    appUser.setLock(false);
+                    appUser.setUpdatedAt(new Date());
+
+                    appUserRepository.save(appUser);
+
+
+                    return new Response(Constant.generalSuccess);
+
                 }
-            } else
-                return new Response(Constant.generalFailed, null);
-        } catch (Exception ex) {
-            logger.error(ex.getMessage());
-            return new Response(Constant.generalFailed, ex.getMessage());
+
+            } else {
+                return new Response(Constant.generalFailed, "User not found!");
+            }
         }
     }
 
@@ -146,15 +135,10 @@ public class AppUserService {
         return userPasswordHistory != null;
     }
 
-    public DataTablesOutput<AppUser> DTData(@Valid DataTablesInput input, HttpServletRequest request) {
+    public DataTablesOutput<AppUser> DTData(@Valid DataTablesInput input) {
         DataTablesOutput<AppUser> output = new DataTablesOutput<>();
         try {
-            //output.setDraw(input.getDraw());
             output = appUserDTRepository.findAll(input, new CustomSpecifier<AppUser>().textInAllColumns(input.getSearch().getValue()));
-
-//            output.setRecordsFiltered(appUsers.size());
-//            output.setRecordsTotal(appUsers.size());
-//            output.setData(appUsers);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage(), e);
@@ -255,33 +239,4 @@ public class AppUserService {
         return (List<AppUser>) appUserRepository.findAll();
     }
 
-    @Transactional
-    public Boolean saveNewUserNew(AppUser newMdUserModel) {
-
-        AppUser checkUser = appUserRepository.findFirstByLoginName(newMdUserModel.getLoginName());
-        if(checkUser.equals(null)){
-            String password="Iot@!123456";
-            newMdUserModel.setLoginName(newMdUserModel.getLoginName());
-            newMdUserModel.setName(newMdUserModel.getName());
-            newMdUserModel.setPhone(newMdUserModel.getPhone());
-            newMdUserModel.setPassword(AppExtension.toMD5(password));
-
-            newMdUserModel=appUserRepository.save(newMdUserModel);
-
-            try{
-                String phoneNo = newMdUserModel.getPhone();
-                String smsBody = "Grameenphone IOT login user account creation successful! Login user: " + newMdUserModel.getLoginName()+ " & Password: "+ password;
-                String operator = "ROBI";
-                SMS sms = new SMS();
-                sms.setText(smsBody);
-                sms.setPhone(phoneNo);
-                sendSMSService.sendSMS(sms);
-            }catch (Exception  e){
-                logger.warn("Failed to send SMS");
-                logger.error(e.getMessage(),e);
-            }
-            return true;
-        }
-        return true;
-    }
 }

@@ -34,8 +34,7 @@ public class LoginHandler implements AuthenticationSuccessHandler {
 
     @Autowired
     private MenuService menuService;
-//    @Autowired
-//    private OtpHandlerService otpHandlerService;
+
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
@@ -50,17 +49,12 @@ public class LoginHandler implements AuthenticationSuccessHandler {
                     .email(appUser.getEmail())
                     .phone(appUser.getPhone())
                     .active(appUser.isActive())
+                    .userType(appUser.getUserType())
+                    .isSystemAdmin(appUser.isSystemAdmin())
+                    .isB2bAdmin(appUser.isB2bAdmin())
+                    .isB2cAdmin(appUser.isB2cAdmin())
                     .build();
             if (dtoUserSession != null) {
-//                MDUserModel mdUserModel = usersList.get(0);
-//                logger.info("Login User: " + authentication.getDetails().toString());
-//                SessionManager.initSession(httpServletRequest, mdUserModel, new ArrayList<MenuModelItemRedis>());
-//                CommonRestResponse commonRestResponse = otpHandlerService.sendFirstOtp(mdUserModel.getWORK_PHONE(), 1, httpServletRequest);
-//                if (commonRestResponse.getCode() == 200) {
-//                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, ConstantGlobal.DEFAULT_OTP);
-//                } else {
-//                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, ConstantGlobal.DEFAULT_OTP_ERROR);
-//                }
                 SessionManager.initSession(httpServletRequest, dtoUserSession, menuService.getPermittedSideMenusByUserId(appUser.getId()), menuService.getPermittedMenusByUserId(appUser.getId()));
 
                 redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/dashboard");
