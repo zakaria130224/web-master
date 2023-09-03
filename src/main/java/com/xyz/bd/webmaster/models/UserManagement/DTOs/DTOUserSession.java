@@ -27,12 +27,12 @@ public class DTOUserSession implements Serializable {
 
     private String userType;
 
-    private boolean isB2bAdmin;
+    private boolean b2badmin;
 
-    private boolean isB2cAdmin;
+    private boolean b2cadmin;
 
-    private boolean isSystemAdmin;
+    private boolean systemadmin;
 
-    private boolean isVendor;
+    private boolean vendor;
 
 }

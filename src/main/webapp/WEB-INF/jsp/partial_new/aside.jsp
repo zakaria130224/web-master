@@ -161,7 +161,7 @@
         </nav>
     </div>--%>
 
-    <div class="sidebar">
+    <%--<div class="sidebar">
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -373,11 +373,11 @@
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
-    </div>
+    </div>--%>
 
 
-    <%--<c:choose>
-        <c:when test="${logedUser.getIsSystemAdmin}">
+    <c:choose>
+        <c:when test="${logedUser.systemadmin}">
             <div class="sidebar">
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -498,13 +498,6 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="${pageContext.request.contextPath}/order-Management" class="nav-link">
-                                <i class="nav-icon fa fa-car"></i>
-                                <p>Order Management</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-cart-plus"></i>
                                 <p>
@@ -592,7 +585,7 @@
                 <!-- /.sidebar-menu -->
             </div>
         </c:when>
-        <c:when test="${logedUser.getIsB2bAdmin}">
+        <c:when test="${logedUser.b2badmin}">
             <div class="sidebar">
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -713,13 +706,6 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="${pageContext.request.contextPath}/order-Management" class="nav-link">
-                                <i class="nav-icon fa fa-car"></i>
-                                <p>Order Management</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-cart-plus"></i>
                                 <p>
@@ -807,20 +793,13 @@
                 <!-- /.sidebar-menu -->
             </div>
         </c:when>
-        <c:when test="${logedUser.getIsVendor}">
+        <c:when test="${logedUser.vendor}">
             <div class="sidebar">
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                            with font-awesome or any other icon font library -->
-
-                        <li class="nav-item">
-                            <a href="${pageContext.request.contextPath}/order-Management" class="nav-link">
-                                <i class="nav-icon fa fa-car"></i>
-                                <p>Order Management</p>
-                            </a>
-                        </li>
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -905,11 +884,8 @@
                 <!-- /.sidebar-menu -->
             </div>
         </c:when>
-        <c:otherwise>
-            pizzas.
-            <br />
-        </c:otherwise>
-    </c:choose>--%>
+        <c:otherwise></c:otherwise>
+    </c:choose>
 
 
 

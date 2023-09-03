@@ -20,15 +20,26 @@
     </li>
   </ul>
 
+  <%--<pre>
+    ${logedUser}
+  </pre>--%>
+
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
     <!-- Notifications Dropdown Menu -->
     <!-- Messages Dropdown Menu -->
+
+    <li class="nav-item">
+      <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+        <i class="fa fa-arrows-alt"></i>
+      </a>
+    </li>
+
     <li class="nav-item dropdown">
       <div class="user-panel d-flex">
         <div class="info">
           <p class="black-30 font-size-16 m-0">${logedUser.name}</p>
-          <p class="black-50 font-size-14 m-0">${logedUser.userType} User</p>
+          <p class="black-50 font-size-14 m-0">${logedUser.userType} </p>
           <%--<span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>--%>
         </div>
         <div class="image">
