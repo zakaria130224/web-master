@@ -12,4 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface B2cGpShopServices {
 
     DataTablesOutput<OrderModelEntity> findAllB2cGpShopOrderList(HttpServletRequest request, String customQuery, DataTablesInput input);
+
+    void saveData(HttpServletRequest request, MultipartFile excelFile);
 }

@@ -19,7 +19,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Orders - B2B Sim Based</title>
+    <title>Order Management</title>
 
     <jsp:include page="../../partial_new/header-link.jsp"></jsp:include>
 
@@ -137,12 +137,17 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-1">
-                    <div class="col-sm-6">
-                        <h5>Order Management</h5>
+                    <div class="col-md-6 col-sm-12">
+                        <h5>Order Management (B2C - GP Shop)</h5>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Cloud </a></li>
-                            <li class="breadcrumb-item active">Order Management (GP Shop)</li>
+                            <li class="breadcrumb-item active">Order Management (B2C - GP Shop)</li>
                         </ol>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="float-right">
+                            <button data-toggle="modal" class="btn b2b-btn-submit-blue mr-2" data-target="#newOrderEntry"> Add New Order</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -159,15 +164,30 @@
                     <div class="col-md-12 col-lg-12 col-sm-12">
 
                         <div id="createSrNotification"></div>
+
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-head-custom">
-                                    <div class="float-left">
-                                        <h3 class="b2b-font-20-500 black-10 float-left">Order and Installation Management</h3>
-                                    </div>
-                                    <div class="float-right">
-                                        <button type="submit" class="btn btn-sm btn-custom-dark-blue mr-2" data-toggle="modal" data-target="#newOrderEntry"><i class="fa fa-plus-circle"></i> Add New Entry</button>
-                                        <button type="submit" class="btn btn-sm btn-custom-dark-blue"><i class="fa fa-download"></i> Export</button>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="float-left">
+                                                <h3 class="b2b-font-20-500 black-10 float-left pt-2">Order and Installation List</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="float-right mr-5">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="padding-left:30px; padding-right: 30px">
+                                                        Export
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Export in PDF</a>
+                                                        <a class="dropdown-item" href="#">Export in Excel</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -175,54 +195,53 @@
 
                                 <div class="row">
 
-                                    <div class="col-sm-12 col-md-8 col-lg-8">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
                                         <!-- select -->
-                                        <div class="form-group float-left mr-2">
+                                        <div class="form-group float-left mr-2 mb-2">
                                             <select class="form-control select2" id="order_type" disabled>
-                                                <option value="gpshop_">Gp Shop</option>
+                                                <option value="gpshop_">B2C GP Shop</option>
                                             </select>
                                         </div>
-                                        <div class="form-group float-left mr-2">
+                                        <div class="form-group float-left mr-2 mb-2">
                                             <div class="input-group">
-                                                <button type="button" class="btn btn-default pull-right btn-rounded" id="date_range">
+                                                <button type="button" class="btn btn-default pull-right btn-rounded bh-40" id="date_range" style="border-radius: 8px">
                                                     <span>Date Range</span>
                                                     <i class="fa fa-calendar"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="form-group float-left mr-2">
+                                        <div class="form-group float-left mr-2 mb-2">
                                             <select class="form-control select2" id="search_status_input">
 
                                             </select>
                                         </div>
-                                        <div class="form-group float-left mr-2">
+                                        <div class="form-group float-left mr-2 mb-2">
                                             <select class="form-control select2" id="search_vendor_input">
 
                                             </select>
                                         </div>
 
-                                        <div class="form-group float-left mr-2">
+                                        <div class="form-group float-left mr-2 mb-2">
                                             <select class="form-control select2" id="search_product_input">
 
                                             </select>
                                         </div>
 
-                                        <div class="form-group float-left mr-2">
-                                            <button class="btn-b2b-sm-base" onclick="getCustomOrderData()">Search</button>
+                                        <div class="form-group float-left mr-2 mb-2">
+                                            <button class="btn btn-b2b-sm-base" onclick="getCustomOrderData()" style="border-radius: 8px">Search</button>
                                         </div>
-                                        <div class="form-group float-left mr-2">
-                                            <button class="btn-b2b-sm-base" onclick="getOrderSimData()">Reset</button>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4 col-lg-4 col-sm-12 float-right">
-                                        <!-- Actual search box -->
-                                        <div class="form-group has-search">
-                                            <span class="fa fa-search form-control-feedback"></span>
-                                            <input type="text" class="form-control" placeholder="Search">
+                                        <div class="form-group float-left mr-2 mb-2">
+                                            <button class="btn btn-b2b-sm-base" onclick="getOrderSimData()" style="border-radius: 8px">Reset</button>
                                         </div>
                                     </div>
 
+                                    <%--<div class="col-md-4 col-lg-4 col-sm-12 float-right">
+                                      <!-- Actual search box -->
+                                      <div class="form-group has-search">
+                                        <span class="fa fa-search form-control-feedback"></span>
+                                        <input type="text" class="form-control" placeholder="Search">
+                                      </div>
+                                    </div>--%>
 
 
                                     <div class="col-md-12 mt-2 mb-2">
@@ -238,7 +257,6 @@
                                                     <th>Status</th>
                                                     <th>Order Excel</th>
                                                     <th>Actions</th>
-
                                                     </thead>
                                                     <tbody>
 
@@ -436,7 +454,7 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <a href="${pageContext.request.contextPath}/assets/custom/b2b_sim_less_template.xlsx" id="templateLink"></a>
+                                        <a href="${pageContext.request.contextPath}/assets/custom/b2c_order_template.xlsx" id="templateLink"></a>
                                         <button style="float: right" type="button" class="btn btn-custom-dark-blue" id="downloadTemplate">Download Template</button>
                                     </div>
                                 </div>
@@ -949,7 +967,7 @@
             ordering: true,
             info: true,
             autoWidth: false,
-            responsive: true,
+          //  responsive: true,
             //data: data,
             order: [[0, 'desc']],
             ajax: {
@@ -1199,11 +1217,11 @@
 
         if($("#dataForm").parsley().validate()){
             var formData = new FormData();
-            formData.append("chtticket", $("#chtticket").val());
+        //    formData.append("chtticket", $("#chtticket").val());
             formData.append("excelFile", $("#upload_file")[0].files[0]);
 
             $.ajax({
-                url: base_url + "orders/save-data-device",
+                url: base_url + "orders/save-data-gpshop",
                 type: "POST",
                 data: formData,
                 contentType: false,
@@ -1332,10 +1350,15 @@
             type: 'get',
             url: base_url + "api/web/utility/order-status-list",
             success: function (data) {
-                if(orderType === "b2b_simless"){
-                    console.log("b2b_simless");
+                if(orderType === "gpshop_sim"){
+                    console.log("gpshop_sim");
                     data.data.forEach(element => {
-                        $('#current_status').append('<option value="' + element.b2b_simless + '">' + element.order_name + '</option>');
+                        $('#current_status').append('<option value="' + element.gpshop_sim + '">' + element.order_name + '</option>');
+                    });
+                } else if(orderType === "gpshop_simless"){
+                    console.log("gpshop_simless");
+                    data.data.forEach(element => {
+                        $('#current_status').append('<option value="' + element.gpshop_simless + '">' + element.order_name + '</option>');
                     });
                 }
 
@@ -1364,10 +1387,19 @@
             data: {id: $('#current_status').val(), columnName: orderType},
             url: base_url + "api/web/utility/next-order-status",
             success: function (data) {
+                if (orderType == "gpshop_sim") {
+
                 data.data.forEach(element => {
-                    $('#editStatus').append('<option value="' + element.b2b_simless + "/" + element.order_name + "/" + element.id +'">' + element.order_name + '</option>');
+                    $('#editStatus').append('<option value="' + element.gpshop_sim + "/" + element.order_name + "/" + element.id + '">' + element.order_name + '</option>');
                 });
                 $('#editStatus').append('<option value="100/Cancelled">Cancelled</option>')
+                }
+                else if(orderType === "gpshop_simless"){
+                    data.data.forEach(element => {
+                        $('#editStatus').append('<option value="' + element.gpshop_simless + "/" + element.order_name + "/" + element.id + '">' + element.order_name + '</option>');
+                    });
+                    $('#editStatus').append('<option value="100/Cancelled">Cancelled</option>')
+                }
             },
             error: function (error) {
                 console.log(error);

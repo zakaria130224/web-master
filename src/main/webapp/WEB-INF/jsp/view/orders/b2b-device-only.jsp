@@ -19,7 +19,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Orders - B2B Sim Based</title>
+    <title>Order Management</title>
 
     <jsp:include page="../../partial_new/header-link.jsp"></jsp:include>
 
