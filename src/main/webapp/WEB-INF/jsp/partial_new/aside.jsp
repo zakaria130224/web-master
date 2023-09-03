@@ -375,4 +375,542 @@
         <!-- /.sidebar-menu -->
     </div>
 
+
+    <%--<c:choose>
+        <c:when test="${logedUser.getIsSystemAdmin}">
+            <div class="sidebar">
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                           with font-awesome or any other icon font library -->
+
+                        <li class="nav-item active-element">
+                            <a href="${pageContext.request.contextPath}/dashboard" class="nav-link">
+                                <i class="nav-icon fa fa-tachometer"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/devices" class="nav-link">
+                                <i class="nav-icon fa fa-cube"></i>
+                                <p>IoT Devices</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/vts/alert" class="nav-link">
+                                <i class="nav-icon fa fa-bell"></i>
+                                <p>Alarm</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/vts/map" class="nav-link">
+                                <i class="nav-icon fa fa-map"></i>
+                                <p>Map</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/vts/settings" class="nav-link">
+                                <i class="nav-icon fa fa-gear"></i>
+                                <p>Settings</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-clipboard"></i>
+                                <p>
+                                    Reports
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/engine_off_report" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Engine Off Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/report-fuel-used" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Fuel Used Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/active_report" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Active Time Report</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/alarm_summary" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Alarm Summary Report</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/vts-report-summary" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Summary Report</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/vts-expenditure-summary" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Expenditure Report</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/report-idle-time" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Idle Time Report</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/report-excessive-idle-time" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Excessive Idle Time Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/report-tips" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Trips Reports</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/billing" class="nav-link">
+                                <i class="nav-icon fa fa-file-text"></i>
+                                <p>Billing</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/order-Management" class="nav-link">
+                                <i class="nav-icon fa fa-car"></i>
+                                <p>Order Management</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-cart-plus"></i>
+                                <p>
+                                    Orders
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/orders/b2c-gpc" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>B2C GPC Order</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/orders/b2c-gp-shop" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>B2C GP Shop</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/orders/b2b-device-only" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>B2B Device only</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/orders/b2b-sim-based" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>B2B Sim Based</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-houzz"></i>
+                                <p>
+                                    Inventory
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/inventory/management" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Manage</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/inventory/logs" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Inventory Logs</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/vts/maintenance-log" class="nav-link">
+                                <i class="nav-icon fa fa-list-alt"></i>
+                                <p>Logs</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/vts/support" class="nav-link">
+                                <i class="nav-icon fa fa-phone-square"></i>
+                                <p>Support</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/logout" class="nav-link">
+                                <i class="nav-icon fa fa-sign-out"></i>
+                                <p>Logout</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+        </c:when>
+        <c:when test="${logedUser.getIsB2bAdmin}">
+            <div class="sidebar">
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                           with font-awesome or any other icon font library -->
+
+                        <li class="nav-item active-element">
+                            <a href="${pageContext.request.contextPath}/dashboard" class="nav-link">
+                                <i class="nav-icon fa fa-tachometer"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/devices" class="nav-link">
+                                <i class="nav-icon fa fa-cube"></i>
+                                <p>IoT Devices</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/vts/alert" class="nav-link">
+                                <i class="nav-icon fa fa-bell"></i>
+                                <p>Alarm</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/vts/map" class="nav-link">
+                                <i class="nav-icon fa fa-map"></i>
+                                <p>Map</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/vts/settings" class="nav-link">
+                                <i class="nav-icon fa fa-gear"></i>
+                                <p>Settings</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-clipboard"></i>
+                                <p>
+                                    Reports
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/engine_off_report" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Engine Off Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/report-fuel-used" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Fuel Used Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/active_report" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Active Time Report</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/alarm_summary" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Alarm Summary Report</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/vts-report-summary" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Summary Report</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/vts-expenditure-summary" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Expenditure Report</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/report-idle-time" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Idle Time Report</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/report-excessive-idle-time" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Excessive Idle Time Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/reports/report-tips" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Trips Reports</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/billing" class="nav-link">
+                                <i class="nav-icon fa fa-file-text"></i>
+                                <p>Billing</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/order-Management" class="nav-link">
+                                <i class="nav-icon fa fa-car"></i>
+                                <p>Order Management</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-cart-plus"></i>
+                                <p>
+                                    Orders
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/orders/b2c-gpc" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>B2C GPC Order</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/orders/b2c-gp-shop" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>B2C GP Shop</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/orders/b2b-device-only" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>B2B Device only</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/orders/b2b-sim-based" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>B2B Sim Based</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-houzz"></i>
+                                <p>
+                                    Inventory
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/inventory/management" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Manage</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/inventory/logs" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Inventory Logs</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/vts/maintenance-log" class="nav-link">
+                                <i class="nav-icon fa fa-list-alt"></i>
+                                <p>Logs</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/vts/support" class="nav-link">
+                                <i class="nav-icon fa fa-phone-square"></i>
+                                <p>Support</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/logout" class="nav-link">
+                                <i class="nav-icon fa fa-sign-out"></i>
+                                <p>Logout</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+        </c:when>
+        <c:when test="${logedUser.getIsVendor}">
+            <div class="sidebar">
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                           with font-awesome or any other icon font library -->
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/order-Management" class="nav-link">
+                                <i class="nav-icon fa fa-car"></i>
+                                <p>Order Management</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-cart-plus"></i>
+                                <p>
+                                    Orders
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/orders/b2c-gpc" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>B2C GPC Order</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/orders/b2c-gp-shop" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>B2C GP Shop</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/orders/b2b-device-only" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>B2B Device only</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/orders/b2b-sim-based" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>B2B Sim Based</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-houzz"></i>
+                                <p>
+                                    Inventory
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/inventory/management" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Manage</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="${pageContext.request.contextPath}/inventory/logs" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Inventory Logs</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/vts/support" class="nav-link">
+                                <i class="nav-icon fa fa-phone-square"></i>
+                                <p>Support</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/logout" class="nav-link">
+                                <i class="nav-icon fa fa-sign-out"></i>
+                                <p>Logout</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+        </c:when>
+        <c:otherwise>
+            pizzas.
+            <br />
+        </c:otherwise>
+    </c:choose>--%>
+
+
+
 </aside>

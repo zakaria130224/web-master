@@ -27,8 +27,8 @@
     <li class="nav-item dropdown">
       <div class="user-panel d-flex">
         <div class="info">
-          <p class="black-30 font-size-16 m-0">${logedUser.loginName}</p>
-          <p class="black-50 font-size-14 m-0">User Role</p>
+          <p class="black-30 font-size-16 m-0">${logedUser.name}</p>
+          <p class="black-50 font-size-14 m-0">${logedUser.userType} User</p>
           <%--<span>${logedUser.loginName}<i class="zmdi zmdi-chevron-down"></i></span>--%>
         </div>
         <div class="image">

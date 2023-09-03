@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="float-right">
-                            <button data-toggle="modal" class="btn b2b-btn-submit-blue mr-2" data-target="#addUser""> Add New User</button>
+                            <button data-toggle="modal" class="btn b2b-btn-submit-blue mr-2" data-target="#addUser"> Add New User</button>
                         </div>
                     </div>
                 </div>
