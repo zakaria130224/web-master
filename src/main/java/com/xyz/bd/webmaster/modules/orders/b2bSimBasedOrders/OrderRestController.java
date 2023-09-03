@@ -3,6 +3,7 @@ package com.xyz.bd.webmaster.modules.orders.b2bSimBasedOrders;
 
 import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
 import com.xyz.bd.webmaster.modules.orders.b2bDeviceOnly.B2bDeviceServices;
+import com.xyz.bd.webmaster.modules.orders.b2cGpShop.B2cGpShopServices;
 import com.xyz.bd.webmaster.utility.CommonRestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
@@ -24,6 +25,9 @@ public class OrderRestController {
     @Autowired
     B2bDeviceServices deviceServices;
 
+    @Autowired
+    B2cGpShopServices b2cGpShopServices;
+
 
     @RequestMapping(value = "/listB2bSimDT", method = RequestMethod.GET)
     public DataTablesOutput<OrderModelEntity> getB2bSimOrdersDT(@Valid DataTablesInput input, HttpServletRequest request, @RequestParam(value = "customQuery",required = false) String customQuery) {
@@ -40,5 +44,10 @@ public class OrderRestController {
     @RequestMapping(value = "/listB2bDeviceDT", method = RequestMethod.GET)
     public DataTablesOutput<OrderModelEntity> getB2bDeviceOrdersDT(@Valid DataTablesInput input, HttpServletRequest request, @RequestParam(value = "customQuery",required = false) String customQuery) {
         return deviceServices.findAllB2bDeviceOrderList(request, customQuery, input);
+    }
+
+    @RequestMapping(value = "/listB2cGpShopDT", method = RequestMethod.GET)
+    public DataTablesOutput<OrderModelEntity> getB2cGpShopOrdersDT(@Valid DataTablesInput input, HttpServletRequest request, @RequestParam(value = "customQuery",required = false) String customQuery) {
+        return b2cGpShopServices.findAllB2cGpShopOrderList(request, customQuery, input);
     }
 }
