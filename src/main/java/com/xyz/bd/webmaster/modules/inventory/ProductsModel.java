@@ -67,6 +67,18 @@ public class ProductsModel extends BaseEntity implements Serializable {
     @JsonProperty("vendorId")
     private Long vendorId;
 
+    @Column(name="vendor_name")
+    @JsonProperty("vendorName")
+    private String vendorName;
+
+    @Column(name="vendor_email")
+    @JsonProperty("vendorEmail")
+    private String vendorEmail;
+
+    @Column(name="vendor_phone")
+    @JsonProperty("vendorPhone")
+    private String vendorPhone;
+
     @Column(name = "status")
     @JsonProperty("status")
     private Boolean status;

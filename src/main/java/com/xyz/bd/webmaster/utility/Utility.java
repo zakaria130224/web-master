@@ -17,4 +17,7 @@ public class Utility {
     public static String update_order_gps="Update GPS order";
     public static String update_order_status="Update order Status";
 
+    public static String create_concern="Create new concern";
+    public static String update_concern_status="Update concern address";
+
 }

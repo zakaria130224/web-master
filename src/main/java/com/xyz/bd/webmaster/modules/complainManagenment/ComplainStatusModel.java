@@ -2,10 +2,20 @@ package com.xyz.bd.webmaster.modules.complainManagenment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xyz.bd.webmaster.models.common.Entities.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 
+@Data
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "tbl_complaint_status")
 public class ComplainStatusModel extends BaseEntity implements Serializable {
 
     @Column(name = "order_name")

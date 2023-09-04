@@ -302,9 +302,9 @@
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="product_type">Product Type</label>
-                    <select class="form-control" id="product_type" disabled>
-                      <option>Please select</option>
+                    <label for="product_name">Product </label>
+                    <select class="form-control" id="product_name">
+
                     </select>
                   </div>
                 </div>
@@ -312,34 +312,29 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="product_category">Product Category</label>
-                    <input type="hidden" id="ratePlan">
-                    <select class="form-control" id="product_category" required>
-                      <option>Please select product</option>
-
-                    </select>
+                    <input type="text" class="form-control" id="product_category" disabled>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="tracker_sim_no">Tracker SIM Number</label>
-                    <input type="text" class="form-control" id="tracker_sim_no" placeholder="write here">
+                    <label for="product_sub_category">Product Sub Category</label>
+                    <input type="text" class="form-control" id="product_sub_category" disabled>
                   </div>
                 </div>
-
-                <div class="col-md-12" id="vts_sim_block">
-                  <div class="form-group">
-                    <label for="user_no">Tracker SIM Number</label>
-                    <input type="text" class="form-control" id="user_no" placeholder="write here">
-                  </div>
-                </div>
-
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="vendor_name">Responsible</label>
-                    <select class="form-control" id="vendor_name" disabled>
-                      <option>Please select</option>
+                    <label for="vendor_name">Vendor Name</label>
+                    <input type="text" class="form-control" id="vendor_name" disabled>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="product_type">Product Type</label>
+                    <select class="form-control" id="product_type" disabled>
+
                     </select>
                   </div>
                 </div>
@@ -347,10 +342,34 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="user_type">User Type</label>
-                    <select class="form-control" id="user_type" disabled>
+                    <select class="form-control" id="user_type">
                       <option>Please select</option>
                       <option value="B2B">B2B</option>
                       <option value="B2C">B2C</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="tracker_sim_no">Tracker SIM Number <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="tracker_sim_no" required placeholder="write here">
+                  </div>
+                </div>
+
+                <div class="col-md-12" id="vts_sim_block">
+                  <div class="form-group">
+                    <label for="user_no">User Number <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="user_no" required placeholder="write here">
+                  </div>
+                </div>
+
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="resp_name">Responsible <span class="text-danger"> *</span></label>
+                    <select class="form-control" id="resp_name" required>
+
                     </select>
                   </div>
                 </div>
@@ -360,7 +379,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="remarks_note">Remarks <span class="text-danger"> *</span></label>
-                    <textarea class="form-control" id="remarks_note"></textarea>
+                    <textarea class="form-control" id="remarks_note" required></textarea>
                   </div>
                 </div>
 
@@ -695,20 +714,19 @@
     let productSimStatus = $('#product_name').val().split("/")[2];
 
     if (productId != 'Please select product'){
-      $('#vendor_name').html('');
-      $('#product_type').html('');
+      //$('#product_sub_category').html('');
+      //$('#product_category').html('');
 
-      getVendorListUpdate($('#product_name').val().split("/")[1])
+      //getVendorListUpdate($('#product_name').val().split("/")[1])
+
+      $('#vendor_name').val($("#product_name").val().split("/")[1]);
+      $('#product_category').val($("#product_name").val().split("/")[3]);
+      $('#product_sub_category').val($("#product_name").val().split("/")[4]);
 
       if(productSimStatus === "true"){
         $('#product_type').append('<option value="1">SIM Based</option>');
-        $('#vts_sim_block').show();
-        $('#vts_sim').attr("required", true);
-
       } else{
         $('#product_type').append('<option value="2">SIM Less</option>');
-        $('#vts_sim_block').hide();
-        $('#vts_sim').attr("required", false);
       }
     }
   });
@@ -738,6 +756,7 @@
 
   function openCreateComplainModal(){
     getProductList();
+    getResponsibleTeamList();
     $("#newComplainEntry").modal("show");
   }
 
@@ -926,25 +945,21 @@
 
     if($("#create_concern_form").parsley().validate()){
 
-      let orderInfo = {
-        customerName: $("#customer_name").val(),
-        customerContactNumber: $("#customer_contact_number").val(),
-        productId: parseInt($("#product_name").val().split("/")[0]),
-        address: $( "#address" ).val(),
-        vtsSimNo: $( "#vts_sim" ).val(),
-        statusNameId: 1,
-        vendorEmail: $( "#vendor_name" ).val().split("/")[1],
-        vendorId: parseInt($( "#vendor_name" ).val().split("/")[0]),
-        vendorName: $( "#vendor_name" ).text(),
-        ratePlan: $( "#vendor_name" ).val().split("/")[2],
-        orderType: "GPC"
+      let complainInfo = {
+        stsTicketId: $("#sts_ticket").val(),
+        vtsSimNo: $("#tracker_sim_no").val(),
+        customerContactNumber: $("#user_no").val(),
+        userType: $("#user_type").val(),
+        newComplaintNote: $("#remarks_note").val(),
+        responsibleTeamId: parseInt($("#resp_name").val().split("/")[0]),
+        responsibleTeamName: $("#resp_name").val().split("/")[1]
       }
 
 
       $.ajax({
         type: 'POST',
-        url: base_url + "api/web/orders/b2c-gpc/save",
-        data: {orderInfo: JSON.stringify(orderInfo)},
+        url: base_url + "api/web/complain/save",
+        data: {complainInfo: JSON.stringify(complainInfo), productId: parseInt($("#product_name").val().split("/")[0])},
         success: function (resultData) {
           $(".loader_body").hide();
           if (resultData.code === 200) {
@@ -1085,15 +1100,30 @@
       success: function (data) {
         $('#product_name').append('<option>Please Select</option>')
         data.data.forEach(element => {
-          $('#product_name').append('<option value="' + element.id + "/" + element.vendorId +"/" + element.hasSim +'">' + element.productName + '</option>');
+          $('#product_name').append('<option value="' + element.id + "/" + element.vendorName +"/" + element.hasSim +"/" + element.deviceCategory + "/" + element.deviceSubCategory +'">' + element.productName + '</option>');
         });
-        productData = data.data;
-        getVendorDetails($('#product_name').val().split("/")[1])
       },
       error: function (error) {
         console.log(error);
       }
-    });
+    })
+  }
+
+  function getResponsibleTeamList() {
+    $('#resp_name').html("");
+    $.ajax({
+      type: 'get',
+      url: base_url + "api/web/utility/get-responsible-team-list",
+      success: function (data) {
+        $('#resp_name').append('<option>Please Select</option>')
+        data.data.forEach(element => {
+          $('#resp_name').append('<option value="' + element.id + "/" + element.teamName +'">' + element.teamName + '</option>');
+        });
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    })
   }
 
 
