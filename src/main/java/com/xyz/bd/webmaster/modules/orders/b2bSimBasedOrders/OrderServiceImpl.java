@@ -494,48 +494,10 @@ public class OrderServiceImpl implements OrderService{
                     // look the origin of excption
                 }
 
-            //working code
-//                String Datis = String.valueOf(updateStatus.getScheduledDt());
-//                System.out.println(Datis);
-//                String inputDateStr = Datis;
-//                SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-//                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//
-//                try {
-//                    Date parsedDate = inputFormat.parse(inputDateStr);
-//                    String formattedDateStr = outputFormat.format(parsedDate);
-//                    System.out.println("Formatted Date: " + formattedDateStr);
-//
-//
-//
-//                    Date convertedDate = outputFormat.parse(formattedDateStr);
-//                    orderModelEntity.setScheduledDt(convertedDate);
-//                 //   orderModelEntity.setStatusName(updateStatus.getStatusName());
-//                    orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
-//                    orderModelEntity.setFirstContactNote(updateStatus.getFirstContactNote());
-//                    orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));
-//                    orderRepository.save(orderModelEntity);
-//                    System.out.println("Converted Date: " + outputFormat.format(convertedDate));
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
 
-                //working
-
-              //  orderRepository.save(orderModelEntity);
-//            }
-//            catch (Exception e) {
-//                System.out.println(e.getMessage());
-//                // Handle exceptions
-//            }
 
           }
 
-//          else if ("Sim Activation".equals(status_name)){
-//              orderModelEntity.setSimActivationNote(updateStatus.getSimActivationNote());
-//              orderModelEntity.setSimActivationDt(Helper.getCurrentDate());
-//              orderModelEntity.setSimActivationBy(SessionManager.getUserLoginName(request));
-//          }
 
           else if ("Sim Activation".equals(status_name)){
               orderModelEntity.setSimActivationNote(updateStatus.getSimActivationNote());
@@ -558,23 +520,23 @@ public class OrderServiceImpl implements OrderService{
             orderModelEntity.setUpdatedBy(SessionManager.getUserLoginName(request));
             orderModelEntity.setUpdatedAt(Helper.getCurrentDate());
 
-//            ActionLogsModel actionLogsModel = new ActionLogsModel();
-//
-//            actionLogsModel.setAction_type_name(Utility.create_order_gps);
-//            actionLogsModel.setAction_type_id(1L);
-//            actionLogsModel.setEvent_date(Helper.getCurrentDate());
-//            actionLogsModel.setF_id(1L);
-//            actionLogsModel.setF_table(Utility.tbl_order);
-//            actionLogsModel.setUser_id(SessionManager.getUserID(request));
-//
-//            //Old data need to be modified to json string
-//            actionLogsModel.setOld_data(orderModelEntity.toString());
-//            actionLogsModel.setNew_data(orderStatusData);
-//            actionLogsModel.setNote("Order Update");
-//            actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
-//            actionLogsModel.setCreatedAt(Helper.getCurrentDate());
-//
-//            actionLogService.SaveLogsData(actionLogsModel);
+            ActionLogsModel actionLogsModel = new ActionLogsModel();
+            actionLogsModel.setAction_type_name(Utility.update_order_b2b);
+            actionLogsModel.setAction_type_id(1L);
+            actionLogsModel.setEvent_date(Helper.getCurrentDate());
+            actionLogsModel.setForeign_id(1L);
+            actionLogsModel.setForeign_table(Utility.tbl_order);
+            actionLogsModel.setUser_id(SessionManager.getUserID(request));
+            actionLogsModel.setOld_data("");
+            Gson gson = new Gson();
+            String jsonData = gson.toJson(updateStatus);
+            actionLogsModel.setNew_data(jsonData);
+            actionLogsModel.setMsisdn(orderModelEntity.getCustomerContactNumber());
+            actionLogsModel.setNote("Update Order b2b");
+            actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
+            actionLogsModel.setCreatedAt(Helper.getCurrentDate());
+
+            actionLogService.SaveLogsData(actionLogsModel);
 
 
             orderRepository.save(orderModelEntity);

@@ -266,16 +266,18 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
                     }
 
                     ActionLogsModel actionLogsModel = new ActionLogsModel();
-                    actionLogsModel.setAction_type_name(Utility.create_order_gpc);
+                    actionLogsModel.setAction_type_name(Utility.create_order_gpshop);
                     actionLogsModel.setAction_type_id(1L);
                     actionLogsModel.setEvent_date(Helper.getCurrentDate());
                     actionLogsModel.setForeign_id(1L);
                     actionLogsModel.setForeign_table(Utility.tbl_order);
                     actionLogsModel.setUser_id(SessionManager.getUserID(request));
                     actionLogsModel.setOld_data("");
-                    actionLogsModel.setNew_data(String.valueOf(orderModelEntity));
+                    Gson gson = new Gson();
+                    String jsonData = gson.toJson(orderModelEntity);
+                    actionLogsModel.setNew_data(jsonData);
                     actionLogsModel.setMsisdn(orderModelEntity.getCustomerContactNumber());
-                    actionLogsModel.setNote("Order Creation b2C GPC");
+                    actionLogsModel.setNote("Order Creation b2C Gpshop");
                     actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
                     actionLogsModel.setCreatedAt(Helper.getCurrentDate());
 
@@ -521,23 +523,23 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
             orderModelEntity.setUpdatedBy(SessionManager.getUserLoginName(request));
             orderModelEntity.setUpdatedAt(Helper.getCurrentDate());
 
-//            ActionLogsModel actionLogsModel = new ActionLogsModel();
-//
-//            actionLogsModel.setAction_type_name(Utility.create_order_gps);
-//            actionLogsModel.setAction_type_id(1L);
-//            actionLogsModel.setEvent_date(Helper.getCurrentDate());
-//            actionLogsModel.setF_id(1L);
-//            actionLogsModel.setF_table(Utility.tbl_order);
-//            actionLogsModel.setUser_id(SessionManager.getUserID(request));
-//
-//            //Old data need to be modified to json string
-//            actionLogsModel.setOld_data(orderModelEntity.toString());
-//            actionLogsModel.setNew_data(orderStatusData);
-//            actionLogsModel.setNote("Order Update");
-//            actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
-//            actionLogsModel.setCreatedAt(Helper.getCurrentDate());
-//
-//            actionLogService.SaveLogsData(actionLogsModel);
+            ActionLogsModel actionLogsModel = new ActionLogsModel();
+            actionLogsModel.setAction_type_name(Utility.update_order_gpshop);
+            actionLogsModel.setAction_type_id(1L);
+            actionLogsModel.setEvent_date(Helper.getCurrentDate());
+            actionLogsModel.setForeign_id(1L);
+            actionLogsModel.setForeign_table(Utility.tbl_order);
+            actionLogsModel.setUser_id(SessionManager.getUserID(request));
+            actionLogsModel.setOld_data("");
+            Gson gson = new Gson();
+            String jsonData = gson.toJson(updateStatus);
+            actionLogsModel.setNew_data(jsonData);
+            actionLogsModel.setMsisdn(orderModelEntity.getCustomerContactNumber());
+            actionLogsModel.setNote("Update Order b2C Gp Shop");
+            actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
+            actionLogsModel.setCreatedAt(Helper.getCurrentDate());
+
+            actionLogService.SaveLogsData(actionLogsModel);
 
 
             orderRepository.save(orderModelEntity);
