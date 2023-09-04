@@ -503,12 +503,23 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-12" id="area_div">
+                                    <div class="form-group">
+                                        <label for="area">Area<span class="text-danger"> *</span></label>
+                                        <select name="area" id="area" class="form-control" required>
+
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="add_note">Add Note</label>
                                         <textarea type="text" class="form-control" name="add_note" id="add_note" placeholder="Add Note"></textarea>
                                     </div>
                                 </div>
+
+
 
                             </div>
                         </div>
@@ -761,6 +772,7 @@
             $('#templateLink')[0].click();
         });
 
+
         getOrderSimData();
         getProductListSearch();
         getVendorListSearch();
@@ -820,23 +832,7 @@
         });
     }
 
-    //order data get
-    // function getOrderSimData() {
-    //     $(".loader_body").show();
-    //     //   console.log(base_url);
-    //     $.ajax({
-    //         type: 'get',
-    //         url: base_url + "api/web/orders/b2b-sim-based/listB2bDeviceDT",
-    //         success: function (data) {
-    //             $(".loader_body").hide();
-    //             initOrderTable(data.data);
-    //         },
-    //         error: function (error) {
-    //             $(".loader_body").hide();
-    //         }
-    //     });
-    // }
-    //order data closed
+
 
     function getCustomOrderData() {
         $(".loader_body").show();
@@ -994,9 +990,11 @@
 
         if(previous_state == "New Order" && updatedStatus == "First Contact"){
             var schedule_val = $('#schedule').val();
+            var service_area = $('#area').val();
         }
         else{
             var schedule_val = "2023-08-30";
+            var service_area = "";
         }
 
         if(updatedStatus == "Installation"){
@@ -1076,6 +1074,8 @@
                 $('#tracker_device_name').attr("required", false);
                 $('#schedule_time').hide();
                 $('#schedule_time').attr("required", false);
+                $('#area_div').hide();
+                $('#area_div').attr("required", false);
                 break
 
             // case "Installation" :
@@ -1093,6 +1093,8 @@
                 $('#tracker_device_name').attr("required", false);
                 $('#schedule_time').hide();
                 $('#schedule_time').attr("required", false);
+                $('#area_div').hide();
+                $('#area_div').attr("required", false);
         }
     }
 
@@ -1167,6 +1169,7 @@
         $("#kcp_p_email").val(data.kcpEmail);
         $("#kcp_p_contact").val(data.kcpContactNumber);
         $("#previous_state").val(data.statusName);
+        getAreaList();
 
         $("#changeStatusModal").modal("show");
         if( curr_status == "Sim Activation") {
@@ -1176,10 +1179,14 @@
             $('#tracker_device_name').attr("required", true);
             $('#schedule_time').hide();
             $('#schedule_time').attr("required", false);
+            $('#area_div').hide();
+            $('#area_div').attr("required", false);
         }
         else if(curr_status == "New Order"){
             $('#schedule_time').show();
             $('#schedule_time').attr("required", true);
+            $('#area_div').show();
+            $('#area_div').attr("required", true);
             $('#imei_block').hide();
             $('#imei_input').attr("required", false);
             $('#tracker_device_name').hide();
@@ -1193,6 +1200,8 @@
             $('#tracker_device_name').attr("required", false);
             $('#schedule_time').hide();
             $('#schedule_time').attr("required", false);
+            $('#area_div').hide();
+            $('#area_div').attr("required", false);
         }
         getStatusAll(data.statusName, data.statusNameId, data.orderType);
     });
@@ -1290,6 +1299,26 @@
                     });
                     $('#editStatus').append('<option value="100/Cancelled">Cancelled</option>')
                 }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function getAreaList() {
+        $('#area').html("");
+        $(".loader_body").hide();
+        $.ajax({
+            type: 'post',
+            data: {type: "service_area"},
+            url: base_url + "api/web/orders/b2b-sim-based/area-detail",
+            success: function (data) {
+                console.log(data);
+                data.data.data.forEach(element => {
+                    $('#area').append('<option value="' + element.val + '">' + element.name + '</option>');
+                });
+
             },
             error: function (error) {
                 console.log(error);

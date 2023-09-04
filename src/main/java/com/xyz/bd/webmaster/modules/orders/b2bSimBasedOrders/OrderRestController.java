@@ -1,6 +1,7 @@
 package com.xyz.bd.webmaster.modules.orders.b2bSimBasedOrders;
 
 
+import com.xyz.bd.webmaster.modules.commonPackages.lov.LovService;
 import com.xyz.bd.webmaster.modules.orders.OrderModelEntity;
 import com.xyz.bd.webmaster.modules.orders.b2bDeviceOnly.B2bDeviceServices;
 import com.xyz.bd.webmaster.modules.orders.b2cGpShop.B2cGpShopServices;
@@ -8,10 +9,7 @@ import com.xyz.bd.webmaster.utility.CommonRestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -27,6 +25,9 @@ public class OrderRestController {
 
     @Autowired
     B2cGpShopServices b2cGpShopServices;
+
+    @Autowired
+    LovService lovService;
 
 
     @RequestMapping(value = "/listB2bSimDT", method = RequestMethod.GET)
@@ -56,5 +57,12 @@ public class OrderRestController {
                                                     @RequestParam("orderStatusData") String orderStatusData, @RequestParam("id") Long id, @RequestParam("scheduled_time") String scheduled_time) {
         return b2cGpShopServices.updateOrderStatus(request, orderStatusData, id, scheduled_time);
 
+    }
+
+    @PostMapping("/area-detail")
+    public CommonRestResponse getAreaInfo(HttpServletRequest request, @RequestParam("type") String type) {
+        CommonRestResponse commonRestResponse = new CommonRestResponse();
+        commonRestResponse.setData(lovService.getLovDataByType(type));
+        return commonRestResponse;
     }
 }
