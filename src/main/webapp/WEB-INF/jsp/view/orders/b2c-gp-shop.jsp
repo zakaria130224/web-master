@@ -250,7 +250,7 @@
                                                 <table class="table" id="dataTable">
                                                     <thead class="b2b-custom-boder">
                                                     <th>Cloud ID</th>
-                                                    <th>Ticket No</th>
+                                                    <th>GP Shop Transaction No</th>
                                                     <th>Date</th>
                                                     <th>Product</th>
                                                     <th>Support<br> Partner</th>
