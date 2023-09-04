@@ -990,11 +990,13 @@
 
         if(previous_state == "New Order" && updatedStatus == "First Contact"){
             var schedule_val = $('#schedule').val();
-            var service_area = $('#area').val();
+            var service_area = $('#area').val().split("/")[1];
+            var service_sla = $('#area').val().split("/")[0];
         }
         else{
             var schedule_val = "2023-08-30";
             var service_area = "";
+            var service_sla = 0;
         }
 
         if(updatedStatus == "Installation"){
@@ -1021,7 +1023,9 @@
                 finalizationNote :$('#add_note').val(),
                 onboardedNote :$('#add_note').val(),
                 cancelledNote :$('#add_note').val(),
-                deviceName : device_name
+                deviceName : device_name,
+                serviceArea : service_area,
+                serviceSla : service_sla
 
             }
             let id = $("#row_id").val();
@@ -1316,7 +1320,7 @@
             success: function (data) {
                 console.log(data);
                 data.data.data.forEach(element => {
-                    $('#area').append('<option value="' + element.val + '">' + element.name + '</option>');
+                    $('#area').append('<option value="' + element.val + "/" + element.name + '">' + element.name + '</option>');
                 });
 
             },

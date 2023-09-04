@@ -266,7 +266,7 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
                     }
 
                     ActionLogsModel actionLogsModel = new ActionLogsModel();
-                    actionLogsModel.setAction_type_name(Utility.create_order_gps);
+                    actionLogsModel.setAction_type_name(Utility.create_order_gpc);
                     actionLogsModel.setAction_type_id(1L);
                     actionLogsModel.setEvent_date(Helper.getCurrentDate());
                     actionLogsModel.setForeign_id(1L);
@@ -468,6 +468,8 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
                     Date parsedDate = dateFormat.parse(dateTime);
                     Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
                     orderModelEntity.setScheduledAppointedDt(timestamp);
+                    orderModelEntity.setServiceArea(updateStatus.getServiceArea());
+                    orderModelEntity.setServiceSla(updateStatus.getServiceSla());
                     orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
                     orderModelEntity.setFirstContactNote(updateStatus.getFirstContactNote());
                     orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));

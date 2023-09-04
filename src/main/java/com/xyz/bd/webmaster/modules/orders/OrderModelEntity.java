@@ -356,4 +356,12 @@ public class OrderModelEntity extends BaseEntity implements Serializable {
     @JsonProperty("deviceName")
     private String deviceName;
 
+    @Column(name = "service_area")
+    @JsonProperty("serviceArea")
+    private String serviceArea;
+
+    @Column(name = "service_sla")
+    @JsonProperty("serviceSla")
+    private Long serviceSla;
+
 }
