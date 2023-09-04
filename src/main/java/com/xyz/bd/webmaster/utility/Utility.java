@@ -13,8 +13,8 @@ public class Utility {
     public static String tbl_complaints="tbl_complaints";
 
 
-    public static String create_order_gps="Create GPS order";
-    public static String update_order_gps="Update GPS order";
+    public static String create_order_gpc="Create GPC order";
+    public static String update_order_gpc="Update GPC order";
     public static String update_order_status="Update order Status";
 
     public static String create_concern="Create new concern";
