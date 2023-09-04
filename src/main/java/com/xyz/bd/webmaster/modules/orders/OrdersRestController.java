@@ -26,13 +26,13 @@ public class OrdersRestController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public CommonRestResponse addNewDriver(HttpServletRequest request,
+    public CommonRestResponse addNewOrder(HttpServletRequest request,
                                            @RequestParam("orderInfo") String orderInfo) {
         return b2cGpcServices.addNewOrder(request, orderInfo);
 
     }
     @RequestMapping(value = "/update-status", method = RequestMethod.POST)
-    public CommonRestResponse updateDriverBasicInfo(HttpServletRequest request,
+    public CommonRestResponse updateOrderStatus(HttpServletRequest request,
                                                     @RequestParam("orderStatusData") String orderStatusData, @RequestParam("id") Long id, @RequestParam("scheduled_time") String scheduled_time) {
         return b2cGpcServices.updateOrderStatus(request, orderStatusData, id, scheduled_time);
     }
