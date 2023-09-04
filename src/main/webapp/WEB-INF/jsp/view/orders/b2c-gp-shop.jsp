@@ -251,10 +251,12 @@
                                                     <thead class="b2b-custom-boder">
                                                     <th>Cloud ID</th>
                                                     <th>GP Shop Transaction No</th>
-                                                    <th>Date</th>
-                                                    <th>Product</th>
-                                                    <th>Support<br> Partner</th>
+                                                    <th>GP Shop Transaction Date</th>
+                                                    <th>Customer Name</th>
+                                                    <th>Contact Number</th>
                                                     <th>Status</th>
+                                                    <th>Product Type</th>
+                                                    <th>Product Name</th>
                                                     <th>Order Excel</th>
                                                     <th>Actions</th>
                                                     </thead>
@@ -305,7 +307,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="status_date">Last Status Change Date</label>
+                                        <label for="status_date">Gp Shop Transaction Date</label>
                                         <input type="hidden" class="form-control" name="status_date" id="status_date"  placeholder="Select">
                                     </div>
                                 </div>
@@ -318,85 +320,42 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="ticket_id">Ticket ID</label>
-                                        <input type="text" name="ticket_id" id= "ticket_id" class="form-control" placeholder="Ticket id">
+                                        <label for="transaction_id">Transaction ID</label>
+                                        <input type="text" name="transaction_id" id= "transaction_id" class="form-control" placeholder="transaction_id">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="bs_code">BS Code</label>
-                                        <input type="text" name="bs_code" id= "bs_code" class="form-control" placeholder="BS Code">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="company_name">Company Name</label>
-                                        <input type="text" name="company_name" id= "company_name" class="form-control" placeholder="Company Name">
-                                    </div>
-                                </div>
-                                <%--                                <div class="col-md-12">--%>
-                                <%--                                    <div class="form-group">--%>
-                                <%--                                        <label for="vts_sim">VTS Mobile Number</label>--%>
-                                <%--                                        <input type="number" name="vts_sim" id= "vts_sim" class="form-control" placeholder="VTS SIM">--%>
-                                <%--                                    </div>--%>
-                                <%--                                </div>--%>
-                                <%--                                <div class="col-md-12">--%>
-                                <%--                                    <div class="form-group">--%>
-                                <%--                                        <label for="sim_kit">SIM Kit</label>--%>
-                                <%--                                        <input type="text" name="sim_kit" id= "sim_kit" class="form-control" placeholder="SIM Kit">--%>
-                                <%--                                    </div>--%>
-                                <%--                                </div>--%>
-                                <%--                                <div class="col-md-12">--%>
-                                <%--                                    <div class="form-group">--%>
-                                <%--                                        <label for="pack_name">Pack Name</label>--%>
-                                <%--                                        <input type="text" name="pack_name" id= "pack_name" class="form-control" placeholder="Pack Name">--%>
-                                <%--                                    </div>--%>
-                                <%--                                </div>--%>
-                                <%--                                <div class="col-md-12">--%>
-                                <%--                                    <div class="form-group">--%>
-                                <%--                                        <label for="base_price">Base Price (excluding VAT,SD,SC)</label>--%>
-                                <%--                                        <input type="text" name="base_price" id= "base_price" class="form-control" placeholder="Base price">--%>
-                                <%--                                    </div>--%>
-                                <%--                                </div>--%>
-                                <%--                                <div class="col-md-12">--%>
-                                <%--                                    <div class="form-group">--%>
-                                <%--                                        <label for="mrp">MRP</label>--%>
-                                <%--                                        <input type="text" name="mrp" id= "mrp" class="form-control" placeholder="MRP">--%>
-                                <%--                                    </div>--%>
-                                <%--                                </div>--%>
-
-                                <%--                                <div class="col-md-12">--%>
-                                <%--                                    <div class="form-group">--%>
-                                <%--                                        <label for="alt_cont_num">Alternative Contact No.</label>--%>
-                                <%--                                        <input type="text" name="alt_cont_num" id= "alt_cont_num" class="form-control" placeholder="Alt. Contact Number">--%>
-                                <%--                                    </div>--%>
-                                <%--                                </div>--%>
-
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="kcp_name">KCP Name</label>
-                                        <input type="text" name="kcp_name" id= "kcp_name" class="form-control" placeholder="KCP Name">
+                                        <label for="transaction_date">Transaction Date</label>
+                                        <input type="text" name="transaction_date" id= "transaction_date" class="form-control" placeholder="transaction_date">
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="kcp_contact">KCP Contact Number</label>
-                                        <input type="text" name="kcp_contact" id= "kcp_contact" class="form-control" placeholder="KCP Contact">
+                                        <label for="customer_name">Customer Name</label>
+                                        <input type="text" name="customer_name" id= "customer_name" class="form-control" placeholder="customer name">
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="kcp_email">KCP Email</label>
-                                        <input type="text" name="kcp_email" id= "kcp_email" class="form-control" placeholder="KCP Email">
+                                        <label for="customer_contact">Customer Contact Number</label>
+                                        <input type="text" name="customer_contact" id= "customer_contact" class="form-control" placeholder="Customer Contact">
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="support_partner">Support Partner Name</label>
-                                        <input type="text" name="support_partner" id= "support_partner" class="form-control" placeholder="Support Partner">
+                                        <label for="customer_email">Customer Email</label>
+                                        <input type="text" name="customer_email" id= "customer_email" class="form-control" placeholder="Customer Email">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="product_name">Product Name</label>
+                                        <input type="text" name="product_name" id= "product_name" class="form-control" placeholder="product name">
                                     </div>
                                 </div>
 
@@ -407,12 +366,6 @@
                                     </div>
                                 </div>
 
-                                <%--                                <div class="col-md-12">--%>
-                                <%--                                    <div class="form-group">--%>
-                                <%--                                        <label for="aud_auth_number">Audio Listen in Authorized Number</label>--%>
-                                <%--                                        <input type="text" name="aud_auth_number" id= "aud_auth_number" class="form-control" placeholder="Audio Listen in Authorized Number">--%>
-                                <%--                                    </div>--%>
-                                <%--                                </div>--%>
 
                             </div>
                         </div>
@@ -459,12 +412,6 @@
                                     </div>
                                 </div>
 
-<%--                                <div class="col-md-12">--%>
-<%--                                    <div class="form-group">--%>
-<%--                                        <label for="chtticket">CHT Ticket Number</label>--%>
-<%--                                        <input type="text" class="form-control" name="chtticket" id="chtticket"  placeholder="" required>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
 
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -534,12 +481,7 @@
                                     </div>
                                 </div>
 
-<%--                                <div class="col-md-12">--%>
-<%--                                    <div class="form-group">--%>
-<%--                                        <label for="editCht">Cht Ticket</label>--%>
-<%--                                        <input type="text" class="form-control" name="editCht" id="editCht" placeholder="" disabled>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
+
 
                                 <div class="col-md-12" id="imei_block">
                                     <div class="form-group">
@@ -620,12 +562,7 @@
                                     </div>
                                 </div>
 
-<%--                                <div class="col-md-12">--%>
-<%--                                    <div class="form-group">--%>
-<%--                                        <label for="editCht">Cht Ticket</label>--%>
-<%--                                        <input type="text" class="form-control" name="editCht" id="editChts" placeholder="" readonly>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
+
 
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -712,12 +649,7 @@
                                         <input type="text" class="form-control" name="imei" id="imei" placeholder="Add IMEI" required>
                                     </div>
                                 </div>
-                                <%--                                <div class="col-md-12">--%>
-                                <%--                                    <div class="form-group">--%>
-                                <%--                                        <label for="user_otp_final">User OTP</label>--%>
-                                <%--                                        <input type="password" class="form-control" name="user_otp_final" id="user_otp_final" placeholder="Type">--%>
-                                <%--                                    </div>--%>
-                                <%--                                </div>--%>
+
                             </div>
                         </div>
                     </form>
@@ -739,20 +671,13 @@
     <div class="modal fade" id="statusSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <%--                <div class="modal-header">--%>
-                <%--                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>--%>
-                <%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
-                <%--                        <span aria-hidden="true">&times;</span>--%>
-                <%--                    </button>--%>
-                <%--                </div>--%>
+
                 <div class="modal-body text-center" style="font-size: 18px">
                     Status updated <br>
                     Successfully<br>
                     <button type="button" class="btn btn-secondary" style="width: 247px" data-dismiss="modal" id="closeSuccessModalButton">Close</button>
                 </div>
-                <%--                <div class="modal-footer ">--%>
-                <%--&lt;%&ndash;                    <button type="button" class="btn btn-secondary" style="width: 247px" data-dismiss="modal">Close</button>&ndash;%&gt;--%>
-                <%--                </div>--%>
+
             </div>
         </div>
     </div>
@@ -979,8 +904,8 @@
             select:true,
             columns: [
                 {data: 'id'},
-                {data: 'chtTicketId'},
-                {data: 'createdAt',
+                {data: 'gpshopTransactionId'},
+                {data: 'gpshopRequisitionDt',
                     render: function(data) {
                         var createdAtDate = new Date(data);
                         var formattedDate = createdAtDate.getFullYear() + '-' +
@@ -992,8 +917,8 @@
                         return formattedDate;
                     }
                 },
-                {data: 'productType'},
-                {data: 'supportPartnerName'},
+                {data: 'customerName'},
+                {data: 'customerContactNumber'},
                 {data: 'statusName',
                     autowidth: true,
                     render: function (data, type, full, row) {
@@ -1019,18 +944,16 @@
                             return '';
                         }
                     }},
+                {data: 'productType'},
+                {data: 'productName'},
+
                 {
                     data: 'id',
                     render: function (data, type, full, row){
                         return '<button class="btn btn-b2b-sm btn-b2b-sm-download btn-sm exclude-click">Download Excel</button>';
                     }
                 },
-                // {
-                //     data: 'id',
-                //     render: function (data, type, full, row){
-                //         return '<button class="btn btn-b2b-sm btn-b2b-sm-base btn-sm change-status exclude-click">Change Status</button>';
-                //     }
-                // }
+
                 {
                     data: 'statusName',
                     render: function (data, type, full, row){
@@ -1048,39 +971,6 @@
     }
     // table ends
 
-    // click event handler for the order details link
-    // $('#dataTable').on('click', '.order-details-link', function(e) {
-    //   e.preventDefault();
-    //   var orderId = $(this).data('order-id');
-    //   console.log(data);
-    //   loadOrderDetails(orderId, data);
-    // });
-    //
-    // function loadOrderDetails(orderId, data) {
-    //   var detailedData = findDetailedDataById(orderId, data);
-    //
-    //   if (detailedData) {
-    //
-    //     $('#status_date').val(detailedData.createdAt);
-    //     $('#cloud_id').val(detailedData.cloudId);
-    //     $('#ticket_id').val(detailedData.chtTicketId);
-    //
-    //
-    //     // Open the modal to display the details
-    //     $('#detailsOrderView').modal('show');
-    //   }
-    // }
-    //
-    // function findDetailedDataById(orderId, data) {
-    //
-    //   for (var i = 0; i < data.length; i++) {
-    //     if (data[i].id === orderId) {
-    //       return data[i];
-    //     }
-    //   }
-    //   // Return null or an empty object if no matching order is found
-    //   return null;
-    // }
 
     function updateStatus(){
         $(".loader_body").show();
@@ -1109,6 +999,13 @@
             var schedule_val = "2023-08-30";
         }
 
+        if(updatedStatus == "Installation"){
+            var device_name = $('#device_name').val();
+        }
+        else{
+            var device_name = "";
+        }
+
         if($("#updateForm").parsley().validate()){
             let orderStatusData = {
                 statusName: $('#editStatus').val().split("/")[1],
@@ -1125,7 +1022,8 @@
                 installationNote :$('#add_note').val(),
                 finalizationNote :$('#add_note').val(),
                 onboardedNote :$('#add_note').val(),
-                cancelledNote :$('#add_note').val()
+                cancelledNote :$('#add_note').val(),
+                deviceName : device_name
 
             }
             let id = $("#row_id").val();
@@ -1319,23 +1217,15 @@
     });
 
     function loadOrderDetails(orderId, detailedData) {
-        $('#status_date').val(detailedData.createdAt);
+        $('#status_date').val(detailedData.gpshopRequisitionDt);
         $('#cloud_id').val(detailedData.id);
-        $('#ticket_id').val(detailedData.chtTicketId);
-        $('#bs_code').val(detailedData.bsCode);
-        $('#company_name').val(detailedData.companyName);
-        $('#vts_sim').val(detailedData.vtsSimNo);
-        $('#sim_kit').val(detailedData.simKit);
-        $('#pack_name').val(detailedData.packName);
-        $('#base_price').val(detailedData.basePrice);
-        $('#mrp').val(detailedData.unitPrice);
-        $('#alt_cont_num').val(detailedData.altContactNum);
-        $('#kcp_name').val(detailedData.kcpName);
-        $('#kcp_contact').val(detailedData.kcpContactNumber);
-        $('#kcp_email').val(detailedData.kcpEmail);
-        $('#support_partner').val(detailedData.supportPartnerName);
+        $('#transaction_id').val(detailedData.gpshopTransactionId);
+        $('#transaction_date').val(detailedData.gpshopRequisitionDt);
+        $('#customer_name').val(detailedData.customerName);
+        $('#customer_contact').val(detailedData.customerContactNumber);
+        $('#customer_email').val(detailedData.customerEmail);
+        $('#product_name').val(detailedData.productName);
         $('#product_type').val(detailedData.productType);
-        $('#aud_auth_number').val(detailedData.audioListenMsisdn);
 
         // Populate other fields using detailedData
 
