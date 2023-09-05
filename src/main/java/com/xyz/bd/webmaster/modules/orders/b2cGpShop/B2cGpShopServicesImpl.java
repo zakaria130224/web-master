@@ -266,60 +266,41 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
                     }
 
                     ActionLogsModel actionLogsModel = new ActionLogsModel();
-                    actionLogsModel.setAction_type_name(Utility.create_order_gps);
+                    actionLogsModel.setAction_type_name(Utility.create_order_gpshop);
                     actionLogsModel.setAction_type_id(1L);
                     actionLogsModel.setEvent_date(Helper.getCurrentDate());
                     actionLogsModel.setForeign_id(1L);
                     actionLogsModel.setForeign_table(Utility.tbl_order);
                     actionLogsModel.setUser_id(SessionManager.getUserID(request));
                     actionLogsModel.setOld_data("");
-                    actionLogsModel.setNew_data(String.valueOf(orderModelEntity));
+                    Gson gson = new Gson();
+                    String jsonData = gson.toJson(orderModelEntity);
+                    actionLogsModel.setNew_data(jsonData);
                     actionLogsModel.setMsisdn(orderModelEntity.getCustomerContactNumber());
-                    actionLogsModel.setNote("Order Creation b2C GPC");
+                    actionLogsModel.setNote("Order Creation b2C Gpshop");
                     actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
                     actionLogsModel.setCreatedAt(Helper.getCurrentDate());
 
                     actionLogService.SaveLogsData(actionLogsModel);
-
-                    UserModelEntity existingUser = userService.findByUserName("880"+cusMsisdn);
-
+                    String customer_msisdn = "880"+cusMsisdn;
+                    System.out.println(customer_msisdn);
+                    UserModelEntity existingUser = userService.findByUserName(customer_msisdn);
+                    System.out.println(existingUser);
 
                     if (existingUser == null) {
                         // Create a new user entry in tbl_user
                         UserModelEntity newUser = new UserModelEntity();
-                        String customer_msisdn = "880"+cusMsisdn;
-                        try {
-                            // Create an MD5 hash instance
-                            MessageDigest md = MessageDigest.getInstance("MD5");
-
-                            // Update the hash with the bytes of the mobile number
-                            md.update(customer_msisdn.getBytes());
-
-                            // Generate the MD5 hash as bytes
-                            byte[] md5Bytes = md.digest();
-
-                            // Convert the byte array to a hexadecimal string
-                            StringBuilder sb = new StringBuilder();
-                            for (byte md5Byte : md5Bytes) {
-                                sb.append(Integer.toString((md5Byte & 0xff) + 0x100, 16).substring(1));
-                            }
-
-                            // The sb.toString() now contains the MD5 hash of the mobile number
-                            String md5Hash = sb.toString();
-
-                            System.out.println("Original Mobile Number: " + customer_msisdn);
-                            System.out.println("MD5 Hash: " + md5Hash);
                             newUser.setUserName(customer_msisdn);
                             newUser.setFullName(customerName);
-                            newUser.setMobileNumber(cusMsisdn);
+                            newUser.setMobileNumber(customer_msisdn);
                             newUser.setIsActive(1);
-                            newUser.setPassword(md5Hash);
-                            orderModelEntity.setUserId(existingUser.getId());
-                            userService.save(newUser);
-                        } catch (NoSuchAlgorithmException e) {
-                            e.printStackTrace();
-                        }
+                            UserModelEntity savedUser =  userService.save(newUser);
+                            Long userId = savedUser.getId();
+                            orderModelEntity.setUserId(userId);
+                    }
 
+                    else{
+                        orderModelEntity.setUserId(existingUser.getId());
                     }
 
 
@@ -347,31 +328,30 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
             OrderModelEntity orderModelEntity = orderRepository.getById(id);
             String status_name = updateStatus.getStatusName();
 
-            String orderTypeName = orderModelEntity.getOrderType();
-            System.out.println(orderTypeName);
+
 
             System.out.println("orderStatusData: " + status_name);
             if ("Installation".equals(status_name)){
                 System.out.println("tests success");
-                UserModelEntity existingUser = userService.findByUserName(updateStatus.getKcpContactNumber());
+                UserModelEntity existingUser = userService.findByUserName(orderModelEntity.getCustomerContactNumber());
 
                 if (existingUser == null) {
                     // Create a new user entry in tbl_user
                     UserModelEntity newUser = new UserModelEntity();
-                    newUser.setUserName(updateStatus.getKcpContactNumber());
-                    newUser.setFullName(updateStatus.getKcpName());
-                    newUser.setMobileNumber(updateStatus.getKcpEmail());
+                    newUser.setUserName(orderModelEntity.getCustomerContactNumber());
+                    newUser.setFullName(orderModelEntity.getCustomerName());
+                    newUser.setMobileNumber(orderModelEntity.getCustomerContactNumber());
                     newUser.setIsActive(1);
                     userService.save(newUser);
                 }
-                if(orderTypeName == "gpshop_sim"){
+                String orderTypeName = orderModelEntity.getOrderType();
+                System.out.println(orderTypeName);
+                if("gpshop_sim".equals(orderTypeName)){
+                    System.out.println("entered");
                 String existingImei = trackerDeviceService.checkImeiExists(updateStatus.getImei());
                 System.out.println(existingImei);
                 System.out.println("-------"+updateStatus.getImei());
                 if("false".equals(existingImei)) {
-                    // Send HTTP POST request
-//                    String apiUrl = "https://tteche.grameenphone.com/federal-mw/so/api/web/device/add";
-//                    String authorizationHeader = "Basic aW90d2ViOmdwNzU4MA==";
 
                     long resultCode = 0;
                     String resultDesc = "";
@@ -429,18 +409,16 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
                     deviceInfo.setUserId(existingUser.getId()); // Set the user ID
                     deviceInfo.setImei(updateStatus.getImei());
                     deviceInfo.setTrackerDeviceId(resultCode);
-                    deviceInfo.setUserEmail(orders.getKcpEmail());
-                    deviceInfo.setCustomerName(updateStatus.getKcpName());
+                    deviceInfo.setUserEmail(orderModelEntity.getCustomerEmail());
+                    deviceInfo.setCustomerName(orderModelEntity.getCustomerName());
                     deviceInfo.setOrderId(id);
-                    deviceInfo.setCompanyId(orders.getCompanyId());
-                    deviceInfo.setCustomerName(orders.getKcpName());
-                    deviceInfo.setCellPhone(orders.getKcpContactNumber());
-                    deviceInfo.setUserEmail(orders.getKcpEmail());
-                    deviceInfo.setVtsSim(orders.getVtsSimNo());
-                    deviceInfo.setDeviceCategory(orders.getDeviceCategory());
-                    deviceInfo.setDeviceSubCategory(orders.getDeviceSubCategory());
-                    deviceInfo.setDataPackName(orders.getPackName());
-                    deviceInfo.setCompanyName(orders.getCompanyName());
+                    deviceInfo.setCustomerName(orderModelEntity.getCustomerName());
+                    deviceInfo.setCellPhone(orderModelEntity.getCustomerContactNumber());
+                    deviceInfo.setUserEmail(orderModelEntity.getCustomerEmail());
+                    deviceInfo.setVtsSim(orderModelEntity.getVtsSimNo());
+                    deviceInfo.setDeviceCategory(orderModelEntity.getDeviceCategory());
+                    deviceInfo.setDeviceSubCategory(orderModelEntity.getDeviceSubCategory());
+                    deviceInfo.setDataPackName(orderModelEntity.getPackName());
                     deviceInfo.setInstallationDate(Helper.getCurrentDate());
                     deviceInfo.setDeviceName(updateStatus.getDeviceName());
 
@@ -452,10 +430,9 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
                     orderModelEntity.setInstallationNote(updateStatus.getInstallationNote());
                     orderModelEntity.setInstallationDt(Helper.getCurrentDate());
                     orderModelEntity.setInstallationBy(SessionManager.getUserLoginName(request));
-                    if(orderTypeName == "gpshop_sim") {
-                        orderModelEntity.setImei(orderModelEntity.getImei());
-                        orderModelEntity.setDeviceName(updateStatus.getDeviceName());
-                    }
+                    orderModelEntity.setImei(updateStatus.getImei());
+                    orderModelEntity.setDeviceName(updateStatus.getDeviceName());
+
 
 
                 }
@@ -493,12 +470,11 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
                     Date parsedDate = dateFormat.parse(dateTime);
                     Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
                     orderModelEntity.setScheduledAppointedDt(timestamp);
+                    orderModelEntity.setServiceArea(updateStatus.getServiceArea());
+                    orderModelEntity.setServiceSla(updateStatus.getServiceSla());
                     orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
                     orderModelEntity.setFirstContactNote(updateStatus.getFirstContactNote());
                     orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));
-
-//                    String firstCall = "2023-08-11 15:30:00";
-//                    String orderDate = "2023-08-12 15:30:00";
 
                     SimpleDateFormat dateFormats = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -522,48 +498,9 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
                     // look the origin of excption
                 }
 
-                //working code
-//                String Datis = String.valueOf(updateStatus.getScheduledDt());
-//                System.out.println(Datis);
-//                String inputDateStr = Datis;
-//                SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-//                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//
-//                try {
-//                    Date parsedDate = inputFormat.parse(inputDateStr);
-//                    String formattedDateStr = outputFormat.format(parsedDate);
-//                    System.out.println("Formatted Date: " + formattedDateStr);
-//
-//
-//
-//                    Date convertedDate = outputFormat.parse(formattedDateStr);
-//                    orderModelEntity.setScheduledDt(convertedDate);
-//                 //   orderModelEntity.setStatusName(updateStatus.getStatusName());
-//                    orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
-//                    orderModelEntity.setFirstContactNote(updateStatus.getFirstContactNote());
-//                    orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));
-//                    orderRepository.save(orderModelEntity);
-//                    System.out.println("Converted Date: " + outputFormat.format(convertedDate));
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-
-                //working
-
-                //  orderRepository.save(orderModelEntity);
-//            }
-//            catch (Exception e) {
-//                System.out.println(e.getMessage());
-//                // Handle exceptions
-//            }
 
             }
 
-//          else if ("Sim Activation".equals(status_name)){
-//              orderModelEntity.setSimActivationNote(updateStatus.getSimActivationNote());
-//              orderModelEntity.setSimActivationDt(Helper.getCurrentDate());
-//              orderModelEntity.setSimActivationBy(SessionManager.getUserLoginName(request));
-//          }
 
             else if ("Sim Activation".equals(status_name)){
                 orderModelEntity.setSimActivationNote(updateStatus.getSimActivationNote());
@@ -571,13 +508,13 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
                 orderModelEntity.setSimActivationBy(SessionManager.getUserLoginName(request));
             }
 
-            else if ("Cancelled".equals(status_name)){
-                orderModelEntity.setSimActivationNote(updateStatus.getSimActivationNote());
-                orderModelEntity.setCancelledDt(Helper.getCurrentDate());
-                orderModelEntity.setCancelledBy(SessionManager.getUserLoginName(request));
-            }
+//            else if ("Cancelled".equals(status_name)){
+//                orderModelEntity.setSimActivationNote(updateStatus.getSimActivationNote());
+//                orderModelEntity.setCancelledDt(Helper.getCurrentDate());
+//                orderModelEntity.setCancelledBy(SessionManager.getUserLoginName(request));
+//            }
 
-            //  OrderModelEntity orderModelEntity = orderRepository.getById(id);
+
 
             orderModelEntity.setStatusName(updateStatus.getStatusName());
             orderModelEntity.setStatusNameId(updateStatus.getStatusNameId());
@@ -586,23 +523,23 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
             orderModelEntity.setUpdatedBy(SessionManager.getUserLoginName(request));
             orderModelEntity.setUpdatedAt(Helper.getCurrentDate());
 
-//            ActionLogsModel actionLogsModel = new ActionLogsModel();
-//
-//            actionLogsModel.setAction_type_name(Utility.create_order_gps);
-//            actionLogsModel.setAction_type_id(1L);
-//            actionLogsModel.setEvent_date(Helper.getCurrentDate());
-//            actionLogsModel.setF_id(1L);
-//            actionLogsModel.setF_table(Utility.tbl_order);
-//            actionLogsModel.setUser_id(SessionManager.getUserID(request));
-//
-//            //Old data need to be modified to json string
-//            actionLogsModel.setOld_data(orderModelEntity.toString());
-//            actionLogsModel.setNew_data(orderStatusData);
-//            actionLogsModel.setNote("Order Update");
-//            actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
-//            actionLogsModel.setCreatedAt(Helper.getCurrentDate());
-//
-//            actionLogService.SaveLogsData(actionLogsModel);
+            ActionLogsModel actionLogsModel = new ActionLogsModel();
+            actionLogsModel.setAction_type_name(Utility.update_order_gpshop);
+            actionLogsModel.setAction_type_id(1L);
+            actionLogsModel.setEvent_date(Helper.getCurrentDate());
+            actionLogsModel.setForeign_id(1L);
+            actionLogsModel.setForeign_table(Utility.tbl_order);
+            actionLogsModel.setUser_id(SessionManager.getUserID(request));
+            actionLogsModel.setOld_data("");
+            Gson gson = new Gson();
+            String jsonData = gson.toJson(updateStatus);
+            actionLogsModel.setNew_data(jsonData);
+            actionLogsModel.setMsisdn(orderModelEntity.getCustomerContactNumber());
+            actionLogsModel.setNote("Update Order b2C Gp Shop");
+            actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
+            actionLogsModel.setCreatedAt(Helper.getCurrentDate());
+
+            actionLogService.SaveLogsData(actionLogsModel);
 
 
             orderRepository.save(orderModelEntity);

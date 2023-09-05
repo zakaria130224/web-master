@@ -273,7 +273,7 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
             ActionLogsModel actionLogsModel = new ActionLogsModel();
 
-            actionLogsModel.setAction_type_name(Utility.update_order_status);
+            actionLogsModel.setAction_type_name(Utility.create_order_gpc);
             actionLogsModel.setAction_type_id(2L);
             actionLogsModel.setEvent_date(Helper.getCurrentDate());
             actionLogsModel.setForeign_id(2L);

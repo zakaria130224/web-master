@@ -20,4 +20,10 @@ public class Utility {
     public static String create_concern="Create new concern";
     public static String update_concern_status="Update concern address";
 
+    public static String create_order_gpshop="Create GP Shop Order";
+    public static String update_order_gpshop="Update GP Shop order";
+
+    public static String create_order_b2b="Create B2B Order";
+    public static String update_order_b2b="Update B2B order ";
+
 }
