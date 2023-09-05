@@ -6,6 +6,7 @@ import com.xyz.bd.webmaster.config.session.SessionManager;
 import com.xyz.bd.webmaster.models.common.DTOs.SMS;
 import com.xyz.bd.webmaster.modules.actionLogs.ActionLogService;
 import com.xyz.bd.webmaster.modules.actionLogs.ActionLogsModel;
+import com.xyz.bd.webmaster.modules.commonPackages.apiRequest.ApiRequestService;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyModelEntity;
 import com.xyz.bd.webmaster.modules.commonPackages.company.CompanyRepository;
 import com.xyz.bd.webmaster.modules.commonPackages.models.VendorModelEntity;
@@ -54,9 +55,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.text.SimpleDateFormat;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -102,6 +101,9 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     ActionLogService actionLogService;
+
+    @Autowired
+    ApiRequestService apiRequestService;
 
 
 
@@ -368,52 +370,90 @@ public class OrderServiceImpl implements OrderService{
 
                     long resultCode = 0;
                     String resultDesc = "";
+                    //working api call
+//                    try {
+//                        URL url = new URL(addDeviceUrl);
+//                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//                        connection.setRequestMethod("POST");
+//                        connection.setRequestProperty("Authorization", webAuthorizationHeader);
+//                        connection.setRequestProperty("channel", "WEB");
+//                        connection.setRequestProperty("Content-Type", "application/json");
+//                        connection.setDoOutput(true);
+//
+//                        String payload = "{\n" +
+//                                "    \"imei\": \"" + updateStatus.getImei() + "\",\n" +
+//                                "    \"name\": \"Test device\",\n" +
+//                                "    \"speedLimit\": 20.6\n" +
+//                                "}";
+//
+//                        try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+//                            wr.writeBytes(payload);
+//                            wr.flush();
+//                        }
+//
+//                        int responseCode = connection.getResponseCode();
+//                        System.out.println("POST Response Code: " + responseCode);
+//
+//                        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//                        String inputLine;
+//                        StringBuilder response = new StringBuilder();
+//
+//                        while ((inputLine = in.readLine()) != null) {
+//                            response.append(inputLine);
+//                        }
+//                        in.close();
+//
+//                        System.out.println("POST Response: " + response.toString());
+//
+//                        // Parse the API response
+//                        JSONObject jsonResponse = new JSONObject(response.toString());
+//                        JSONObject responseHeader = jsonResponse.getJSONObject("data");
+//                        resultCode = responseHeader.getLong("id");
+//                      //  resultDesc  = responseHeader.getString("resultDesc");
+//
+//                        // Use the resultCode as needed
+//                        System.out.println("Result Code: " + resultCode);
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+                    //working api call
+                    //api call using httpservice
                     try {
-                        URL url = new URL(addDeviceUrl);
-                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                        connection.setRequestMethod("POST");
-                        connection.setRequestProperty("Authorization", webAuthorizationHeader);
-                        connection.setRequestProperty("channel", "WEB");
-                        connection.setRequestProperty("Content-Type", "application/json");
-                        connection.setDoOutput(true);
+                        // Define the URL and headers
+//                        String addDeviceUrl = "https://tteche.grameenphone.com/federal-mw/so/api/web/device/add";
+//                        String webAuthorizationHeader = "Basic aW90d2ViOmdwNzU4MA==";
+                        String channel = "WEB";
+                        String contentType = "application/json";
 
+                        // Define the headers as a Map
+                        Map<String, String> headers = new HashMap<>();
+                        headers.put("Authorization", webAuthorizationHeader);
+                        headers.put("channel", channel);
+
+                        // Define the payload
                         String payload = "{\n" +
                                 "    \"imei\": \"" + updateStatus.getImei() + "\",\n" +
-                                "    \"name\": \"Test device\",\n" +
+                                "    \"name\": \"" + updateStatus.getDeviceName() + "\",\n" +
                                 "    \"speedLimit\": 20.6\n" +
                                 "}";
 
-                        try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
-                            wr.writeBytes(payload);
-                            wr.flush();
-                        }
-
-                        int responseCode = connection.getResponseCode();
-                        System.out.println("POST Response Code: " + responseCode);
-
-                        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                        String inputLine;
-                        StringBuilder response = new StringBuilder();
-
-                        while ((inputLine = in.readLine()) != null) {
-                            response.append(inputLine);
-                        }
-                        in.close();
-
-                        System.out.println("POST Response: " + response.toString());
+                        // Send the POST request with headers
+                        String response = apiRequestService.sendPostRequest(addDeviceUrl, headers, contentType, payload);
 
                         // Parse the API response
-                        JSONObject jsonResponse = new JSONObject(response.toString());
+                        JSONObject jsonResponse = new JSONObject(response);
                         JSONObject responseHeader = jsonResponse.getJSONObject("data");
                         resultCode = responseHeader.getLong("id");
-                      //  resultDesc  = responseHeader.getString("resultDesc");
 
                         // Use the resultCode as needed
                         System.out.println("Result Code: " + resultCode);
 
-                    } catch (Exception e) {
+                    } catch (IOException e) {
                         e.printStackTrace();
+                        // Handle exceptions
                     }
+                    //end api call
 //                    String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                     OrderModelEntity orders = orderRepository.getOrderById(id);
 
