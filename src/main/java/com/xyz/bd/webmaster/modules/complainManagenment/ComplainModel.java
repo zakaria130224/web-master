@@ -202,6 +202,18 @@ public class ComplainModel extends BaseEntity  {
     @JsonProperty("unsolvableBy")
     private String unsolvableBy;
 
+    @Column(name = "cancelled_dt")
+    @JsonProperty("cancelledDt")
+    private Date cancelledDt;
+
+    @Column(name = "cancelled_note")
+    @JsonProperty("cancelledNote")
+    private String cancelledNote;
+
+    @Column(name = "cancelled_by")
+    @JsonProperty("cancelledBy")
+    private String cancelledBy;
+
     @Column(name = "otp_verified")
     @JsonProperty("otpVerified")
     private Boolean otpVerified;
@@ -249,4 +261,16 @@ public class ComplainModel extends BaseEntity  {
     @Column(name = "user_type")
     @JsonProperty("userType")
     private String userType;
+
+    @Column(name = "service_area")
+    @JsonProperty("serviceArea")
+    private String serviceArea;
+
+    @Column(name = "product_type")
+    @JsonProperty("productType")
+    private String productType;
+
+    @Column(name = "product_id")
+    @JsonProperty("productId")
+    private Long productId;
 }

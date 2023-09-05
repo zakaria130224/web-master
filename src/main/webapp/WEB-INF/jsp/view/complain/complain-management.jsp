@@ -388,8 +388,8 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn b2b-submit-btn-base btn-outline-primary float-left">close</button>
-          <button type="submit" class="btn btn-primary b2b-submit-btn-base" onclick="createNewConcern()">Add Entry</button>
+          <button type="submit" class="btn btn-b2b-sm btn-sm btn-b2b-sm-base change-status">close</button>
+          <button type="submit" class="btn btn-b2b-sm btn-sm btn-b2b-sm-base change-status" onclick="createNewConcern()">Add Entry</button>
         </div>
       </div>
     </div>
@@ -399,7 +399,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title float-left" id="myModalLabel4">Order Entry</h4>
+          <h4 class="modal-title float-left" id="myModalLabel4">Concern Details</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                   style="height: 20px;width:
                             20px;border: 1px solid;
@@ -418,52 +418,30 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="d_updated_date">Last Status Change Date</label>
-                    <input type="text" class="form-control" id="d_updated_date" placeholder="Select" disabled>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="d_cloud_id">Cloud ID</label>
-                    <input type="text" class="form-control" id="d_cloud_id" placeholder="Select" disabled>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="d_trxid">TRXID </label>
-                    <input type="text" class="form-control" id="d_trxid" placeholder="Select" disabled>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="d_customer_name">Customer Name </label>
-                    <input type="text" class="form-control" id="d_customer_name" placeholder="Select" disabled>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="d_address">Address </label>
-                    <input type="text" class="form-control" id="d_address" disabled>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="d_pack">Pack/Service</label>
-                    <input type="text" class="form-control" id="d_pack" disabled>
+                    <label for="d_sts_ticket">STS Ticket No <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_sts_ticket" placeholder="Select" disabled>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="d_product_name">Product Name</label>
+                    <label for="d_product_name">Product </label>
                     <input type="text" class="form-control" id="d_product_name" disabled>
+
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="d_product_type">Product Type</label>
-                    <input type="text" class="form-control" id="d_product_type" disabled>
+                    <label for="d_product_category">Product Category</label>
+                    <input type="text" class="form-control" id="d_product_category" disabled>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="d_product_sub_category">Product Sub Category</label>
+                    <input type="text" class="form-control" id="d_product_sub_category" disabled>
                   </div>
                 </div>
 
@@ -476,18 +454,47 @@
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="d_rate_plan">Rate Plan </label>
-                    <input type="text" class="form-control" id="d_rate_plan" placeholder="Select" disabled>
+                    <label for="d_product_type">Product Type</label>
+                    <select class="form-control" id="d_product_type" disabled>
+
+                    </select>
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="d_customer_contact">Customer Contact </label>
-                    <input type="text" class="form-control" id="d_customer_contact" placeholder="Select" disabled>
+                    <label for="d_user_type">User Type</label>
+                    <input type="text" class="form-control" id="d_user_type" required placeholder="write here" disabled>
                   </div>
                 </div>
 
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="d_tracker_sim_no">Tracker SIM Number <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_tracker_sim_no" required placeholder="write here" disabled>
+                  </div>
+                </div>
+
+                <div class="col-md-12" id="d_vts_sim_block">
+                  <div class="form-group">
+                    <label for="d_user_no">User Number <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_user_no" required placeholder="write here" disabled>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="d_resp_name">Responsible <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" id="d_resp_name"  placeholder="write here" disabled>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="d_remarks_note">Remarks <span class="text-danger"> *</span></label>
+                    <textarea class="form-control" id="d_remarks_note" disabled></textarea>
+                  </div>
+                </div>
               </div>
             </div>
           </form>
@@ -755,6 +762,7 @@
 
 
   function openCreateComplainModal(){
+    $(".loader_body").show();
     getProductList();
     getResponsibleTeamList();
     $("#newComplainEntry").modal("show");
@@ -926,17 +934,18 @@
     }
     $('#details_order_form').trigger("reset");
 
-    $('#d_updated_date').val(tableRowData.updatedAt);
-    $('#d_cloud_id').val(tableRowData.cloudId);
-    $('#d_trxid').val(tableRowData.id);
-    $('#d_customer_name').val(tableRowData.customerName);
-    $('#d_address').val(tableRowData.address);
-    $('#d_pack').val(tableRowData.packName);
-    $('#d_product_name').val(tableRowData.productName);
-    $('#d_product_type').val(tableRowData.productType);
-    $('#d_vendor_name').val(tableRowData.vendorName);
-    $('#d_rate_plan').val(tableRowData.ratePlan);
-    $('#d_customer_contact').val(tableRowData.customerContactNumber);
+
+    $('#d_sts_ticket').val(tableRowData.stsTicketId)
+    $('#d_product_name').val(tableRowData.deviceSubCategory)
+    $('#d_product_category').val(tableRowData.deviceCategory)
+    $('#d_product_sub_category').val(tableRowData.deviceSubCategory)
+    $('#d_vendor_name').val(tableRowData.vendorName)
+    $('#d_product_type').val(tableRowData.productType)
+    $('#d_user_type').val(tableRowData.userType)
+    $('#d_tracker_sim_no').val(tableRowData.vtsSimNo)
+    $('#d_user_no').val(tableRowData.customerContactNumber)
+    $('#d_resp_name').val(tableRowData.responsibleTeamName)
+    $('#d_remarks_note').val(tableRowData.newComplaintNote)
   } );
 
   function createNewConcern(){
@@ -1002,8 +1011,8 @@
     $("#current_status").val(data.status).change();
     $("#row_id").val(data.id);
     $("#changeStatus").modal("show");
-    console.log(data.statusName + "-" +data.statusNameId + "-" +data.orderType);
-    getStatusB2c(data.statusName, data.statusNameId, data.orderType);
+    console.log(data);
+    getComplaintStatus(data.comStatusName, data.comStatusId);
 
   } );
 
@@ -1102,9 +1111,11 @@
         data.data.forEach(element => {
           $('#product_name').append('<option value="' + element.id + "/" + element.vendorName +"/" + element.hasSim +"/" + element.deviceCategory + "/" + element.deviceSubCategory +'">' + element.productName + '</option>');
         });
+        $(".loader_body").hide();
       },
       error: function (error) {
         console.log(error);
+        $(".loader_body").hide();
       }
     })
   }
@@ -1147,34 +1158,23 @@
     });
   }
 
-  function getStatusB2c(statusName, statusNameId, orderType) {
-    $(".loader_body").show();
+  function getComplaintStatus(statusName, statusNameId) {
+    $(".loader_body").hide();
     $('#current_status').html("");
     $.ajax({
       type: 'get',
-      url: base_url + "api/web/utility/order-status-list",
+      url: base_url + "api/web/complain/get-status-list",
       success: function (data) {
-        if(orderType === "gpc_sim"){
-          console.log("gpc_sim");
-          data.data.forEach(element => {
-            $('#current_status').append('<option value="' + element.gpc_sim + '">' + element.order_name + '</option>');
-          });
-        } else if(orderType === "gpc_simless"){
-          console.log("gpc_simless");
-          data.data.forEach(element => {
-            $('#current_status').append('<option value="' + element.gpc_simless + '">' + element.order_name + '</option>');
-          });
-        }
+        data.data.forEach(element => {
+          $('#current_status').append('<option value="' + element.id + '">' + element.orderName + '</option>');
+        });
 
         $('#current_status option:contains(' + statusName + ')').each(function () {
           if ($(this).text() === statusName) {
             $(this).attr('selected', 'selected');
-            getStatusNext(statusName, orderType)
-            return false;
+            getStatusNext(statusName)
           }
-          return true;
         });
-        productData = data.data;
         //initiateRelatedFieldData();
       },
       error: function (error) {
@@ -1188,14 +1188,13 @@
     $(".loader_body").hide();
     $.ajax({
       type: 'post',
-      data: {id: $('#current_status').val(), columnName: orderType},
-      url: base_url + "api/web/utility/next-order-status",
+      data: {id: parseInt($('#current_status').val())},
+      url: base_url + "api/web/complain/next-order-status",
       success: function (data) {
         data.data.forEach(element => {
-          $('#updated_status').append('<option value="' + element.gpc_sim + "/" + element.order_name + '">' + element.order_name + '</option>');
+          $('#updated_status').append('<option value="' + element.id + "/" + element.orderName + '">' + element.orderName + '</option>');
         });
-        $('#updated_status').append('<option value="100/Cancelled">Cancelled</option>')
-        initiateRelatedFieldData();
+        //initiateRelatedFieldData();
       },
       error: function (error) {
         console.log(error);

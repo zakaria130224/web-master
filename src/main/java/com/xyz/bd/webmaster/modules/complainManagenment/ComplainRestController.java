@@ -5,10 +5,7 @@ import com.xyz.bd.webmaster.utility.CommonRestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -34,6 +31,11 @@ public class ComplainRestController {
     public CommonRestResponse updateComplainStatus(HttpServletRequest request,
                                                     @RequestParam("complainStatusData") String complainStatusData, @RequestParam("id") Long id, @RequestParam("scheduled_time") String scheduled_time) {
         return complainService.updateComplainStatus(request, complainStatusData, id, scheduled_time);
+    }
+
+    @PostMapping("/next-order-status")
+    public CommonRestResponse getNextOrderList(HttpServletRequest request, @RequestParam("id") Long id) {
+        return complainService.getNextComplaintStatus(request, id);
     }
 
     @RequestMapping(value = "/get-status-list", method = RequestMethod.GET)
