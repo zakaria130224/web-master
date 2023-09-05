@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -69,9 +70,9 @@ public class OrderController {
 
         @PostMapping("/save-data")
         @ResponseBody
-        public String saveData(@RequestParam("chtticket") String chtticket,
+        public String saveData(HttpServletRequest request,@RequestParam("chtticket") String chtticket,
                                @RequestParam("excelFile") MultipartFile excelFile) {
-            orderService.saveData(chtticket, excelFile);
+            orderService.saveData(request,chtticket, excelFile);
             return "Data saved successfully!";
         }
 
@@ -356,9 +357,9 @@ public class OrderController {
 
     @PostMapping("/save-data-device")
     @ResponseBody
-    public String saveDataDevice(@RequestParam("chtticket") String chtticket,
+    public String saveDataDevice(HttpServletRequest request, @RequestParam("chtticket") String chtticket,
                            @RequestParam("excelFile") MultipartFile excelFile) {
-        deviceServices.saveData(chtticket, excelFile);
+        deviceServices.saveData(request, chtticket, excelFile);
         return "Data saved successfully!";
     }
 

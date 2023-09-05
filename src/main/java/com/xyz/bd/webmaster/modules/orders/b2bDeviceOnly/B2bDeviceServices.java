@@ -13,5 +13,5 @@ public interface B2bDeviceServices {
 
     DataTablesOutput<OrderModelEntity> findAllB2bDeviceOrderList(HttpServletRequest request, String customQuery, DataTablesInput input);
 
-    void saveData(String chtticket, MultipartFile excelFile);
+    void saveData(HttpServletRequest request,String chtticket, MultipartFile excelFile);
 }

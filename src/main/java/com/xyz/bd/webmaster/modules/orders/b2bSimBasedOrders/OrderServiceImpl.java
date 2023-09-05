@@ -124,7 +124,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     @Transactional
-    public void saveData(String chtticket, MultipartFile excelFile) {
+    public void saveData(HttpServletRequest request, String chtticket, MultipartFile excelFile) {
         try {
             //save excel
             String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -241,6 +241,23 @@ public class OrderServiceImpl implements OrderService{
                 orderModelEntity.setCustomerContactNumber(kcpContact);
                 orderModelEntity.setCustomerEmail(kcpEmail);
 
+                ActionLogsModel actionLogsModel = new ActionLogsModel();
+                actionLogsModel.setAction_type_name(Utility.create_order_b2b);
+                actionLogsModel.setAction_type_id(1L);
+                actionLogsModel.setEvent_date(Helper.getCurrentDate());
+                actionLogsModel.setForeign_id(1L);
+                actionLogsModel.setForeign_table(Utility.tbl_order);
+                actionLogsModel.setUser_id(SessionManager.getUserID(request));
+                actionLogsModel.setOld_data("");
+                Gson gson = new Gson();
+                String jsonData = gson.toJson(orderModelEntity);
+                actionLogsModel.setNew_data(jsonData);
+                actionLogsModel.setMsisdn(orderModelEntity.getCustomerContactNumber());
+                actionLogsModel.setNote("Order Creation b2b");
+                actionLogsModel.setCreatedBy(SessionManager.getUserLoginName(request));
+                actionLogsModel.setCreatedAt(Helper.getCurrentDate());
+
+                actionLogService.SaveLogsData(actionLogsModel);
 
                 orderRepository.save(orderModelEntity);
                 if(orderModelEntity.getId() != null){

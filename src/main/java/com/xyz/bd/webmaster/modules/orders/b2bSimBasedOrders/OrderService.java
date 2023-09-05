@@ -16,7 +16,7 @@ public interface OrderService {
     List<OrderModelEntity> getAllOrder();
    // void saveData(OrderModelEntity orderModelEntity);
 
-    void saveData(String chtticket, MultipartFile excelFile);
+    void saveData(HttpServletRequest request, String chtticket, MultipartFile excelFile);
 
     OrderModelEntity getOrderById(Long orderId);
     void saveOrder(OrderModelEntity order);
