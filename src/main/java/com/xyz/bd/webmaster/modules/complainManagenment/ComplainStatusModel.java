@@ -24,11 +24,11 @@ public class ComplainStatusModel extends BaseEntity implements Serializable {
 
     @Column(name = "b2b")
     @JsonProperty("b2b")
-    private Boolean b2b;
+    private Integer b2b;
 
     @Column(name = "b2c")
     @JsonProperty("b2c")
-    private Boolean b2c;
+    private Integer b2c;
 
     @Column(name = "partner")
     @JsonProperty("partner")

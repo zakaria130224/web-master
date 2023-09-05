@@ -17,4 +17,6 @@ public interface ComplainService {
     CommonRestResponse updateComplainStatus(HttpServletRequest request, String complainStatusData, Long id, String scheduledTime);
 
     CommonRestResponse getAllComplaintStatus(HttpServletRequest request);
+
+    CommonRestResponse getNextComplaintStatus(HttpServletRequest request, Long id);
 }
