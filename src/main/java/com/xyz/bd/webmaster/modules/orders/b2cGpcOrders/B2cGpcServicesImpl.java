@@ -391,16 +391,12 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
             emailSenderService.sendEmail(toEmail, body, subject, cc);
 
-            if(orderData.getCustomerEmail().isEmpty()){
-                return true;
-            } else{
-                String customerMail = orderData.getCustomerEmail();
-                // String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
-                String body_kcp = body;
-                String subject_kcp = "Concern Center Notification";
-                String cc_kcp = "ifaz@grameenphone.com, shafayet.hossen@grameenphone.com";
-                emailSenderService.sendEmail(customerMail, body_kcp, subject_kcp, cc_kcp);
-            }
+            String customerMail = orderData.getCustomerEmail();
+            // String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
+            String body_kcp = body;
+            String subject_kcp = "Concern Center Notification";
+            String cc_kcp = "ifaz@grameenphone.com, shafayet.hossen@grameenphone.com";
+            emailSenderService.sendEmail(customerMail, body_kcp, subject_kcp, cc_kcp);
 
             SMS sms = new SMS();
             sms.setPhone(orderData.getCustomerContactNumber().substring(2));

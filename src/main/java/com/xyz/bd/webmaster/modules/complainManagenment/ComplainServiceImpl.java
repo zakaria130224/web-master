@@ -370,18 +370,13 @@ public class ComplainServiceImpl implements ComplainService{
             }
             emailSenderService.sendEmail(toEmail, body, subject, cc);
 
-            if(orderData.getCustomerEmail().isEmpty()){
-                return true;
-            } else{
-                String customerMail = orderData.getCustomerEmail();
-                // String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
-                String subject_kcp = "Concern Center Notification";
-                String cc_kcp = "ifaz@grameenphone.com, shafayet.hossen@grameenphone.com";
-                Template freemarkerTemplateCustomer = cfg.getTemplate("complaint/new_complaints.ftl");
-                body_customer = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerTemplateCustomer, orderData);
-                emailSenderService.sendEmail(customerMail, body_customer, subject_kcp, cc_kcp);
-            }
-
+            String customerMail = orderData.getCustomerEmail();
+            // String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
+            String subject_kcp = "Concern Center Notification";
+            String cc_kcp = "ifaz@grameenphone.com, shafayet.hossen@grameenphone.com";
+            Template freemarkerTemplateCustomer = cfg.getTemplate("complaint/new_complaints.ftl");
+            body_customer = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerTemplateCustomer, orderData);
+            emailSenderService.sendEmail(customerMail, body_customer, subject_kcp, cc_kcp);
 
 
             SMS sms = new SMS();
@@ -390,7 +385,7 @@ public class ComplainServiceImpl implements ComplainService{
             sendSMSService.sendSMS(sms);
             return true;
         } catch (IOException | TemplateException ex){
-            return false;
+            return true;
         }
     }
 
