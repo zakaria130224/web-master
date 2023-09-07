@@ -221,18 +221,18 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
                     orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
                     orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));
                     orderModelEntity.setFirstContactNote(updateStatus.getScheduledNote());
-                    if(!dateTime.isEmpty()){
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                        Date parsedDate = dateFormat.parse(dateTime);
-                        Timestamp timestamp = new Timestamp(parsedDate.getTime());
-                        orderModelEntity.setScheduledAppointedDt(timestamp);
-                    }
                     break;
 
                 case "Scheduled" :
                     orderModelEntity.setScheduledDt(Helper.getCurrentDate());
                     orderModelEntity.setScheduledBy(SessionManager.getUserLoginName(request));
                     orderModelEntity.setScheduledNote(updateStatus.getScheduledNote());
+                    if(!dateTime.isEmpty()){
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                        Date parsedDate = dateFormat.parse(dateTime);
+                        Timestamp timestamp = new Timestamp(parsedDate.getTime());
+                        orderModelEntity.setScheduledAppointedDt(timestamp);
+                    }
                     break;
                 case "Sim Activation" :
                     orderModelEntity.setSimActivationDt(Helper.getCurrentDate());

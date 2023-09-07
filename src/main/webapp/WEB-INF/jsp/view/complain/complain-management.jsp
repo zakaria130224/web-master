@@ -1017,7 +1017,7 @@
   } );
 
   function initiateRelatedFieldData(){
-    let updatedStatus = $("#current_status option:selected").val().split("/")[1];
+    let updatedStatus = $("#updated_status option:selected").val().split("/")[1];
     switch (updatedStatus){
       case "Scheduled" :
         $("#first_contact_div").show();
@@ -1192,9 +1192,9 @@
     });
   }
 
-  /*$("#updated_status").on("change", function (){
+  $("#updated_status").on("change", function (){
     initiateRelatedFieldData();
-  })*/
+  })
 
 </script>
 
