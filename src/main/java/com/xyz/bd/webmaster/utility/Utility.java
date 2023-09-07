@@ -27,4 +27,6 @@ public class Utility {
     public static String update_order_b2b="Update B2B order ";
 
     public static String update_status_complain = "Update complaint status";
+    public static String order_status_new = "new_order";
+    public static String order_status_update = "status_update";
 }
