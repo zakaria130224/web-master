@@ -42,10 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class ComplainServiceImpl implements ComplainService{
@@ -165,7 +162,7 @@ public class ComplainServiceImpl implements ComplainService{
 
             complainRepository.save(complainModel);
 
-            Boolean notificationStatus = sendMailAndSms(complain, "new-_complain");
+            Boolean notificationStatus = sendMailAndSms(complain, "new_complain");
 
             commonRestResponse.setData(complainModel.getId());
             commonRestResponse.setCode(200);
@@ -206,8 +203,9 @@ public class ComplainServiceImpl implements ComplainService{
                     complainModelData.setFirstContactDt(Helper.getCurrentDate());
                     complainModelData.setFirstContactBy(SessionManager.getUserLoginName(request));
                     complainModelData.setFirstContactNote(updateStatus.getScheduledNote());
+                    //sendMailAndSms(complainModelData, "new_complain");
                     //complainModelData.setScheduledAppointedDt(scheduledDate);
-
+                    break;
                 case "Scheduled" :
                     complainModelData.setScheduledDt(Helper.getCurrentDate());
                     complainModelData.setScheduledBy(SessionManager.getUserLoginName(request));
@@ -276,9 +274,6 @@ public class ComplainServiceImpl implements ComplainService{
             actionLogsModel.setCreatedAt(Helper.getCurrentDate());
 
             actionLogService.SaveLogsData(actionLogsModel);
-
-
-
             complainRepository.save(complainModelData);
 
             commonRestResponse.setData(complainModelData.getId());
@@ -359,6 +354,7 @@ public class ComplainServiceImpl implements ComplainService{
             Configuration cfg = new Configuration();
             Template freemarkerTemplate;
             String body = "";
+            String smsBody = "Concern status has been updated for order ID: " + orderData.getId() + ". " + "successfully and current status is : "+ orderData.getComStatusName();
             String body_customer = "";
             cfg.setClassForTemplateLoading(this.getClass(), "/templates/");
             if(template.equals("new_complain")){
@@ -370,18 +366,23 @@ public class ComplainServiceImpl implements ComplainService{
             }
             emailSenderService.sendEmail(toEmail, body, subject, cc);
 
-            String customerMail = orderData.getCustomerEmail();
-            // String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
-            String subject_kcp = "Concern Center Notification";
-            String cc_kcp = "ifaz@grameenphone.com, shafayet.hossen@grameenphone.com";
-            Template freemarkerTemplateCustomer = cfg.getTemplate("complaint/new_complaints.ftl");
-            body_customer = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerTemplateCustomer, orderData);
-            emailSenderService.sendEmail(customerMail, body_customer, subject_kcp, cc_kcp);
+            if(Objects.equals(orderData.getCustomerEmail(), "") || orderData.getCustomerEmail() == null){
+                return true;
+            } else{
+                String customerMail = orderData.getCustomerEmail();
+                // String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
+                String subject_kcp = "Concern Center Notification";
+                String cc_kcp = "ifaz@grameenphone.com, shafayet.hossen@grameenphone.com";
+                Template freemarkerTemplateCustomer = cfg.getTemplate("complaint/new_complaints.ftl");
+                body_customer = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerTemplateCustomer, orderData);
+                emailSenderService.sendEmail(customerMail, body_customer, subject_kcp, cc_kcp);
+            }
+
 
 
             SMS sms = new SMS();
-            sms.setPhone(orderData.getCustomerContactNumber().substring(2));
-            sms.setText(body);
+            sms.setPhone(orderData.getCustomerContactNumber());
+            sms.setText(smsBody);
             sendSMSService.sendSMS(sms);
             return true;
         } catch (IOException | TemplateException ex){

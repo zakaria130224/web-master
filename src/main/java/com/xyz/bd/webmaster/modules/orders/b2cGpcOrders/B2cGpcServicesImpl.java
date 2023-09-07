@@ -37,9 +37,11 @@ import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 @Service
@@ -165,8 +167,6 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
             newMdUserModel.setCreatedBy(SessionManager.getUserLoginName(request));
             newMdUserModel.setCreatedAt(Helper.getCurrentDate());
 
-            //appUserService.saveNewUserNew(newMdUserModel);
-
 
             actionLogsModel.setAction_type_name(Utility.create_order_gpc);
             actionLogsModel.setAction_type_id(1L);
@@ -212,25 +212,20 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
 
             OrderModelEntity orderModelEntity = orderRepository.getById(id);
-            TrackerDeviceModelEntity trackerDeviceModelEntity = new TrackerDeviceModelEntity();
 
             orderModelEntity.setStatusName(updateStatus.getStatusName());
             orderModelEntity.setStatusNameId(updateStatus.getStatusNameId());
 
             switch(updateStatus.getStatusName()){
                 case "First Contact" :
-                    //Date scheduledDate = new Date(updateStatus.getScheduledAppointedDt().getTime());
                     orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
                     orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));
                     orderModelEntity.setFirstContactNote(updateStatus.getScheduledNote());
-                    //orderModelEntity.setScheduledAppointedDt(scheduledDate);
-                    try {
+                    if(!dateTime.isEmpty()){
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                         Date parsedDate = dateFormat.parse(dateTime);
-                        Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+                        Timestamp timestamp = new Timestamp(parsedDate.getTime());
                         orderModelEntity.setScheduledAppointedDt(timestamp);
-                    } catch(Exception e) { //this generic but you can control another types of exception
-                        // look the origin of excption
                     }
                     break;
 
@@ -250,9 +245,6 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
                     orderModelEntity.setInstallationNote(updateStatus.getScheduledNote());
                     orderModelEntity.setImei(updateStatus.getImei());
                     orderModelEntity.setDeviceName(updateStatus.getDeviceName());
-
-
-
                     break;
                 case "Onboarded" :
                     orderModelEntity.setOnboardedDt(Helper.getCurrentDate());
@@ -291,14 +283,14 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
             orderRepository.save(orderModelEntity);
 
-            boolean notificationStatus = sendMailAndSms(orderModelEntity, "new_order");
+            sendMailAndSms(orderModelEntity, "new_order");
 
             commonRestResponse.setData(orderModelEntity.getId());
             statusCheck(orderModelEntity);
             commonRestResponse.setCode(200);
             commonRestResponse.setMessage("Order Status has been Added Successfully");
         }
-        catch(ArrayIndexOutOfBoundsException | IOException | TemplateException ex)
+        catch(ArrayIndexOutOfBoundsException | IOException | TemplateException | ParseException ex)
         {
             commonRestResponse.setCode(402);
             commonRestResponse.setData(null);
@@ -310,70 +302,50 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
     }
 
     public boolean statusCheck(OrderModelEntity order) throws TemplateException, IOException {
-        OrderModelEntity data = order;
         boolean notificationStatus;
-        switch(order.getStatusName())
-        {
-            case "New Order" :
-                if(inventoryManage(1, order.getProductId())){
-                    notificationStatus = sendMailAndSms(data, "status_update");
-                    if(notificationStatus){
-                        return true;
-                    } else return false;
-                } else return false;
-            case "Scheduled" :
-            case "Sim Activation" :
-            case "Onboarded" :
-            case "First Contact" :
-            case "Pack Activation" :
-                notificationStatus = sendMailAndSms(data, "status_update");
-                if(notificationStatus){
-                    return true;
-                } else return false;
-            case "Cancelled" :
-                if(inventoryManage(-1, order.getProductId())){
-                    notificationStatus = sendMailAndSms(data, "status_update");
-                    if(notificationStatus){
-                        return true;
-                    } else return false;
-                } else return false;
-
-            case "Installation" :
-                if(order.getOrderType().equals("gpc_sim")){
-                    TrackerDeviceModelEntity deviceInfo = new TrackerDeviceModelEntity();
-                    //deviceInfo.setUserId(existingUser.getId()); // Set the user ID
-                    deviceInfo.setImei(order.getImei());
-                    //deviceInfo.setTrackerDeviceId(resultCode);
-                    //deviceInfo.setUserEmail(resultDesc);
-                    deviceInfo.setCustomerName(order.getKcpName());
-                    deviceInfo.setOrderId(order.getId());
-                    deviceInfo.setCompanyId(order.getCompanyId());
-                    deviceInfo.setCustomerName(order.getKcpName());
-                    deviceInfo.setCellPhone(order.getKcpContactNumber());
-                    deviceInfo.setUserEmail(order.getKcpEmail());
-                    deviceInfo.setVtsSim(order.getVtsSimNo());
-                    deviceInfo.setDeviceCategory(order.getDeviceCategory());
-                    deviceInfo.setDeviceSubCategory(order.getDeviceSubCategory());
-                    deviceInfo.setDataPackName(order.getPackName());
-                    deviceInfo.setCompanyName(order.getCompanyName());
-                    deviceInfo.setInstallationDate(Helper.getCurrentDate());
-                    trackerDeviceRepository.save(deviceInfo);
-                }
-                notificationStatus = sendMailAndSms(data, "status_update");
-                if(notificationStatus){
-                    return true;
-                } else return false;
-
-            default:
-                return false;
+        if (order.getStatusName().equals("New Order")) {
+            if (inventoryManage(1, order.getProductId())) {
+                return sendMailAndSms(order, Utility.order_status_new);
+            } else return false;
+        } else if (order.getStatusName().equals("Scheduled") || order.getStatusName().equals("Sim Activation") || order.getStatusName().equals("Onboarded") || order.getStatusName().equals("First Contact") || order.getStatusName().equals("Pack Activation")) {
+            return sendMailAndSms(order, Utility.order_status_update);
+        } else if (order.getStatusName().equals("Cancelled")) {
+            if (inventoryManage(-1, order.getProductId())) {
+                notificationStatus = sendMailAndSms(order, Utility.order_status_update);
+                return notificationStatus;
+            } else return false;
+        } else if (order.getStatusName().equals("Installation")) {
+            if (order.getOrderType().equals("gpc_sim")) {
+                TrackerDeviceModelEntity deviceInfo = new TrackerDeviceModelEntity();
+                //deviceInfo.setUserId(existingUser.getId()); // Set the user ID
+                deviceInfo.setImei(order.getImei());
+                //deviceInfo.setTrackerDeviceId(resultCode); // Set the user Tracker Device Id
+                //deviceInfo.setUserEmail(resultDesc); // Set the user User Email
+                deviceInfo.setCustomerName(order.getKcpName());
+                deviceInfo.setOrderId(order.getId());
+                deviceInfo.setCompanyId(order.getCompanyId());
+                deviceInfo.setCustomerName(order.getKcpName());
+                deviceInfo.setCellPhone(order.getKcpContactNumber());
+                deviceInfo.setUserEmail(order.getKcpEmail());
+                deviceInfo.setVtsSim(order.getVtsSimNo());
+                deviceInfo.setDeviceCategory(order.getDeviceCategory());
+                deviceInfo.setDeviceSubCategory(order.getDeviceSubCategory());
+                deviceInfo.setDataPackName(order.getPackName());
+                deviceInfo.setCompanyName(order.getCompanyName());
+                deviceInfo.setInstallationDate(Helper.getCurrentDate());
+                trackerDeviceRepository.save(deviceInfo);
+            }
+            notificationStatus = sendMailAndSms(order, Utility.order_status_update);
+            return notificationStatus;
         }
+        return false;
     }
 
     public boolean sendMailAndSms(OrderModelEntity orderData, String template) throws IOException, TemplateException{
         boolean status = false;
         try{
             String toEmail = orderData.getVendorEmail();
-            //String body = "Order data has been updated for order ID: " + orderData.getId() + ". " + "Order Status : "+ orderData.getStatusName();
+            String smsBody = "Order status has been updated for order ID: " + orderData.getId() + ". " + "successfully and current status is : "+ orderData.getStatusName();
             String subject = "GP Smart Product Order Notification";
             String cc = "jobaidur@grameenphone.com,ifaz@grameenphone.com,kalyanmoy@grameenphone.com";
 
@@ -391,16 +363,19 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
 
             emailSenderService.sendEmail(toEmail, body, subject, cc);
 
-            String customerMail = orderData.getCustomerEmail();
-            // String body_kcp = "Order Onboarded Successfully. " + "Username : "+ "88"+orderData.getCustomerContactNumber();
-            String body_kcp = body;
-            String subject_kcp = "Concern Center Notification";
-            String cc_kcp = "ifaz@grameenphone.com, shafayet.hossen@grameenphone.com";
-            emailSenderService.sendEmail(customerMail, body_kcp, subject_kcp, cc_kcp);
+            if(Objects.equals(orderData.getCustomerEmail(), "") || orderData.getCustomerEmail() == null){
+                return true;
+            } else{
+                String customerMail = orderData.getCustomerEmail();
+                String body_kcp = body;
+                String subject_kcp = "Order processing Notification";
+                String cc_kcp = "ifaz@grameenphone.com, shafayet.hossen@grameenphone.com";
+                emailSenderService.sendEmail(customerMail, body_kcp, subject_kcp, cc_kcp);
+            }
 
             SMS sms = new SMS();
-            sms.setPhone(orderData.getCustomerContactNumber().substring(2));
-            sms.setText(body);
+            sms.setPhone(orderData.getCustomerContactNumber());
+            sms.setText(smsBody);
             sendSMSService.sendSMS(sms);
             return true;
         } catch (IOException | TemplateException ex){

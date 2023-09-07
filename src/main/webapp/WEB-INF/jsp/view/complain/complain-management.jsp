@@ -1017,22 +1017,14 @@
   } );
 
   function initiateRelatedFieldData(){
-    let updatedStatus = $("#updated_status option:selected").val().split("/")[1];
+    let updatedStatus = $("#current_status option:selected").val().split("/")[1];
     switch (updatedStatus){
-      case "First Contact" :
+      case "Scheduled" :
         $("#first_contact_div").show();
         $("#scheduled_time").attr("required", true);
         $("#schedule_div").hide();
         $("#device_name").attr("required", false);
         $("#imei_number").attr("required", false);
-        break
-
-      case "Installation" :
-        $("#schedule_div").show();
-        $("#device_name").attr("required", true);
-        $("#imei_number").attr("required", true);
-        $("#first_contact_div").hide();
-        $("#scheduled_time").attr("required", false);
         break
 
       default:
@@ -1056,10 +1048,8 @@
     if($("#update_order_form").parsley().validate()){
 
       let orderStatusData = {
-        statusName: $('#updated_status').val().split("/")[1],
-        statusNameId: parseInt($('#updated_status').val().split("/")[0]),
-        deviceName: $('#device_name').val(),
-        imei: $('#imei_number').val(),
+        comStatusName: $('#updated_status').val().split("/")[1],
+        comStatusId: parseInt($('#updated_status').val().split("/")[0]),
         scheduledNote: $('#add_note').val()
       }
       let id = $("#row_id").val();
@@ -1068,8 +1058,8 @@
 
       $.ajax({
         type: 'POST',
-        url: base_url + "api/web/orders/b2c-gpc/update-status",
-        data: {orderStatusData: JSON.stringify(orderStatusData), id: parseInt(id), scheduled_time: scheduled_time},
+        url: base_url + "api/web/complain/update-status",
+        data: {complainStatusData: JSON.stringify(orderStatusData), id: parseInt(id), scheduled_time: scheduled_time},
         success: function (resultData) {
           $(".loader_body").hide();
           if (resultData.code === 200) {
@@ -1166,7 +1156,7 @@
       url: base_url + "api/web/complain/get-status-list",
       success: function (data) {
         data.data.forEach(element => {
-          $('#current_status').append('<option value="' + element.id + '">' + element.orderName + '</option>');
+          $('#current_status').append('<option value="' + element.id + "/" + element.orderName + '">' + element.orderName + '</option>');
         });
 
         $('#current_status option:contains(' + statusName + ')').each(function () {
@@ -1194,7 +1184,7 @@
         data.data.forEach(element => {
           $('#updated_status').append('<option value="' + element.id + "/" + element.orderName + '">' + element.orderName + '</option>');
         });
-        //initiateRelatedFieldData();
+        initiateRelatedFieldData();
       },
       error: function (error) {
         console.log(error);
@@ -1202,9 +1192,9 @@
     });
   }
 
-  $("#updated_status").on("change", function (){
+  /*$("#updated_status").on("change", function (){
     initiateRelatedFieldData();
-  })
+  })*/
 
 </script>
 
