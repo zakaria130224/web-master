@@ -988,7 +988,7 @@
         console.log(formattedDate);
         let updatedStatus = $("#editStatus option:selected").val().split("/")[1];
 
-        if(previous_state == "New Order" && updatedStatus == "First Contact"){
+        if(previous_state == "First Contact" && updatedStatus == "Scheduled"){
             var schedule_val = $('#schedule').val();
             var service_area = $('#area').val().split("/")[1];
             var service_sla = $('#area').val().split("/")[0];
@@ -1187,6 +1187,17 @@
             $('#area_div').attr("required", false);
         }
         else if(curr_status == "New Order"){
+            $('#schedule_time').hide();
+            $('#schedule_time').attr("required", false);
+            $('#area_div').hide();
+            $('#area_div').attr("required", false);
+            $('#imei_block').hide();
+            $('#imei_input').attr("required", false);
+            $('#tracker_device_name').hide();
+            $('#tracker_device_name').attr("required", false);
+        }
+
+        else if(curr_status == "First Contact"){
             $('#schedule_time').show();
             $('#schedule_time').attr("required", true);
             $('#area_div').show();

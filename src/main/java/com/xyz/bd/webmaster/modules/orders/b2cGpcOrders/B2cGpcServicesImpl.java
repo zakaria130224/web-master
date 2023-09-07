@@ -224,6 +224,12 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
                     orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));
                     orderModelEntity.setFirstContactNote(updateStatus.getScheduledNote());
                     //orderModelEntity.setScheduledAppointedDt(scheduledDate);
+
+
+                case "Scheduled" :
+                    orderModelEntity.setScheduledDt(Helper.getCurrentDate());
+                    orderModelEntity.setScheduledBy(SessionManager.getUserLoginName(request));
+                    orderModelEntity.setScheduledNote(updateStatus.getScheduledNote());
                     try {
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                         Date parsedDate = dateFormat.parse(dateTime);
@@ -232,12 +238,6 @@ public class B2cGpcServicesImpl implements B2cGpcServices{
                     } catch(Exception e) { //this generic but you can control another types of exception
                         // look the origin of excption
                     }
-                    break;
-
-                case "Scheduled" :
-                    orderModelEntity.setScheduledDt(Helper.getCurrentDate());
-                    orderModelEntity.setScheduledBy(SessionManager.getUserLoginName(request));
-                    orderModelEntity.setScheduledNote(updateStatus.getScheduledNote());
                     break;
                 case "Sim Activation" :
                     orderModelEntity.setSimActivationDt(Helper.getCurrentDate());

@@ -439,28 +439,7 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
 
             }
             else if ("Scheduled".equals(status_name)){
-                orderModelEntity.setScheduledNote(updateStatus.getScheduledNote());
-                orderModelEntity.setScheduledDt(Helper.getCurrentDate());
-                orderModelEntity.setScheduledBy(SessionManager.getUserLoginName(request));
-            }
-            else if ("Onboarded".equals(status_name)){
-                orderModelEntity.setOnboardedNote(updateStatus.getOnboardedNote());
-                orderModelEntity.setOnboardedDt(Helper.getCurrentDate());
-                orderModelEntity.setOnboardedBy(SessionManager.getUserLoginName(request));
-            }
 
-            else if ("Cancelled".equals(status_name)){
-                orderModelEntity.setCancelledNote(updateStatus.getCancelledNote());
-                orderModelEntity.setCancelledDt(Helper.getCurrentDate());
-                orderModelEntity.setCancelledBy(SessionManager.getUserLoginName(request));
-            }
-            else if ("Finalization".equals(status_name)){
-                orderModelEntity.setFinalizationNote(updateStatus.getFinalizationNote());
-                orderModelEntity.setFinalizationDt(Helper.getCurrentDate());
-                orderModelEntity.setFinalizationBy(SessionManager.getUserLoginName(request));
-            }
-            else if ("First Contact".equals(status_name)){
-//            try{
                 System.out.println("------------------");
                 System.out.println("orderStatusData: " + status_name);
                 System.out.println("orderStatusData: " + orderStatusData);
@@ -472,9 +451,11 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
                     orderModelEntity.setScheduledAppointedDt(timestamp);
                     orderModelEntity.setServiceArea(updateStatus.getServiceArea());
                     orderModelEntity.setServiceSla(updateStatus.getServiceSla());
-                    orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
-                    orderModelEntity.setFirstContactNote(updateStatus.getFirstContactNote());
-                    orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));
+
+                    orderModelEntity.setScheduledNote(updateStatus.getScheduledNote());
+                    orderModelEntity.setScheduledDt(Helper.getCurrentDate());
+                    orderModelEntity.setScheduledBy(SessionManager.getUserLoginName(request));
+
 
                     SimpleDateFormat dateFormats = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -494,11 +475,30 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
 
                     System.out.println("Time Difference (hours): " + hoursDifference);
                     orderRepository.save(orderModelEntity);
-                } catch(Exception e) { //this generic but you can control another types of exception
-                    // look the origin of excption
+                } catch(Exception e) {
+                    System.out.println(e.getMessage());
                 }
+            }
+            else if ("Onboarded".equals(status_name)){
+                orderModelEntity.setOnboardedNote(updateStatus.getOnboardedNote());
+                orderModelEntity.setOnboardedDt(Helper.getCurrentDate());
+                orderModelEntity.setOnboardedBy(SessionManager.getUserLoginName(request));
+            }
 
-
+            else if ("Cancelled".equals(status_name)){
+                orderModelEntity.setCancelledNote(updateStatus.getCancelledNote());
+                orderModelEntity.setCancelledDt(Helper.getCurrentDate());
+                orderModelEntity.setCancelledBy(SessionManager.getUserLoginName(request));
+            }
+            else if ("Finalization".equals(status_name)){
+                orderModelEntity.setFinalizationNote(updateStatus.getFinalizationNote());
+                orderModelEntity.setFinalizationDt(Helper.getCurrentDate());
+                orderModelEntity.setFinalizationBy(SessionManager.getUserLoginName(request));
+            }
+            else if ("First Contact".equals(status_name)){
+                orderModelEntity.setFirstContactDt(Helper.getCurrentDate());
+                orderModelEntity.setFirstContactNote(updateStatus.getFirstContactNote());
+                orderModelEntity.setFirstContactBy(SessionManager.getUserLoginName(request));
             }
 
 
@@ -508,11 +508,7 @@ public class B2cGpShopServicesImpl implements B2cGpShopServices{
                 orderModelEntity.setSimActivationBy(SessionManager.getUserLoginName(request));
             }
 
-//            else if ("Cancelled".equals(status_name)){
-//                orderModelEntity.setSimActivationNote(updateStatus.getSimActivationNote());
-//                orderModelEntity.setCancelledDt(Helper.getCurrentDate());
-//                orderModelEntity.setCancelledBy(SessionManager.getUserLoginName(request));
-//            }
+
 
 
 

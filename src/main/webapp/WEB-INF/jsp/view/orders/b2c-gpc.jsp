@@ -889,7 +889,7 @@
         statusNameId: 1,
         vendorEmail: $( "#vendor_name" ).val().split("/")[1],
         vendorId: parseInt($( "#vendor_name" ).val().split("/")[0]),
-        vendorName: $( "#vendor_name" ).text(),
+        vendorName: $( "#vendor_name" ).val().split("/")[1],
         ratePlan: $( "#vendor_name" ).val().split("/")[2],
         orderType: "GPC"
       }
@@ -949,7 +949,7 @@
   function initiateRelatedFieldData(){
     let updatedStatus = $("#updated_status option:selected").val().split("/")[1];
     switch (updatedStatus){
-      case "First Contact" :
+      case "Scheduled" :
         $("#first_contact_div").show();
         $("#scheduled_time").attr("required", true);
         $("#schedule_div").hide();
