@@ -1269,16 +1269,6 @@
             $('#tracker_device_name').hide();
             $('#tracker_device_name').attr("required", false);
         }
-        else if(curr_status == "First Contact"){
-            $('#schedule_time').show();
-            $('#schedule_time').attr("required", true);
-            // $('#area_div').show();
-            // $('#area_div').attr("required", true);
-            $('#imei_block').hide();
-            $('#imei_input').attr("required", false);
-            $('#tracker_device_name').hide();
-            $('#tracker_device_name').attr("required", false);
-        }
 
         else{
             $('#imei_block').hide();
